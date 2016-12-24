@@ -13,6 +13,12 @@ namespace CrmHub.Schedule
 
         #region Public Methods
 
+        [HttpGet]
+        public IActionResult Get() 
+        {
+            return Ok("Ok");
+        }
+
         [HttpPost]
         public IActionResult Schedule([FromBody]ScheduleValue value) 
         {
