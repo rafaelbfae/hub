@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using CrmHub.Model.Crm;
 using CrmHub.Model.User;
 using CrmHub.Model.Schedule;
+using CrmHub.Infra.Message;
 
 using CrmHub.Zoho;
 using CrmHub.HubSpot;
@@ -15,6 +16,7 @@ namespace CrmHub.Model
         #region Attributes
 
         private Dictionary<CRM, CrmController> _crmHub = new Dictionary<CRM, CrmController>();
+        private MessageController _messageController = new MessageController();
 
         #endregion
 
@@ -28,6 +30,11 @@ namespace CrmHub.Model
         #endregion
 
         #region Properties
+
+        public MessageController messageController 
+        {
+            get { return this._messageController; }
+        }
 
         protected Dictionary<CRM, CrmController> crmHub 
         {
@@ -64,8 +71,8 @@ namespace CrmHub.Model
         
         private void LoadCRM() 
         {
-            crmHub.Add(ZohoController.crm, new ZohoController());
-            crmHub.Add(HubSpotController.crm, new HubSpotController());
+            crmHub.Add(ZohoController.crm, new ZohoController(this));
+            crmHub.Add(HubSpotController.crm, new HubSpotController(this));
         }
 
         private bool Execute(ScheduleValue value, Func<CrmController, ScheduleValue, bool> function)

@@ -1,5 +1,6 @@
 using System;
 
+using CrmHub.Model;
 using CrmHub.Model.Crm;
 using CrmHub.Model.Schedule;
 
@@ -11,6 +12,15 @@ namespace CrmHub.HubSpot
         #region Const
 
         public static CRM crm = CRM.HUBSPOT;
+
+        #endregion
+
+        #region Constructor
+
+        public HubSpotController(HubController controller) : base (controller)
+        {
+            
+        }
 
         #endregion
 

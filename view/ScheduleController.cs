@@ -14,7 +14,7 @@ namespace CrmHub.Schedule
         #region Public Methods
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id) { return Ok(this.GetType().ToString()); }
+        public IActionResult Get() => Ok(this.GetType().ToString());
 
         [HttpPost]
         public IActionResult Schedule([FromBody]ScheduleValue value) 

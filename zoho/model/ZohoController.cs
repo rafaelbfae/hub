@@ -1,5 +1,6 @@
 using System;
 
+using CrmHub.Model;
 using CrmHub.Model.Crm;
 using CrmHub.Model.Schedule;
 
@@ -10,6 +11,15 @@ namespace CrmHub.Zoho
         #region Const
 
         public static CRM crm = CRM.ZOHO;
+
+        #endregion
+
+        #region Constructor
+
+        public ZohoController(HubController controller) : base(controller)
+        {
+            
+        }
 
         #endregion
 
