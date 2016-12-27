@@ -8,11 +8,11 @@ using CrmHub.Model.Crm;
 
 namespace CrmHub.Utility 
 {
-    public static class Utility 
+    public class Utility 
     {
-        public static bool SendRequest(CRM crm, Func<object, object> function) 
+        public static bool SendRequest(CRM crm, Func<object, bool> function) 
         {
-            SendRequest(string.Empty, function).Wait();
+            Utility.SendRequest(string.Empty, function).Wait();
             return true;
         }
 

@@ -1,5 +1,3 @@
-using System;
-
 namespace CrmHub.Infra.Message 
 {
     public class Message 
