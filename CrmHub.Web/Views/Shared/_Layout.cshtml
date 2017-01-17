@@ -1,68 +1,72 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CrmHub.Web</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - CrmHub</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">CrmHub.Web</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
-            </div>
+        <!-- Add local styles, mostly for plugins css file -->
+        @if (IsSectionDefined("Styles"))
+            {@RenderSection("Styles", required: false)}
+
+        <environment names="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+            <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
+            <link rel="stylesheet" href="~/Icons/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
+            <link rel="stylesheet" href="~/lib_local/metisMenu/dist/metisMenu.css" />
+            <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+        </environment>
+        <environment names="Staging,Production">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="~/lib/animate.css/animate.min.css" />
+            <link rel="stylesheet" href="~/Icons/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
+            <link rel="stylesheet" href="~/lib_local/metisMenu/dist/metisMenu.min.css" />
+            <link rel="stylesheet" href="~/css/style.min.css" asp-append-version="true" />
+        </environment>
+
+
+        @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+    </head>
+    <body class="@Html.PageClass()">
+        <!-- Simple splash screen-->
+        <div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>CrmHub - Integrador de CRM's</h1><p>Integrando de forma única seus diferentes CRM's</p><div class="spinner"> <div class="rect1"></div> <div class="rect2"></div> <div class="rect3"></div> <div class="rect4"></div> <div class="rect5"></div> </div> </div> </div>
+        <!--[if lt IE 7]>
+    <p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+        <!-- Header -->
+        <div id="header">
+            @Html.Partial("_Header")
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2016 - CrmHub.Web</p>
-        </footer>
-    </div>
 
-    <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+        <!-- Navigation -->
+        <aside id="menu">
+            @Html.Partial("_Navigation")
+        </aside>
 
-    @RenderSection("scripts", required: false)
-</body>
+        <!-- Main view  -->
+        <div id="wrapper">
+            @RenderBody()
+
+            <!-- Footer-->
+            @Html.Partial("_Footer")
+        </div>
+
+        <environment names="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/lib_local/metisMenu/dist/metisMenu.js"></script>
+            <script src="~/js/homer.js"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script src="~/lib_local/metisMenu/dist/metisMenu.min.js"></script>
+            <script src="~/js/homer.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

@@ -1,3 +1,7 @@
 #:C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\CrmHub.Identity.xproj
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\CrmHub.Identity.xproj|C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Domain\CrmHub.Domain.xproj
 #:C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\CrmHub.Web.xproj
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\CrmHub.Web.xproj|C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\CrmHub.Identity.xproj
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\CrmHub.Web.xproj|C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\CrmHub.Infra.Data.xproj
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\CrmHub.Identity.xproj|C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Domain\CrmHub.Domain.xproj
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\CrmHub.Infra.Data.xproj|C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Domain\CrmHub.Domain.xproj

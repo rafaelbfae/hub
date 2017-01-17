@@ -7,7 +7,7 @@ using CrmHub.Identity.Context;
 
 namespace CrmHub.Identity.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(CrmIdentityDbContext))]
     [Migration("20161230233155_CreateidentitySchema")]
     partial class CreateidentitySchema
     {

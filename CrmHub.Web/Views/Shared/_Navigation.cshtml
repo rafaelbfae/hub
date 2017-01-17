@@ -1,0 +1,17 @@
+﻿<div id="navigation">
+    <div class="profile-picture">
+        <div class="stats-label text-color">
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+    </div>
+
+    <ul class="nav metismenu" id="side-menu">
+        <li class="@Html.IsSelected(action: "Index")">
+            <a href="@Url.Action("Index", "Home")"> 
+            <span class="nav-label">Page 1</span> <span class="label label-success pull-right">Start</span></a>
+        </li>
+        <li class="@Html.IsSelected(action: "Page2")">
+            <a href="@Url.Action("Page2", "Home")"> <span class="nav-label">Page 2</span></a>
+        </li>
+    </ul>
+</div>

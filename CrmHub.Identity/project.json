@@ -3,6 +3,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "CrmHub.Domain": "1.0.0-*",
     "Microsoft.NETCore.App": {
       "version": "1.1.0",
       "type": "platform"

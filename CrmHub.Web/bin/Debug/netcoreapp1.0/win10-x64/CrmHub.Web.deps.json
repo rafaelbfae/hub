@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/win10-x64",
-    "signature": "5cf619299bf93e1f379c48fe1d3a39cf2921cfeb"
+    "signature": "65422016a7093d8836887f3fc4a15ea1a90022a0"
   },
   "compilationOptions": {
     "defines": [
@@ -30,6 +30,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.0",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
           "Microsoft.Extensions.Configuration.Json": "1.1.0",
           "Microsoft.Extensions.Configuration.UserSecrets": "1.1.0",
           "Microsoft.Extensions.Logging": "1.1.0",
@@ -37,7 +38,9 @@
           "Microsoft.Extensions.Logging.Debug": "1.1.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
           "Microsoft.NETCore.App": "1.1.0",
-          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0"
+          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
+          "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
+          "CrmHub.Infra.Data": "1.0.0"
         },
         "compile": {
           "CrmHub.Web.dll": {}
@@ -56,6 +59,47 @@
       "Libuv/1.9.1": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "Microsoft.ApplicationInsights/2.1.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Diagnostics.Tools": "4.3.0",
+          "System.Diagnostics.Tracing": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.IO.Compression": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Net.Http": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "System.Xml.XDocument": "4.3.0"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.AspNetCore/1.0.0": {
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "2.1.0",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.1.0",
+          "Microsoft.Extensions.Configuration": "1.1.0",
+          "Microsoft.Extensions.DiagnosticAdapter": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "System.Net.NameResolution": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/1.1.0": {
@@ -825,29 +869,6 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Design/1.0.0-preview2-final": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design.Core": "1.0.0-preview2-final",
-          "Microsoft.Extensions.CommandLineUtils": "1.0.0",
-          "Microsoft.NETCore.App": "1.1.0"
-        },
-        "compile": {
-          "lib/netcoreapp1.0/Microsoft.EntityFrameworkCore.Design.dll": {}
-        }
-      },
-      "Microsoft.EntityFrameworkCore.Design.Core/1.0.0-preview2-final": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
-          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.0",
-          "System.AppContext": "4.3.0",
-          "System.Collections.NonGeneric": "4.3.0",
-          "System.IO": "4.3.0",
-          "System.IO.FileSystem": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.Core.dll": {}
-        }
-      },
       "Microsoft.EntityFrameworkCore.Relational/1.1.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
@@ -890,19 +911,7 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.Design.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview2-final": {
-        "dependencies": {
-          "Microsoft.DotNet.Cli.Utils": "1.0.0-preview2-003121",
-          "Microsoft.DotNet.ProjectModel": "1.0.0-rc3-003121",
-          "Microsoft.EntityFrameworkCore.Design": "1.0.0-preview2-final",
-          "Microsoft.Extensions.CommandLineUtils": "1.0.0",
-          "Microsoft.NETCore.App": "1.1.0",
-          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
-        },
-        "compile": {
-          "lib/netcoreapp1.0/dotnet-ef.dll": {}
-        }
-      },
+      "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview3-final": {},
       "Microsoft.Extensions.Caching.Abstractions/1.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "1.1.0",
@@ -1033,6 +1042,21 @@
         },
         "compile": {
           "lib/netstandard1.6/Microsoft.Extensions.DependencyModel.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DiagnosticAdapter/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.ComponentModel": "4.3.0",
+          "System.Diagnostics.DiagnosticSource": "4.3.0",
+          "System.Reflection.Emit": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/Microsoft.Extensions.DiagnosticAdapter.dll": {}
         }
       },
       "Microsoft.Extensions.FileProviders.Abstractions/1.1.0": {
@@ -2710,6 +2734,9 @@
           "System.Reflection.Emit.ILGeneration": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
           "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
         }
       },
       "System.Reflection.Emit.ILGeneration/4.3.0": {
@@ -2717,6 +2744,9 @@
           "System.Reflection": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
           "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
         }
       },
       "System.Reflection.Emit.Lightweight/4.3.0": {
@@ -2725,6 +2755,9 @@
           "System.Reflection.Emit.ILGeneration": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
           "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.0/System.Reflection.Emit.Lightweight.dll": {}
         }
       },
       "System.Reflection.Extensions/4.3.0": {
@@ -3332,8 +3365,19 @@
           "System.Xml.XPath": "4.0.1"
         }
       },
+      "CrmHub.Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "CrmHub.Domain.dll": {}
+        }
+      },
       "CrmHub.Identity/1.0.0": {
         "dependencies": {
+          "CrmHub.Domain": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
           "Microsoft.AspNetCore.Mvc": "1.1.0",
@@ -3342,6 +3386,19 @@
         },
         "compile": {
           "CrmHub.Identity.dll": {}
+        }
+      },
+      "CrmHub.Infra.Data/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.0",
+          "CrmHub.Domain": "1.0.0",
+          "Microsoft.AspNetCore.Mvc": "1.1.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
+          "System.ComponentModel.Annotations": "4.3.0",
+          "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview3-final"
+        },
+        "compile": {
+          "CrmHub.Infra.Data.dll": {}
         }
       }
     },
@@ -3362,6 +3419,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.0",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
           "Microsoft.Extensions.Configuration.Json": "1.1.0",
           "Microsoft.Extensions.Configuration.UserSecrets": "1.1.0",
           "Microsoft.Extensions.Logging": "1.1.0",
@@ -3369,7 +3427,9 @@
           "Microsoft.Extensions.Logging.Debug": "1.1.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
           "Microsoft.NETCore.App": "1.1.0",
-          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0"
+          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
+          "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
+          "CrmHub.Infra.Data": "1.0.0"
         },
         "runtime": {
           "CrmHub.Web.dll": {}
@@ -3391,6 +3451,47 @@
         },
         "native": {
           "runtimes/win7-x64/native/libuv.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights/2.1.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Diagnostics.Tools": "4.3.0",
+          "System.Diagnostics.Tracing": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.IO.Compression": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Net.Http": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "System.Xml.XDocument": "4.3.0"
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.AspNetCore/1.0.0": {
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "2.1.0",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
+          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.1.0",
+          "Microsoft.Extensions.Configuration": "1.1.0",
+          "Microsoft.Extensions.DiagnosticAdapter": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "System.Net.NameResolution": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/1.1.0": {
@@ -4163,29 +4264,6 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Design/1.0.0-preview2-final": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design.Core": "1.0.0-preview2-final",
-          "Microsoft.Extensions.CommandLineUtils": "1.0.0",
-          "Microsoft.NETCore.App": "1.1.0"
-        },
-        "runtime": {
-          "lib/netcoreapp1.0/Microsoft.EntityFrameworkCore.Design.dll": {}
-        }
-      },
-      "Microsoft.EntityFrameworkCore.Design.Core/1.0.0-preview2-final": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
-          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.0",
-          "System.AppContext": "4.3.0",
-          "System.Collections.NonGeneric": "4.3.0",
-          "System.IO": "4.3.0",
-          "System.IO.FileSystem": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.Core.dll": {}
-        }
-      },
       "Microsoft.EntityFrameworkCore.Relational/1.1.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
@@ -4228,19 +4306,7 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.Design.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview2-final": {
-        "dependencies": {
-          "Microsoft.DotNet.Cli.Utils": "1.0.0-preview2-003121",
-          "Microsoft.DotNet.ProjectModel": "1.0.0-rc3-003121",
-          "Microsoft.EntityFrameworkCore.Design": "1.0.0-preview2-final",
-          "Microsoft.Extensions.CommandLineUtils": "1.0.0",
-          "Microsoft.NETCore.App": "1.1.0",
-          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
-        },
-        "runtime": {
-          "lib/netcoreapp1.0/dotnet-ef.dll": {}
-        }
-      },
+      "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview3-final": {},
       "Microsoft.Extensions.Caching.Abstractions/1.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "1.1.0",
@@ -4371,6 +4437,21 @@
         },
         "runtime": {
           "lib/netstandard1.6/Microsoft.Extensions.DependencyModel.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DiagnosticAdapter/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.ComponentModel": "4.3.0",
+          "System.Diagnostics.DiagnosticSource": "4.3.0",
+          "System.Reflection.Emit": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.1/Microsoft.Extensions.DiagnosticAdapter.dll": {}
         }
       },
       "Microsoft.Extensions.FileProviders.Abstractions/1.1.0": {
@@ -6768,8 +6849,19 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "CrmHub.Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "CrmHub.Domain.dll": {}
+        }
+      },
       "CrmHub.Identity/1.0.0": {
         "dependencies": {
+          "CrmHub.Domain": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
           "Microsoft.AspNetCore.Mvc": "1.1.0",
@@ -6778,6 +6870,19 @@
         },
         "runtime": {
           "CrmHub.Identity.dll": {}
+        }
+      },
+      "CrmHub.Infra.Data/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.0",
+          "CrmHub.Domain": "1.0.0",
+          "Microsoft.AspNetCore.Mvc": "1.1.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
+          "System.ComponentModel.Annotations": "4.3.0",
+          "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview3-final"
+        },
+        "runtime": {
+          "CrmHub.Infra.Data.dll": {}
         }
       }
     }
@@ -6797,6 +6902,16 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-uqX2Frwf9PW8MaY7PRNY6HM5BpW1D8oj1EdqzrmbEFD5nH63Yat3aEjN/tws6Tw6Fk7LwmLBvtUh32tTeTaHiA=="
+    },
+    "Microsoft.ApplicationInsights/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mviO8PLQd3r22Pmv8JfjYzTCQ9ByhkU9wdC4fwd6WmAARwAMgMw9HEbHeYS3r+8pB3w+fZMi7p4LKijzgNybRQ=="
+    },
+    "Microsoft.ApplicationInsights.AspNetCore/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-t1O4hbatuHU4BJnuBZ4zmx6fNoTryyZO/NwxwqmMUbuHyvil3elkOZvX3pJWlUTOk6/wyRXItGKBiW4uDET6Kw=="
     },
     "Microsoft.AspNetCore.Antiforgery/1.1.0": {
       "type": "package",
@@ -7098,16 +7213,6 @@
       "serviceable": true,
       "sha512": "sha512-S00vr6pLeoCMbm1PsXNZIceCAA/TUX83W3f2PcLFLGrx2QnGo5aqhtYjHvBhOVKJXZmt52EKEdORoTZVZ/swww=="
     },
-    "Microsoft.EntityFrameworkCore.Design/1.0.0-preview2-final": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-RhyjntECuOVsrKjgFog9rv+V7oBsxBNxz5NviF7uHvDDQXLyHH3os/CewQxRNsve114AQH5RX/Bww6qAXlSORQ=="
-    },
-    "Microsoft.EntityFrameworkCore.Design.Core/1.0.0-preview2-final": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-H3pHksGErQSEwWyvISlDYMslIXftS4XB2m0AvqBS08ECGHagh27mqm/oIyUetzzRad+C2V0zpguJmR14eMiRaA=="
-    },
     "Microsoft.EntityFrameworkCore.Relational/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -7128,10 +7233,10 @@
       "serviceable": true,
       "sha512": "sha512-xq27REzgNW5GVG9JLabi5DcRi7VQ/AARBYzTNflwMXi048D5Fm/JPCZTRkVlIy9XpVNAIQ8io1l3GlCu+oQh9w=="
     },
-    "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview2-final": {
+    "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview3-final": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-x+OkqEMERFJY9cAFBZsNPEmZEApAakay2yhE3CD+nyc+HtJDFbyX+spcnOxUjZ2w+YqAdzT6L3DzjlCbRLv9vQ=="
+      "sha512": "sha512-SDk1lvgcSWDxehlmrdZZiUnp6/II0oEaasQGOwivmuF+w4Zxnah9Qq/sFIFhcGDQk9EQu1mYSinMGT3BQaLnQQ=="
     },
     "Microsoft.Extensions.Caching.Abstractions/1.1.0": {
       "type": "package",
@@ -7197,6 +7302,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-TG7dJ8GY1Myz9lZ8DJL4i6D05ncJQBi5CjBMXMdJ4edKxaW+vP2DndDd1jJabdMdmVRdGrvybzqkB+A6Df7eDw=="
+    },
+    "Microsoft.Extensions.DiagnosticAdapter/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GGI4Pp9DpRBFlAXDcZRz5e+R+TqLFBWzToTDXqxPjQiRq6DwPvDYuKD10rlJD4QxxeX8fcjakTlKO1RfC+DmFg=="
     },
     "Microsoft.Extensions.FileProviders.Abstractions/1.1.0": {
       "type": "package",
@@ -8233,7 +8343,17 @@
       "serviceable": true,
       "sha512": "sha512-FLhdYJx4331oGovQypQ8JIw2kEmNzCsjVOVYY/16kZTUoquZG85oVn7yUhBE2OZt1yGPSXAL0HTEfzjlbNpM7Q=="
     },
+    "CrmHub.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "CrmHub.Identity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CrmHub.Infra.Data/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

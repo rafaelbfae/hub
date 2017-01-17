@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using CrmHub.Web.Services;
 using CrmHub.Identity.Context;
 using CrmHub.Identity.Models;
+using CrmHub.Infra.Data.Context;
 
 namespace CrmHub.Web
 {
@@ -24,6 +25,7 @@ namespace CrmHub.Web
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();
+                builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
             builder.AddEnvironmentVariables();
@@ -36,11 +38,14 @@ namespace CrmHub.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<CrmIdentityDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection")));
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<CrmIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
@@ -48,6 +53,7 @@ namespace CrmHub.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddApplicationInsightsTelemetry(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +61,7 @@ namespace CrmHub.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            app.UseApplicationInsightsRequestTelemetry();
 
             if (env.IsDevelopment())
             {
@@ -68,8 +75,9 @@ namespace CrmHub.Web
             }
 
             app.UseStaticFiles();
-
             app.UseIdentity();
+            app.UseApplicationInsightsExceptionTelemetry();
+
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 

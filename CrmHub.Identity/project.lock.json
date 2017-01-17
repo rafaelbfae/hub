@@ -3609,6 +3609,21 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "CrmHub.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "netcoreapp1.0/CrmHub.Domain.dll": {}
+        },
+        "runtime": {
+          "netcoreapp1.0/CrmHub.Domain.dll": {}
+        }
       }
     }
   },
@@ -9789,10 +9804,16 @@
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
       ]
+    },
+    "CrmHub.Domain/1.0.0": {
+      "type": "project",
+      "path": "../CrmHub.Domain/project.json",
+      "msbuildProject": "../CrmHub.Domain/CrmHub.Domain.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
+      "CrmHub.Domain >= 1.0.0-*",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 1.1.0",
       "Microsoft.AspNetCore.Mvc >= 1.1.0",
       "Microsoft.EntityFrameworkCore.Design >= 1.1.0",

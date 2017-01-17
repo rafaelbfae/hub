@@ -7,7 +7,7 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>8d42fb56-0927-4a77-ac93-838a7955eefa</ProjectGuid>
+    <ProjectGuid>e8c4c25e-0007-4bcb-804e-27ec057966c7</ProjectGuid>
     <RootNamespace>CrmHub.Infra.Data</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
