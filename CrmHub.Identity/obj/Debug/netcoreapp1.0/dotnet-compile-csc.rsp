@@ -168,7 +168,6 @@
 -r:"C:\Users\fabio\.nuget\packages\System.Threading.Timer\4.3.0\ref\netstandard1.2\System.Threading.Timer.dll"
 -r:"C:\Users\fabio\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\fabio\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll"
--r:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Domain\bin\Debug\netcoreapp1.0\CrmHub.Domain.dll"
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Configuration\ApplicationRoleManager.cs"
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Context\CrmIdentityDbContext.cs"
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Context\TemporaryDbContextFactory.cs"

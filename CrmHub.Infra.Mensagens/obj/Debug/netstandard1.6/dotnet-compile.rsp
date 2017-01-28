@@ -57,5 +57,6 @@
 --reference:C:\Users\fabio\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\fabio\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Mensagens\MessageController.cs
-C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Mensagens\Messages\MessageType.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Mensagens\Interfaces\IMessageController.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Mensagens\Models\MessageType.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Mensagens\Properties\AssemblyInfo.cs

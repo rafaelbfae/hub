@@ -116,12 +116,24 @@ namespace CrmHub.Infra.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Environment")
+                        .IsRequired()
+                        .HasColumnType("varchar(25)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(150)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("UrlAccount")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("UrlService")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 

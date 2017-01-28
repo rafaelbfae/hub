@@ -3624,17 +3624,17 @@
       },
       "CrmHub.Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v1.0",
+        "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
           "Microsoft.EntityFrameworkCore": "1.1.0",
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "netcoreapp1.0/CrmHub.Domain.dll": {}
+          "netstandard1.6/CrmHub.Domain.dll": {}
         },
         "runtime": {
-          "netcoreapp1.0/CrmHub.Domain.dll": {}
+          "netstandard1.6/CrmHub.Domain.dll": {}
         }
       }
     }

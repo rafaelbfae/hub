@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/win10-x64",
-    "signature": "65422016a7093d8836887f3fc4a15ea1a90022a0"
+    "signature": "d5e249c93e74cc561b8f919c9140a86615a97534"
   },
   "compilationOptions": {
     "defines": [
@@ -40,10 +40,25 @@
           "Microsoft.NETCore.App": "1.1.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
           "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
-          "CrmHub.Infra.Data": "1.0.0"
+          "CrmHub.Infra.Data": "1.0.0",
+          "CrmHub.Application": "1.0.0",
+          "CrmHub.Infra.Dependences.Injection": "1.0.0"
         },
         "compile": {
           "CrmHub.Web.dll": {}
+        }
+      },
+      "AutoMapper/5.2.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.3.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Collections.Specialized": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0",
+          "System.Dynamic.Runtime": "4.3.0",
+          "System.Linq.Queryable": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
       "BundlerMinifier.Core/2.2.306": {
@@ -869,6 +884,17 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.Design/1.1.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
+          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Collections.NonGeneric": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/1.1.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
@@ -911,7 +937,11 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.Design.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview3-final": {},
+      "Microsoft.EntityFrameworkCore.Tools/1.1.0-preview4-final": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Design": "1.1.0"
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/1.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "1.1.0",
@@ -1978,6 +2008,9 @@
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Collections.Specialized.dll": {}
         }
       },
       "System.ComponentModel/4.3.0": {
@@ -3365,6 +3398,27 @@
           "System.Xml.XPath": "4.0.1"
         }
       },
+      "CrmHub.Appication.Integration/1.0.0": {
+        "dependencies": {
+          "CrmHub.Infra.Mensagens": "1.0.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "CrmHub.Appication.Integration.dll": {}
+        }
+      },
+      "CrmHub.Application/1.0.0": {
+        "dependencies": {
+          "CrmHub.Domain": "1.0.0",
+          "CrmHub.Appication.Integration": "1.0.0",
+          "NETStandard.Library": "1.6.1",
+          "AutoMapper": "5.2.0"
+        },
+        "compile": {
+          "CrmHub.Application.dll": {}
+        }
+      },
       "CrmHub.Domain/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
@@ -3377,7 +3431,6 @@
       },
       "CrmHub.Identity/1.0.0": {
         "dependencies": {
-          "CrmHub.Domain": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
           "Microsoft.AspNetCore.Mvc": "1.1.0",
@@ -3395,10 +3448,29 @@
           "Microsoft.AspNetCore.Mvc": "1.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
           "System.ComponentModel.Annotations": "4.3.0",
-          "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview3-final"
+          "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final"
         },
         "compile": {
           "CrmHub.Infra.Data.dll": {}
+        }
+      },
+      "CrmHub.Infra.Dependences.Injection/1.0.0": {
+        "dependencies": {
+          "CrmHub.Application": "1.0.0",
+          "CrmHub.Appication.Integration": "1.0.0",
+          "CrmHub.Infra.Mensagens": "1.0.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "CrmHub.Infra.Dependences.Injection.dll": {}
+        }
+      },
+      "CrmHub.Infra.Mensagens/1.0.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "CrmHub.Infra.Mensagens.dll": {}
         }
       }
     },
@@ -3429,10 +3501,25 @@
           "Microsoft.NETCore.App": "1.1.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
           "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
-          "CrmHub.Infra.Data": "1.0.0"
+          "CrmHub.Infra.Data": "1.0.0",
+          "CrmHub.Application": "1.0.0",
+          "CrmHub.Infra.Dependences.Injection": "1.0.0"
         },
         "runtime": {
           "CrmHub.Web.dll": {}
+        }
+      },
+      "AutoMapper/5.2.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.3.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Collections.Specialized": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0",
+          "System.Dynamic.Runtime": "4.3.0",
+          "System.Linq.Queryable": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
       "BundlerMinifier.Core/2.2.306": {
@@ -4264,6 +4351,17 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.Design/1.1.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
+          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Collections.NonGeneric": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/1.1.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
@@ -4306,7 +4404,11 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.Design.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview3-final": {},
+      "Microsoft.EntityFrameworkCore.Tools/1.1.0-preview4-final": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Design": "1.1.0"
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/1.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "1.1.0",
@@ -6849,6 +6951,27 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "CrmHub.Appication.Integration/1.0.0": {
+        "dependencies": {
+          "CrmHub.Infra.Mensagens": "1.0.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "CrmHub.Appication.Integration.dll": {}
+        }
+      },
+      "CrmHub.Application/1.0.0": {
+        "dependencies": {
+          "CrmHub.Domain": "1.0.0",
+          "CrmHub.Appication.Integration": "1.0.0",
+          "NETStandard.Library": "1.6.1",
+          "AutoMapper": "5.2.0"
+        },
+        "runtime": {
+          "CrmHub.Application.dll": {}
+        }
+      },
       "CrmHub.Domain/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
@@ -6861,7 +6984,6 @@
       },
       "CrmHub.Identity/1.0.0": {
         "dependencies": {
-          "CrmHub.Domain": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
           "Microsoft.AspNetCore.Mvc": "1.1.0",
@@ -6879,10 +7001,29 @@
           "Microsoft.AspNetCore.Mvc": "1.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
           "System.ComponentModel.Annotations": "4.3.0",
-          "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview3-final"
+          "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final"
         },
         "runtime": {
           "CrmHub.Infra.Data.dll": {}
+        }
+      },
+      "CrmHub.Infra.Dependences.Injection/1.0.0": {
+        "dependencies": {
+          "CrmHub.Application": "1.0.0",
+          "CrmHub.Appication.Integration": "1.0.0",
+          "CrmHub.Infra.Mensagens": "1.0.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "CrmHub.Infra.Dependences.Injection.dll": {}
+        }
+      },
+      "CrmHub.Infra.Mensagens/1.0.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "CrmHub.Infra.Mensagens.dll": {}
         }
       }
     }
@@ -6892,6 +7033,11 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/5.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ulUMmzFg1vAFMpTyJsplgnC7pOIFlb25dbldHd7J4eroQWjSV4iAoOQ33h1oMjf6mLo3uZ8aRNUN2rgpOeSE1w=="
     },
     "BundlerMinifier.Core/2.2.306": {
       "type": "package",
@@ -7213,6 +7359,11 @@
       "serviceable": true,
       "sha512": "sha512-S00vr6pLeoCMbm1PsXNZIceCAA/TUX83W3f2PcLFLGrx2QnGo5aqhtYjHvBhOVKJXZmt52EKEdORoTZVZ/swww=="
     },
+    "Microsoft.EntityFrameworkCore.Design/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7hWqxlNYUocjRqljw6yi3bQpEjMyzNSBX+LqsUuo9cFqTu3uv2YVRyRobBmfvnXVNfRxB6EysMmTmhxApPhiNw=="
+    },
     "Microsoft.EntityFrameworkCore.Relational/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -7233,10 +7384,10 @@
       "serviceable": true,
       "sha512": "sha512-xq27REzgNW5GVG9JLabi5DcRi7VQ/AARBYzTNflwMXi048D5Fm/JPCZTRkVlIy9XpVNAIQ8io1l3GlCu+oQh9w=="
     },
-    "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview3-final": {
+    "Microsoft.EntityFrameworkCore.Tools/1.1.0-preview4-final": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-SDk1lvgcSWDxehlmrdZZiUnp6/II0oEaasQGOwivmuF+w4Zxnah9Qq/sFIFhcGDQk9EQu1mYSinMGT3BQaLnQQ=="
+      "sha512": "sha512-n7g5JB4YxLYCl32XCmjXEHDF/9J/DSeNYGjxGAzG1xUi/IXOCWd6T3XyEnDXsub7iFDvpB2VgUlh6wHDqmTZgA=="
     },
     "Microsoft.Extensions.Caching.Abstractions/1.1.0": {
       "type": "package",
@@ -8343,6 +8494,16 @@
       "serviceable": true,
       "sha512": "sha512-FLhdYJx4331oGovQypQ8JIw2kEmNzCsjVOVYY/16kZTUoquZG85oVn7yUhBE2OZt1yGPSXAL0HTEfzjlbNpM7Q=="
     },
+    "CrmHub.Appication.Integration/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CrmHub.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "CrmHub.Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -8354,6 +8515,16 @@
       "sha512": ""
     },
     "CrmHub.Infra.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CrmHub.Infra.Dependences.Injection/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CrmHub.Infra.Mensagens/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

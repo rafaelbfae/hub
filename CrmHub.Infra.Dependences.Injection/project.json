@@ -1,0 +1,17 @@
+{
+  "title": "CrmHub.Infra.Dependences.Injection",
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "CrmHub.Application": "1.0.0-*",
+    "CrmHub.Appication.Integration": "1.0.0-*",
+    "CrmHub.Infra.Mensagens": "1.0.0-*",
+    "NETStandard.Library": "1.6.1"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

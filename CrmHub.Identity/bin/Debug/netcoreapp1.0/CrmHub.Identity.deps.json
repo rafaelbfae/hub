@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v1.0": {
       "CrmHub.Identity/1.0.0": {
         "dependencies": {
-          "CrmHub.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
           "Microsoft.AspNetCore.Mvc": "1.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
@@ -2327,16 +2326,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
-      },
-      "CrmHub.Domain/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
-          "Microsoft.EntityFrameworkCore": "1.1.0",
-          "NETStandard.Library": "1.6.1"
-        },
-        "runtime": {
-          "CrmHub.Domain.dll": {}
-        }
       }
     }
   },
@@ -3230,11 +3219,6 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ=="
-    },
-    "CrmHub.Domain/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

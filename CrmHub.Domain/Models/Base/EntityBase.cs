@@ -8,7 +8,7 @@ namespace CrmHub.Domain.Models.Base
 {
     public class EntityBase
     {
-        public int Id { get; set; }
+        public int Id { get; protected set; }
 
         [Column(TypeName = "datetime2")]
         public DateTime CreatedAt { get; set; }

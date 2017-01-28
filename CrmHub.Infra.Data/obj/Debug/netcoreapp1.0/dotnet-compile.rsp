@@ -171,10 +171,20 @@
 --reference:C:\Users\fabio\.nuget\packages\System.Threading.Timer\4.3.0\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\fabio\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\fabio\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
---reference:C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Domain\bin\Debug\netcoreapp1.0\CrmHub.Domain.dll
+--reference:C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Domain\bin\Debug\netstandard1.6\CrmHub.Domain.dll
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Configuration\DbInitializer.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Context\ApplicationDbContext.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Context\TemporaryDbContextFactory.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Migrations\20170116222951_FirstEntities.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Migrations\20170116222951_FirstEntities.Designer.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Migrations\20170128205828_AlterCrm.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Migrations\20170128205828_AlterCrm.Designer.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Properties\AssemblyInfo.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Repositories\AttributeEntityRepository .cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Repositories\ClientRepository.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Repositories\CompanyRepository.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Repositories\CrmRepository.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Repositories\FieldMappingValueRepository.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Repositories\VendorRepository.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\Repositories\Base\Repository.cs

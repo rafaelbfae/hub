@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace CrmHub.Application.Models.Exact.Roots.Base
+{
+    public class BaseHub
+    {
+        public Autenticacao Autenticacao { get; set; }
+        public List<MapeamentoCampos> MapeamentoCampos { get; set; }
+        public List<CamposPersonalizado> CamposPersonalizados { get; set; }
+    }
+}

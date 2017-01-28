@@ -9,6 +9,8 @@ using CrmHub.Web.Services;
 using CrmHub.Identity.Context;
 using CrmHub.Identity.Models;
 using CrmHub.Infra.Data.Context;
+using CrmHub.Infra.Data.Configuration;
+using CrmHub.Infra.Dependences.Injection;
 
 namespace CrmHub.Web
 {
@@ -54,10 +56,11 @@ namespace CrmHub.Web
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddApplicationInsightsTelemetry(Configuration);
+            new InjectionContainer(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -87,6 +90,8 @@ namespace CrmHub.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            DbInitializer.Initialize(context);
         }
     }
 }
