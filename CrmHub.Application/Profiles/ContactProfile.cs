@@ -8,14 +8,11 @@ using System.Threading.Tasks;
 
 namespace CrmHub.Application
 {
-    internal partial class AutoMapperApplicationConfig
+    public class ContactProfile : Profile
     {
-        internal sealed class LeadProfile : Profile
+        public ContactProfile()
         {
-            public LeadProfile()
-            {
-                this.CreateMap<LeadHub, Lead>();
-            }
+            this.CreateMap<ContactHub, Contact>();
         }
     }
 }

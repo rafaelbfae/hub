@@ -19,5 +19,6 @@ namespace CrmHub.Appication.Integration.Models
         public bool FlNotification { get; set; }
 
         public Lead Lead { get; set; }
+        
     }
 }

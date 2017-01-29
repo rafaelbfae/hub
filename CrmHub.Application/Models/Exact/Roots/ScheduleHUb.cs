@@ -8,7 +8,7 @@ namespace CrmHub.Application.Models.Exact.Roots
 {
     public class ScheduleHub : BaseHub
     {
-        public Lead Lead { get; set; }
+        public LeadHub Lead { get; set; }
         public Reuniao Reuniao { get; set; }
         public Endereco Endereco { get; set; }
         public List<Contato> Contatos { get; set; }

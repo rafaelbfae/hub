@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/win10-x64",
-    "signature": "d5e249c93e74cc561b8f919c9140a86615a97534"
+    "signature": "355b23443c1e5f1e1b07cc8a1a51e4bda1f14ab5"
   },
   "compilationOptions": {
     "defines": [
@@ -42,7 +42,9 @@
           "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
           "CrmHub.Application": "1.0.0",
-          "CrmHub.Infra.Dependences.Injection": "1.0.0"
+          "CrmHub.Infra.Dependences.Injection": "1.0.0",
+          "AutoMapper": "5.2.0",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.2.0"
         },
         "compile": {
           "CrmHub.Web.dll": {}
@@ -59,6 +61,17 @@
         },
         "compile": {
           "lib/netstandard1.3/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/1.2.0": {
+        "dependencies": {
+          "AutoMapper": "5.2.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+          "Microsoft.Extensions.DependencyModel": "1.1.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "BundlerMinifier.Core/2.2.306": {
@@ -3503,7 +3516,9 @@
           "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
           "CrmHub.Application": "1.0.0",
-          "CrmHub.Infra.Dependences.Injection": "1.0.0"
+          "CrmHub.Infra.Dependences.Injection": "1.0.0",
+          "AutoMapper": "5.2.0",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.2.0"
         },
         "runtime": {
           "CrmHub.Web.dll": {}
@@ -3520,6 +3535,17 @@
         },
         "runtime": {
           "lib/netstandard1.3/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/1.2.0": {
+        "dependencies": {
+          "AutoMapper": "5.2.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+          "Microsoft.Extensions.DependencyModel": "1.1.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "BundlerMinifier.Core/2.2.306": {
@@ -7038,6 +7064,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-ulUMmzFg1vAFMpTyJsplgnC7pOIFlb25dbldHd7J4eroQWjSV4iAoOQ33h1oMjf6mLo3uZ8aRNUN2rgpOeSE1w=="
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pSWmuxqlE6aZNSljcEC0hXEGHrswi2ukYGDiypcBNYMLaOwPxpp4LmT9z9Eqb3EDweC1S9uRSLQPiuSRhwxVow=="
     },
     "BundlerMinifier.Core/2.2.306": {
       "type": "package",

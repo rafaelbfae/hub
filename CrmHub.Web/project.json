@@ -44,7 +44,9 @@
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "CrmHub.Infra.Data": "1.0.0-*",
     "CrmHub.Application": "1.0.0-*",
-    "CrmHub.Infra.Dependences.Injection": "1.0.0-*"
+    "CrmHub.Infra.Dependences.Injection": "1.0.0-*",
+    "AutoMapper": "5.2.0",
+    "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.2.0"
   },
 
   "tools": {

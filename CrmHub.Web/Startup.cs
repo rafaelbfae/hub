@@ -11,6 +11,8 @@ using CrmHub.Identity.Models;
 using CrmHub.Infra.Data.Context;
 using CrmHub.Infra.Data.Configuration;
 using CrmHub.Infra.Dependences.Injection;
+using CrmHub.Application;
+using AutoMapper;
 
 namespace CrmHub.Web
 {
@@ -51,6 +53,7 @@ namespace CrmHub.Web
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddAutoMapper();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

@@ -7,6 +7,12 @@ namespace CrmHub.Appication.Integration.Models
 {
     public class User
     {
+
+        public User()
+        {
+            
+        }
+
         public User(Crm crm, string token)
         {
             this.Crm = crm;

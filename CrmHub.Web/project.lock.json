@@ -20,6 +20,21 @@
           "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/1.2.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "5.0.2",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "Microsoft.Extensions.DependencyModel": "1.0.0",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "BundlerMinifier.Core/2.2.306": {
         "type": "package",
         "dependencies": {
@@ -4640,6 +4655,21 @@
         },
         "runtime": {
           "lib/netstandard1.3/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/1.2.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "5.0.2",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "Microsoft.Extensions.DependencyModel": "1.0.0",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "BundlerMinifier.Core/2.2.306": {
@@ -9372,6 +9402,18 @@
         "lib/netstandard1.1/AutoMapper.xml",
         "lib/netstandard1.3/AutoMapper.dll",
         "lib/netstandard1.3/AutoMapper.xml"
+      ]
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/1.2.0": {
+      "sha512": "pSWmuxqlE6aZNSljcEC0hXEGHrswi2ukYGDiypcBNYMLaOwPxpp4LmT9z9Eqb3EDweC1S9uRSLQPiuSRhwxVow==",
+      "type": "package",
+      "path": "AutoMapper.Extensions.Microsoft.DependencyInjection/1.2.0",
+      "files": [
+        "AutoMapper.Extensions.Microsoft.DependencyInjection.1.2.0.nupkg.sha512",
+        "AutoMapper.Extensions.Microsoft.DependencyInjection.nuspec",
+        "lib/net451/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+        "lib/netstandard1.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+        "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
       ]
     },
     "BundlerMinifier.Core/2.2.306": {
@@ -16984,6 +17026,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "AutoMapper >= 5.2.0",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 1.2.0",
       "BundlerMinifier.Core >= 2.2.306",
       "CrmHub.Application >= 1.0.0-*",
       "CrmHub.Identity >= 1.0.0-*",

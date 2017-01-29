@@ -10,6 +10,7 @@
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
 -out:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\bin\Debug\netcoreapp1.0\CrmHub.Web.dll"
 -r:"C:\Users\fabio\.nuget\packages\AutoMapper\5.2.0\lib\netstandard1.3\AutoMapper.dll"
+-r:"C:\Users\fabio\.nuget\packages\AutoMapper.Extensions.Microsoft.DependencyInjection\1.2.0\lib\netstandard1.6\AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
 -r:"C:\Users\fabio\.nuget\packages\BundlerMinifier.Core\2.2.306\lib\netcoreapp1.0\dotnet-bundle.dll"
 -r:"C:\Users\fabio\.nuget\packages\Microsoft.ApplicationInsights\2.1.0\lib\dotnet5.4\Microsoft.ApplicationInsights.dll"
 -r:"C:\Users\fabio\.nuget\packages\Microsoft.ApplicationInsights.AspNetCore\1.0.0\lib\netstandard1.6\Microsoft.ApplicationInsights.AspNetCore.dll"
