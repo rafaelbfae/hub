@@ -126,36 +126,34 @@ namespace CrmHub.Application.Integration.Services
 
         private bool OnSendRequestSave(BaseRoot value, string entityName, string xml)
         {
-            if (value.GetId().Equals(string.Empty))
-                return SendRequestInsert(value, entityName, xml);
-            else
-                return SendRequestUpdate(value, entityName, value.GetId(), xml);
+            return string.IsNullOrEmpty(value.GetId()) ? SendRequestInsert(value, entityName, xml)
+                                                      : SendRequestUpdate(value, entityName, value.GetId(), xml);
         }
 
         private bool SendRequestGet(BaseRoot value, string entityName)
         {
-            string url = "";
+            string url = value.Authentication.UrlService;
             string urlFormat = string.Format("{0}/json/{1}/{2}?authtoken={3}&scope={4}", url, entityName, "getFields", value.Authentication.Token, value.Authentication.User);
             return SendRequestGetAsync(this, urlFormat).Result;
         }
 
         private bool SendRequestInsert(BaseRoot value, string entityName, string xml)
         {
-            string url = "";
+            string url = value.Authentication.UrlService;
             string urlFormat = string.Format("{0}/xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&xmlData={5}", url, entityName, "insertRecords", value.Authentication.Token, value.Authentication.User, xml);
             return SendRequestPostAsync(this, urlFormat, xml).Result;
         }
 
         private bool SendRequestUpdate(BaseRoot value, string entityName, string id, string xml)
         {
-            string url = "";
+            string url = value.Authentication.UrlService;
             string urlFormat = string.Format("{0}/xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&id={5}&xmlData={6}", url, entityName, "updateRecords", value.Authentication.Token, value.Authentication.User, id, xml);
             return SendRequestPostAsync(this, urlFormat, xml).Result;
         }
 
         private bool SendRequestDelete(BaseRoot value, string entityName, string id)
         {
-            string url = "";
+            string url = value.Authentication.UrlService;
             string urlFormat = string.Format("{0}/xml/{1}/{2}?authtoken={3}&scope={4}&id={4}", url, entityName, "deleteRecords", value.Authentication.Token, value.Authentication.User, id);
             return SendRequestDeleteAsync(this, urlFormat).Result;
         }

@@ -25,6 +25,7 @@ namespace CrmHub.Application.Services.Integration
         public bool Schedule(ReuniaoExact value)
         {
             var _value = Mapper.Map<ScheduleRoot>(value);
+            _value.Authentication.UrlService = "https://crm.zoho.com/crm/private";
             return _crmIntegration.Schedule(_value);
         }
 

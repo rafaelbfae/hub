@@ -16,17 +16,6 @@ namespace CrmHub.Application
             this.CreateMap<LeadExact, LeadRoot>()
                  .ForMember(s => s.EntityName, i => i.MapFrom(o => "Lead"))
                  //.ForMember(s => s.Lead.Name, i => i.MapFrom(o => o.Lead.Nome))
-                 //.ForMember(s => s.Lead.Site, i => i.MapFrom(o => o.Lead.Site))
-                 //.ForMember(s => s.Lead.Link, i => i.MapFrom(o => o.Lead.LinkExact))
-                 //.ForMember(s => s.Lead.Note, i => i.MapFrom(o => o.Lead.Nome))
-                 //.ForMember(s => s.Lead.Data, i => i.MapFrom(o => o.Lead.DataCadastro))
-                 //.ForMember(s => s.Lead.Source, i => i.MapFrom(o => o.Lead.Origem))
-                 //.ForMember(s => s.Lead.Market, i => i.MapFrom(o => o.Lead.Mercado))
-                 //.ForMember(s => s.Lead.Phones, i => i.MapFrom(o => o.Lead.Telefone))
-                 //.ForMember(s => s.Lead.Vendor, i => i.MapFrom(o => o.Lead.PreVendedor))
-                 //.ForMember(s => s.Lead.Product, i => i.MapFrom(o => o.Lead.Produto))
-                 //.ForMember(s => s.Lead.SubSource, i => i.MapFrom(o => o.Lead.SubOrigem))
-                 //.ForMember(s => s.Lead.Diagnosis, i => i.MapFrom(o => o.Lead.Diagnostico))
                  .AfterMap((service, integration) => integration.Authentication = new Authentication
                  {
                      Crm = (eCrmName)Enum.Parse(typeof(eCrmName), service.Autenticacao.TipoCRM),

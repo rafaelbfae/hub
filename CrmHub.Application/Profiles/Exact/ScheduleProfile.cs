@@ -15,12 +15,9 @@ namespace CrmHub.Application
         {
             this.CreateMap<ReuniaoExact, ScheduleRoot>()
                 .ForMember(s => s.EntityName, i => i.MapFrom(o => "Schedule"))
-                //.ForMember(s => s.Schedule.End, i => i.MapFrom(o => o.Reuniao.DataFim))
-                //.ForMember(s => s.Schedule.Type, i => i.MapFrom(o => o.Reuniao.TipoReuniao))
-                //.ForMember(s => s.Schedule.Start, i => i.MapFrom(o => o.Reuniao.DataIni))
-                //.ForMember(s => s.Schedule.Subject, i => i.MapFrom(o => o.Reuniao.Referencia))
-                //.ForMember(s => s.Schedule.Address, i => i.MapFrom(o => o.Reuniao.Endereco))
-                //.ForMember(s => s.Schedule.TimeZone, i => i.MapFrom(o => o.Reuniao.TimeZone))
+                .ForMember(s => s.Schedule, i => i.MapFrom(o => o.Reuniao))
+                .ForMember(s => s.Address, i => i.MapFrom(o => o.Endereco))
+                .ForMember(s => s.Contacts, i => i.MapFrom(o => o.Contatos))
                 .AfterMap((service, integration) => integration.Authentication = new Authentication
                 {
                     Crm = (eCrmName)Enum.Parse(typeof(eCrmName), service.Autenticacao.TipoCRM),

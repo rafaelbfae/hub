@@ -8,6 +8,8 @@ namespace CrmHub.Application.Integration.Models
         public string Email { get; set; }
         public string Token { get; set; }
         public string UserToken { get; set; }
+        public string UrlService { get; set; }
+        public string UrlAccount { get; set; }
         public eCrmName Crm { get; set; }
     }
 }

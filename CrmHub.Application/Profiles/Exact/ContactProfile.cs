@@ -15,12 +15,7 @@ namespace CrmHub.Application
         {
             this.CreateMap<ContatoExact, ContactRoot>()
                 .ForMember(s => s.EntityName, i => i.MapFrom(o => "Contact"))
-                //.ForMember(s => s.Contact.Name, i => i.MapFrom(o => o.Contato.Nome))
-                //.ForMember(s => s.Contact.Email, i => i.MapFrom(o => o.Contato.Email))
-                //.ForMember(s => s.Contact.Role, i => i.MapFrom(o => o.Contato.Cargo))
-                //.ForMember(s => s.Contact.MessengerId, i => i.MapFrom(o => o.Contato.IdMensageiro))
-                //.ForMember(s => s.Contact.MessengerType, i => i.MapFrom(o => o.Contato.TipoMensageiro))
-                //.ForMember(s => s.Contact.Phones, i => i.MapFrom(o => o.Contato.Telefone))
+                .ForMember(s => s.Contact, i => i.MapFrom(o => o.Contato))
                 .AfterMap((service, integration) => integration.Authentication = new Authentication
                 {
                     Crm = (eCrmName)Enum.Parse(typeof(eCrmName), service.Autenticacao.TipoCRM),
