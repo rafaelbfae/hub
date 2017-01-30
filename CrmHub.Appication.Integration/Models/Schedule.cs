@@ -1,24 +1,16 @@
-﻿using CrmHub.Appication.Integration.Models.Base;
+﻿using CrmHub.Application.Integration.Models.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CrmHub.Appication.Integration.Models
+namespace CrmHub.Application.Integration.Models
 {
-    public class Schedule : EntityBase
+    public class Schedule : BaseEntity
     {
+        public string Type { get; set; }
         public string Subject { get; set; }
-
-        public DateTime Start { get; set; }
-
+        public string Address { get; set; }
+        public string TimeZone { get; set; }
+        public string Reference { get; set; }
         public DateTime End { get; set; }
-
-        public string Venue { get; set; }
-
-        public bool FlNotification { get; set; }
-
-        public Lead Lead { get; set; }
-        
+        public DateTime Start { get; set; }
     }
 }

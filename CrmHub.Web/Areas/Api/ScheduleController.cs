@@ -36,14 +36,14 @@ namespace CrmHub.Web.Areas.Api
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ScheduleHub schedule)
+        public IActionResult Post([FromBody] ReuniaoExact schedule)
         {
             _service.Schedule(schedule);
             return Ok(new { id = 12 });
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ScheduleHub schedule)
+        public IActionResult Put(int id, [FromBody] ReuniaoExact schedule)
         {
             _service.ReSchedule(schedule);
             return new NoContentResult();

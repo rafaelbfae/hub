@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CrmHub.Application.Models.Exact.Roots
 {
-    public class ContactHub : BaseHub
+    public class LeadExact : BaseExact
     {
-        public Contato Contato { get; set; }
+        public Lead Lead { get; set; }
     }
 }

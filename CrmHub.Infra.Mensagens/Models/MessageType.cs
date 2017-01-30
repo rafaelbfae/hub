@@ -20,6 +20,8 @@ namespace CrmHub.Infra.Messages.Models
 
         public string Message { get; set; }
 
+        public string Data { get; set; }
+
         #endregion
     }
 }

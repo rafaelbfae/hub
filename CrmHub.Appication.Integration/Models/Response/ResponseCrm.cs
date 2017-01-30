@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CrmHub.Appication.Integration.Models.Response
+namespace CrmHub.Application.Integration.Models.Response
 {
-    public class ResponseCrm
+    public class ResponseCrm 
     {
+        public string id { get; set; }
+
+        public ResponseCrm()
+        {
+            this.id = string.Empty;
+        }
     }
 }

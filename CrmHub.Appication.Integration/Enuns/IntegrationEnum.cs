@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 
-namespace CrmHub.Appication.Integration.Enuns
+namespace CrmHub.Application.Integration.Enuns
 {
     public enum eCrmName { ZOHOCRM, HUBSPOT, PIPEDRIVE, NECTARCRM, RDSTATION, SALESFORCE, AGENDOR, MOSKITCRM, VTIGER }
 

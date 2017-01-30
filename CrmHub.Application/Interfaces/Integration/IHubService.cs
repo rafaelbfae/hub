@@ -8,18 +8,15 @@ namespace CrmHub.Application.Interfaces.Integration
 {
     public interface IHubService
     {
-        bool Schedule(ScheduleHub value);
-        bool OnSchedule(ScheduleHub value);
-        bool ReSchedule(ScheduleHub value);
-        bool CancelSchedule(ScheduleHub value);
-        bool FeedBackSchedule(ScheduleHub value);
+        bool Schedule(ReuniaoExact value);
+        bool ReSchedule(ReuniaoExact value);
+        
+        bool LeadRegister(LeadExact value);
+        bool LeadUpdate(LeadExact value);
+        bool LeadDelete(LeadExact value);
 
-        bool LeadRegister(LeadHub value);
-        bool LeadUpdate(LeadHub value);
-        bool LeadDelete(LeadHub value);
-
-        bool ContactRegister(ContactHub value);
-        bool ContactUpdate(ContactHub value);
-        bool ContactDelete(ContactHub value);
+        bool ContactRegister(ContatoExact value);
+        bool ContactUpdate(ContatoExact value);
+        bool ContactDelete(ContatoExact value);
     }
 }

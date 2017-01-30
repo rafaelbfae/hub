@@ -40,7 +40,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CrmHub.Infra.Data", "CrmHub
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CrmHub.Application", "CrmHub.Application\CrmHub.Application.xproj", "{7875768E-E9B2-4E3C-ABEF-75506BD451C4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CrmHub.Appication.Integration", "CrmHub.Appication.Integration\CrmHub.Appication.Integration.xproj", "{8F2BAA89-D8DD-4126-8AC7-D947815BA20C}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CrmHub.Application.Integration", "CrmHub.Appication.Integration\CrmHub.Application.Integration.xproj", "{8F2BAA89-D8DD-4126-8AC7-D947815BA20C}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CrmHub.Infra.Dependences.Injection", "CrmHub.Infra.Dependences.Injection\CrmHub.Infra.Dependences.Injection.xproj", "{677F16E5-F2C5-4DFD-BA81-37A6764F6236}"
 EndProject

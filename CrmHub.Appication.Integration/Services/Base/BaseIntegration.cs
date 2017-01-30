@@ -1,6 +1,8 @@
-﻿using CrmHub.Appication.Integration.Interfaces.Base;
-using CrmHub.Appication.Integration.Models;
-using CrmHub.Appication.Integration.Models.Base;
+﻿using CrmHub.Application.Integration.Interfaces.Base;
+using CrmHub.Application.Integration.Models;
+using CrmHub.Application.Integration.Models.Roots;
+using CrmHub.Application.Integration.Models.Roots.Base;
+using CrmHub.Infra.Messages.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +10,17 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace CrmHub.Appication.Integration.Services.Base
+namespace CrmHub.Application.Integration.Services.Base
 {
     public abstract class BaseIntegration
     {
-        protected static string GetFieldValue(FieldMappingValue mapping, EntityBase value)
+        protected static string GetFieldValue(MappingFields mapping, BaseRoot value)
         {
             Type t = value.GetType();
             PropertyInfo[] props = t.GetProperties();
             try
             {
-                PropertyInfo prop = props.Where(w => w.Name.Equals(mapping.PropertyNameHub)).First();
+                PropertyInfo prop = props.Where(w => w.Name.Equals(mapping.CrmField)).First();
                 if (prop.PropertyType.Name.Equals("DateTime"))
                 {
                     DateTime date = DateTime.Parse(prop.GetValue(value).ToString());
@@ -29,21 +31,41 @@ namespace CrmHub.Appication.Integration.Services.Base
             }
             catch (Exception e) { return string.Empty; }
         }
+        #region Public Methods
 
-        public static async Task<bool> SendRequestCreateAsync(ICrmIntegration controller, string url, string content)
+        public async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url)
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                var response = await httpClient.PostAsync(new Uri(url), new StringContent(content));
+                var response = await httpClient.GetAsync(new Uri(url));
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                controller.MessageController.Clear();
-                controller.MessageController.AddSuccessMessage(responseBody);
+                //responseBody = RemovoDescription(responseBody);
+                //try
+                //{
+                //    var objectResponse = JsonConvert.DeserializeObject(responseBody, typeof(FieldsResponseCrm));
+                //    controller.MessageController.Clear();
+                //    controller.MessageController.AddMessage(
+                //        new Message()
+                //        {
+                //            typeMessage = Message.TYPE.SUCCESS,
+                //            data = (FieldsResponseCrm)objectResponse
+                //        });
+                //}
+                //catch (JsonSerializationException e)
+                //{
+                //    Console.WriteLine(e.Message);
+                //}
+                //catch (AggregateException e)
+                //{
+                //    Console.WriteLine(e.Message);
+                //}
+
                 return true;
             }
         }
 
-        public static async Task<bool> SendRequestUpdateAsync(ICrmIntegration controller, string url, string content)
+        public async Task<bool> SendRequestPostAsync(BaseIntegration controller, string url, string content)
         {
             using (HttpClient httpClient = new HttpClient())
             {
@@ -57,7 +79,7 @@ namespace CrmHub.Appication.Integration.Services.Base
             }
         }
 
-        public static async Task<bool> SendRequestDeleteAsync(ICrmIntegration controller, string url)
+        public async Task<bool> SendRequestDeleteAsync(BaseIntegration controller, string url)
         {
             using (HttpClient httpClient = new HttpClient())
             {
@@ -69,5 +91,114 @@ namespace CrmHub.Appication.Integration.Services.Base
                 return true;
             }
         }
+
+        public bool Schedule(ScheduleRoot value)
+        {
+            value.Schedule.Id = string.Empty;
+            return ReSchedule(value);
+        }
+
+        public bool ReSchedule(ScheduleRoot value)
+        {
+            bool result = true;
+            if (ExecuteLead(value))
+            {
+                value.Contacts.ForEach(c => result &= ExecuteContact(value, c));
+                result &= ExecuteEvent(value);
+            }
+            return result;
+        }
+
+        public bool LeadRegister(LeadRoot value) => ExecuteLead(value);
+        public bool LeadUpdate(LeadRoot value) => ExecuteLead(value);
+        public bool LeadDelete(LeadRoot value) => OnDeleteLead(value);
+        public bool LeadGetFields(BaseRoot value) => OnGetFieldsLead(value);
+
+        public bool EventRegister(EventRoot value) => ExecuteEvent(value);
+        public bool EventUpdate(EventRoot value) => ExecuteEvent(value);
+        public bool EventDelete(EventRoot value) => OnDeleteEvent(value);
+        public bool EventGetFields(BaseRoot value) => OnGetFieldsEvent(value);
+
+        public bool ContactRegister(ContactRoot value) => ExecuteContact(value);
+        public bool ContactUpdate(ContactRoot value) => ExecuteContact(value);
+        public bool ContactDelete(ContactRoot value) => OnDeleteContact(value);
+        public bool ContactGetFields(BaseRoot value) => OnGetFieldsContact(value);
+
+        public bool CompanyRegister(CompanyRoot value) => ExecuteCompany(value);
+        public bool CompanyUpdate(CompanyRoot value) => ExecuteCompany(value);
+        public bool CompanyDelete(CompanyRoot value) => OnDeleteCompany(value);
+        public bool CompanyGetFields(BaseRoot value) => OnGetFieldsCompany(value);
+
+        #endregion
+
+        #region Protected Methods
+
+        protected abstract IMessageController MessageController { get; }
+        protected abstract bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list);
+        protected abstract bool OnExecuteLead(LeadRoot value, List<MappingFields> list);
+        protected abstract bool OnDeleteLead(LeadRoot value);
+        protected abstract bool OnGetFieldsLead(BaseRoot value);
+        protected abstract bool OnExecuteEvent(ScheduleRoot value, List<MappingFields> list);
+        protected abstract bool OnExecuteEvent(EventRoot value, List<MappingFields> list);
+        protected abstract bool OnDeleteEvent(EventRoot value);
+        protected abstract bool OnGetFieldsEvent(BaseRoot value);
+        protected abstract bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list);
+        protected abstract bool OnExecuteContact(ContactRoot value, List<MappingFields> list);
+        protected abstract bool OnDeleteContact(ContactRoot value);
+        protected abstract bool OnGetFieldsContact(BaseRoot value);
+        protected abstract bool OnExecuteCompany(CompanyRoot value, List<MappingFields> list);
+        protected abstract bool OnDeleteCompany(CompanyRoot value);
+        protected abstract bool OnGetFieldsCompany(BaseRoot value);
+
+        #endregion
+
+        #region Private Methods
+
+        private bool ExecuteLead(ScheduleRoot value)
+        {
+            return OnExecuteLead(value, value.MappingFields.Where(v => filterLead(v.ClientEntity)).ToList());
+        }
+
+        private bool ExecuteLead(LeadRoot value)
+        {
+            return OnExecuteLead(value, value.MappingFields);
+        }
+
+        private bool ExecuteEvent(ScheduleRoot value)
+        {
+            value.Schedule.Subject = "Reunião: " + value.Lead.Name + " " +
+                value.Schedule.Start.ToString("dd/MM/yyyy hh:mm") + " " +
+                value.Schedule.End.ToString("dd/MM/yyyy hh:mm");
+
+            return OnExecuteEvent(value, value.MappingFields.Where(v => filterEvent(v.ClientEntity)).ToList());
+        }
+
+        private bool ExecuteEvent(EventRoot value)
+        {
+            return OnExecuteEvent(value, value.MappingFields);
+        }
+
+        private bool ExecuteContact(ScheduleRoot value, Contact contact)
+        {
+            return OnExecuteContact(value, contact, value.MappingFields.Where(v => filterContact(v.ClientEntity)).ToList());
+        }
+
+        private bool ExecuteContact(ContactRoot value)
+        {
+            return OnExecuteContact(value, value.MappingFields);
+        }
+
+        private bool ExecuteCompany(CompanyRoot value)
+        {
+            return OnExecuteCompany(value, value.MappingFields);
+        }
+
+        private Func<string, bool> filterLead = (v) => v.Equals("Lead") || v.Equals("Endereco");
+
+        private Func<string, bool> filterContact = (v) => v.Equals("Contato");
+
+        private Func<string, bool> filterEvent = (v) => v.Equals("Reuniao");
+
+        #endregion
     }
 }

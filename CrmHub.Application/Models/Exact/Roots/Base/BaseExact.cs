@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CrmHub.Application.Models.Exact.Roots.Base
 {
-    public class BaseHub
+    public class BaseExact
     {
         public Autenticacao Autenticacao { get; set; }
         public List<MapeamentoCampos> MapeamentoCampos { get; set; }

@@ -1,6 +1,6 @@
-﻿using CrmHub.Appication.Integration.Enuns;
+﻿using CrmHub.Application.Integration.Enuns;
 
-namespace CrmHub.Appication.Integration.Models
+namespace CrmHub.Application.Integration.Models
 {
     public class Crm
     {

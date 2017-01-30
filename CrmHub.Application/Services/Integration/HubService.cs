@@ -1,10 +1,11 @@
-﻿using CrmHub.Appication.Integration.Interfaces.Base;
+﻿using CrmHub.Application.Integration.Interfaces.Base;
 using CrmHub.Application.Interfaces;
 using Microsoft.Extensions.Logging;
 using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Interfaces.Integration;
 using AutoMapper;
-using CrmHub.Appication.Integration.Models;
+using CrmHub.Application.Integration.Models;
+using CrmHub.Application.Integration.Models.Roots;
 
 namespace CrmHub.Application.Services.Integration
 {
@@ -21,69 +22,51 @@ namespace CrmHub.Application.Services.Integration
             _crmIntegration = crmIntegration;
         }
 
-        public bool Schedule(ScheduleHub value)
+        public bool Schedule(ReuniaoExact value)
         {
-            var _value = Mapper.Map<Schedule>(value);
+            var _value = Mapper.Map<ScheduleRoot>(value);
             return _crmIntegration.Schedule(_value);
         }
 
-        public bool OnSchedule(ScheduleHub value)
+        public bool ReSchedule(ReuniaoExact value)
         {
-            var _value = Mapper.Map<Schedule>(value);
-            return _crmIntegration.OnSchedule(_value);
-        }
-
-        public bool ReSchedule(ScheduleHub value)
-        {
-            var _value = Mapper.Map<Schedule>(value);
+            var _value = Mapper.Map<ScheduleRoot>(value);
             return _crmIntegration.ReSchedule(_value);
         }
 
-        public bool CancelSchedule(ScheduleHub value)
+        public bool LeadRegister(LeadExact value)
         {
-            var _value = Mapper.Map<Schedule>(value);
-            return _crmIntegration.CancelSchedule(_value);
-        }
-
-        public bool FeedBackSchedule(ScheduleHub value)
-        {
-            var _value = Mapper.Map<Schedule>(value);
-            return _crmIntegration.FeedBackSchedule(_value);
-        }
-
-        public bool LeadRegister(LeadHub value)
-        {
-            var _value = Mapper.Map<Lead>(value);
+            var _value = Mapper.Map<LeadRoot>(value);
             return _crmIntegration.LeadRegister(_value);
         }
 
-        public bool LeadUpdate(LeadHub value)
+        public bool LeadUpdate(LeadExact value)
         {
-            var _value = Mapper.Map<Lead>(value);
+            var _value = Mapper.Map<LeadRoot>(value);
             return _crmIntegration.LeadUpdate(_value);
         }
 
-        public bool LeadDelete(LeadHub value)
+        public bool LeadDelete(LeadExact value)
         {
-            var _value = Mapper.Map<Lead>(value);
+            var _value = Mapper.Map<LeadRoot>(value);
             return _crmIntegration.LeadDelete(_value);
         }
 
-        public bool ContactRegister(ContactHub value)
+        public bool ContactRegister(ContatoExact value)
         {
-            var _value = Mapper.Map<Contact>(value);
+            var _value = Mapper.Map<ContactRoot>(value);
             return _crmIntegration.ContactRegister(_value);
         }
 
-        public bool ContactUpdate(ContactHub value)
+        public bool ContactUpdate(ContatoExact value)
         {
-            var _value = Mapper.Map<Contact>(value);
+            var _value = Mapper.Map<ContactRoot>(value);
             return _crmIntegration.ContactUpdate(_value);
         }
 
-        public bool ContactDelete(ContactHub value)
+        public bool ContactDelete(ContatoExact value)
         {
-            var _value = Mapper.Map<Contact>(value);
+            var _value = Mapper.Map<ContactRoot>(value);
             return _crmIntegration.ContactDelete(_value);
         }
     }

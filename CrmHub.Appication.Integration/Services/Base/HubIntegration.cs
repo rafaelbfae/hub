@@ -1,12 +1,12 @@
-﻿using CrmHub.Appication.Integration.Enuns;
-using CrmHub.Appication.Integration.Interfaces.Base;
-using CrmHub.Appication.Integration.Models;
-using CrmHub.Appication.Integration.Models.Base;
+﻿using CrmHub.Application.Integration.Enuns;
+using CrmHub.Application.Integration.Interfaces.Base;
+using CrmHub.Application.Integration.Models.Roots;
+using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace CrmHub.Appication.Integration.Services.Base
+namespace CrmHub.Application.Integration.Services.Base
 {
     public class HubIntegration : ICrmIntegration
     {
@@ -37,65 +37,28 @@ namespace CrmHub.Appication.Integration.Services.Base
             }
         }
 
-        public bool Schedule(Schedule value)
-        {
-            return Execute(value, (c, v) => c.Schedule((Schedule)v));
-        }
+        public bool Schedule(ScheduleRoot value) => Execute(value, (c, v) => c.Schedule((ScheduleRoot)v));
+        public bool ReSchedule(ScheduleRoot value) => Execute(value, (c, v) => c.ReSchedule((ScheduleRoot)v));
 
-        public bool OnSchedule(Schedule value)
-        {
-            return Execute(value, (c, v) => c.OnSchedule((Schedule)v));
-        }
+        public bool LeadRegister(LeadRoot value) => Execute(value, (c, v) => c.LeadRegister((LeadRoot)v));
+        public bool LeadUpdate(LeadRoot value) => Execute(value, (c, v) => c.LeadUpdate((LeadRoot)v));
+        public bool LeadDelete(LeadRoot value) => Execute(value, (c, v) => c.LeadDelete((LeadRoot)v));
+        public bool LeadGetFields(BaseRoot value) => Execute(value, (c, v) => c.LeadGetFields(v));
 
-        public bool ReSchedule(Schedule value)
-        {
-            return Execute(value, (c, v) => c.ReSchedule((Schedule)v));
-        }
+        public bool ContactRegister(ContactRoot value) => Execute(value, (c, v) => c.ContactRegister((ContactRoot)v));
+        public bool ContactUpdate(ContactRoot value) => Execute(value, (c, v) => c.ContactUpdate((ContactRoot)v));
+        public bool ContactDelete(ContactRoot value) => Execute(value, (c, v) => c.ContactDelete((ContactRoot)v));
+        public bool ContactGetFields(BaseRoot value) => Execute(value, (c, v) => c.ContactGetFields(v));
 
-        public bool CancelSchedule(Schedule value)
-        {
-            return Execute(value, (c, v) => c.CancelSchedule((Schedule)v));
-        }
+        public bool EventRegister(EventRoot value) => Execute(value, (c, v) => c.EventRegister((EventRoot)v));
+        public bool EventUpdate(EventRoot value) => Execute(value, (c, v) => c.EventUpdate((EventRoot)v));
+        public bool EventDelete(EventRoot value) => Execute(value, (c, v) => c.EventDelete((EventRoot)v));
+        public bool EventGetFields(BaseRoot value) => Execute(value, (c, v) => c.EventGetFields(v));
 
-        public bool FeedBackSchedule(Schedule value)
-        {
-            return Execute(value, (c, v) => c.FeedBackSchedule((Schedule)v));
-        }
-
-        public bool LeadRegister(Lead value)
-        {
-            return Execute(value, (c, v) => c.LeadRegister((Lead)v));
-        }
-
-        public bool LeadUpdate(Lead value)
-        {
-            return Execute(value, (c, v) => c.LeadUpdate((Lead)v));
-        }
-
-        public bool LeadDelete(Lead value)
-        {
-            return Execute(value, (c, v) => c.LeadDelete((Lead)v));
-        }
-
-        public bool ContactRegister(Contact value)
-        {
-            return Execute(value, (c, v) => c.ContactRegister((Contact)v));
-        }
-
-        public bool ContactUpdate(Contact value)
-        {
-            return Execute(value, (c, v) => c.ContactUpdate((Contact)v));
-        }
-
-        public bool ContactDelete(Contact value)
-        {
-            return Execute(value, (c, v) => c.ContactDelete((Contact)v));
-        }
-
-        public bool GetFields(EntityBase value)
-        {
-            return Execute(value, (c, v) => c.GetFields(v));
-        }
+        public bool CompanyRegister(CompanyRoot value) => Execute(value, (c, v) => c.CompanyRegister((CompanyRoot)v));
+        public bool CompanyUpdate(CompanyRoot value) => Execute(value, (c, v) => c.CompanyUpdate((CompanyRoot)v));
+        public bool CompanyDelete(CompanyRoot value) => Execute(value, (c, v) => c.CompanyDelete((CompanyRoot)v));
+        public bool CompanyGetFields(BaseRoot value) => Execute(value, (c, v) => c.CompanyGetFields(v));
 
         #endregion
 
@@ -106,14 +69,14 @@ namespace CrmHub.Appication.Integration.Services.Base
             _crmHub.Add(ZohoIntegration.CRM_NAME, typeof(ZohoIntegration));
         }
 
-        private ICrmIntegration CrmController(eCrmName value) => (ICrmIntegration)Activator.CreateInstance(_crmHub[value], this._messageController);
+        private BaseIntegration CrmController(eCrmName value) => (BaseIntegration)Activator.CreateInstance(_crmHub[value], this._messageController);
 
-        private bool Execute(EntityBase value, Func<ICrmIntegration, EntityBase, bool> function)
+        private bool Execute(BaseRoot value, Func<BaseIntegration, BaseRoot, bool> function)
         {
-            Crm crm = value.User.Crm;
+            eCrmName crm = value.Authentication.Crm;
             try
             {
-                return function(CrmController(crm.Name), value);
+                return function(CrmController(crm), value);
             }
             catch (KeyNotFoundException e)
             {

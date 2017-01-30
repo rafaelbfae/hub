@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace CrmHub.Appication.Integration.Models.Response
+namespace CrmHub.Application.Integration.Models.Response
 {
     public class ResponseEntity
     {
-        public ResponseEntity()
+        public ResponseEntity() 
         {
-            this.EntityName = string.Empty;
             this.Fields = new List<FieldCrm>();
         }
 
         public List<FieldCrm> Fields { get; set; }
-
         public string EntityName { get; set; }
     }
 }

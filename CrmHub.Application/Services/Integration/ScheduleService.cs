@@ -17,27 +17,12 @@ namespace CrmHub.Application.Services.Integration
             this._service = service;
         }
 
-        public bool CancelSchedule(ScheduleHub value)
-        {
-            return _service.CancelSchedule(value);
-        }
-
-        public bool FeedBackSchedule(ScheduleHub value)
-        {
-            return _service.FeedBackSchedule(value);
-        }
-
-        public bool OnSchedule(ScheduleHub value)
-        {
-            return _service.OnSchedule(value);
-        }
-
-        public bool ReSchedule(ScheduleHub value)
+        public bool ReSchedule(ReuniaoExact value)
         {
             return _service.ReSchedule(value);
         }
 
-        public bool Schedule(ScheduleHub value)
+        public bool Schedule(ReuniaoExact value)
         {
             return _service.Schedule(value);
         }
