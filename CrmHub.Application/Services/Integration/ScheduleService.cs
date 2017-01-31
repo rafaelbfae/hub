@@ -1,9 +1,4 @@
-﻿using CrmHub.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CrmHub.Application.Interfaces.Integration;
+﻿using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Models.Exact.Roots;
 
 namespace CrmHub.Application.Services.Integration

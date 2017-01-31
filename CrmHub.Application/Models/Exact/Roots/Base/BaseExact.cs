@@ -9,6 +9,6 @@ namespace CrmHub.Application.Models.Exact.Roots.Base
     {
         public Autenticacao Autenticacao { get; set; }
         public List<MapeamentoCampos> MapeamentoCampos { get; set; }
-        public List<CamposPersonalizado> CamposPersonalizados { get; set; }
+        public List<CamposPersonalizados> CamposPersonalizados { get; set; }
     }
 }

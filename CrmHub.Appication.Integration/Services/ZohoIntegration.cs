@@ -83,7 +83,6 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnExecuteEvent(ScheduleRoot value, List<MappingFields> list)
         {
-            list.Add(new MappingFields { ClientEntity = "Reuniao", ClientField = "Assunto", CrmEntity = "Events", CrmField = "Subject" });
             EventRoot reuniao = new EventRoot { Schedule = value.Schedule, Authentication = value.Authentication };
             return OnExecuteEvent(reuniao, list);
         }
@@ -126,8 +125,12 @@ namespace CrmHub.Application.Integration.Services
 
         private bool OnSendRequestSave(BaseRoot value, string entityName, string xml)
         {
-            return string.IsNullOrEmpty(value.GetId()) ? SendRequestInsert(value, entityName, xml)
-                                                      : SendRequestUpdate(value, entityName, value.GetId(), xml);
+            if (string.IsNullOrEmpty(value.GetId()))
+            {
+                return SendRequestInsert(value, entityName, xml);
+            }
+
+            return SendRequestUpdate(value, entityName, value.GetId(), xml);
         }
 
         private bool SendRequestGet(BaseRoot value, string entityName)

@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using CrmHub.Application.Integration.Models;
 using CrmHub.Application.Models.Exact;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CrmHub.Application.Profiles.Exact
 {
@@ -20,7 +17,6 @@ namespace CrmHub.Application.Profiles.Exact
                 .ForMember(s => s.Country, i => i.MapFrom(o => o.Pais))
                 .ForMember(s => s.ZipCode, i => i.MapFrom(o => o.CEP))
                 .ForMember(s => s.Complement, i => i.MapFrom(o => o.Complemento))
-
                 ;
        }
     }

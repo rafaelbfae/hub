@@ -1,5 +1,4 @@
-﻿using CrmHub.Application.Integration.Interfaces.Base;
-using CrmHub.Application.Integration.Models;
+﻿using CrmHub.Application.Integration.Models;
 using CrmHub.Application.Integration.Models.Roots;
 using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;
@@ -20,14 +19,12 @@ namespace CrmHub.Application.Integration.Services.Base
             PropertyInfo[] props = t.GetProperties();
             try
             {
-                PropertyInfo prop = props.Where(w => w.Name.Equals(mapping.CrmField)).First();
-                if (prop.PropertyType.Name.Equals("DateTime"))
-                {
-                    DateTime date = DateTime.Parse(prop.GetValue(value).ToString());
-                    return date.ToString("yyyy-MM-dd hh:mm:ss");
-                }
-                else
-                    return prop.GetValue(value).ToString();
+                PropertyInfo prop = props.Where(w => w.Name.Equals(mapping.ClientEntity)).First();
+                var source = prop.GetValue(value, null);
+                Type tp = source.GetType();
+                PropertyInfo[] tpp = tp.GetProperties();
+                PropertyInfo pp = tpp.Where(w => w.Name.Equals(mapping.ClientField)).First();
+                return pp.GetValue(source, null).ToString();
             }
             catch (Exception e) { return string.Empty; }
         }
@@ -193,11 +190,11 @@ namespace CrmHub.Application.Integration.Services.Base
             return OnExecuteCompany(value, value.MappingFields);
         }
 
-        private Func<string, bool> filterLead = (v) => v.Equals("Lead") || v.Equals("Endereco");
+        private Func<string, bool> filterLead = (v) => v.Equals("Lead") || v.Equals("Address");
 
-        private Func<string, bool> filterContact = (v) => v.Equals("Contato");
+        private Func<string, bool> filterContact = (v) => v.Equals("Contact");
 
-        private Func<string, bool> filterEvent = (v) => v.Equals("Reuniao");
+        private Func<string, bool> filterEvent = (v) => v.Equals("Event");
 
         #endregion
     }
