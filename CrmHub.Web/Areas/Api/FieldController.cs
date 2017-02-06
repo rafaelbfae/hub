@@ -9,7 +9,7 @@ using CrmHub.Application.Models.Exact;
 
 namespace CrmHub.Web.Areas.Api
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class FieldController : Controller
     {
         [HttpGet]

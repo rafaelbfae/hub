@@ -11,7 +11,7 @@ using CrmHub.Application.Models.Exact.Roots;
 
 namespace CrmHub.Web.Areas.Api
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class ScheduleController : Controller
     {
         private readonly IScheduleService _service;
