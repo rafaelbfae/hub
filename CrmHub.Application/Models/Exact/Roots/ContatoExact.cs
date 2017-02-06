@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrmHub.Application.Models.Exact.Roots
 {
-    public class ContatoExact : BaseExact
+    public class ContatoExact : BaseExact<ContatoExact>
     {
         public Contato Contato { get; set; }
     }

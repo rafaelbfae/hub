@@ -13,21 +13,6 @@ namespace CrmHub.Application.Integration.Services.Base
 {
     public abstract class BaseIntegration
     {
-        protected static string GetFieldValue(MappingFields mapping, BaseRoot value)
-        {
-            Type t = value.GetType();
-            PropertyInfo[] props = t.GetProperties();
-            try
-            {
-                PropertyInfo prop = props.Where(w => w.Name.Equals(mapping.ClientEntity)).First();
-                var source = prop.GetValue(value, null);
-                Type tp = source.GetType();
-                PropertyInfo[] tpp = tp.GetProperties();
-                PropertyInfo pp = tpp.Where(w => w.Name.Equals(mapping.ClientField)).First();
-                return pp.GetValue(source, null).ToString();
-            }
-            catch (Exception e) { return string.Empty; }
-        }
         #region Public Methods
 
         public async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url)
@@ -100,7 +85,8 @@ namespace CrmHub.Application.Integration.Services.Base
             bool result = true;
             if (ExecuteLead(value))
             {
-                value.Contacts.ForEach(c => result &= ExecuteContact(value, c));
+                int index = 0;
+                value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
                 result &= ExecuteEvent(value);
             }
             return result;
@@ -108,23 +94,23 @@ namespace CrmHub.Application.Integration.Services.Base
 
         public bool LeadRegister(LeadRoot value) => ExecuteLead(value);
         public bool LeadUpdate(LeadRoot value) => ExecuteLead(value);
-        public bool LeadDelete(LeadRoot value) => OnDeleteLead(value);
-        public bool LeadGetFields(BaseRoot value) => OnGetFieldsLead(value);
+        public bool LeadDelete(LeadRoot value) => OnDeleteLead(value.GetId(), value.Authentication);
+        public bool LeadGetFields(BaseRoot value) => OnGetFieldsLead(value.Authentication);
 
         public bool EventRegister(EventRoot value) => ExecuteEvent(value);
         public bool EventUpdate(EventRoot value) => ExecuteEvent(value);
-        public bool EventDelete(EventRoot value) => OnDeleteEvent(value);
-        public bool EventGetFields(BaseRoot value) => OnGetFieldsEvent(value);
+        public bool EventDelete(EventRoot value) => OnDeleteEvent(value.GetId(), value.Authentication);
+        public bool EventGetFields(BaseRoot value) => OnGetFieldsEvent(value.Authentication);
 
         public bool ContactRegister(ContactRoot value) => ExecuteContact(value);
         public bool ContactUpdate(ContactRoot value) => ExecuteContact(value);
-        public bool ContactDelete(ContactRoot value) => OnDeleteContact(value);
-        public bool ContactGetFields(BaseRoot value) => OnGetFieldsContact(value);
+        public bool ContactDelete(ContactRoot value) => OnDeleteContact(value.GetId(), value.Authentication);
+        public bool ContactGetFields(BaseRoot value) => OnGetFieldsContact(value.Authentication);
 
         public bool CompanyRegister(CompanyRoot value) => ExecuteCompany(value);
         public bool CompanyUpdate(CompanyRoot value) => ExecuteCompany(value);
-        public bool CompanyDelete(CompanyRoot value) => OnDeleteCompany(value);
-        public bool CompanyGetFields(BaseRoot value) => OnGetFieldsCompany(value);
+        public bool CompanyDelete(CompanyRoot value) => OnDeleteCompany(value.GetId(), value.Authentication);
+        public bool CompanyGetFields(BaseRoot value) => OnGetFieldsCompany(value.Authentication);
 
         #endregion
 
@@ -133,19 +119,19 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract IMessageController MessageController { get; }
         protected abstract bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list);
         protected abstract bool OnExecuteLead(LeadRoot value, List<MappingFields> list);
-        protected abstract bool OnDeleteLead(LeadRoot value);
-        protected abstract bool OnGetFieldsLead(BaseRoot value);
+        protected abstract bool OnDeleteLead(string id, Authentication value);
+        protected abstract bool OnGetFieldsLead(Authentication value);
         protected abstract bool OnExecuteEvent(ScheduleRoot value, List<MappingFields> list);
         protected abstract bool OnExecuteEvent(EventRoot value, List<MappingFields> list);
-        protected abstract bool OnDeleteEvent(EventRoot value);
-        protected abstract bool OnGetFieldsEvent(BaseRoot value);
-        protected abstract bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list);
-        protected abstract bool OnExecuteContact(ContactRoot value, List<MappingFields> list);
-        protected abstract bool OnDeleteContact(ContactRoot value);
-        protected abstract bool OnGetFieldsContact(BaseRoot value);
+        protected abstract bool OnDeleteEvent(string id, Authentication value);
+        protected abstract bool OnGetFieldsEvent(Authentication value);
+        protected abstract bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list, int index = 0);
+        protected abstract bool OnExecuteContact(ContactRoot value, List<MappingFields> list, int index = 0);
+        protected abstract bool OnDeleteContact(string id, Authentication value);
+        protected abstract bool OnGetFieldsContact(Authentication value);
         protected abstract bool OnExecuteCompany(CompanyRoot value, List<MappingFields> list);
-        protected abstract bool OnDeleteCompany(CompanyRoot value);
-        protected abstract bool OnGetFieldsCompany(BaseRoot value);
+        protected abstract bool OnDeleteCompany(string id, Authentication value);
+        protected abstract bool OnGetFieldsCompany(Authentication value);
 
         #endregion
 
@@ -153,7 +139,7 @@ namespace CrmHub.Application.Integration.Services.Base
 
         private bool ExecuteLead(ScheduleRoot value)
         {
-            return OnExecuteLead(value, value.MappingFields.Where(v => filterLead(v.ClientEntity)).ToList());
+            return OnExecuteLead(value, value.MappingFields.Where(v => filterLead(v.Entity)).ToList());
         }
 
         private bool ExecuteLead(LeadRoot value)
@@ -163,11 +149,24 @@ namespace CrmHub.Application.Integration.Services.Base
 
         private bool ExecuteEvent(ScheduleRoot value)
         {
-            value.Schedule.Subject = "Reunião: " + value.Lead.Name + " " +
-                value.Schedule.Start.ToString("dd/MM/yyyy hh:mm") + " " +
-                value.Schedule.End.ToString("dd/MM/yyyy hh:mm");
+            var mapping = value.MappingFields.Where(v => filterEvent(v.Entity)).ToList();
+            var subject = mapping.Where(x => x.Field == "Subject").FirstOrDefault();
 
-            return OnExecuteEvent(value, value.MappingFields.Where(v => filterEvent(v.ClientEntity)).ToList());
+            if(subject == null)
+            {
+                value.MappingFields.Add(new MappingFields()
+                {
+                    Id = 0,
+                    Entity = "Event",
+                    Field = "Subject",
+                    Value = "Reunião das" + DateTime.Now.ToString("dd/MM/yyyy hh:mm")
+                });
+            } else if (string.IsNullOrEmpty(subject.Value))
+            {
+                subject.Value = "Reunião das" + DateTime.Now.ToString("dd/MM/yyyy hh:mm");
+            }
+
+            return OnExecuteEvent(value, mapping);
         }
 
         private bool ExecuteEvent(EventRoot value)
@@ -175,9 +174,9 @@ namespace CrmHub.Application.Integration.Services.Base
             return OnExecuteEvent(value, value.MappingFields);
         }
 
-        private bool ExecuteContact(ScheduleRoot value, Contact contact)
+        private bool ExecuteContact(ScheduleRoot value, Contact contact, int index)
         {
-            return OnExecuteContact(value, contact, value.MappingFields.Where(v => filterContact(v.ClientEntity)).ToList());
+            return OnExecuteContact(value, contact, value.MappingFields.Where(v => filterContact(v.Entity)).ToList(), index);
         }
 
         private bool ExecuteContact(ContactRoot value)

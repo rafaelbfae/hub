@@ -114,6 +114,7 @@
 --reference:C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Appication.Integration\bin\Debug\netstandard1.6\CrmHub.Appication.Integration.dll
 --reference:C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Domain\bin\Debug\netstandard1.6\CrmHub.Domain.dll
 --reference:C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Mensagens\bin\Debug\netstandard1.6\CrmHub.Infra.Mensagens.dll
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Custom\CrmAttribute.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\IClientService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\ICompanyService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\ICrmService.cs
@@ -123,7 +124,8 @@ C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfa
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\Integration\IHubService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\Integration\IScheduleService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\Exact\Autenticacao.cs
-C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\Exact\CamposPersonalizado.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\Exact\Base.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\Exact\CamposPersonalizados.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\Exact\Contato.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\Exact\Endereco.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\Exact\Filtro.cs
@@ -138,6 +140,7 @@ C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Profiles\Exact\AddressProfile.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Profiles\Exact\AuthenticationProfile.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Profiles\Exact\ContactProfile.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Profiles\Exact\CustomFieldsProfile.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Profiles\Exact\LeadProfile.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Profiles\Exact\MappingFieldsProfile.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Profiles\Exact\ScheduleProfile.cs

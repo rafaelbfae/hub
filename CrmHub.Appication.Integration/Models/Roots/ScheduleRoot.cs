@@ -7,7 +7,7 @@ namespace CrmHub.Application.Integration.Models.Roots
     {
         public Lead Lead { get; set; }
         public Address Address { get; set; }
-        public Schedule Schedule { get; set; }
+        public Events Schedule { get; set; }
         public List<Contact> Contacts { get; set; }
 
         public override string GetId() { return string.Empty; }

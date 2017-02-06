@@ -2074,12 +2074,6 @@
           "CrmHub.Infra.Mensagens": "1.0.0",
           "NETStandard.Library": "1.6.1",
           "System.Reflection.TypeExtensions": "4.3.0"
-        },
-        "compile": {
-          "netstandard1.6/CrmHub.Appication.Integration.dll": {}
-        },
-        "runtime": {
-          "netstandard1.6/CrmHub.Appication.Integration.dll": {}
         }
       },
       "CrmHub.Application/1.0.0": {
@@ -6476,8 +6470,7 @@
     },
     "CrmHub.Appication.Integration/1.0.0": {
       "type": "project",
-      "path": "../CrmHub.Appication.Integration/project.json",
-      "msbuildProject": "../CrmHub.Appication.Integration/CrmHub.Appication.Integration.xproj"
+      "path": "../CrmHub.Appication.Integration/project.json"
     },
     "CrmHub.Application/1.0.0": {
       "type": "project",

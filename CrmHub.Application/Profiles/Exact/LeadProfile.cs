@@ -17,20 +17,7 @@ namespace CrmHub.Application
                 .ForMember(s => s.Authentication, i => i.MapFrom(o => o.Autenticacao))
                 ;
 
-            this.CreateMap<Models.Exact.Lead, Lead>()
-                 .ForMember(s => s.Name, i => i.MapFrom(o => o.Nome))
-                 .ForMember(s => s.Site, i => i.MapFrom(o => o.Site))
-                 .ForMember(s => s.Link, i => i.MapFrom(o => o.LinkExact))
-                 .ForMember(s => s.Note, i => i.MapFrom(o => o.Observacao))
-                 .ForMember(s => s.Data, i => i.MapFrom(o => o.DataCadastro))
-                 .ForMember(s => s.Vendor, i => i.MapFrom(o => o.PreVendedor))
-                 .ForMember(s => s.Source, i => i.MapFrom(o => o.Origem))
-                 .ForMember(s => s.Market, i => i.MapFrom(o => o.Mercado))
-                 .ForMember(s => s.Phones, i => i.MapFrom(o => o.Telefone))
-                 .ForMember(s => s.Product, i => i.MapFrom(o => o.Produto))
-                 .ForMember(s => s.SubSource, i => i.MapFrom(o => o.SubOrigem))
-                 .ForMember(s => s.Diagnosis, i => i.MapFrom(o => o.Diagnostico))
-                ;
+            this.CreateMap<Models.Exact.Lead, Lead>();
         }
 
     }

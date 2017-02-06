@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace CrmHub.Application.Models.Exact
 {
     public class MapeamentoCampos
@@ -11,5 +7,7 @@ namespace CrmHub.Application.Models.Exact
         public string CampoExact { get; set; }
         public string TipoEntidadeCRM { get; set; }
         public string TipoEntidadeExact { get; set; }
+        public string Valor { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrmHub.Application.Integration.Enuns;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,5 +13,6 @@ namespace CrmHub.Application.Models.Exact
         public string UsuarioCRM { get; set; }
         public string UsuarioToken { get; set; }
         public string EmailVendedor { get; set; }
+        public eCrmName Crm() { return (eCrmName)Enum.Parse(typeof(eCrmName), TipoCRM); }
     }
 }

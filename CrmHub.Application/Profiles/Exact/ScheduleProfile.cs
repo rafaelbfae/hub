@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using CrmHub.Application.Integration.Enuns;
 using CrmHub.Application.Integration.Models;
 using CrmHub.Application.Integration.Models.Roots;
 using CrmHub.Application.Models.Exact;
 using CrmHub.Application.Models.Exact.Roots;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CrmHub.Application
 {
@@ -11,23 +13,22 @@ namespace CrmHub.Application
     {
         public ScheduleProfile()
         {
+            int id = 0;
             this.CreateMap<ReuniaoExact, ScheduleRoot>()
-                .ForMember(s => s.EntityName, i => i.MapFrom(o => "Schedule"))
-                .ForMember(s => s.Address, i => i.MapFrom(o => o.Endereco))
+                .BeforeMap((s, i) => s.EntidadeCampoValor.AddRange(s.GetFieldsByMapping()))
+                .BeforeMap((s, i) => s.EntidadeCampoValor.AddRange(s.Reuniao.GetFieldsByAttribute(0, s.Autenticacao.Crm())))
+                .BeforeMap((s, i) => s.EntidadeCampoValor.AddRange(s.Endereco.GetFieldsByAttribute(0, s.Autenticacao.Crm())))
+                .BeforeMap((s, i) => s.Contatos.ForEach(x=> s.EntidadeCampoValor.AddRange(x.GetFieldsByAttribute(id++, s.Autenticacao.Crm()))))
+                .ForMember(s => s.EntityName, i => i.MapFrom(o => "Event"))
+                .ForMember(s => s.Lead, i => i.MapFrom(o => o.Lead))
                 .ForMember(s => s.Schedule, i => i.MapFrom(o => o.Reuniao))
-                .ForMember(s => s.Contacts, i => i.MapFrom(o => o.Contatos))
-                .ForMember(s => s.MappingFields, i => i.MapFrom(o => o.MapeamentoCampos))
+                .ForMember(s => s.CustomFields, i => i.MapFrom(o => o.CamposPersonalizados))
                 .ForMember(s => s.Authentication, i => i.MapFrom(o => o.Autenticacao))
-                ;
+                .ForMember(s => s.MappingFields, i => i.MapFrom(o => o.EntidadeCampoValor))
+                .ForMember(s => s.Contacts, i => i.MapFrom(o => o.Contatos))
+            ;
 
-            this.CreateMap<Reuniao, Schedule>()
-                .ForMember(s => s.End, i => i.MapFrom(o => o.DataFim))
-                .ForMember(s => s.Type, i => i.MapFrom(o => o.TipoReuniao))
-                .ForMember(s => s.Start, i => i.MapFrom(o => o.DataIni))
-                .ForMember(s => s.Subject, i => i.MapFrom(o => o.Referencia))
-                .ForMember(s => s.Address, i => i.MapFrom(o => o.Endereco))
-                .ForMember(s => s.TimeZone, i => i.MapFrom(o => o.TimeZone))
-                ;
+            this.CreateMap<Reuniao, Events>();
         }
     }
 }

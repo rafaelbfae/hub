@@ -8,7 +8,6 @@ namespace CrmHub.Application.Integration.Models.Roots.Base
         public Authentication Authentication { get; set; }
         public List<CustomFields> CustomFields { get; set; }
         public List<MappingFields> MappingFields { get; set; }
-
         public virtual string GetId() { return string.Empty; }
     }
 }
