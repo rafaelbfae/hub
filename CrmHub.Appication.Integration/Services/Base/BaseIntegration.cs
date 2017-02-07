@@ -81,6 +81,7 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract bool OnDeleteCompany(string id, Authentication value);
         protected abstract bool OnGetFieldsCompany(Authentication value);
         protected abstract string GetSubjectEvent(ScheduleRoot value);
+        protected abstract bool GetResponse(string responseBody);
 
         protected Func<string, bool> filterLead = v => v.Equals("Lead") || v.Equals("Address");
         protected Func<string, bool> filterContact = v => v.Equals("Contact");
@@ -126,10 +127,7 @@ namespace CrmHub.Application.Integration.Services.Base
                 StringContent xmlQuery = new StringContent(content);
                 var response = await httpClient.PostAsync(new Uri(url), xmlQuery);
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                controller.MessageController.Clear();
-                controller.MessageController.AddSuccessMessage(responseBody);
-                return true;
+                return GetResponse(await response.Content.ReadAsStringAsync());
             }
         }
 
@@ -139,10 +137,7 @@ namespace CrmHub.Application.Integration.Services.Base
             {
                 var response = await httpClient.DeleteAsync(new Uri(url));
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                controller.MessageController.Clear();
-                controller.MessageController.AddSuccessMessage(responseBody);
-                return true;
+                return GetResponse(await response.Content.ReadAsStringAsync());
             }
         }
 

@@ -142,6 +142,22 @@ namespace CrmHub.Application.Integration.Services
             return OnSendRequestSave(value, entityName, LoadXml(entityName, list));
         }
 
+        protected override bool GetResponse(string responseBody)
+        {
+            string idRecord = LoadId(responseBody);
+
+            MessageType message = new MessageType(MessageType.TYPE.ERROR);
+
+            if (IsSuccess(responseBody, idRecord))
+            {
+                message.Type = MessageType.TYPE.SUCCESS;
+                message.Data = new { id = idRecord };
+            }
+
+            MessageController.AddMessage(message);
+            return message.Type == MessageType.TYPE.SUCCESS;
+        }
+
         protected override string GetSubjectEvent(ScheduleRoot value)
         {
             string leadName = GetFieldValue(value, "Last Name", filterLead);
@@ -254,6 +270,18 @@ namespace CrmHub.Application.Integration.Services
         }
 
         private Func<string, bool> filterPotential = v => v.Equals("Potential");
+
+        private static bool IsSuccess(string responseBody, string id)
+        {
+            return (responseBody.IndexOf("<code>5000</code>") > 0) || !id.Equals(string.Empty);
+        }
+
+        private static string LoadId(string value)
+        {
+            if (value.IndexOf("<FL val=\"Id\">") > 0)
+                return value.Substring(value.IndexOf("<FL val=\"Id\">") + 13, 19);
+            return string.Empty; ;
+        }
 
         #endregion
     }
