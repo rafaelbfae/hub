@@ -11,10 +11,10 @@ namespace CrmHub.Application.Models.Exact
         [Crm(eCrmName.ZOHOCRM, "Subject")]
         public string Assunto { get; set; }
 
-        [Crm(eCrmName.ZOHOCRM, "Start Date Time")]
+        [Crm(eCrmName.ZOHOCRM, "Start DateTime")]
         public string DataIni { get; set; }
 
-        [Crm(eCrmName.ZOHOCRM, "End Date Time")]
+        [Crm(eCrmName.ZOHOCRM, "End DateTime")]
         public string DataFim { get; set; }
 
         [Crm(eCrmName.ZOHOCRM, "Venue")]

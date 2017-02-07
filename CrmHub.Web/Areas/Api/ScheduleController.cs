@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using CrmHub.Application.Models.Exact;
-using CrmHub.Application.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Models.Exact.Roots;
@@ -39,14 +33,14 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Post([FromBody] ReuniaoExact schedule)
         {
             _service.Schedule(schedule);
-            return Ok(new { id = 12 });
+            return Ok(_service.MessageController().GetAllMessage());
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ReuniaoExact schedule)
         {
             _service.ReSchedule(schedule);
-            return new NoContentResult();
+            return Ok(_service.MessageController().GetAllMessage());
         }
 
         [HttpDelete("{id}")]

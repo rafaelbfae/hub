@@ -6,6 +6,7 @@ using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Application.Integration.Services.Base;
 using CrmHub.Infra.Messages.Interfaces;
 using CrmHub.Infra.Messages.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static CrmHub.Application.Integration.Models.Zoho.FieldsResponse;
@@ -22,10 +23,14 @@ namespace CrmHub.Application.Integration.Services
 
         #endregion
 
+        #region Constructor
+
         public ZohoIntegration(IMessageController messageController)
         {
             _messageController = messageController;
         }
+
+        #endregion
 
         #region Protect Methods
 
@@ -39,8 +44,13 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list)
         {
-            LeadRoot lead = new LeadRoot { Lead = value.Lead, Authentication = value.Authentication };
-            return OnExecuteLead(lead, list);
+            CompanyRoot company = GetCompany(value);
+
+            LoadPotential(value);
+
+            if (OnExecuteCompany(company, company.MappingFields))
+                return OnExecutePotential(value, value.MappingFields.Where(v => filterPotential(v.Entity)).ToList());
+            return false;
         }
 
         protected override bool OnExecuteLead(LeadRoot value, List<MappingFields> list)
@@ -104,6 +114,12 @@ namespace CrmHub.Application.Integration.Services
             return SendRequestGet(value, "Events");
         }
 
+        protected override bool OnExecuteCompany(ScheduleRoot value, List<MappingFields> list)
+        {
+            string entityName = "Accounts";
+            return OnSendRequestSave(value, entityName, LoadXml(entityName, list));
+        }
+
         protected override bool OnExecuteCompany(CompanyRoot value, List<MappingFields> list)
         {
             string entityName = "Accounts";
@@ -120,6 +136,21 @@ namespace CrmHub.Application.Integration.Services
             return SendRequestGet(value, "Accounts");
         }
 
+        protected bool OnExecutePotential(ScheduleRoot value, List<MappingFields> list)
+        {
+            string entityName = "Potentials";
+            return OnSendRequestSave(value, entityName, LoadXml(entityName, list));
+        }
+
+        protected override string GetSubjectEvent(ScheduleRoot value)
+        {
+            string leadName = GetFieldValue(value, "Last Name", filterLead);
+            string dtIni = GetFieldValue(value, "Start DateTime", filterEvent);
+            string dtFim = GetFieldValue(value, "End DateTime", filterEvent);
+                 
+            return string.Format(labelEvent, leadName, dtIni, dtFim);
+        }
+
         #endregion
 
         #region Private Methods
@@ -127,9 +158,7 @@ namespace CrmHub.Application.Integration.Services
         private bool OnSendRequestSave(BaseRoot value, string entityName, string xml)
         {
             if (string.IsNullOrEmpty(value.GetId()))
-            {
                 return SendRequestInsert(value.Authentication, entityName, xml);
-            }
 
             return SendRequestUpdate(value.Authentication, entityName, value.GetId(), xml);
         }
@@ -199,13 +228,32 @@ namespace CrmHub.Application.Integration.Services
         private string LoadXml(string entityName, List<MappingFields> list)
         {
             string result = string.Format("<{0}><row no=\"1\">", entityName);
+
             foreach (MappingFields mapping in list)
-            {
                 result += string.Format("<FL val=\"{0}\">{1}</FL>", mapping.Field, mapping.Value);
-            }
+
             result += string.Format("</row></{0}>", entityName);
             return result;
         }
+
+        private CompanyRoot GetCompany(ScheduleRoot value)
+        {
+            CompanyRoot company = new CompanyRoot { Authentication = value.Authentication };
+            string leadName = GetFieldValue(value, "Last Name", filterLead);
+            company.MappingFields = new List<MappingFields>();
+            company.MappingFields.Add(new MappingFields { Entity = "Account", Field = "Account Name", Value = leadName });
+            return company;
+        }
+
+        private void LoadPotential(ScheduleRoot value)
+        {
+            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Potential Name", Value = "Potential Name" });
+            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Account Name", Value = "Account Name" });
+            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Stage", Value = "Qualificação" });
+            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = "2017-02-27 13:00:00" });
+        }
+
+        private Func<string, bool> filterPotential = v => v.Equals("Potential");
 
         #endregion
     }

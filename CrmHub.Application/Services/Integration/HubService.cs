@@ -4,16 +4,22 @@ using Microsoft.Extensions.Logging;
 using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Interfaces.Integration;
 using AutoMapper;
-using CrmHub.Application.Integration.Models;
 using CrmHub.Application.Integration.Models.Roots;
+using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Services.Integration
 {
     public class HubService : IHubService
     {
+        #region Attributes
+
         private readonly ILogger _logger;
         private readonly ICrmService _crmService;
         private readonly ICrmIntegration _crmIntegration;
+
+        #endregion
+
+        #region Constructor
 
         public HubService(ICrmService crmService, ICrmIntegration crmIntegration, ILogger<HubService> logger)
         {
@@ -21,6 +27,10 @@ namespace CrmHub.Application.Services.Integration
             _crmService = crmService;
             _crmIntegration = crmIntegration;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public bool Schedule(ReuniaoExact value)
         {
@@ -70,5 +80,13 @@ namespace CrmHub.Application.Services.Integration
             var _value = Mapper.Map<ContactRoot>(value);
             return _crmIntegration.ContactDelete(_value);
         }
+
+        public IMessageController MessageController()
+        {
+            return _crmIntegration.MessageController;
+        }
+
+        #endregion
+
     }
 }

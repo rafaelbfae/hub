@@ -4613,7 +4613,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "CrmHub.Appication.Integration": "1.0.0",
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "NETStandard.Library": "1.6.1"
@@ -4633,7 +4632,7 @@
         }
       }
     },
-    ".NETCoreApp,Version=v1.0/win10-x64": {
+    ".NETCoreApp,Version=v1.0/win8-x64": {
       "AutoMapper/5.2.0": {
         "type": "package",
         "dependencies": {
@@ -6390,7 +6389,10 @@
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
-        "type": "package"
+        "type": "package",
+        "dependencies": {
+          "runtime.win8-x64.Microsoft.NETCore.Windows.ApiSets": "1.0.1"
+        }
       },
       "Microsoft.VisualBasic/10.0.1": {
         "type": "package",
@@ -7390,6 +7392,38 @@
         },
         "runtime": {
           "runtimes/win/lib/netstandard1.0/System.Private.Uri.dll": {}
+        }
+      },
+      "runtime.win8-x64.Microsoft.NETCore.Windows.ApiSets/1.0.1": {
+        "type": "package",
+        "native": {
+          "runtimes/win8-x64/native/API-MS-Win-Core-Kernel32-Private-L1-1-1.dll": {},
+          "runtimes/win8-x64/native/API-MS-Win-Core-Kernel32-Private-L1-1-2.dll": {},
+          "runtimes/win8-x64/native/API-MS-Win-devices-config-L1-1-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-file-l1-2-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-file-l2-1-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-kernel32-legacy-l1-1-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-kernel32-legacy-l1-1-2.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-localization-l1-2-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-localization-obsolete-l1-2-0.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-memory-l1-1-2.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-memory-l1-1-3.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-namedpipe-l1-2-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-privateprofile-l1-1-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-processthreads-l1-1-2.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-shutdown-l1-1-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-string-obsolete-l1-1-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-stringloader-l1-1-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-sysinfo-l1-2-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-sysinfo-l1-2-2.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-sysinfo-l1-2-3.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-winrt-error-l1-1-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-core-xstate-l2-1-0.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-security-cpwl-l1-1-0.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-security-cryptoapi-l1-1-0.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-security-lsalookup-l2-1-1.dll": {},
+          "runtimes/win8-x64/native/api-ms-win-service-private-l1-1-1.dll": {},
+          "runtimes/win8-x64/native/ext-ms-win-ntuser-keyboard-l1-2-1.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -9355,7 +9389,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "CrmHub.Appication.Integration": "1.0.0",
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "NETStandard.Library": "1.6.1"
@@ -10825,7 +10858,7 @@
       ]
     },
     "Microsoft.NETCore.Jit/1.0.4": {
-      "sha512": "k9c9sIKssLVXEt9707uUsxilUs1PjN6UL1GKx1kMU9xvOPoEGd1zTROGYHby686RZG1rPip+yshBJLRDUzACHg==",
+      "sha512": "IcHTGj+vTFcOu7/flwNg+CWIfTsxqHWgj08MKOtYwS5k0EuLvx6PrYsn7vHCV0SUTk1zbQ1l0EJj1UdxTMyx4w==",
       "type": "package",
       "path": "Microsoft.NETCore.Jit/1.0.4",
       "files": [
@@ -10850,7 +10883,7 @@
       ]
     },
     "Microsoft.NETCore.Runtime.CoreCLR/1.0.4": {
-      "sha512": "REkMivB0yBdcwmgaTcojMWQp3y7T3UiNYuAKSieUiY105LES1ZwVxnS0FIVUGssYg+xfJw6mzpBKHI1hVR00DQ==",
+      "sha512": "r4/aP7VYcJ+W/rJVFU+jAdjF4KrsHRDYQJ+p8weUP5n65yLzWXlQTVY6OsR560aV5EF7jc65dqsNXIryUCrEkQ==",
       "type": "package",
       "path": "Microsoft.NETCore.Runtime.CoreCLR/1.0.4",
       "files": [
@@ -12260,6 +12293,44 @@
         "runtimes/aot/lib/netcore50/System.Private.Uri.dll",
         "runtimes/win/lib/netcore50/System.Private.Uri.dll",
         "runtimes/win/lib/netstandard1.0/System.Private.Uri.dll"
+      ]
+    },
+    "runtime.win8-x64.Microsoft.NETCore.Windows.ApiSets/1.0.1": {
+      "sha512": "1pQM1UUqdytzEjJyGKKLcpg/kJp5xj3J/GweuVmWHqz6GBbZuvOEkZLQipVV+zEo6MexR7OwrifeNyr33it7SQ==",
+      "type": "package",
+      "path": "runtime.win8-x64.Microsoft.NETCore.Windows.ApiSets/1.0.1",
+      "files": [
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "runtime.win8-x64.Microsoft.NETCore.Windows.ApiSets.1.0.1.nupkg.sha512",
+        "runtime.win8-x64.Microsoft.NETCore.Windows.ApiSets.nuspec",
+        "runtimes/win8-x64/native/API-MS-Win-Core-Kernel32-Private-L1-1-1.dll",
+        "runtimes/win8-x64/native/API-MS-Win-Core-Kernel32-Private-L1-1-2.dll",
+        "runtimes/win8-x64/native/API-MS-Win-devices-config-L1-1-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-file-l1-2-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-file-l2-1-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-kernel32-legacy-l1-1-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-kernel32-legacy-l1-1-2.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-localization-l1-2-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-localization-obsolete-l1-2-0.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-memory-l1-1-2.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-memory-l1-1-3.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-namedpipe-l1-2-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-privateprofile-l1-1-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-processthreads-l1-1-2.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-shutdown-l1-1-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-string-obsolete-l1-1-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-stringloader-l1-1-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-sysinfo-l1-2-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-sysinfo-l1-2-2.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-sysinfo-l1-2-3.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-winrt-error-l1-1-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-core-xstate-l2-1-0.dll",
+        "runtimes/win8-x64/native/api-ms-win-security-cpwl-l1-1-0.dll",
+        "runtimes/win8-x64/native/api-ms-win-security-cryptoapi-l1-1-0.dll",
+        "runtimes/win8-x64/native/api-ms-win-security-lsalookup-l2-1-1.dll",
+        "runtimes/win8-x64/native/api-ms-win-service-private-l1-1-1.dll",
+        "runtimes/win8-x64/native/ext-ms-win-ntuser-keyboard-l1-2-1.dll"
       ]
     },
     "System.AppContext/4.3.0": {
