@@ -10,7 +10,6 @@ namespace CrmHub.Application.Models.Exact
         public string Id { get; set; }
 
         [Crm(eCrmName.ZOHOCRM, "First Name")]
-        [Crm(eCrmName.ZOHOCRM, "Last Name")]
         public string Nome { get; set; }
 
         [Crm(eCrmName.ZOHOCRM, "Title")]
@@ -22,7 +21,6 @@ namespace CrmHub.Application.Models.Exact
         [Crm(eCrmName.ZOHOCRM, "Phone", "Mobile", "Other Phone")]
         public List<string> Telefone { get; set; }
 
-        [Crm(eCrmName.ZOHOCRM, "Skype Id")]
         public string IdMensageiro { get; set; }
 
         public string TipoMensageiro { get; set; }
