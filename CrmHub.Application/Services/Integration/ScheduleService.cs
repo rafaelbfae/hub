@@ -1,5 +1,6 @@
 ﻿using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Models.Exact.Roots;
+using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Services.Integration
 {
@@ -10,6 +11,11 @@ namespace CrmHub.Application.Services.Integration
         public ScheduleService(IHubService service)
         {
             this._service = service;
+        }
+
+        public IMessageController MessageController()
+        {
+            return _service.MessageController();
         }
 
         public bool ReSchedule(ReuniaoExact value)

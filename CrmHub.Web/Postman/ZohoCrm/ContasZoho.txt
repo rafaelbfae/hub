@@ -1,0 +1,4 @@
+﻿usuario: exact.crmhub02@gmail.com
+senha: crmhub123
+token: 8fe3a3d6012e33b211045fa74a42c902
+scope: crmapi

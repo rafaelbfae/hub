@@ -1,3 +1,6 @@
+//using Newtonsoft.Json;
+//using Newtonsoft.Json.Converters;
+
 namespace CrmHub.Infra.Messages.Models
 {
     public class MessageType
@@ -16,11 +19,12 @@ namespace CrmHub.Infra.Messages.Models
 
         #region Properties
 
+        //[JsonConverter(typeof(StringEnumConverter))]
         public TYPE Type { get; set; }
 
         public string Message { get; set; }
 
-        public string Data { get; set; }
+        public object Data { get; set; }
 
         #endregion
     }

@@ -21,6 +21,7 @@ namespace CrmHub.Application
                 .BeforeMap((s, i) => s.Contatos.ForEach(x=> s.EntidadeCampoValor.AddRange(x.GetFieldsByAttribute(id++, s.Autenticacao.Crm()))))
                 .ForMember(s => s.EntityName, i => i.MapFrom(o => "Event"))
                 .ForMember(s => s.Lead, i => i.MapFrom(o => o.Lead))
+                //.ForMember(s => s.Company, i => i.MapFrom(o => o.Lead))
                 .ForMember(s => s.Schedule, i => i.MapFrom(o => o.Reuniao))
                 .ForMember(s => s.CustomFields, i => i.MapFrom(o => o.CamposPersonalizados))
                 .ForMember(s => s.Authentication, i => i.MapFrom(o => o.Autenticacao))

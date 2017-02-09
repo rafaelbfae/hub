@@ -2972,7 +2972,6 @@
       "CrmHub.Infra.Dependences.Injection/1.0.0": {
         "dependencies": {
           "CrmHub.Application": "1.0.0",
-          "CrmHub.Appication.Integration": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "NETStandard.Library": "1.6.1"
         },
@@ -5846,7 +5845,6 @@
       "CrmHub.Infra.Dependences.Injection/1.0.0": {
         "dependencies": {
           "CrmHub.Application": "1.0.0",
-          "CrmHub.Appication.Integration": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "NETStandard.Library": "1.6.1"
         },
@@ -6368,7 +6366,7 @@
     "Microsoft.NETCore.Jit/1.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-k9c9sIKssLVXEt9707uUsxilUs1PjN6UL1GKx1kMU9xvOPoEGd1zTROGYHby686RZG1rPip+yshBJLRDUzACHg=="
+      "sha512": "sha512-IcHTGj+vTFcOu7/flwNg+CWIfTsxqHWgj08MKOtYwS5k0EuLvx6PrYsn7vHCV0SUTk1zbQ1l0EJj1UdxTMyx4w=="
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
@@ -6378,7 +6376,7 @@
     "Microsoft.NETCore.Runtime.CoreCLR/1.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-REkMivB0yBdcwmgaTcojMWQp3y7T3UiNYuAKSieUiY105LES1ZwVxnS0FIVUGssYg+xfJw6mzpBKHI1hVR00DQ=="
+      "sha512": "sha512-r4/aP7VYcJ+W/rJVFU+jAdjF4KrsHRDYQJ+p8weUP5n65yLzWXlQTVY6OsR560aV5EF7jc65dqsNXIryUCrEkQ=="
     },
     "Microsoft.NETCore.Targets/1.1.0": {
       "type": "package",

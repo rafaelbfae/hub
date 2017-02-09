@@ -6,73 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CrmHub.Application.Integration.Services.Base
 {
     public abstract class BaseIntegration
     {
+        #region Static
+
+        protected static string labelEvent = "Reunião: {0} {1} - {2}";
+
+        #endregion
+
         #region Public Methods
-
-        public async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url)
-        {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                var response = await httpClient.GetAsync(new Uri(url));
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                //responseBody = RemovoDescription(responseBody);
-                //try
-                //{
-                //    var objectResponse = JsonConvert.DeserializeObject(responseBody, typeof(FieldsResponseCrm));
-                //    controller.MessageController.Clear();
-                //    controller.MessageController.AddMessage(
-                //        new Message()
-                //        {
-                //            typeMessage = Message.TYPE.SUCCESS,
-                //            data = (FieldsResponseCrm)objectResponse
-                //        });
-                //}
-                //catch (JsonSerializationException e)
-                //{
-                //    Console.WriteLine(e.Message);
-                //}
-                //catch (AggregateException e)
-                //{
-                //    Console.WriteLine(e.Message);
-                //}
-
-                return true;
-            }
-        }
-
-        public async Task<bool> SendRequestPostAsync(BaseIntegration controller, string url, string content)
-        {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                StringContent xmlQuery = new StringContent(content);
-                var response = await httpClient.PutAsync(new Uri(url), xmlQuery);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                controller.MessageController.Clear();
-                controller.MessageController.AddSuccessMessage(responseBody);
-                return true;
-            }
-        }
-
-        public async Task<bool> SendRequestDeleteAsync(BaseIntegration controller, string url)
-        {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                var response = await httpClient.DeleteAsync(new Uri(url));
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                controller.MessageController.Clear();
-                controller.MessageController.AddSuccessMessage(responseBody);
-                return true;
-            }
-        }
 
         public bool Schedule(ScheduleRoot value)
         {
@@ -87,6 +33,7 @@ namespace CrmHub.Application.Integration.Services.Base
             {
                 int index = 0;
                 value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
+                result &= ExecuteCompany(value);
                 result &= ExecuteEvent(value);
             }
             return result;
@@ -129,9 +76,77 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract bool OnExecuteContact(ContactRoot value, List<MappingFields> list, int index = 0);
         protected abstract bool OnDeleteContact(string id, Authentication value);
         protected abstract bool OnGetFieldsContact(Authentication value);
+        protected abstract bool OnExecuteCompany(ScheduleRoot value, List<MappingFields> list);
         protected abstract bool OnExecuteCompany(CompanyRoot value, List<MappingFields> list);
         protected abstract bool OnDeleteCompany(string id, Authentication value);
         protected abstract bool OnGetFieldsCompany(Authentication value);
+        protected abstract string GetSubjectEvent(ScheduleRoot value);
+        protected abstract bool GetResponse(string responseBody);
+
+        protected Func<string, bool> filterLead = v => v.Equals("Lead") || v.Equals("Address");
+        protected Func<string, bool> filterContact = v => v.Equals("Contact");
+        protected Func<string, bool> filterEvent = v => v.Equals("Event");
+        protected Func<string, bool> filterCompany = v => v.Equals("Company");
+
+        protected async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var response = await httpClient.GetAsync(new Uri(url));
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                //responseBody = RemovoDescription(responseBody);
+                //try
+                //{
+                //    var objectResponse = JsonConvert.DeserializeObject(responseBody, typeof(FieldsResponseCrm));
+                //    controller.MessageController.Clear();
+                //    controller.MessageController.AddMessage(
+                //        new Message()
+                //        {
+                //            typeMessage = Message.TYPE.SUCCESS,
+                //            data = (FieldsResponseCrm)objectResponse
+                //        });
+                //}
+                //catch (JsonSerializationException e)
+                //{
+                //    Console.WriteLine(e.Message);
+                //}
+                //catch (AggregateException e)
+                //{
+                //    Console.WriteLine(e.Message);
+                //}
+
+                return true;
+            }
+        }
+
+        protected async Task<bool> SendRequestPostAsync(BaseIntegration controller, string url, string content)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                StringContent xmlQuery = new StringContent(content);
+                var response = await httpClient.PostAsync(new Uri(url), xmlQuery);
+                response.EnsureSuccessStatusCode();
+                return GetResponse(await response.Content.ReadAsStringAsync());
+            }
+        }
+
+        protected async Task<bool> SendRequestDeleteAsync(BaseIntegration controller, string url)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var response = await httpClient.DeleteAsync(new Uri(url));
+                response.EnsureSuccessStatusCode();
+                return GetResponse(await response.Content.ReadAsStringAsync());
+            }
+        }
+
+        protected string GetFieldValue(ScheduleRoot value, string field, Func<string, bool> filter)
+        {
+            var mapping = value.MappingFields.Where(v => filter(v.Entity)).ToList();
+            var fieldValue = mapping.Where(x => x.Field == field).FirstOrDefault();
+            return fieldValue.Value;
+        }
 
         #endregion
 
@@ -161,10 +176,9 @@ namespace CrmHub.Application.Integration.Services.Base
                     Field = "Subject",
                     Value = "Reunião das" + DateTime.Now.ToString("dd/MM/yyyy hh:mm")
                 });
-            } else if (string.IsNullOrEmpty(subject.Value))
-            {
-                subject.Value = "Reunião das" + DateTime.Now.ToString("dd/MM/yyyy hh:mm");
             }
+            else if (string.IsNullOrEmpty(subject.Value))
+                subject.Value = GetSubjectEvent(value);
 
             return OnExecuteEvent(value, mapping);
         }
@@ -184,16 +198,15 @@ namespace CrmHub.Application.Integration.Services.Base
             return OnExecuteContact(value, value.MappingFields);
         }
 
+        private bool ExecuteCompany(ScheduleRoot value)
+        {
+            return OnExecuteCompany(value, value.MappingFields.Where(v => filterCompany(v.Entity)).ToList());
+        }
+
         private bool ExecuteCompany(CompanyRoot value)
         {
             return OnExecuteCompany(value, value.MappingFields);
         }
-
-        private Func<string, bool> filterLead = (v) => v.Equals("Lead") || v.Equals("Address");
-
-        private Func<string, bool> filterContact = (v) => v.Equals("Contact");
-
-        private Func<string, bool> filterEvent = (v) => v.Equals("Event");
 
         #endregion
     }

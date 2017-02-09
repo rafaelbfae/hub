@@ -1,13 +1,12 @@
 ﻿using CrmHub.Application.Models.Exact.Roots;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Interfaces.Integration
 {
     public interface IHubService
     {
+        IMessageController MessageController();
+
         bool Schedule(ReuniaoExact value);
         bool ReSchedule(ReuniaoExact value);
         

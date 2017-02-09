@@ -60,10 +60,6 @@ namespace CrmHub.Application.Integration.Services.Base
         public bool CompanyDelete(CompanyRoot value) => Execute(value, (c, v) => c.CompanyDelete((CompanyRoot)v));
         public bool CompanyGetFields(BaseRoot value) => Execute(value, (c, v) => c.CompanyGetFields(v));
 
-        #endregion
-
-        #region Public Methods
-
         private void LoadCRM()
         {
             _crmHub.Add(ZohoIntegration.CRM_NAME, typeof(ZohoIntegration));
@@ -86,6 +82,5 @@ namespace CrmHub.Application.Integration.Services.Base
         }
 
         #endregion
-
     }
 }
