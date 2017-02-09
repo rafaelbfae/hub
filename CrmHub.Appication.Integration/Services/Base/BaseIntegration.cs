@@ -167,18 +167,20 @@ namespace CrmHub.Application.Integration.Services.Base
             var mapping = value.MappingFields.Where(v => filterEvent(v.Entity)).ToList();
             var subject = mapping.Where(x => x.Field == "Subject").FirstOrDefault();
 
-            if(subject == null)
+            if (subject == null)
             {
                 value.MappingFields.Add(new MappingFields()
                 {
                     Id = 0,
                     Entity = "Event",
                     Field = "Subject",
-                    Value = "Reunião das" + DateTime.Now.ToString("dd/MM/yyyy hh:mm")
-                });
+                    Value = GetSubjectEvent(value)
+            });
             }
             else if (string.IsNullOrEmpty(subject.Value))
+            {
                 subject.Value = GetSubjectEvent(value);
+            }
 
             return OnExecuteEvent(value, mapping);
         }

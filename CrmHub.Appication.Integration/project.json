@@ -5,7 +5,8 @@
   "dependencies": {
     "CrmHub.Infra.Mensagens": "1.0.0-*",
     "System.Reflection.TypeExtensions": "4.3.0",
-    "NETStandard.Library": "1.6.1"
+    "NETStandard.Library": "1.6.1",
+    "CoreCompat.Newtonsoft.Json": "9.0.2-beta001"
   },
 
   "frameworks": {

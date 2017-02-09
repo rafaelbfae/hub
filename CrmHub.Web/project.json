@@ -19,6 +19,9 @@
       "type": "build"
     },
     "CrmHub.Identity": "1.0.0-*",
+    "CrmHub.Infra.Data": "1.0.0-*",
+    "CrmHub.Application": "1.0.0-*",
+    "CrmHub.Infra.Dependences.Injection": "1.0.0-*",
     "BundlerMinifier.Core": "2.2.306",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
@@ -42,9 +45,6 @@
     "Microsoft.NETCore.App": "1.1.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
-    "CrmHub.Infra.Data": "1.0.0-*",
-    "CrmHub.Application": "1.0.0-*",
-    "CrmHub.Infra.Dependences.Injection": "1.0.0-*",
     "AutoMapper": "5.2.0",
     "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.2.0"
   },
@@ -97,6 +97,6 @@
   },
 
   "runtimes": {
-    "win8-x64": {}
+    "win10-x64": {}
   }
 }
