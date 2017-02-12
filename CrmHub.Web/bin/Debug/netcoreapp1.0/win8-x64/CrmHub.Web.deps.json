@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/win8-x64",
-    "signature": "f79aacd20b8208ae23ae41744f782f7a208fcad3"
+    "signature": "b426c1b46d282e12e75c2881729f9505c7682ebe"
   },
   "compilationOptions": {
     "defines": [
@@ -17,6 +17,9 @@
       "CrmHub.Web/1.0.0": {
         "dependencies": {
           "CrmHub.Identity": "1.0.0",
+          "CrmHub.Infra.Data": "1.0.0",
+          "CrmHub.Application": "1.0.0",
+          "CrmHub.Infra.Dependences.Injection": "1.0.0",
           "BundlerMinifier.Core": "2.2.306",
           "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
           "Microsoft.AspNetCore.Diagnostics": "1.1.0",
@@ -40,9 +43,6 @@
           "Microsoft.NETCore.App": "1.1.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
           "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
-          "CrmHub.Infra.Data": "1.0.0",
-          "CrmHub.Application": "1.0.0",
-          "CrmHub.Infra.Dependences.Injection": "1.0.0",
           "AutoMapper": "5.2.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.2.0"
         },
@@ -82,6 +82,47 @@
         },
         "compile": {
           "lib/netcoreapp1.0/dotnet-bundle.dll": {}
+        }
+      },
+      "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.3.0",
+          "System.AppDomain": "2.0.10",
+          "System.Collections": "4.3.0",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0",
+          "System.Data.Common": "4.3.0",
+          "System.Data.SqlClient": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Diagnostics.TraceSource": "4.0.0",
+          "System.Dynamic.Runtime": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Linq.Expressions": "4.3.0",
+          "System.ObjectModel": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Emit.ILGeneration": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Runtime.Numerics": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0",
+          "System.Xml.XDocument": "4.3.0",
+          "System.Xml.XmlDocument": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.5/CoreCompat.Newtonsoft.Json.dll": {}
         }
       },
       "Libuv/1.9.1": {
@@ -1949,6 +1990,19 @@
           "ref/netstandard1.6/System.AppContext.dll": {}
         }
       },
+      "System.AppDomain/2.0.10": {
+        "dependencies": {
+          "System.Linq": "4.3.0",
+          "System.Linq.Expressions": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/System.AppDomain.dll": {}
+        }
+      },
       "System.Buffers/4.3.0": {
         "dependencies": {
           "System.Diagnostics.Debug": "4.3.0",
@@ -2253,6 +2307,22 @@
         },
         "compile": {
           "ref/netstandard1.0/System.Diagnostics.Tools.dll": {}
+        }
+      },
+      "System.Diagnostics.TraceSource/4.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "runtime.native.System": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Diagnostics.TraceSource.dll": {}
         }
       },
       "System.Diagnostics.Tracing/4.3.0": {
@@ -3388,6 +3458,9 @@
           "System.Text.Encoding": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
       },
       "System.Xml.XPath/4.0.1": {
@@ -3420,7 +3493,8 @@
         "dependencies": {
           "CrmHub.Infra.Mensagens": "1.0.0",
           "System.Reflection.TypeExtensions": "4.3.0",
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001"
         },
         "compile": {
           "CrmHub.Appication.Integration.dll": {}
@@ -3495,6 +3569,9 @@
       "CrmHub.Web/1.0.0": {
         "dependencies": {
           "CrmHub.Identity": "1.0.0",
+          "CrmHub.Infra.Data": "1.0.0",
+          "CrmHub.Application": "1.0.0",
+          "CrmHub.Infra.Dependences.Injection": "1.0.0",
           "BundlerMinifier.Core": "2.2.306",
           "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
           "Microsoft.AspNetCore.Diagnostics": "1.1.0",
@@ -3518,9 +3595,6 @@
           "Microsoft.NETCore.App": "1.1.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
           "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
-          "CrmHub.Infra.Data": "1.0.0",
-          "CrmHub.Application": "1.0.0",
-          "CrmHub.Infra.Dependences.Injection": "1.0.0",
           "AutoMapper": "5.2.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.2.0"
         },
@@ -3560,6 +3634,47 @@
         },
         "runtime": {
           "lib/netcoreapp1.0/dotnet-bundle.dll": {}
+        }
+      },
+      "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.3.0",
+          "System.AppDomain": "2.0.10",
+          "System.Collections": "4.3.0",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0",
+          "System.Data.Common": "4.3.0",
+          "System.Data.SqlClient": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Diagnostics.TraceSource": "4.0.0",
+          "System.Dynamic.Runtime": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Linq.Expressions": "4.3.0",
+          "System.ObjectModel": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Emit.ILGeneration": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Runtime.Numerics": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0",
+          "System.Xml.XDocument": "4.3.0",
+          "System.Xml.XmlDocument": "4.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.5/CoreCompat.Newtonsoft.Json.dll": {}
         }
       },
       "Libuv/1.9.1": {
@@ -5591,6 +5706,19 @@
           "lib/netstandard1.6/System.AppContext.dll": {}
         }
       },
+      "System.AppDomain/2.0.10": {
+        "dependencies": {
+          "System.Linq": "4.3.0",
+          "System.Linq.Expressions": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.AppDomain.dll": {}
+        }
+      },
       "System.Buffers/4.3.0": {
         "dependencies": {
           "System.Diagnostics.Debug": "4.3.0",
@@ -5886,6 +6014,22 @@
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0",
           "runtime.any.System.Diagnostics.Tools": "4.3.0"
+        }
+      },
+      "System.Diagnostics.TraceSource/4.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "runtime.native.System": "4.3.0"
+        },
+        "runtime": {
+          "runtimes/win/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {}
         }
       },
       "System.Diagnostics.Tracing/4.3.0": {
@@ -7020,7 +7164,8 @@
         "dependencies": {
           "CrmHub.Infra.Mensagens": "1.0.0",
           "System.Reflection.TypeExtensions": "4.3.0",
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001"
         },
         "runtime": {
           "CrmHub.Appication.Integration.dll": {}
@@ -7112,6 +7257,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-3MhXe3qLroL+Fe4Uo/7cmtYQ3YPjSHIjfuHxpewVZUdU4mh73wLEKAgf9rr3OLTuEXCbJr8bOBdwjuNwfGR8qw=="
+    },
+    "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KuaJL0Ni+hPcyE7j2KH1Pmy1g51J0bx6b3RlUXIaYfJrA9BoDIF8PcJ5OesHMa3+O2yxjD9BNEEB2Axr6meCHw=="
     },
     "Libuv/1.9.1": {
       "type": "package",
@@ -8073,6 +8223,11 @@
       "serviceable": true,
       "sha512": "sha512-fKC+rmaLfeIzUhagxY17Q9siv/sPrjjKcfNg1Ic8IlQkZLipo8ljcaZQu4VtI4Jqbzjc2VTjzGLF6WmsRXAEgA=="
     },
+    "System.AppDomain/2.0.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BpKqoIrEXtqoK0pZ7KOISMvR3qRKuJnxeLwPQoPhFN8MrroLcRe/V6GmERYpnP4iya7+ie8qwQOGoOR93FQ2Mw=="
+    },
     "System.Buffers/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -8172,6 +8327,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-UUvkJfSYJMM6x527dJg2VyWPSRqIVB0Z7dbjHst1zmwTXz5CcXSYJFWRpuigfbO1Lf7yfZiIaEUesfnl/g5EyA=="
+    },
+    "System.Diagnostics.TraceSource/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6WVCczFZKXwpWpzd/iJkYnsmWTSFFiU24Xx/YdHXBcu+nFI/ehTgeqdJQFbtRPzbrO3KtRNjvkhtj4t5/WwWsA=="
     },
     "System.Diagnostics.Tracing/4.3.0": {
       "type": "package",

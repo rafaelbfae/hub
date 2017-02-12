@@ -25,8 +25,9 @@ namespace CrmHub.Web.Areas.Api
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ReuniaoExact schedule)
+        public IActionResult Put(string id, [FromBody] ReuniaoExact schedule)
         {
+            schedule.Reuniao.Id = id;
             _service.Update(schedule);
             return Ok(_service.MessageController().GetAllMessage());
         }

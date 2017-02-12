@@ -2,6 +2,7 @@
 using CrmHub.Application.Integration.Models.Roots;
 using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,16 +90,14 @@ namespace CrmHub.Application.Integration.Services.Base
         protected Func<string, bool> filterEvent = v => v.Equals("Event");
         protected Func<string, bool> filterAccount = v => v.Equals("Account");
 
-        protected async Task<bool> SendRequestGetAsync(string url)
+        protected async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url, Func<string, bool> loadResponse)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(new Uri(url));
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                //TODO
-                // Metodo Generico para todos os CRMs
-                return true;
+                return loadResponse(responseBody);
             }
         }
 
@@ -157,12 +156,10 @@ namespace CrmHub.Application.Integration.Services.Base
                     Entity = "Event",
                     Field = "Subject",
                     Value = GetSubjectEvent(value)
-            });
+                });
             }
             else if (string.IsNullOrEmpty(subject.Value))
-            {
                 subject.Value = GetSubjectEvent(value);
-            }
 
             return OnExecuteEvent(value, mapping);
         }

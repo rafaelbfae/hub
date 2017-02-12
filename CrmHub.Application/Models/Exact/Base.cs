@@ -10,6 +10,14 @@ namespace CrmHub.Application.Models.Exact
 {
     public abstract class Base<T>
     {
+        struct Map
+        {
+            public string Name;
+            public object PropertieValue;
+            public string Entity;
+            public string[] Fields;
+        };
+
         public string GetEntityNameByAttribute(eCrmName crmName)
         {
             var crmEntity = typeof(T).GetTypeInfo().GetCustomAttributes<CrmAttribute>()
@@ -22,30 +30,42 @@ namespace CrmHub.Application.Models.Exact
             List<MapeamentoCampos> fields = new List<MapeamentoCampos>();
             string entityCrm = this.GetEntityNameByAttribute(crmName);
 
-            var mapping = (typeof(T).GetProperties()
-                .Select(prop => new
+            List<Map> mapping = new List<Map>();
+            typeof(T).GetProperties().ToList().ForEach(x =>
+            {
+                x.GetCustomAttributes(true).OfType<CrmAttribute>().ToList().ForEach(a =>
                 {
-                    Name = prop.Name,
-                    PropertieValue = prop.GetValue(this),
-                    Fields = prop.GetCustomAttributes(true).OfType<CrmAttribute>()
-                            .Where(x => x.CrmName.Equals(crmName))
-                            .Select(x => x.Mappings).ToList().FirstOrDefault()
-                })).Where(x => x.Fields != null).ToList();
+                    Map map = new Map();
+                    map.Name = x.Name;
+                    map.PropertieValue = x.GetValue(this);
+                    map.Entity = a.HasEntity ? a.Entity : entityCrm;
+                    map.Fields = a.Mappings;
+
+                    mapping.Add(map);
+                });
+            });
 
             foreach (var map in mapping)
             {
-                if (map.PropertieValue is IList)
+                if (map.Fields is IList)
                 {
-                    var propertieValue = map.PropertieValue as IList;
-                    var maxLoop = Math.Min(propertieValue.Count, map.Fields.Length);
-                    for (int index = 0; index < maxLoop; index++)
+                    string fieldValue = string.Empty;
+                    if (map.PropertieValue is IList)
+                    {
+                        var propertieValue = map.PropertieValue as IList;
+                        fieldValue = propertieValue[0].ToString();
+                    }
+                    else
+                        fieldValue = map.PropertieValue != null ? map.PropertieValue.ToString() : string.Empty;
+                        
+                    foreach (var value in map.Fields)
                     {
                         fields.Add(new MapeamentoCampos()
                         {
                             Id = id,
-                            TipoEntidadeCRM = entityCrm,
-                            CampoCRM = map.Fields[index],
-                            Valor = propertieValue[index].ToString()
+                            TipoEntidadeCRM = map.Entity,
+                            CampoCRM = value,
+                            Valor = fieldValue
                         });
                     }
                     continue;
@@ -54,13 +74,21 @@ namespace CrmHub.Application.Models.Exact
                 fields.Add(new MapeamentoCampos()
                 {
                     Id = id,
-                    TipoEntidadeCRM = entityCrm,
+                    TipoEntidadeCRM = map.Entity,
                     CampoCRM = map.Fields[0],
                     Valor = map.PropertieValue == null ? "" : map.PropertieValue.ToString()
                 });
             }
 
             return fields;
+        }
+        
+        private string[] GetFields(PropertyInfo prop, eCrmName crmName)
+        {
+            return
+                prop.GetCustomAttributes(true).OfType<CrmAttribute>()
+                            .Where(x => x.CrmName.Equals(crmName))
+                            .Select(x => x.Mappings).ToList().FirstOrDefault();
         }
     }
 }
