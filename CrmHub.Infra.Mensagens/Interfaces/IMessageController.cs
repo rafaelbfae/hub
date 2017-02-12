@@ -20,5 +20,7 @@ namespace CrmHub.Infra.Messages.Interfaces
         List<MessageType> GetMessageSuccess();
 
         List<MessageType> GetMessageWaring();
+
+        string GetAllMessageToJson();
     }
 }

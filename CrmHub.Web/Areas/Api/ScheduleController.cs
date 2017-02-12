@@ -21,7 +21,7 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Post([FromBody] ReuniaoExact schedule)
         {
             _service.Register(schedule);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
 
         [HttpPut("{id}")]
