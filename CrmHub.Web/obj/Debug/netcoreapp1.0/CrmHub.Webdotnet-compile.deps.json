@@ -17,7 +17,6 @@
       "CrmHub.Web/1.0.0": {
         "dependencies": {
           "CrmHub.Identity": "1.0.0",
-          "CrmHub.Infra.Data": "1.0.0",
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Dependences.Injection": "1.0.0",
           "BundlerMinifier.Core": "2.2.306",
@@ -3045,9 +3044,10 @@
       },
       "CrmHub.Infra.Dependences.Injection/1.0.0": {
         "dependencies": {
+          "Microsoft.NETCore.App": "1.1.0",
           "CrmHub.Application": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0",
-          "NETStandard.Library": "1.6.1"
+          "CrmHub.Infra.Data": "1.0.0",
+          "CrmHub.Infra.Mensagens": "1.0.0"
         },
         "compile": {
           "CrmHub.Infra.Dependences.Injection.dll": {}
@@ -3066,7 +3066,6 @@
       "CrmHub.Web/1.0.0": {
         "dependencies": {
           "CrmHub.Identity": "1.0.0",
-          "CrmHub.Infra.Data": "1.0.0",
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Dependences.Injection": "1.0.0",
           "BundlerMinifier.Core": "2.2.306",
@@ -5986,9 +5985,10 @@
       },
       "CrmHub.Infra.Dependences.Injection/1.0.0": {
         "dependencies": {
+          "Microsoft.NETCore.App": "1.1.0",
           "CrmHub.Application": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0",
-          "NETStandard.Library": "1.6.1"
+          "CrmHub.Infra.Data": "1.0.0",
+          "CrmHub.Infra.Mensagens": "1.0.0"
         },
         "runtime": {
           "CrmHub.Infra.Dependences.Injection.dll": {}

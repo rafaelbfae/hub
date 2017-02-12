@@ -9,7 +9,6 @@ namespace CrmHub.Application.Models.Exact
     {
         public string Id { get; set; }
 
-        [Crm(eCrmName.ZOHOCRM, "First Name")]
         [Crm(eCrmName.ZOHOCRM, "Last Name")]
         public string Nome { get; set; }
 

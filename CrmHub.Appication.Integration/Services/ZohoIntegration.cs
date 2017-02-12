@@ -9,6 +9,7 @@ using CrmHub.Infra.Messages.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using static CrmHub.Application.Integration.Models.Zoho.FieldsResponse;
 
 namespace CrmHub.Application.Integration.Services
@@ -44,7 +45,7 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list)
         {
-            CompanyRoot company = GetCompany(value);
+            CompanyRoot company = GetAccount(value);
 
             LoadPotential(value);
 
@@ -154,6 +155,20 @@ namespace CrmHub.Application.Integration.Services
                 message.Data = new { id = idRecord };
             }
 
+            string msg = string.Empty;
+            Match match = Regex.Match(responseBody, "(xml/)(\\S*)(\">)|(json/)(\\S*)(\">)");
+            if (match.Success)
+            {
+                msg = match.Groups[2].Value + ": ";
+            }
+
+            match = Regex.Match(responseBody, @"(<message>)(...*)(</message>)");
+            if (match.Success)
+            {
+                msg += match.Groups[2].Value;
+            }
+
+            message.Message = msg;
             MessageController.AddMessage(message);
             return message.Type == MessageType.TYPE.SUCCESS;
         }
@@ -182,29 +197,29 @@ namespace CrmHub.Application.Integration.Services
         private bool SendRequestGet(Authentication value, string entityName)
         {
             string url = value.UrlService;
-            string urlFormat = string.Format("{0}/json/{1}/{2}?authtoken={3}&scope={4}", url, entityName, "getFields", value.Token, value.User);
-            return SendRequestGetAsync(this, urlFormat).Result;
+            string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}", url, entityName, "getFields", value.Token, value.User);
+            return SendRequestGetAsync(urlFormat).Result;
         }
 
         private bool SendRequestInsert(Authentication value, string entityName, string xml)
         {
             string url = value.UrlService;
-            string urlFormat = string.Format("{0}/xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&xmlData={5}", url, entityName, "insertRecords", value.Token, value.User, xml);
-            return SendRequestPostAsync(this, urlFormat, xml).Result;
+            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&xmlData={5}", url, entityName, "insertRecords", value.Token, value.User, xml);
+            return SendRequestPostAsync(urlFormat, xml).Result;
         }
 
         private bool SendRequestUpdate(Authentication value, string entityName, string id, string xml)
         {
             string url = value.UrlService;
-            string urlFormat = string.Format("{0}/xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&id={5}&xmlData={6}", url, entityName, "updateRecords", value.Token, value.User, id, xml);
-            return SendRequestPostAsync(this, urlFormat, xml).Result;
+            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&id={5}&xmlData={6}", url, entityName, "updateRecords", value.Token, value.User, id, xml);
+            return SendRequestPostAsync(urlFormat, xml).Result;
         }
 
         private bool SendRequestDelete(Authentication value, string entityName, string id)
         {
             string url = value.UrlService;
-            string urlFormat = string.Format("{0}/xml/{1}/{2}?authtoken={3}&scope={4}&id={4}", url, entityName, "deleteRecords", value.Token, value.User, id);
-            return SendRequestDeleteAsync(this, urlFormat).Result;
+            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={4}", url, entityName, "deleteRecords", value.Token, value.User, id);
+            return SendRequestDeleteAsync(urlFormat).Result;
         }
 
         private void LoadResponse(EntityResponse value, MessageType message)
@@ -252,7 +267,7 @@ namespace CrmHub.Application.Integration.Services
             return result;
         }
 
-        private CompanyRoot GetCompany(ScheduleRoot value)
+        private CompanyRoot GetAccount(ScheduleRoot value)
         {
             CompanyRoot company = new CompanyRoot { Authentication = value.Authentication };
             string leadName = GetFieldValue(value, "Last Name", filterLead);
@@ -263,8 +278,9 @@ namespace CrmHub.Application.Integration.Services
 
         private void LoadPotential(ScheduleRoot value)
         {
-            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Potential Name", Value = "Potential Name" });
-            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Account Name", Value = "Account Name" });
+            string leadName = GetFieldValue(value, "Last Name", filterLead);
+            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Potential Name", Value = leadName });
+            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Account Name", Value = leadName });
             value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Stage", Value = "Qualificação" });
             value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = "2017-02-27 13:00:00" });
         }

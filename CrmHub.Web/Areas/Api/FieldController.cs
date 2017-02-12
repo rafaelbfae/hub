@@ -23,23 +23,5 @@ namespace CrmHub.Web.Areas.Api
         {
             return Ok(new { id = 12 });
         }
-
-        //[HttpPost]
-        //public IActionResult Post([FromBody] ScheduleSend envio)
-        //{
-        //    return Ok(new { id = 12 });
-        //}
-
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, [FromBody] ScheduleSend envio)
-        //{
-        //    return new NoContentResult();
-        //}
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            return new NoContentResult();
-        }
     }
 }

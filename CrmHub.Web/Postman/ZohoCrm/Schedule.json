@@ -84,34 +84,10 @@
   },
   "MapeamentoCampos": [
     {
-      "TipoEntidadeExact": "Reuniao",
-      "TipoEntidadeCRM": "Events",
-      "CampoExact": "Referencia",
-      "CampoCRM": "Subject"
-    },
-    {
-      "TipoEntidadeExact": "Reuniao",
-      "TipoEntidadeCRM": "Events",
-      "CampoExact": "DataIni",
-      "CampoCRM": "Start DateTime"
-    },
-    {
-      "TipoEntidadeExact": "Reuniao",
-      "TipoEntidadeCRM": "Events",
-      "CampoExact": "DataFim",
-      "CampoCRM": "End DateTime"
-    },
-    {
-      "TipoEntidadeExact": "Contato",
-      "TipoEntidadeCRM": "Contacts",
-      "CampoExact": "Nome",
-      "CampoCRM": "Last Name"
-    },
-    {
       "TipoEntidadeExact": "Lead",
-      "TipoEntidadeCRM": "Lead",
+      "TipoEntidadeCRM": "Account",
       "CampoExact": "Nome",
-      "CampoCRM": "Last Name"
+      "CampoCRM": "Account Name"
     }
   ]
 }

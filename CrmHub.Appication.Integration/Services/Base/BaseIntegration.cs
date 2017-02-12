@@ -28,15 +28,16 @@ namespace CrmHub.Application.Integration.Services.Base
 
         public bool ReSchedule(ScheduleRoot value)
         {
-            bool result = true;
             if (ExecuteLead(value))
             {
                 int index = 0;
+                bool result = true;
                 value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
                 result &= ExecuteCompany(value);
                 result &= ExecuteEvent(value);
+                return result;
             }
-            return result;
+            return false;
         }
 
         public bool LeadRegister(LeadRoot value) => ExecuteLead(value);
@@ -86,41 +87,22 @@ namespace CrmHub.Application.Integration.Services.Base
         protected Func<string, bool> filterLead = v => v.Equals("Lead") || v.Equals("Address");
         protected Func<string, bool> filterContact = v => v.Equals("Contact");
         protected Func<string, bool> filterEvent = v => v.Equals("Event");
-        protected Func<string, bool> filterCompany = v => v.Equals("Company");
+        protected Func<string, bool> filterAccount = v => v.Equals("Account");
 
-        protected async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url)
+        protected async Task<bool> SendRequestGetAsync(string url)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(new Uri(url));
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                //responseBody = RemovoDescription(responseBody);
-                //try
-                //{
-                //    var objectResponse = JsonConvert.DeserializeObject(responseBody, typeof(FieldsResponseCrm));
-                //    controller.MessageController.Clear();
-                //    controller.MessageController.AddMessage(
-                //        new Message()
-                //        {
-                //            typeMessage = Message.TYPE.SUCCESS,
-                //            data = (FieldsResponseCrm)objectResponse
-                //        });
-                //}
-                //catch (JsonSerializationException e)
-                //{
-                //    Console.WriteLine(e.Message);
-                //}
-                //catch (AggregateException e)
-                //{
-                //    Console.WriteLine(e.Message);
-                //}
-
+                //TODO
+                // Metodo Generico para todos os CRMs
                 return true;
             }
         }
 
-        protected async Task<bool> SendRequestPostAsync(BaseIntegration controller, string url, string content)
+        protected async Task<bool> SendRequestPostAsync(string url, string content)
         {
             using (HttpClient httpClient = new HttpClient())
             {
@@ -131,7 +113,7 @@ namespace CrmHub.Application.Integration.Services.Base
             }
         }
 
-        protected async Task<bool> SendRequestDeleteAsync(BaseIntegration controller, string url)
+        protected async Task<bool> SendRequestDeleteAsync(string url)
         {
             using (HttpClient httpClient = new HttpClient())
             {
@@ -202,7 +184,7 @@ namespace CrmHub.Application.Integration.Services.Base
 
         private bool ExecuteCompany(ScheduleRoot value)
         {
-            return OnExecuteCompany(value, value.MappingFields.Where(v => filterCompany(v.Entity)).ToList());
+            return OnExecuteCompany(value, value.MappingFields.Where(v => filterAccount(v.Entity)).ToList());
         }
 
         private bool ExecuteCompany(CompanyRoot value)

@@ -7,8 +7,8 @@ namespace CrmHub.Application.Interfaces.Integration
     {
         IMessageController MessageController();
 
-        bool Schedule(ReuniaoExact value);
-        bool ReSchedule(ReuniaoExact value);
+        bool ScheduleRegister(ReuniaoExact value);
+        bool ScheduleUpdate(ReuniaoExact value);
         
         bool LeadRegister(LeadExact value);
         bool LeadUpdate(LeadExact value);

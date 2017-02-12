@@ -239,7 +239,7 @@
 -r:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Domain\bin\Debug\netstandard1.6\CrmHub.Domain.dll"
 -r:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\bin\Debug\netcoreapp1.0\CrmHub.Identity.dll"
 -r:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Data\bin\Debug\netcoreapp1.0\CrmHub.Infra.Data.dll"
--r:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Dependences.Injection\bin\Debug\netstandard1.6\CrmHub.Infra.Dependences.Injection.dll"
+-r:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Dependences.Injection\bin\Debug\netcoreapp1.0\CrmHub.Infra.Dependences.Injection.dll"
 -r:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Mensagens\bin\Debug\netstandard1.6\CrmHub.Infra.Mensagens.dll"
 -resource:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\obj\Debug\netcoreapp1.0\CrmHub.Webdotnet-compile.deps.json",CrmHub.Web.deps.json
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\Program.cs"

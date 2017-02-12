@@ -1,4 +1,5 @@
-﻿using CrmHub.Application.Interfaces.Base;
+﻿using CrmHub.Application.Integration.Enuns;
+using CrmHub.Application.Interfaces.Base;
 using CrmHub.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -9,5 +10,6 @@ namespace CrmHub.Application.Interfaces
 {
     public interface ICrmService : IServiceBase<Crm>
     {
+        Crm GetByName(eCrmName name, string environment);
     }
 }

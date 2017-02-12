@@ -124,12 +124,13 @@
 --reference:C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Infra.Mensagens\bin\Debug\netstandard1.6\CrmHub.Infra.Mensagens.dll
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Custom\CrmAttribute.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\IClientService.cs
-C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\ICompanyService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\ICrmService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\IFieldMappingValue.cs
-C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\IVendorService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\Base\IServiceBase.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\Integration\ICompanyService.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\Integration\IContactService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\Integration\IHubService.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\Integration\ILeadService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Interfaces\Integration\IScheduleService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\Exact\Autenticacao.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Models\Exact\Base.cs
@@ -155,5 +156,7 @@ C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Profile
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Profiles\Exact\ScheduleProfile.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Properties\AssemblyInfo.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Services\CrmService.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Services\Integration\ContactService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Services\Integration\HubService.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Services\Integration\LeadService.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Application\Services\Integration\ScheduleService.cs

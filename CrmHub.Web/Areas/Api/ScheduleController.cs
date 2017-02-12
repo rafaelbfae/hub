@@ -17,29 +17,17 @@ namespace CrmHub.Web.Areas.Api
             this._logger = logger;
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(new string[] { "value1", "value2" });
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            return Ok(new { id = 12 });
-        }
-
         [HttpPost]
         public IActionResult Post([FromBody] ReuniaoExact schedule)
         {
-            _service.Schedule(schedule);
+            _service.Register(schedule);
             return Ok(_service.MessageController().GetAllMessage());
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ReuniaoExact schedule)
         {
-            _service.ReSchedule(schedule);
+            _service.Update(schedule);
             return Ok(_service.MessageController().GetAllMessage());
         }
 

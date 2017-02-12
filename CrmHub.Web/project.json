@@ -19,7 +19,6 @@
       "type": "build"
     },
     "CrmHub.Identity": "1.0.0-*",
-    "CrmHub.Infra.Data": "1.0.0-*",
     "CrmHub.Application": "1.0.0-*",
     "CrmHub.Infra.Dependences.Injection": "1.0.0-*",
     "BundlerMinifier.Core": "2.2.306",

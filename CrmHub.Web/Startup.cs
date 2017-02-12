@@ -8,11 +8,9 @@ using Microsoft.Extensions.Logging;
 using CrmHub.Web.Services;
 using CrmHub.Identity.Context;
 using CrmHub.Identity.Models;
-using CrmHub.Infra.Data.Context;
-using CrmHub.Infra.Data.Configuration;
 using CrmHub.Infra.Dependences.Injection;
-using CrmHub.Application;
 using AutoMapper;
+using CrmHub.Infra.Data.Context;
 
 namespace CrmHub.Web
 {

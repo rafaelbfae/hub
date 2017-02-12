@@ -4,6 +4,8 @@ using CrmHub.Application.Interfaces;
 using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Services;
 using CrmHub.Application.Services.Integration;
+using CrmHub.Domain.Interfaces.Repositories;
+using CrmHub.Infra.Data.Repositories;
 using CrmHub.Infra.Messages;
 using CrmHub.Infra.Messages.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +27,13 @@ namespace CrmHub.Infra.Dependences.Injection
 
             services.AddTransient<IHubService, HubService> ();
             services.AddTransient<IScheduleService, ScheduleService>();
+            services.AddTransient<IContactService, ContactService>();
+            services.AddTransient<ILeadService, LeadService>();
+            //services.AddTransient<ICompanyService, CompanyService>();
+
+            services.AddTransient<ICrmRepository, CrmRepository>();
+            
+
             services.AddTransient<IMessageController, MessageController>();
 
 

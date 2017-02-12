@@ -18,14 +18,14 @@ namespace CrmHub.Application.Services.Integration
             return _service.MessageController();
         }
 
-        public bool ReSchedule(ReuniaoExact value)
+        public bool Update(ReuniaoExact value)
         {
-            return _service.ReSchedule(value);
+            return _service.ScheduleUpdate(value);
         }
 
-        public bool Schedule(ReuniaoExact value)
+        public bool Register(ReuniaoExact value)
         {
-            return _service.Schedule(value);
+            return _service.ScheduleRegister(value);
         }
     }
 }

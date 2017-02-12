@@ -19,7 +19,6 @@ namespace CrmHub.Infra.Messages.Models
 
         #region Properties
 
-        //[JsonConverter(typeof(StringEnumConverter))]
         public TYPE Type { get; set; }
 
         public string Message { get; set; }
