@@ -3,6 +3,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
     "NETStandard.Library": "1.6.1"
   },
 

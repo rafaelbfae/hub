@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "5809b6cf4d4a4e5f54804ced9db8029529c74ef6"
+    "signature": "9ccdad6cba5df13c4344191714157a877a626f45"
   },
   "compilationOptions": {
     "defines": [
@@ -851,17 +851,6 @@
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        }
-      },
-      "Microsoft.EntityFrameworkCore.Design/1.1.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
-          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.0",
-          "NETStandard.Library": "1.6.1",
-          "System.Collections.NonGeneric": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.dll": {}
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/1.1.0": {
@@ -3030,24 +3019,12 @@
           "CrmHub.Identity.dll": {}
         }
       },
-      "CrmHub.Infra.Data/1.0.0": {
-        "dependencies": {
-          "Microsoft.NETCore.App": "1.1.0",
-          "CrmHub.Domain": "1.0.0",
-          "Microsoft.AspNetCore.Mvc": "1.1.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
-          "System.ComponentModel.Annotations": "4.3.0"
-        },
-        "compile": {
-          "CrmHub.Infra.Data.dll": {}
-        }
-      },
       "CrmHub.Infra.Dependences.Injection/1.0.0": {
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.0",
           "CrmHub.Application": "1.0.0",
-          "CrmHub.Infra.Data": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0"
+          "CrmHub.Infra.Mensagens": "1.0.0",
+          "NETStandard.Library": "1.6.1"
         },
         "compile": {
           "CrmHub.Infra.Dependences.Injection.dll": {}
@@ -3055,6 +3032,7 @@
       },
       "CrmHub.Infra.Mensagens/1.0.0": {
         "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
@@ -3903,17 +3881,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        }
-      },
-      "Microsoft.EntityFrameworkCore.Design/1.1.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
-          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.0",
-          "NETStandard.Library": "1.6.1",
-          "System.Collections.NonGeneric": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.dll": {}
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/1.1.0": {
@@ -5971,24 +5938,12 @@
           "CrmHub.Identity.dll": {}
         }
       },
-      "CrmHub.Infra.Data/1.0.0": {
-        "dependencies": {
-          "Microsoft.NETCore.App": "1.1.0",
-          "CrmHub.Domain": "1.0.0",
-          "Microsoft.AspNetCore.Mvc": "1.1.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
-          "System.ComponentModel.Annotations": "4.3.0"
-        },
-        "runtime": {
-          "CrmHub.Infra.Data.dll": {}
-        }
-      },
       "CrmHub.Infra.Dependences.Injection/1.0.0": {
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.0",
           "CrmHub.Application": "1.0.0",
-          "CrmHub.Infra.Data": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0"
+          "CrmHub.Infra.Mensagens": "1.0.0",
+          "NETStandard.Library": "1.6.1"
         },
         "runtime": {
           "CrmHub.Infra.Dependences.Injection.dll": {}
@@ -5996,6 +5951,7 @@
       },
       "CrmHub.Infra.Mensagens/1.0.0": {
         "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "NETStandard.Library": "1.6.1"
         },
         "runtime": {
@@ -6309,11 +6265,6 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-S00vr6pLeoCMbm1PsXNZIceCAA/TUX83W3f2PcLFLGrx2QnGo5aqhtYjHvBhOVKJXZmt52EKEdORoTZVZ/swww=="
-    },
-    "Microsoft.EntityFrameworkCore.Design/1.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-7hWqxlNYUocjRqljw6yi3bQpEjMyzNSBX+LqsUuo9cFqTu3uv2YVRyRobBmfvnXVNfRxB6EysMmTmhxApPhiNw=="
     },
     "Microsoft.EntityFrameworkCore.Relational/1.1.0": {
       "type": "package",
@@ -7196,11 +7147,6 @@
       "sha512": ""
     },
     "CrmHub.Identity/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "CrmHub.Infra.Data/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
