@@ -1,11 +1,13 @@
 ﻿using CrmHub.Application.Integration.Enuns;
 using CrmHub.Application.Integration.Models;
+using CrmHub.Application.Integration.Models.Json;
 using CrmHub.Application.Integration.Models.Response;
 using CrmHub.Application.Integration.Models.Roots;
 using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Application.Integration.Services.Base;
 using CrmHub.Infra.Messages.Interfaces;
 using CrmHub.Infra.Messages.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +47,6 @@ namespace CrmHub.Application.Integration.Services
         protected override bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list)
         {
             CompanyRoot company = GetCompany(value);
-
-            LoadPotential(value);
-
             if (OnExecuteCompany(company, company.MappingFields))
                 return OnExecutePotential(value, value.MappingFields.Where(v => filterPotential(v.Entity)).ToList());
             return false;
@@ -72,6 +71,34 @@ namespace CrmHub.Application.Integration.Services
         protected override bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list, int index = 0)
         {
             ContactRoot contactRoot = new ContactRoot { Contact = contact, Authentication = value.Authentication };
+
+            var emailField = "Email";
+            Predicate<MappingFields> filterEmail = m => m.Field.Equals(emailField) && m.Id == index;
+
+            if (list.ToList().Exists(e => filterEmail(e)))
+            {
+                var email = list.Where(w => filterEmail(w)).First().Value;
+
+                Func<String, bool> loadId = s =>
+                {
+                    try
+                    {
+                        var response = JsonConvert.DeserializeObject(s, typeof(RootObject));
+                        if (!((RootObject)response).response.result.Contacts.row.FL.content.Equals(string.Empty))
+                        {
+                            contact.Id = ((RootObject)response).response.result.Contacts.row.FL.content;
+                            return true;
+                        }
+                    }
+                    catch
+                    {  }
+                    return false;
+                };
+
+                if (SendRequestSearch(value.Authentication, "Contacts", "CONTACTID", emailField, email, loadId))
+                    return OnExecuteContact(contactRoot, list, index);
+            }
+                
             return OnExecuteContact(contactRoot, list, index);
         }
 
@@ -123,6 +150,33 @@ namespace CrmHub.Application.Integration.Services
         protected override bool OnExecuteCompany(CompanyRoot value, List<MappingFields> list)
         {
             string entityName = "Accounts";
+            var accountField = "Account Name";
+
+            Predicate<MappingFields> filterAccount = m => m.Field.Equals(accountField);
+            if (list.Exists(e => filterAccount(e)))
+            {
+                var accountName = list.Where(w => filterAccount(w)).First().Value;
+
+                Func<String, bool> loadId = s =>
+                {
+                    try
+                    {
+                        var response = JsonConvert.DeserializeObject(s, typeof(RootObject));
+                        if (!((RootObject)response).response.result.Accounts.row.FL.content.Equals(string.Empty))
+                        {
+                            value.Id = ((RootObject)response).response.result.Accounts.row.FL.content;
+                            return true;
+                        }
+                    }
+                    catch
+                    { }
+                    return false;
+                };
+
+                if (SendRequestSearch(value.Authentication, entityName, "ACCOUNTSID", "accountname", accountName, loadId))
+                    return OnSendRequestSave(value, entityName, LoadXml(entityName, list));
+            }
+            
             return OnSendRequestSave(value, entityName, LoadXml(entityName, list));
         }
 
@@ -139,6 +193,36 @@ namespace CrmHub.Application.Integration.Services
         protected bool OnExecutePotential(ScheduleRoot value, List<MappingFields> list)
         {
             string entityName = "Potentials";
+            var potentialField = "Potential Name";
+            list.Add(new MappingFields { Entity = "Potential", Field = "Stage", Value = "Qualificação" });
+            list.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = DateTime.Now.ToString("yyy-MM-dd hh:mm:ss") });
+
+            Predicate<MappingFields> filterPotential = m => m.Field.Equals(potentialField);
+            if (list.Exists(e => filterPotential(e)))
+            {
+                var potentialName = list.Where(w => filterPotential(w)).First().Value;
+                LeadRoot lead = new LeadRoot { Authentication = value.Authentication, EntityName = entityName, MappingFields = list };
+                Func<String, bool> loadId = s =>
+                {
+                    try
+                    {
+                        var response = JsonConvert.DeserializeObject(s, typeof(RootObject));
+                        if (!((RootObject)response).response.result.Potentials.row.FL.content.Equals(string.Empty))
+                        {
+                            lead.Lead = new Lead();
+                            lead.Lead.Id = ((RootObject)response).response.result.Potentials.row.FL.content;
+                            return true;
+                        }
+                    }
+                    catch
+                    { }
+                    return false;
+                };
+
+                if (SendRequestSearch(value.Authentication, entityName, "POTENTIALSID", "potentialname", potentialName, loadId))
+                    return OnSendRequestSave(lead, entityName, LoadXml(entityName, list));
+            }
+
             return OnSendRequestSave(value, entityName, LoadXml(entityName, list));
         }
 
@@ -183,7 +267,15 @@ namespace CrmHub.Application.Integration.Services
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}/json/{1}/{2}?authtoken={3}&scope={4}", url, entityName, "getFields", value.Token, value.User);
-            return SendRequestGetAsync(this, urlFormat).Result;
+            return SendRequestGetAsync(this, urlFormat, s => { return true; }).Result;
+        }
+
+        private bool SendRequestSearch(Authentication value, string entityName, string selectColumn, string searchColumn, string searchValue, Func<string, bool> loadResponse)
+        {
+            string url = value.UrlService;
+            string urlFormat = string.Format("{0}/json/{1}/{2}?authtoken={3}&scope={4}&selectColumns={5}({6})&searchColumn={7}&searchValue={8}",
+                url, entityName, "getSearchRecordsByPDC", value.Token, value.User, entityName, selectColumn, searchColumn.ToLower() , searchValue);
+            return SendRequestGetAsync(this, urlFormat, loadResponse).Result;
         }
 
         private bool SendRequestInsert(Authentication value, string entityName, string xml)
@@ -212,6 +304,7 @@ namespace CrmHub.Application.Integration.Services
             message.Type = MessageType.TYPE.SUCCESS;
             message.Message = string.Empty;
             //message.Data = GetResponseFields(value);
+            
         }
 
         private ResponseFields GetResponseFields(EntityResponse value)
@@ -225,20 +318,8 @@ namespace CrmHub.Application.Integration.Services
         {
             ResponseEntity result = new ResponseEntity();
             result.EntityName = value.name;
-            value.FL.ForEach(v => result.Fields.Add(ConvertFieldCrmToResponse(v)));
+            //value.FL.ForEach(v => result.Fields.Add(ConvertFieldCrmToResponse(v)));
             return result;
-        }
-
-        private FieldCrm ConvertFieldCrmToResponse(FL value)
-        {
-            return new FieldCrm()
-            {
-                Customfield = value.customfield,
-                Maxlength = value.maxlength,
-                Label = value.label,
-                Type = value.type,
-                Required = value.req
-            };
         }
 
         private string LoadXml(string entityName, List<MappingFields> list)
@@ -259,14 +340,6 @@ namespace CrmHub.Application.Integration.Services
             company.MappingFields = new List<MappingFields>();
             company.MappingFields.Add(new MappingFields { Entity = "Account", Field = "Account Name", Value = leadName });
             return company;
-        }
-
-        private void LoadPotential(ScheduleRoot value)
-        {
-            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Potential Name", Value = "Potential Name" });
-            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Account Name", Value = "Account Name" });
-            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Stage", Value = "Qualificação" });
-            value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = "2017-02-27 13:00:00" });
         }
 
         private Func<string, bool> filterPotential = v => v.Equals("Potential");

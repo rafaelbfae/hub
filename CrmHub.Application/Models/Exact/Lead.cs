@@ -12,6 +12,7 @@ namespace CrmHub.Application.Models.Exact
 
         [Crm(eCrmName.ZOHOCRM, "Fist Name")]
         [Crm(eCrmName.ZOHOCRM, "Last Name")]
+        [Crm(eCrmName.ZOHOCRM, "Potential", true, "Potential Name", "Account Name")]
         public string Nome { get; set; }
 
         [Crm(eCrmName.ZOHOCRM, "Lead Source")]
@@ -22,7 +23,10 @@ namespace CrmHub.Application.Models.Exact
         public string SubOrigem { get; set; }
         public string LinkExact { get; set; }
         public string Observacao { get; set; }
+        
+        [Crm(eCrmName.ZOHOCRM, "Potential", true, "Description")]
         public string Diagnostico { get; set; }
+
         public string PreVendedor { get; set; }
         public string DataCadastro { get; set; }
 

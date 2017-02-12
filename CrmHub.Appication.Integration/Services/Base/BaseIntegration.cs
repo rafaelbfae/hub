@@ -2,6 +2,7 @@
 using CrmHub.Application.Integration.Models.Roots;
 using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +29,11 @@ namespace CrmHub.Application.Integration.Services.Base
 
         public bool ReSchedule(ScheduleRoot value)
         {
-            bool result = true;
+            bool result = false;
             if (ExecuteLead(value))
             {
                 int index = 0;
+                result = true;
                 value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
                 result &= ExecuteCompany(value);
                 result &= ExecuteEvent(value);
@@ -88,35 +90,14 @@ namespace CrmHub.Application.Integration.Services.Base
         protected Func<string, bool> filterEvent = v => v.Equals("Event");
         protected Func<string, bool> filterCompany = v => v.Equals("Company");
 
-        protected async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url)
+        protected async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url, Func<string, bool> loadResponse)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(new Uri(url));
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                //responseBody = RemovoDescription(responseBody);
-                //try
-                //{
-                //    var objectResponse = JsonConvert.DeserializeObject(responseBody, typeof(FieldsResponseCrm));
-                //    controller.MessageController.Clear();
-                //    controller.MessageController.AddMessage(
-                //        new Message()
-                //        {
-                //            typeMessage = Message.TYPE.SUCCESS,
-                //            data = (FieldsResponseCrm)objectResponse
-                //        });
-                //}
-                //catch (JsonSerializationException e)
-                //{
-                //    Console.WriteLine(e.Message);
-                //}
-                //catch (AggregateException e)
-                //{
-                //    Console.WriteLine(e.Message);
-                //}
-
-                return true;
+                return loadResponse(responseBody);
             }
         }
 
@@ -175,12 +156,10 @@ namespace CrmHub.Application.Integration.Services.Base
                     Entity = "Event",
                     Field = "Subject",
                     Value = GetSubjectEvent(value)
-            });
+                });
             }
             else if (string.IsNullOrEmpty(subject.Value))
-            {
                 subject.Value = GetSubjectEvent(value);
-            }
 
             return OnExecuteEvent(value, mapping);
         }
