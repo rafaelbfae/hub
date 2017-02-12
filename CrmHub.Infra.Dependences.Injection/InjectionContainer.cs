@@ -10,7 +10,6 @@ using CrmHub.Infra.Messages;
 using CrmHub.Infra.Messages.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-
 namespace CrmHub.Infra.Dependences.Injection
 {
     public class InjectionContainer
@@ -32,7 +31,6 @@ namespace CrmHub.Infra.Dependences.Injection
             //services.AddTransient<ICompanyService, CompanyService>();
 
             services.AddTransient<ICrmRepository, CrmRepository>();
-            
 
             services.AddTransient<IMessageController, MessageController>();
 
