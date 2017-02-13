@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Models.Exact.Roots;
+using CrmHub.Application.Models.Exact;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,23 +26,32 @@ namespace CrmHub.Web.Areas.Api
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ContatoExact schedule)
+        public IActionResult Post([FromBody] ContatoExact value)
         {
-            _service.Register(schedule);
+            _service.Register(value);
             return Ok(_service.MessageController().GetAllMessage());
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ContatoExact schedule)
+        public IActionResult Put(int id, [FromBody] ContatoExact value)
         {
-            _service.Update(schedule);
+            _service.Update(value);
             return Ok(_service.MessageController().GetAllMessage());
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return new NoContentResult();
+            //_service.Delete(value);
+            return Ok(_service.MessageController().GetAllMessage());
+        }
+
+        [HttpPost]
+        [Route("fields")]
+        public IActionResult Fields([FromBody] Autenticacao value)
+        {
+            _service.Fields(value);
+            return Ok(_service.MessageController().GetAllMessage());
         }
     }
 }

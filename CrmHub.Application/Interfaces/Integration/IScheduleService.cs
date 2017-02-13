@@ -1,4 +1,5 @@
-﻿using CrmHub.Application.Models.Exact.Roots;
+﻿using CrmHub.Application.Models.Exact;
+using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Interfaces.Integration
@@ -8,5 +9,6 @@ namespace CrmHub.Application.Interfaces.Integration
         IMessageController MessageController();
         bool Register(ReuniaoExact value);
         bool Update(ReuniaoExact value);
+        bool Fields(Autenticacao value);
     }
 }

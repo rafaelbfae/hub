@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace CrmHub.Application.Integration.Services.Base
 {
-    public class HubIntegration : ICrmIntegration
+    public class HubIntegration : IHubIntegration
     {
         #region Attributes
 

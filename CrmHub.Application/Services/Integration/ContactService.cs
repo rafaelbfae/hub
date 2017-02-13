@@ -1,4 +1,5 @@
 ﻿using CrmHub.Application.Interfaces.Integration;
+using CrmHub.Application.Models.Exact;
 using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Infra.Messages.Interfaces;
 
@@ -31,6 +32,11 @@ namespace CrmHub.Application.Services.Integration
         public bool Delete(ContatoExact value)
         {
             return _service.ContactDelete(value);
+        }
+
+        public bool Fields(Autenticacao value)
+        {
+            return _service.ContactGetFields(value);
         }
     }
 }

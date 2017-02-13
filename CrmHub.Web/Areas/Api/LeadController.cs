@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Interfaces.Integration;
 using Microsoft.Extensions.Logging;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using CrmHub.Application.Models.Exact;
 
 namespace CrmHub.Web.Areas.Api
 {
@@ -26,6 +21,7 @@ namespace CrmHub.Web.Areas.Api
         [HttpPost]
         public IActionResult Post([FromBody] LeadExact schedule)
         {
+            _logger.LogDebug("Lead Register Call");
             _service.Register(schedule);
             return Ok(_service.MessageController().GetAllMessage());
         }
@@ -33,6 +29,7 @@ namespace CrmHub.Web.Areas.Api
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] LeadExact schedule)
         {
+            _logger.LogDebug("Lead Update Call");
             _service.Update(schedule);
             return Ok(_service.MessageController().GetAllMessage());
         }
@@ -41,6 +38,15 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Delete(int id)
         {
             return new NoContentResult();
+        }
+
+        [HttpPost]
+        [Route("fields")]
+        public IActionResult Fields([FromBody] Autenticacao value)
+        {
+            _logger.LogDebug("Lead Fields Call");
+            _service.Fields(value);
+            return Ok(_service.MessageController().GetAllMessage());
         }
     }
 }

@@ -281,14 +281,14 @@ namespace CrmHub.Application.Integration.Services
         private bool SendRequestGet(Authentication value, string entityName)
         {
             string url = value.UrlService;
-            string urlFormat = string.Format("{0}/json/{1}/{2}?authtoken={3}&scope={4}", url, entityName, "getFields", value.Token, value.User);
+            string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}", url, entityName, "getFields", value.Token, value.User);
             return SendRequestGetAsync(this, urlFormat, s => { return true; }).Result;
         }
 
         private bool SendRequestSearch(Authentication value, string entityName, string selectColumn, string searchColumn, string searchValue, Func<string, bool> loadResponse)
         {
             string url = value.UrlService;
-            string urlFormat = string.Format("{0}/json/{1}/{2}?authtoken={3}&scope={4}&selectColumns={5}({6})&searchColumn={7}&searchValue={8}",
+            string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}&selectColumns={5}({6})&searchColumn={7}&searchValue={8}",
                 url, entityName, "getSearchRecordsByPDC", value.Token, value.User, entityName, selectColumn, searchColumn.ToLower() , searchValue);
             return SendRequestGetAsync(this, urlFormat, loadResponse).Result;
         }

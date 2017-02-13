@@ -4,7 +4,7 @@ using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Integration.Interfaces.Base
 {
-    public interface ICrmIntegration
+    public interface IHubIntegration
     {
         IMessageController MessageController { get; }
 

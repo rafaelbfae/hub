@@ -21,7 +21,7 @@ namespace CrmHub.Infra.Dependences.Injection
 
         public void CreateSimpleInject(IServiceCollection services)
         {
-            services.AddTransient<ICrmIntegration, HubIntegration>();
+            services.AddTransient<IHubIntegration, HubIntegration>();
             services.AddTransient<ICrmService, CrmService>();
 
             services.AddTransient<IHubService, HubService> ();
