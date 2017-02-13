@@ -32,7 +32,7 @@ namespace CrmHub.Web.Areas.Api
             _logger.LogDebug("Schedule Update Call");
             schedule.Reuniao.Id = id;
             _service.Update(schedule);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
 
         [HttpDelete("{id}")]

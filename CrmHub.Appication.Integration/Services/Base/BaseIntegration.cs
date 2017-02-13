@@ -2,6 +2,7 @@
 using CrmHub.Application.Integration.Models.Roots;
 using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;
+using CrmHub.Infra.Messages.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,6 @@ namespace CrmHub.Application.Integration.Services.Base
                 int index = 0;
                 bool result = true;
                 value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
-                result &= ExecuteCompany(value);
                 result &= ExecuteEvent(value);
                 return result;
             }
@@ -83,7 +83,7 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract bool OnDeleteCompany(string id, Authentication value);
         protected abstract bool OnGetFieldsCompany(Authentication value);
         protected abstract string GetSubjectEvent(ScheduleRoot value);
-        protected abstract bool GetResponse(string responseBody);
+        protected abstract bool GetResponse(string responseBody, MessageType.ENTITY entity);
 
         protected Func<string, bool> filterLead = v => v.Equals("Lead") || v.Equals("Address");
         protected Func<string, bool> filterContact = v => v.Equals("Contact");
@@ -101,24 +101,24 @@ namespace CrmHub.Application.Integration.Services.Base
             }
         }
 
-        protected async Task<bool> SendRequestPostAsync(string url, string content)
+        protected async Task<bool> SendRequestPostAsync(string url, string content, MessageType.ENTITY entity)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 StringContent xmlQuery = new StringContent(content);
                 var response = await httpClient.PostAsync(new Uri(url), xmlQuery);
                 response.EnsureSuccessStatusCode();
-                return GetResponse(await response.Content.ReadAsStringAsync());
+                return GetResponse(await response.Content.ReadAsStringAsync(), entity);
             }
         }
 
-        protected async Task<bool> SendRequestDeleteAsync(string url)
+        protected async Task<bool> SendRequestDeleteAsync(string url, MessageType.ENTITY entity)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 var response = await httpClient.DeleteAsync(new Uri(url));
                 response.EnsureSuccessStatusCode();
-                return GetResponse(await response.Content.ReadAsStringAsync());
+                return GetResponse(await response.Content.ReadAsStringAsync(), entity);
             }
         }
 

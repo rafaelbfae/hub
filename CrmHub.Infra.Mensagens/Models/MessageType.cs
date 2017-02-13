@@ -5,7 +5,13 @@ namespace CrmHub.Infra.Messages.Models
 {
     public class MessageType
     {
+        #region Enum
+
         public enum TYPE { INFO, SUCCESS, WARING, ERROR }
+
+        public enum ENTITY { LEAD, REUNIAO, CONTATO, EMPRESA, NONE }
+
+        #endregion
 
         #region Constructor
 
@@ -13,6 +19,14 @@ namespace CrmHub.Infra.Messages.Models
         {
             Type = type;
             Message = string.Empty;
+            Entity = ENTITY.NONE;
+        }
+
+        public MessageType(TYPE type, ENTITY entity)
+        {
+            Type = type;
+            Message = string.Empty;
+            Entity = entity;
         }
 
         #endregion
@@ -23,6 +37,9 @@ namespace CrmHub.Infra.Messages.Models
         public TYPE Type { get; set; }
 
         public string Message { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ENTITY Entity { get; set; } 
 
         public object Data { get; set; }
 
