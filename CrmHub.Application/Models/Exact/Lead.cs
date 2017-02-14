@@ -1,7 +1,7 @@
 ﻿using CrmHub.Application.Custom;
 using CrmHub.Application.Integration.Enuns;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace CrmHub.Application.Models.Exact
 {
@@ -10,6 +10,7 @@ namespace CrmHub.Application.Models.Exact
     {
         public string Id { get; set; }
 
+        [Required]
         [Crm(eCrmName.ZOHOCRM, "Last Name")]
         [Crm(eCrmName.ZOHOCRM, "Potential", true, "Potential Name", "Account Name")]
         public string Nome { get; set; }
@@ -22,13 +23,15 @@ namespace CrmHub.Application.Models.Exact
         public string SubOrigem { get; set; }
         public string LinkExact { get; set; }
         public string Observacao { get; set; }
-        
+
+        [Required]
         [Crm(eCrmName.ZOHOCRM, "Potential", true, "Description")]
         public string Diagnostico { get; set; }
 
         public string PreVendedor { get; set; }
         public string DataCadastro { get; set; }
 
+        [Required]
         [Crm(eCrmName.ZOHOCRM, "Phone", "Mobile", "Other Phone")]
         public List<string> Telefone { get; set; }
 

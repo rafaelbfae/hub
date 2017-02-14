@@ -2426,7 +2426,8 @@
           "CrmHub.Infra.Mensagens": "1.0.0",
           "System.Reflection.TypeExtensions": "4.3.0",
           "NETStandard.Library": "1.6.1",
-          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001"
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0"
         },
         "runtime": {
           "CrmHub.Appication.Integration.dll": {}
@@ -2437,7 +2438,8 @@
           "CrmHub.Domain": "1.0.0",
           "CrmHub.Appication.Integration": "1.0.0",
           "NETStandard.Library": "1.6.1",
-          "AutoMapper": "5.2.0"
+          "AutoMapper": "5.2.0",
+          "Microsoft.Extensions.Logging": "1.1.0"
         },
         "runtime": {
           "CrmHub.Application.dll": {}

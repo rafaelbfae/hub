@@ -37,6 +37,7 @@ namespace CrmHub.Web.Areas.Api
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            _logger.LogDebug("Lead Delete Call");
             return new NoContentResult();
         }
 

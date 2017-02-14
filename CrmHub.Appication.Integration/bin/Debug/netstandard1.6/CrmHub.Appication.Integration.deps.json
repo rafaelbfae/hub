@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.6/",
-    "signature": "9ef5eae1f2d5cded3e5d4af4aa9bfe80066eef0f"
+    "signature": "4b89f7787acc9fe825957ac36570d23f79e6909d"
   },
   "compilationOptions": {},
   "targets": {
@@ -12,7 +12,8 @@
           "CrmHub.Infra.Mensagens": "1.0.0",
           "System.Reflection.TypeExtensions": "4.3.0",
           "NETStandard.Library": "1.6.1",
-          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001"
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0"
         },
         "runtime": {
           "CrmHub.Appication.Integration.dll": {}
@@ -80,6 +81,14 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.CSharp.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/1.1.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -1216,6 +1225,11 @@
       "serviceable": true,
       "sha512": "sha512-17h8b5mXa87XYKrrVqdgZ38JefSUqLChUQpXgSnpzsM0nDOhE40FTeNWOJ/YmySGV6tG6T8+hjz6vxbknHJr6A=="
     },
+    "Microsoft.Extensions.Logging.Abstractions/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5zDtM0Dal+pwDIj49PPq9Y8SYu6z70v55VDx70rOuquLTlaCIdv9uItkcp9c1FH/ASNdfANVnh1cTwd85dyE+Q=="
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -1274,7 +1288,7 @@
     "runtime.native.System.Net.Security/4.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Az6Ff6rZFb8nYGAaejFR6jr8ktt9f3e1Q/yKdw0pwHNTLaO/1eCAC9vzBoR9YAb0QeZD6fZXl1A9tRB5stpzXA=="
+      "sha512": "sha512-r0ltRFY4G8f5AftenyMrkfJTnNsViXtKEwd7g6E0LkAIABMd5VlP09V+uzxyqoqqyEgtrvSuPpFM3yC7ymNbKA=="
     },
     "runtime.native.System.Security.Cryptography/4.0.0": {
       "type": "package",
