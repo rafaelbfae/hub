@@ -23,7 +23,7 @@ namespace CrmHub.Web.Areas.Api
         {
             _logger.LogDebug("Lead Register Call");
             _service.Register(schedule);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
 
         [HttpPut("{id}")]
@@ -31,7 +31,7 @@ namespace CrmHub.Web.Areas.Api
         {
             _logger.LogDebug("Lead Update Call");
             _service.Update(schedule);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
 
         [HttpDelete("{id}")]
@@ -46,7 +46,7 @@ namespace CrmHub.Web.Areas.Api
         {
             _logger.LogDebug("Lead Fields Call");
             _service.Fields(value);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
     }
 }

@@ -66,7 +66,18 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnGetFieldsLead(Authentication value)
         {
-            return SendRequestGet(value, "Leads", LoadResponseFields);
+            if (SendRequestGet(value, "Leads", LoadResponseFields))
+            {
+                MessageController.GetMessageSuccess().ForEach(e =>
+                {
+                    e.Entity = MessageType.ENTITY.LEAD;
+                    FieldsResponseCrm data = ((FieldsResponseCrm)(e.Data));
+                    if (data.Leads != null)
+                        LoadResponse(data.Leads, e);
+                });
+                return true;
+            }
+            return false;
         }
 
         protected override bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list, int index = 0)
@@ -117,7 +128,18 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnGetFieldsContact(Authentication value)
         {
-            return SendRequestGet(value, "Contacts", LoadResponseFields);
+            if (SendRequestGet(value, "Contacts", LoadResponseFields))
+            {
+                MessageController.GetMessageSuccess().ForEach(e =>
+                {
+                    e.Entity = MessageType.ENTITY.CONTATO;
+                    FieldsResponseCrm data = ((FieldsResponseCrm)(e.Data));
+                    if (data.Contacts != null)
+                        LoadResponse(data.Contacts, e);
+                });
+                return true;
+            }
+            return false;
         }
 
         protected override bool OnExecuteEvent(ScheduleRoot value, List<MappingFields> list)
@@ -139,7 +161,18 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnGetFieldsEvent(Authentication value)
         {
-            return SendRequestGet(value, "Events", LoadResponseFields);
+            if (SendRequestGet(value, "Events", LoadResponseFields))
+            {
+                MessageController.GetMessageSuccess().ForEach(e =>
+                {
+                    e.Entity = MessageType.ENTITY.REUNIAO;
+                    FieldsResponseCrm data = ((FieldsResponseCrm)(e.Data));
+                    if (data.Events != null)
+                        LoadResponse(data.Events, e);
+                });
+                return true;
+            }
+            return false;
         }
 
         protected override bool OnExecuteCompany(ScheduleRoot value, List<MappingFields> list)
@@ -188,7 +221,18 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnGetFieldsCompany(Authentication value)
         {
-            return SendRequestGet(value, "Accounts", LoadResponseFields);
+            if (SendRequestGet(value, "Accounts", LoadResponseFields))
+            {
+                MessageController.GetMessageSuccess().ForEach(e =>
+                {
+                    e.Entity = MessageType.ENTITY.EMPRESA;
+                    FieldsResponseCrm data = ((FieldsResponseCrm)(e.Data));
+                    if (data.Accounts != null)
+                        LoadResponse(data.Accounts, e);
+                });
+                return true;
+            }
+            return false;
         }
 
         protected bool OnExecutePotential(ScheduleRoot value, List<MappingFields> list)

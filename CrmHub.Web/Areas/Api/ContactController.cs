@@ -29,21 +29,21 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Post([FromBody] ContatoExact value)
         {
             _service.Register(value);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ContatoExact value)
         {
             _service.Update(value);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             //_service.Delete(value);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Fields([FromBody] Autenticacao value)
         {
             _service.Fields(value);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
     }
 }

@@ -47,7 +47,7 @@ namespace CrmHub.Web.Areas.Api
         {
             _logger.LogDebug("Schedule Fields Call");
             _service.Fields(value);
-            return Ok(_service.MessageController().GetAllMessage());
+            return Ok(_service.MessageController().GetAllMessageToJson());
         }
     }
 }
