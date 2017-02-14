@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using static CrmHub.Application.Integration.Models.Zoho.FieldsResponse;
 
 namespace CrmHub.Application.Integration.Services.Base
 {
@@ -90,7 +91,7 @@ namespace CrmHub.Application.Integration.Services.Base
         protected Func<string, bool> filterEvent = v => v.Equals("Event");
         protected Func<string, bool> filterAccount = v => v.Equals("Account");
 
-        protected async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url, Func<string, bool> loadResponse)
+        protected async Task<bool> SendRequestGetAsync(BaseIntegration controller, string url, Predicate<string> loadResponse)
         {
             using (HttpClient httpClient = new HttpClient())
             {
