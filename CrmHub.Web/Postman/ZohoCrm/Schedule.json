@@ -83,11 +83,11 @@
     "Endereco": "Rua treze de maio, 123, João Paulo, Florianopolis, SC"
   },
   "MapeamentoCampos": [
-    {
-      "TipoEntidadeExact": "Lead",
-      "TipoEntidadeCRM": "Account",
-      "CampoExact": "Nome",
-      "CampoCRM": "Account Name"
-    }
+    //{
+    //  "TipoEntidadeExact": "Lead",
+    //  "TipoEntidadeCRM": "Account",
+    //  "CampoExact": "Nome",
+    //  "CampoCRM": "Account Name"
+    //}
   ]
 }

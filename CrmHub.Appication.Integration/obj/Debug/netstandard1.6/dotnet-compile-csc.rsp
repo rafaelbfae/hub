@@ -12,6 +12,7 @@
 -out:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Appication.Integration\bin\Debug\netstandard1.6\CrmHub.Appication.Integration.dll"
 -r:"C:\Users\fabio\.nuget\packages\CoreCompat.Newtonsoft.Json\9.0.2-beta001\lib\netstandard1.5\CoreCompat.Newtonsoft.Json.dll"
 -r:"C:\Users\fabio\.nuget\packages\Microsoft.CSharp\4.0.1\ref\netstandard1.0\Microsoft.CSharp.dll"
+-r:"C:\Users\fabio\.nuget\packages\Microsoft.Extensions.Logging.Abstractions\1.1.0\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll"
 -r:"C:\Users\fabio\.nuget\packages\Microsoft.Win32.Primitives\4.3.0\ref\netstandard1.3\Microsoft.Win32.Primitives.dll"
 -r:"C:\Users\fabio\.nuget\packages\System.AppContext\4.3.0\ref\netstandard1.6\System.AppContext.dll"
 -r:"C:\Users\fabio\.nuget\packages\System.AppDomain\2.0.10\lib\netstandard1.3\System.AppDomain.dll"

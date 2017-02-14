@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Models.Exact.Roots;
@@ -28,6 +24,7 @@ namespace CrmHub.Web.Areas.Api
         [HttpPost]
         public IActionResult Post([FromBody] ContatoExact value)
         {
+            _logger.LogDebug("Contact Register Call");
             _service.Register(value);
             return Ok(_service.MessageController().GetAllMessage());
         }
@@ -35,6 +32,7 @@ namespace CrmHub.Web.Areas.Api
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ContatoExact value)
         {
+            _logger.LogDebug("Contact Update Call");
             _service.Update(value);
             return Ok(_service.MessageController().GetAllMessage());
         }
@@ -42,6 +40,7 @@ namespace CrmHub.Web.Areas.Api
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            _logger.LogDebug("Contact Delete Call");
             //_service.Delete(value);
             return Ok(_service.MessageController().GetAllMessage());
         }
@@ -50,6 +49,7 @@ namespace CrmHub.Web.Areas.Api
         [Route("fields")]
         public IActionResult Fields([FromBody] Autenticacao value)
         {
+            _logger.LogDebug("Contact Fields Call");
             _service.Fields(value);
             return Ok(_service.MessageController().GetAllMessage());
         }

@@ -35,20 +35,6 @@
           "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
-      "BundlerMinifier.Core/2.2.306": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.App": "1.1.0",
-          "NUglify": "1.5.1",
-          "Newtonsoft.Json": "9.0.1"
-        },
-        "compile": {
-          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
-        }
-      },
       "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
         "type": "package",
         "dependencies": {
@@ -2306,19 +2292,6 @@
         },
         "runtime": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
-        }
-      },
-      "NUglify/1.5.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "System.Security.Cryptography.Algorithms": "4.2.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/NUglify.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/NUglify.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -4629,6 +4602,7 @@
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "CrmHub.Infra.Mensagens": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
           "NETStandard.Library": "1.6.1",
           "System.Reflection.TypeExtensions": "4.3.0"
         }
@@ -4640,6 +4614,7 @@
           "AutoMapper": "5.2.0",
           "CrmHub.Appication.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
+          "Microsoft.Extensions.Logging": "1.1.0",
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
@@ -4756,20 +4731,6 @@
         },
         "runtime": {
           "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
-        }
-      },
-      "BundlerMinifier.Core/2.2.306": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.App": "1.1.0",
-          "NUglify": "1.5.1",
-          "Newtonsoft.Json": "9.0.1"
-        },
-        "compile": {
-          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
         }
       },
       "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
@@ -7004,19 +6965,6 @@
         },
         "runtime": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
-        }
-      },
-      "NUglify/1.5.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "System.Security.Cryptography.Algorithms": "4.2.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/NUglify.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/NUglify.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -9491,6 +9439,7 @@
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "CrmHub.Infra.Mensagens": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
           "NETStandard.Library": "1.6.1",
           "System.Reflection.TypeExtensions": "4.3.0"
         }
@@ -9502,6 +9451,7 @@
           "AutoMapper": "5.2.0",
           "CrmHub.Appication.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
+          "Microsoft.Extensions.Logging": "1.1.0",
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
@@ -9614,18 +9564,6 @@
         "lib/net451/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
         "lib/netstandard1.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
         "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
-      ]
-    },
-    "BundlerMinifier.Core/2.2.306": {
-      "sha512": "3MhXe3qLroL+Fe4Uo/7cmtYQ3YPjSHIjfuHxpewVZUdU4mh73wLEKAgf9rr3OLTuEXCbJr8bOBdwjuNwfGR8qw==",
-      "type": "package",
-      "path": "BundlerMinifier.Core/2.2.306",
-      "files": [
-        "BundlerMinifier.Core.2.2.306.nupkg.sha512",
-        "BundlerMinifier.Core.nuspec",
-        "lib/net452/dotnet-bundle.exe",
-        "lib/netcoreapp1.0/dotnet-bundle.dll",
-        "lib/netcoreapp1.0/dotnet-bundle.runtimeconfig.json"
       ]
     },
     "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
@@ -11585,21 +11523,6 @@
         "lib/net45/NuGet.Versioning.xml",
         "lib/netstandard1.0/NuGet.Versioning.dll",
         "lib/netstandard1.0/NuGet.Versioning.xml"
-      ]
-    },
-    "NUglify/1.5.1": {
-      "sha512": "iYV/OtSs+HgyE/RilY7UvGXYec6r0OJenWlPIdX/IivedVpSSdzxvPvUIyWpiV/6ad7VjantH0/6oaOhAZbaoQ==",
-      "type": "package",
-      "path": "NUglify/1.5.1",
-      "files": [
-        "NUglify.1.5.1.nupkg.sha512",
-        "NUglify.nuspec",
-        "lib/net35/NUglify.dll",
-        "lib/net35/NUglify.xml",
-        "lib/net40/NUglify.dll",
-        "lib/net40/NUglify.xml",
-        "lib/netstandard1.3/NUglify.dll",
-        "lib/netstandard1.3/NUglify.xml"
       ]
     },
     "Remotion.Linq/2.1.1": {
@@ -17338,7 +17261,6 @@
     "": [
       "AutoMapper >= 5.2.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 1.2.0",
-      "BundlerMinifier.Core >= 2.2.306",
       "CrmHub.Application >= 1.0.0-*",
       "CrmHub.Identity >= 1.0.0-*",
       "CrmHub.Infra.Dependences.Injection >= 1.0.0-*",
@@ -17438,6 +17360,20 @@
           "lib/netcoreapp1.0/dotnet-user-secrets.dll": {}
         }
       },
+      "BundlerMinifier.Core/2.2.306": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.0",
+          "NUglify": "1.5.1",
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
+        }
+      },
       "Microsoft.VisualStudio.Web.CodeGeneration.Tools/1.0.0-preview2-final": {
         "type": "package",
         "dependencies": {
@@ -17455,6 +17391,7 @@
   },
   "projectFileToolGroups": {
     ".NETCoreApp,Version=v1.0": [
+      "BundlerMinifier.Core >= 2.2.306",
       "Microsoft.AspNetCore.Razor.Tools >= 1.0.0-preview2-final",
       "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.0.0-preview2-final",
       "Microsoft.EntityFrameworkCore.Tools >= 1.1.0-preview4-final",

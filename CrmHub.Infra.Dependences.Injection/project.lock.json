@@ -3734,6 +3734,7 @@
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "CrmHub.Infra.Mensagens": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
           "NETStandard.Library": "1.6.1",
           "System.Reflection.TypeExtensions": "4.3.0"
         }
@@ -3745,6 +3746,7 @@
           "AutoMapper": "5.2.0",
           "CrmHub.Appication.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
+          "Microsoft.Extensions.Logging": "1.1.0",
           "NETStandard.Library": "1.6.1"
         },
         "compile": {

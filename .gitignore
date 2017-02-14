@@ -1,4 +1,7 @@
 *.dll
 *.pdb
 *.suo
+*.user
 *.exe
+bin
+obj
