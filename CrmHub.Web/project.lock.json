@@ -35,6 +35,20 @@
           "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "BundlerMinifier.Core/2.3.327": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.0",
+          "NUglify": "1.5.4",
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
+        }
+      },
       "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
         "type": "package",
         "dependencies": {
@@ -2292,6 +2306,19 @@
         },
         "runtime": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
+        }
+      },
+      "NUglify/1.5.4": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "System.Security.Cryptography.Algorithms": "4.2.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/NUglify.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/NUglify.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -4596,23 +4623,12 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "CrmHub.Appication.Integration/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
-          "CrmHub.Infra.Mensagens": "1.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
-          "NETStandard.Library": "1.6.1",
-          "System.Reflection.TypeExtensions": "4.3.0"
-        }
-      },
       "CrmHub.Application/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "AutoMapper": "5.2.0",
-          "CrmHub.Appication.Integration": "1.0.0",
+          "CrmHub.Application.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
           "Microsoft.Extensions.Logging": "1.1.0",
           "NETStandard.Library": "1.6.1"
@@ -4622,6 +4638,23 @@
         },
         "runtime": {
           "netstandard1.6/CrmHub.Application.dll": {}
+        }
+      },
+      "CrmHub.Application.Integration/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "CrmHub.Infra.Messages": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Application.Integration.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Application.Integration.dll": {}
         }
       },
       "CrmHub.Domain/1.0.0": {
@@ -4680,7 +4713,7 @@
         "dependencies": {
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0",
+          "CrmHub.Infra.Messages": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "NETStandard.Library": "1.6.1"
         },
@@ -4691,12 +4724,18 @@
           "netcoreapp1.0/CrmHub.Infra.Dependences.Injection.dll": {}
         }
       },
-      "CrmHub.Infra.Mensagens/1.0.0": {
+      "CrmHub.Infra.Messages/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
         }
       }
     },
@@ -4731,6 +4770,20 @@
         },
         "runtime": {
           "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
+      "BundlerMinifier.Core/2.3.327": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.0",
+          "NUglify": "1.5.4",
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.0/dotnet-bundle.dll": {}
         }
       },
       "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
@@ -6965,6 +7018,19 @@
         },
         "runtime": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
+        }
+      },
+      "NUglify/1.5.4": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "System.Security.Cryptography.Algorithms": "4.2.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/NUglify.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/NUglify.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -9433,23 +9499,12 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "CrmHub.Appication.Integration/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
-          "CrmHub.Infra.Mensagens": "1.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
-          "NETStandard.Library": "1.6.1",
-          "System.Reflection.TypeExtensions": "4.3.0"
-        }
-      },
       "CrmHub.Application/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "AutoMapper": "5.2.0",
-          "CrmHub.Appication.Integration": "1.0.0",
+          "CrmHub.Application.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
           "Microsoft.Extensions.Logging": "1.1.0",
           "NETStandard.Library": "1.6.1"
@@ -9459,6 +9514,23 @@
         },
         "runtime": {
           "netstandard1.6/CrmHub.Application.dll": {}
+        }
+      },
+      "CrmHub.Application.Integration/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "CrmHub.Infra.Messages": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Application.Integration.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Application.Integration.dll": {}
         }
       },
       "CrmHub.Domain/1.0.0": {
@@ -9517,7 +9589,7 @@
         "dependencies": {
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0",
+          "CrmHub.Infra.Messages": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "NETStandard.Library": "1.6.1"
         },
@@ -9528,12 +9600,18 @@
           "netcoreapp1.0/CrmHub.Infra.Dependences.Injection.dll": {}
         }
       },
-      "CrmHub.Infra.Mensagens/1.0.0": {
+      "CrmHub.Infra.Messages/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
         }
       }
     }
@@ -9564,6 +9642,18 @@
         "lib/net451/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
         "lib/netstandard1.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
         "lib/netstandard1.6/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
+    "BundlerMinifier.Core/2.3.327": {
+      "sha512": "KfPBhOq4M4ud88q+Qcht8kvr0oilgPe5hNML6iLRGzb61mR9MjTpWUDWfNsSSy9GYMJ1Q3qRKgiOybo/KCw+iw==",
+      "type": "package",
+      "path": "BundlerMinifier.Core/2.3.327",
+      "files": [
+        "BundlerMinifier.Core.2.3.327.nupkg.sha512",
+        "BundlerMinifier.Core.nuspec",
+        "lib/net452/dotnet-bundle.exe",
+        "lib/netcoreapp1.0/dotnet-bundle.dll",
+        "lib/netcoreapp1.0/dotnet-bundle.runtimeconfig.json"
       ]
     },
     "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
@@ -10996,7 +11086,7 @@
       ]
     },
     "Microsoft.NETCore.Jit/1.0.4": {
-      "sha512": "k9c9sIKssLVXEt9707uUsxilUs1PjN6UL1GKx1kMU9xvOPoEGd1zTROGYHby686RZG1rPip+yshBJLRDUzACHg==",
+      "sha512": "IcHTGj+vTFcOu7/flwNg+CWIfTsxqHWgj08MKOtYwS5k0EuLvx6PrYsn7vHCV0SUTk1zbQ1l0EJj1UdxTMyx4w==",
       "type": "package",
       "path": "Microsoft.NETCore.Jit/1.0.4",
       "files": [
@@ -11021,7 +11111,7 @@
       ]
     },
     "Microsoft.NETCore.Runtime.CoreCLR/1.0.4": {
-      "sha512": "REkMivB0yBdcwmgaTcojMWQp3y7T3UiNYuAKSieUiY105LES1ZwVxnS0FIVUGssYg+xfJw6mzpBKHI1hVR00DQ==",
+      "sha512": "r4/aP7VYcJ+W/rJVFU+jAdjF4KrsHRDYQJ+p8weUP5n65yLzWXlQTVY6OsR560aV5EF7jc65dqsNXIryUCrEkQ==",
       "type": "package",
       "path": "Microsoft.NETCore.Runtime.CoreCLR/1.0.4",
       "files": [
@@ -11523,6 +11613,21 @@
         "lib/net45/NuGet.Versioning.xml",
         "lib/netstandard1.0/NuGet.Versioning.dll",
         "lib/netstandard1.0/NuGet.Versioning.xml"
+      ]
+    },
+    "NUglify/1.5.4": {
+      "sha512": "MxYC4UDAjkGf2Zn5hpLqy163DQ36OAhOpoqe8r29KvY/MJ6N8Wdeee+D0XiutGzCF65DcFKjlEhRtmtw8pe2gQ==",
+      "type": "package",
+      "path": "NUglify/1.5.4",
+      "files": [
+        "NUglify.1.5.4.nupkg.sha512",
+        "NUglify.nuspec",
+        "lib/net35/NUglify.dll",
+        "lib/net35/NUglify.xml",
+        "lib/net40/NUglify.dll",
+        "lib/net40/NUglify.xml",
+        "lib/netstandard1.3/NUglify.dll",
+        "lib/netstandard1.3/NUglify.xml"
       ]
     },
     "Remotion.Linq/2.1.1": {
@@ -17223,14 +17328,15 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "CrmHub.Appication.Integration/1.0.0": {
-      "type": "project",
-      "path": "../CrmHub.Appication.Integration/project.json"
-    },
     "CrmHub.Application/1.0.0": {
       "type": "project",
       "path": "../CrmHub.Application/project.json",
       "msbuildProject": "../CrmHub.Application/CrmHub.Application.xproj"
+    },
+    "CrmHub.Application.Integration/1.0.0": {
+      "type": "project",
+      "path": "../CrmHub.Appication.Integration/project.json",
+      "msbuildProject": "../CrmHub.Appication.Integration/CrmHub.Application.Integration.xproj"
     },
     "CrmHub.Domain/1.0.0": {
       "type": "project",
@@ -17252,15 +17358,17 @@
       "path": "../CrmHub.Infra.Dependences.Injection/project.json",
       "msbuildProject": "../CrmHub.Infra.Dependences.Injection/CrmHub.Infra.Dependences.Injection.xproj"
     },
-    "CrmHub.Infra.Mensagens/1.0.0": {
+    "CrmHub.Infra.Messages/1.0.0": {
       "type": "project",
-      "path": "../CrmHub.Infra.Mensagens/project.json"
+      "path": "../CrmHub.Infra.Mensagens/project.json",
+      "msbuildProject": "../CrmHub.Infra.Mensagens/CrmHub.Infra.Messages.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
       "AutoMapper >= 5.2.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 1.2.0",
+      "BundlerMinifier.Core >= 2.3.327",
       "CrmHub.Application >= 1.0.0-*",
       "CrmHub.Identity >= 1.0.0-*",
       "CrmHub.Infra.Dependences.Injection >= 1.0.0-*",
