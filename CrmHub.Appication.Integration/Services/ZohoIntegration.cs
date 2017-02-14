@@ -66,7 +66,7 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnGetFieldsLead(Authentication value)
         {
-            return SendRequestGet(value, "Leads");
+            return SendRequestGet(value, "Leads", LoadResponseFields);
         }
 
         protected override bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list, int index = 0)
@@ -80,7 +80,7 @@ namespace CrmHub.Application.Integration.Services
             {
                 var email = list.Where(w => filterEmail(w)).First().Value;
 
-                Func<String, bool> loadId = s =>
+                Predicate<String> loadId = s =>
                 {
                     try
                     {
@@ -117,7 +117,7 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnGetFieldsContact(Authentication value)
         {
-            return SendRequestGet(value, "Contacts");
+            return SendRequestGet(value, "Contacts", LoadResponseFields);
         }
 
         protected override bool OnExecuteEvent(ScheduleRoot value, List<MappingFields> list)
@@ -139,7 +139,7 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnGetFieldsEvent(Authentication value)
         {
-            return SendRequestGet(value, "Events");
+            return SendRequestGet(value, "Events", LoadResponseFields);
         }
 
         protected override bool OnExecuteCompany(ScheduleRoot value, List<MappingFields> list)
@@ -158,7 +158,7 @@ namespace CrmHub.Application.Integration.Services
             {
                 var accountName = list.Where(w => filterAccount(w)).First().Value;
 
-                Func<String, bool> loadId = s =>
+                Predicate<String> loadId = s =>
                 {
                     try
                     {
@@ -188,7 +188,7 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnGetFieldsCompany(Authentication value)
         {
-            return SendRequestGet(value, "Accounts");
+            return SendRequestGet(value, "Accounts", LoadResponseFields);
         }
 
         protected bool OnExecutePotential(ScheduleRoot value, List<MappingFields> list)
@@ -203,7 +203,7 @@ namespace CrmHub.Application.Integration.Services
             {
                 var potentialName = list.Where(w => filterPotential(w)).First().Value;
                 LeadRoot lead = new LeadRoot { Authentication = value.Authentication, EntityName = entityName, MappingFields = list };
-                Func<String, bool> loadId = s =>
+                Predicate<String> loadId = s =>
                 {
                     try
                     {
@@ -278,14 +278,14 @@ namespace CrmHub.Application.Integration.Services
             return SendRequestUpdate(value.Authentication, entityName, value.GetId(), xml, entity);
         }
 
-        private bool SendRequestGet(Authentication value, string entityName)
+        private bool SendRequestGet(Authentication value, string entityName, Predicate<string> loadResponse)
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}", url, entityName, "getFields", value.Token, value.User);
-            return SendRequestGetAsync(this, urlFormat, s => { return true; }).Result;
+            return SendRequestGetAsync(this, urlFormat, loadResponse).Result;
         }
 
-        private bool SendRequestSearch(Authentication value, string entityName, string selectColumn, string searchColumn, string searchValue, Func<string, bool> loadResponse)
+        private bool SendRequestSearch(Authentication value, string entityName, string selectColumn, string searchColumn, string searchValue, Predicate<string> loadResponse)
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}&selectColumns={5}({6})&searchColumn={7}&searchValue={8}",
@@ -318,8 +318,7 @@ namespace CrmHub.Application.Integration.Services
         {
             message.Type = MessageType.TYPE.SUCCESS;
             message.Message = string.Empty;
-            //message.Data = GetResponseFields(value);
-            
+            message.Data = GetResponseFields(value);
         }
 
         private ResponseFields GetResponseFields(EntityResponse value)
@@ -333,8 +332,20 @@ namespace CrmHub.Application.Integration.Services
         {
             ResponseEntity result = new ResponseEntity();
             result.EntityName = value.name;
-            //value.FL.ForEach(v => result.Fields.Add(ConvertFieldCrmToResponse(v)));
+            value.FL.ForEach(v => result.Fields.Add(ConvertFieldCrmToResponse(v)));
             return result;
+        }
+
+        private FieldCrm ConvertFieldCrmToResponse(Models.Zoho.FieldsResponse.FL value)
+        {
+            return new FieldCrm()
+            {
+                Customfield = value.customfield,
+                Maxlength = value.maxlength,
+                Label = value.label,
+                Type = value.type,
+                Required = value.req
+            };
         }
 
         private string LoadXml(string entityName, List<MappingFields> list)
@@ -368,7 +379,39 @@ namespace CrmHub.Application.Integration.Services
         {
             if (value.IndexOf("<FL val=\"Id\">") > 0)
                 return value.Substring(value.IndexOf("<FL val=\"Id\">") + 13, 19);
-            return string.Empty; ;
+            return string.Empty;
+        }
+
+        private bool LoadResponseFields(string response)
+        {
+            response = RemoveDescription(response);
+            try
+            {
+                var objectResponse = JsonConvert.DeserializeObject(response, typeof(FieldsResponseCrm));
+                MessageController.Clear();
+                MessageController.AddMessage(
+                    new MessageType(MessageType.TYPE.SUCCESS)
+                    {
+                        Data = (FieldsResponseCrm)objectResponse
+                    });
+                return true;
+            }
+            catch (JsonSerializationException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (AggregateException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return false;
+        }
+
+        private static string RemoveDescription(string value)
+        {
+            return value.Replace(
+                ",{\"dv\":\"Descrição Informações\",\"FL\":{\"dv\":\"Descrição\",\"customfield\":\"false\",\"maxlength\":\"32000\",\"isreadonly\":\"false\",\"label\":\"Description\",\"type\":\"TextArea\",\"req\":\"false\"},\"name\":\"Description Information\"}",
+                string.Empty);
         }
 
         #endregion
