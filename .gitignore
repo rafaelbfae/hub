@@ -1,7 +1,23 @@
-*.dll
-*.pdb
+# User-specific files
 *.suo
 *.user
+*.sln.docstates
+
+# Build results
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+
+
+*.dll
+*.pdb
 *.exe
-bin
-obj
