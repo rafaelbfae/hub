@@ -29,9 +29,9 @@ namespace CrmHub.Application.Services.Integration
             return _service.ContactRegister(value);
         }
 
-        public bool Delete(ContatoExact value)
+        public bool Delete(string email, Autenticacao value)
         {
-            return _service.ContactDelete(value);
+            return _service.ContactDelete(email, value);
         }
 
         public bool Fields(Autenticacao value)

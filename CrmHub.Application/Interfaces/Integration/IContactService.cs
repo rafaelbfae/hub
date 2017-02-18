@@ -4,12 +4,11 @@ using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Interfaces.Integration
 {
-    public interface IContactService
+    public interface IContactService : IMessageService
     {
         bool Register(ContatoExact value);
         bool Update(ContatoExact value);
-        bool Delete(ContatoExact value);
         bool Fields(Autenticacao value);
-        IMessageController MessageController();
+        bool Delete(string email, Autenticacao value);
     }
 }

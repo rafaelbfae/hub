@@ -5,40 +5,43 @@ using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Models.Exact;
 using System.Linq;
 using System;
+using CrmHub.Web.Areas.Api.Base;
 
 namespace CrmHub.Web.Areas.Api
 {
     [Route("api/v1/[controller]")]
-    public class ScheduleController : Controller
+    public class ScheduleController : HubController<IScheduleService>
     {
-        private readonly IScheduleService _service;
-        private readonly ILogger _logger;
-
-        public ScheduleController(IScheduleService service, ILogger<ScheduleController> logger)
+        public ScheduleController(IScheduleService service, ILogger<ScheduleController> logger) : base(service, logger)
         {
-            this._service = service;
-            this._logger = logger;
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ReuniaoExact schedule)
+        public IActionResult Post([FromBody] ReuniaoExact value)
         {
             _logger.LogDebug("Schedule Register Call");
-            return Execute(schedule, (v, c) => v.Register(c));
+            return Execute(value, (v, c) => v.Register(c));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] ReuniaoExact schedule)
+        public IActionResult Put(string id, [FromBody] ReuniaoExact value)
         {
             _logger.LogDebug("Schedule Update Call");
-            schedule.Reuniao.Id = id;
-            return Execute(schedule, (v, c) => v.Update(c));
+            value.Reuniao.Id = id;
+            return Execute(value, (v, c) => v.Update(c));
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id, [FromBody] Autenticacao value)
         {
-            return new NoContentResult();
+            if (ModelState.IsValid)
+            {
+                _logger.LogDebug("Schedule Delete Call");
+                _service.Delete(id, value);
+                return Ok(_service.MessageController().GetAllMessageToJson());
+            }
+
+            return ErrorValidation();
         }
 
         [HttpPost]
@@ -53,24 +56,6 @@ namespace CrmHub.Web.Areas.Api
             }
 
             return ErrorValidation();
-        }
-
-        private IActionResult Execute(ReuniaoExact value, Func<IScheduleService, ReuniaoExact, bool> function, bool json = true)
-        {
-            if (ModelState.IsValid)
-            {
-                function(_service, value);
-                return json ? Ok(_service.MessageController().GetAllMessageToJson()) : Ok(_service.MessageController().GetAllMessage());
-            }
-
-            return ErrorValidation();
-        }
-
-        private IActionResult ErrorValidation()
-        {
-            _logger.LogDebug("Model Error Validation");
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-            return BadRequest(errors);
         }
     }
 }

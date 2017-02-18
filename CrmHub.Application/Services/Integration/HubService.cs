@@ -57,6 +57,12 @@ namespace CrmHub.Application.Services.Integration
             return Execute(_value, (c, v) => c.EventGetFields(_value));
         }
 
+        public bool ScheduleDelete(string id, Autenticacao value)
+        {
+            var _value = Mapper.Map<Authentication>(value);
+            return ExecuteById(id, _value, (c, i, v) => c.LeadDelete(id, _value));
+        }
+
         public bool LeadRegister(LeadExact value)
         {
             var _value = Mapper.Map<LeadRoot>(value);
@@ -69,10 +75,10 @@ namespace CrmHub.Application.Services.Integration
             return Execute(_value, (c, v) => c.LeadUpdate(_value));
         }
 
-        public bool LeadDelete(LeadExact value)
+        public bool LeadDelete(string id, Autenticacao value)
         {
-            var _value = Mapper.Map<LeadRoot>(value);
-            return Execute(_value, (c, v) => c.LeadDelete(_value));
+            var _value = Mapper.Map<Authentication>(value);
+            return ExecuteById(id, _value, (c, i, v) => c.LeadDelete(id, _value));
         }
 
         public bool LeadGetFields(Autenticacao value)
@@ -93,10 +99,10 @@ namespace CrmHub.Application.Services.Integration
             return Execute(_value, (c, v) => c.ContactUpdate(_value));
         }
 
-        public bool ContactDelete(ContatoExact value)
+        public bool ContactDelete(string email, Autenticacao value)
         {
-            var _value = Mapper.Map<ContactRoot>(value);
-            return Execute(_value, (c, v) => c.ContactDelete(_value));
+            var _value = Mapper.Map<Authentication>(value);
+            return ExecuteById(email, _value, (c, i, v) => c.ContactDelete(email, _value));
         }
 
         public bool ContactGetFields(Autenticacao value)
@@ -104,7 +110,6 @@ namespace CrmHub.Application.Services.Integration
             var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
             return Execute(_value, (c, v) => c.CompanyGetFields(_value));
         }
-
 
         public IMessageController MessageController()
         {
@@ -124,6 +129,14 @@ namespace CrmHub.Application.Services.Integration
             _logger.LogDebug(msg);
             AddUrl(value.Authentication);
             return function(_crmIntegration, value);
+        }
+
+        private bool ExecuteById(string id, Authentication value, Func<IHubIntegration, string, Authentication, bool> function)
+        {
+            string msg = string.Format("Execute By Id CRM:{0} ", value.Crm);
+            _logger.LogDebug(msg);
+            AddUrl(value);
+            return function(_crmIntegration, id, value);
         }
 
         #endregion

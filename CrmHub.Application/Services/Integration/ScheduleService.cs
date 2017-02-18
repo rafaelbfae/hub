@@ -33,5 +33,10 @@ namespace CrmHub.Application.Services.Integration
         {
             return _service.ScheduleGetFields(value);
         }
+
+        public bool Delete(string id, Autenticacao value)
+        {
+            return _service.ScheduleDelete(id, value);
+        }
     }
 }

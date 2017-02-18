@@ -3,51 +3,57 @@ using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Interfaces.Integration;
 using Microsoft.Extensions.Logging;
 using CrmHub.Application.Models.Exact;
+using CrmHub.Web.Areas.Api.Base;
 
 namespace CrmHub.Web.Areas.Api
 {
     [Route("api/v1/[controller]")]
-    public class LeadController : Controller
+    public class LeadController : HubController<ILeadService>
     {
-        private readonly ILeadService _service;
-        private readonly ILogger _logger;
-
-        public LeadController(ILeadService service, ILogger<LeadController> logger)
+        public LeadController(ILeadService service, ILogger<LeadController> logger) : base(service, logger)
         {
-            _service = service;
-            _logger = logger;
         }
-
+    
         [HttpPost]
-        public IActionResult Post([FromBody] LeadExact schedule)
+        public IActionResult Post([FromBody] LeadExact value)
         {
             _logger.LogDebug("Lead Register Call");
-            _service.Register(schedule);
-            return Ok(_service.MessageController().GetAllMessageToJson());
+            return Execute(value, (v, c) => v.Register(c));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] LeadExact schedule)
+        public IActionResult Put(string id, [FromBody] LeadExact value)
         {
             _logger.LogDebug("Lead Update Call");
-            _service.Update(schedule);
-            return Ok(_service.MessageController().GetAllMessageToJson());
+            value.Lead.Id = id;
+            return Execute(value, (v, c) => v.Update(c));
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id, [FromBody] Autenticacao value)
         {
-            _logger.LogDebug("Lead Delete Call");
-            return new NoContentResult();
+            if (ModelState.IsValid)
+            {
+                _logger.LogDebug("Lead Delete Call");
+                _service.Delete(id, value);
+                return Ok(_service.MessageController().GetAllMessageToJson());
+            }
+
+            return ErrorValidation();
         }
 
         [HttpPost]
         [Route("fields")]
         public IActionResult Fields([FromBody] Autenticacao value)
         {
-            _logger.LogDebug("Lead Fields Call");
-            _service.Fields(value);
-            return Ok(_service.MessageController().GetAllMessageToJson());
+            if (ModelState.IsValid)
+            {
+                _logger.LogDebug("Lead Fields Call");
+                _service.Fields(value);
+                return Ok(_service.MessageController().GetAllMessageToJson());
+            }
+
+            return ErrorValidation();
         }
     }
 }

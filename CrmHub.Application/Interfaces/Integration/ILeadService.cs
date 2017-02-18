@@ -4,12 +4,11 @@ using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Interfaces.Integration
 {
-    public interface ILeadService
+    public interface ILeadService : IMessageService
     {
         bool Register(LeadExact value);
         bool Update(LeadExact value);
-        bool Delete(LeadExact value);
         bool Fields(Autenticacao value);
-        IMessageController MessageController();
+        bool Delete(string id, Autenticacao value);
     }
 }

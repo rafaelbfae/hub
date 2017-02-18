@@ -1,5 +1,6 @@
 ﻿using CrmHub.Application.Custom;
 using CrmHub.Application.Integration.Enuns;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CrmHub.Application.Models.Exact
@@ -12,13 +13,25 @@ namespace CrmHub.Application.Models.Exact
         [Crm(eCrmName.ZOHOCRM, "Subject")]
         public string Assunto { get; set; }
 
-        [Required]
-        [Crm(eCrmName.ZOHOCRM, "Start DateTime")]
-        public string DataIni { get; set; }
+        private DateTime dataIni; 
 
         [Required]
-        [Crm(eCrmName.ZOHOCRM, "End DateTime")]
-        public string DataFim { get; set; }
+        [Crm(eCrmName.ZOHOCRM, "Start DateTime", "yyy-MM-dd hh:mm:ss")]
+        public DateTime DataIni
+        {
+            get { return ConvertTimeZone(dataIni); }
+            set { dataIni = value; }
+        }
+
+        private DateTime dataFim;
+
+        [Required]
+        [Crm(eCrmName.ZOHOCRM, "End DateTime", "yyy-MM-dd hh:mm:ss")]
+        public DateTime DataFim
+        {
+            get { return ConvertTimeZone(dataFim); }
+            set { dataFim = value; }
+        }
 
         [Required]
         [Crm(eCrmName.ZOHOCRM, "Venue")]
@@ -32,5 +45,10 @@ namespace CrmHub.Application.Models.Exact
 
         [Required]
         public string TimeZone { get; set; }
+
+        private DateTime ConvertTimeZone(DateTime value)
+        {
+            return TimeZoneInfo.ConvertTime(value, TimeZoneInfo.FindSystemTimeZoneById(TimeZone));
+        }
     }
 }
