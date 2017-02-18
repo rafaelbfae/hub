@@ -77,6 +77,7 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract bool OnGetFieldsEvent(Authentication value);
         protected abstract bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list, int index = 0);
         protected abstract bool OnExecuteContact(ContactRoot value, List<MappingFields> list, Action<string> setId, int index = 0);
+
         protected abstract bool OnDeleteContact(string id, Authentication value);
         protected abstract bool OnGetFieldsContact(Authentication value);
         protected abstract bool OnExecuteCompany(ScheduleRoot value, List<MappingFields> list);
