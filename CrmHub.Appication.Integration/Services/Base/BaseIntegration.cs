@@ -76,7 +76,7 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract bool OnDeleteEvent(string id, Authentication value);
         protected abstract bool OnGetFieldsEvent(Authentication value);
         protected abstract bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list, int index = 0);
-        protected abstract bool OnExecuteContact(ContactRoot value, List<MappingFields> list, int index = 0);
+        protected abstract bool OnExecuteContact(ContactRoot value, List<MappingFields> list, Action<string> setId, int index = 0);
         protected abstract bool OnDeleteContact(string id, Authentication value);
         protected abstract bool OnGetFieldsContact(Authentication value);
         protected abstract bool OnExecuteCompany(ScheduleRoot value, List<MappingFields> list);
@@ -84,7 +84,7 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract bool OnDeleteCompany(string id, Authentication value);
         protected abstract bool OnGetFieldsCompany(Authentication value);
         protected abstract string GetSubjectEvent(ScheduleRoot value);
-        protected abstract bool GetResponse(string responseBody, MessageType.ENTITY entity);
+        protected abstract bool GetResponse(string responseBody, MessageType.ENTITY entity, Action<string> setId);
 
         protected Func<string, bool> filterLead = v => v.Equals("Lead") || v.Equals("Address");
         protected Func<string, bool> filterContact = v => v.Equals("Contact");
@@ -102,24 +102,24 @@ namespace CrmHub.Application.Integration.Services.Base
             }
         }
 
-        protected async Task<bool> SendRequestPostAsync(string url, string content, MessageType.ENTITY entity)
+        protected async Task<bool> SendRequestPostAsync(string url, string content, MessageType.ENTITY entity, Action<string> setId)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 StringContent xmlQuery = new StringContent(content);
                 var response = await httpClient.PostAsync(new Uri(url), xmlQuery);
                 response.EnsureSuccessStatusCode();
-                return GetResponse(await response.Content.ReadAsStringAsync(), entity);
+                return GetResponse(await response.Content.ReadAsStringAsync(), entity, setId);
             }
         }
 
-        protected async Task<bool> SendRequestDeleteAsync(string url, MessageType.ENTITY entity)
+        protected async Task<bool> SendRequestDeleteAsync(string url, MessageType.ENTITY entity, Action<string> setId)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 var response = await httpClient.DeleteAsync(new Uri(url));
                 response.EnsureSuccessStatusCode();
-                return GetResponse(await response.Content.ReadAsStringAsync(), entity);
+                return GetResponse(await response.Content.ReadAsStringAsync(), entity, setId);
             }
         }
 
@@ -177,7 +177,7 @@ namespace CrmHub.Application.Integration.Services.Base
 
         private bool ExecuteContact(ContactRoot value)
         {
-            return OnExecuteContact(value, value.MappingFields);
+            return OnExecuteContact(value, value.MappingFields, s => { });
         }
 
         private bool ExecuteCompany(ScheduleRoot value)

@@ -49,19 +49,23 @@ namespace CrmHub.Application.Integration.Services
         {
             CompanyRoot company = GetAccount(value);
             if (OnExecuteCompany(company, company.MappingFields))
+            {
+                company.MappingFields.Where(w => w.Entity.Equals("Event")).ToList().ForEach(f => { value.MappingFields.Add(f); });
                 return OnExecutePotential(value, value.MappingFields.Where(v => filterPotential(v.Entity)).ToList());
+            }
+                
             return false;
         }
 
         protected override bool OnExecuteLead(LeadRoot value, List<MappingFields> list)
         {
             string entityName = "Leads";
-            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.LEAD);
+            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.LEAD, s => { });
         }
 
         protected override bool OnDeleteLead(string id, Authentication value)
         {
-            return SendRequestDelete(value, "Leads", id, MessageType.ENTITY.LEAD);
+            return SendRequestDelete(value, "Leads", id, MessageType.ENTITY.LEAD, s => { });
         }
 
         protected override bool OnGetFieldsLead(Authentication value)
@@ -87,6 +91,12 @@ namespace CrmHub.Application.Integration.Services
             var emailField = "Email";
             Predicate<MappingFields> filterEmail = m => m.Field.Equals(emailField) && m.Id == index;
 
+            Action<string> setId = id =>
+            {
+                if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("CONTACTID")))
+                    value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "CONTACTID", Value = id });
+            };
+
             if (list.ToList().Exists(e => filterEmail(e)))
             {
                 var email = list.Where(w => filterEmail(w)).First().Value;
@@ -99,6 +109,7 @@ namespace CrmHub.Application.Integration.Services
                         if (!((RootObject)response).response.result.Contacts.row.FL.content.Equals(string.Empty))
                         {
                             contact.Id = ((RootObject)response).response.result.Contacts.row.FL.content;
+                            setId(contact.Id);
                             return true;
                         }
                     }
@@ -108,22 +119,22 @@ namespace CrmHub.Application.Integration.Services
                 };
 
                 if (SendRequestSearch(value.Authentication, "Contacts", "CONTACTID", emailField, email, loadId))
-                    return OnExecuteContact(contactRoot, list, index);
+                    return OnExecuteContact(contactRoot, list, setId, index);
             }
                 
-            return OnExecuteContact(contactRoot, list, index);
+            return OnExecuteContact(contactRoot, list, setId, index);
         }
 
-        protected override bool OnExecuteContact(ContactRoot value, List<MappingFields> list, int index = 0)
+        protected override bool OnExecuteContact(ContactRoot value, List<MappingFields> list, Action<string> setId, int index = 0)
         {
             string entityName = "Contacts";
             var contacList = list.Where(x => x.Entity == "Contact" && x.Id == index).ToList();
-            return OnSendRequestSave(value, entityName, LoadXml(entityName, contacList), MessageType.ENTITY.CONTATO);
+            return OnSendRequestSave(value, entityName, LoadXml(entityName, contacList), MessageType.ENTITY.CONTATO, setId);
         }
 
         protected override bool OnDeleteContact(string id, Authentication value)
         {
-            return SendRequestDelete(value, "Contacts", id, MessageType.ENTITY.CONTATO);
+            return SendRequestDelete(value, "Contacts", id, MessageType.ENTITY.CONTATO, s => { });
         }
 
         protected override bool OnGetFieldsContact(Authentication value)
@@ -151,12 +162,12 @@ namespace CrmHub.Application.Integration.Services
         protected override bool OnExecuteEvent(EventRoot value, List<MappingFields> list)
         {
             string entityName = "Events";
-            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.REUNIAO);
+            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.REUNIAO, s => { });
         }
 
         protected override bool OnDeleteEvent(string id, Authentication value)
         {
-            return SendRequestDelete(value, "Events", id, MessageType.ENTITY.REUNIAO);
+            return SendRequestDelete(value, "Events", id, MessageType.ENTITY.REUNIAO, s => { });
         }
 
         protected override bool OnGetFieldsEvent(Authentication value)
@@ -178,13 +189,19 @@ namespace CrmHub.Application.Integration.Services
         protected override bool OnExecuteCompany(ScheduleRoot value, List<MappingFields> list)
         {
             string entityName = "Accounts";
-            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.EMPRESA);
+            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.EMPRESA, s => { });
         }
 
         protected override bool OnExecuteCompany(CompanyRoot value, List<MappingFields> list)
         {
             string entityName = "Accounts";
             var accountField = "Account Name";
+
+            Action<string> setId = id =>
+            {
+                if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("ACCOUNTID")))
+                    value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "ACCOUNTID", Value = id });
+            };
 
             Predicate<MappingFields> filterAccount = m => m.Field.Equals(accountField);
             if (list.Exists(e => filterAccount(e)))
@@ -199,6 +216,7 @@ namespace CrmHub.Application.Integration.Services
                         if (!((RootObject)response).response.result.Accounts.row.FL.content.Equals(string.Empty))
                         {
                             value.Id = ((RootObject)response).response.result.Accounts.row.FL.content;
+                            setId(value.Id);
                             return true;
                         }
                     }
@@ -207,16 +225,16 @@ namespace CrmHub.Application.Integration.Services
                     return false;
                 };
 
-                if (SendRequestSearch(value.Authentication, entityName, "ACCOUNTSID", "accountname", accountName, loadId))
-                    return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.EMPRESA);
+                if (!SendRequestSearch(value.Authentication, entityName, "ACCOUNTSID", "accountname", accountName, loadId))
+                    return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.EMPRESA, setId);
             }
             
-            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.EMPRESA);
+            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.EMPRESA, setId);
         }
 
         protected override bool OnDeleteCompany(string id, Authentication value)
         {
-            return SendRequestDelete(value, "Accounts", id, MessageType.ENTITY.EMPRESA);
+            return SendRequestDelete(value, "Accounts", id, MessageType.ENTITY.EMPRESA, s => { });
         }
 
         protected override bool OnGetFieldsCompany(Authentication value)
@@ -239,6 +257,16 @@ namespace CrmHub.Application.Integration.Services
         {
             string entityName = "Potentials";
             var potentialField = "Potential Name";
+
+            Action<string> setId = id =>
+            {
+                if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("SEMODULE")))
+                {
+                    value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "SEID", Value = id });
+                    value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "SEMODULE", Value = "Potentials" });
+                }
+            };
+
             list.Add(new MappingFields { Entity = "Potential", Field = "Stage", Value = "Qualificação" });
             list.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = DateTime.Now.AddMonths(1).ToString("yyy-MM-dd hh:mm:ss") });
 
@@ -256,6 +284,7 @@ namespace CrmHub.Application.Integration.Services
                         {
                             lead.Lead = new Lead();
                             lead.Lead.Id = ((RootObject)response).response.result.Potentials.row.FL.content;
+                            setId(lead.Lead.Id);
                             return true;
                         }
                     }
@@ -265,15 +294,15 @@ namespace CrmHub.Application.Integration.Services
                 };
 
                 if (SendRequestSearch(value.Authentication, entityName, "POTENTIALSID", "potentialname", potentialName, loadId))
-                    return OnSendRequestSave(lead, entityName, LoadXml(entityName, list), MessageType.ENTITY.LEAD);
+                    return OnSendRequestSave(lead, entityName, LoadXml(entityName, list), MessageType.ENTITY.LEAD, setId);
             }
 
-            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.LEAD);
+            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.LEAD, setId);
         }
 
-        protected override bool GetResponse(string responseBody, MessageType.ENTITY entity)
+        protected override bool GetResponse(string responseBody, MessageType.ENTITY entity, Action<string> setId)
         {
-            string idRecord = LoadId(responseBody);
+            string idRecord = LoadId(responseBody, setId);
 
             MessageType message = new MessageType(MessageType.TYPE.ERROR, entity);
 
@@ -314,12 +343,12 @@ namespace CrmHub.Application.Integration.Services
 
         #region Private Methods
 
-        private bool OnSendRequestSave(BaseRoot value, string entityName, string xml, MessageType.ENTITY entity)
+        private bool OnSendRequestSave(BaseRoot value, string entityName, string xml, MessageType.ENTITY entity, Action<string> setId)
         {
             if (string.IsNullOrEmpty(value.GetId()))
-                return SendRequestInsert(value.Authentication, entityName, xml, entity);
+                return SendRequestInsert(value.Authentication, entityName, xml, entity, setId);
 
-            return SendRequestUpdate(value.Authentication, entityName, value.GetId(), xml, entity);
+            return SendRequestUpdate(value.Authentication, entityName, value.GetId(), xml, entity, setId);
         }
 
         private bool SendRequestGet(Authentication value, string entityName, Predicate<string> loadResponse)
@@ -337,25 +366,25 @@ namespace CrmHub.Application.Integration.Services
             return SendRequestGetAsync(this, urlFormat, loadResponse).Result;
         }
 
-        private bool SendRequestInsert(Authentication value, string entityName, string xml, MessageType.ENTITY entity)
+        private bool SendRequestInsert(Authentication value, string entityName, string xml, MessageType.ENTITY entity, Action<string> setId)
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&xmlData={5}", url, entityName, "insertRecords", value.Token, value.User, xml);
-            return SendRequestPostAsync(urlFormat, xml, entity).Result;
+            return SendRequestPostAsync(urlFormat, xml, entity, setId).Result;
         }
 
-        private bool SendRequestUpdate(Authentication value, string entityName, string id, string xml, MessageType.ENTITY entity)
+        private bool SendRequestUpdate(Authentication value, string entityName, string id, string xml, MessageType.ENTITY entity, Action<string> setId)
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&id={5}&xmlData={6}", url, entityName, "updateRecords", value.Token, value.User, id, xml);
-            return SendRequestPostAsync(urlFormat, xml, entity).Result;
+            return SendRequestPostAsync(urlFormat, xml, entity, setId).Result;
         }
 
-        private bool SendRequestDelete(Authentication value, string entityName, string id, MessageType.ENTITY entity)
+        private bool SendRequestDelete(Authentication value, string entityName, string id, MessageType.ENTITY entity, Action<string> setId)
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={4}", url, entityName, "deleteRecords", value.Token, value.User, id);
-            return SendRequestDeleteAsync(urlFormat, entity).Result;
+            return SendRequestDeleteAsync(urlFormat, entity, setId).Result;
         }
 
         private void LoadResponse(EntityResponse value, MessageType message)
@@ -419,10 +448,14 @@ namespace CrmHub.Application.Integration.Services
             return (responseBody.IndexOf("<code>5000</code>") > 0) || !id.Equals(string.Empty);
         }
 
-        private static string LoadId(string value)
+        private static string LoadId(string value, Action<string> setId)
         {
             if (value.IndexOf("<FL val=\"Id\">") > 0)
-                return value.Substring(value.IndexOf("<FL val=\"Id\">") + 13, 19);
+            {
+                string id = value.Substring(value.IndexOf("<FL val=\"Id\">") + 13, 19);
+                setId(id);
+                return id;
+            }
             return string.Empty;
         }
 
