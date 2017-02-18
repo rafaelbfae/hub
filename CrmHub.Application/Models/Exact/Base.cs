@@ -15,6 +15,7 @@ namespace CrmHub.Application.Models.Exact
             public string Name;
             public object PropertieValue;
             public string Entity;
+            public string Format;
             public string[] Fields;
         };
 
@@ -40,7 +41,7 @@ namespace CrmHub.Application.Models.Exact
                     map.PropertieValue = x.GetValue(this);
                     map.Entity = a.HasEntity ? a.Entity : entityCrm;
                     map.Fields = a.Mappings;
-
+                    map.Format = a.Format;
                     mapping.Add(map);
                 });
             });
@@ -53,22 +54,19 @@ namespace CrmHub.Application.Models.Exact
                     if (map.PropertieValue is IList)
                     {
                         var propertieValue = map.PropertieValue as IList;
-                        fieldValue = propertieValue[0].ToString();
-                    }
-                    else
-                        fieldValue = map.PropertieValue != null ? map.PropertieValue.ToString() : string.Empty;
-                        
-                    foreach (var value in map.Fields)
-                    {
-                        fields.Add(new MapeamentoCampos()
+                        var maxLoop = Math.Min(propertieValue.Count, map.Fields.Length);
+                        for (int index = 0; index < maxLoop; index++)
                         {
-                            Id = id,
-                            TipoEntidadeCRM = map.Entity,
-                            CampoCRM = value,
-                            Valor = fieldValue
-                        });
+                            fields.Add(new MapeamentoCampos()
+                            {
+                                Id = id,
+                                TipoEntidadeCRM = entityCrm,
+                                CampoCRM = map.Fields[index],
+                                Valor = ConvertToString(propertieValue[index], map.Format)
+                            });
+                        }
+                        continue;
                     }
-                    continue;
                 }
 
                 fields.Add(new MapeamentoCampos()
@@ -76,19 +74,34 @@ namespace CrmHub.Application.Models.Exact
                     Id = id,
                     TipoEntidadeCRM = map.Entity,
                     CampoCRM = map.Fields[0],
-                    Valor = map.PropertieValue == null ? "" : map.PropertieValue.ToString()
+                    Valor = ConvertToString(map.PropertieValue, map.Format)
                 });
             }
 
             return fields;
         }
-        
+
         private string[] GetFields(PropertyInfo prop, eCrmName crmName)
         {
             return
                 prop.GetCustomAttributes(true).OfType<CrmAttribute>()
                             .Where(x => x.CrmName.Equals(crmName))
                             .Select(x => x.Mappings).ToList().FirstOrDefault();
+        }
+
+        private string ConvertToString(object value, string format)
+        {
+            if (value == null)
+            {
+                return string.Empty;
+            }
+
+            if (format != null && value is DateTime)
+            {
+                return ((DateTime)value).ToString(format);
+            }
+
+            return value.ToString();
         }
     }
 }

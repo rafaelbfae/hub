@@ -30,9 +30,9 @@ namespace CrmHub.Application.Services.Integration
             return _service.LeadRegister(value);
         }
 
-        public bool Delete(LeadExact value)
+        public bool Delete(string id, Autenticacao value)
         {
-            return _service.LeadDelete(value);
+            return _service.LeadDelete(id, value);
         }
 
         public bool Fields(Autenticacao value)

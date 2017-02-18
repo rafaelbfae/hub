@@ -44,23 +44,23 @@ namespace CrmHub.Application.Integration.Services.Base
 
         public bool LeadRegister(LeadRoot value) => ExecuteLead(value);
         public bool LeadUpdate(LeadRoot value) => ExecuteLead(value);
-        public bool LeadDelete(LeadRoot value) => OnDeleteLead(value.GetId(), value.Authentication);
         public bool LeadGetFields(BaseRoot value) => OnGetFieldsLead(value.Authentication);
+        public bool LeadDelete(string id, Authentication value) => OnDeleteLead(id, value);
 
         public bool EventRegister(EventRoot value) => ExecuteEvent(value);
         public bool EventUpdate(EventRoot value) => ExecuteEvent(value);
-        public bool EventDelete(EventRoot value) => OnDeleteEvent(value.GetId(), value.Authentication);
         public bool EventGetFields(BaseRoot value) => OnGetFieldsEvent(value.Authentication);
+        public bool EventDelete(string id, Authentication value) => OnDeleteEvent(id, value);
 
         public bool ContactRegister(ContactRoot value) => ExecuteContact(value);
         public bool ContactUpdate(ContactRoot value) => ExecuteContact(value);
-        public bool ContactDelete(ContactRoot value) => OnDeleteContact(value.GetId(), value.Authentication);
         public bool ContactGetFields(BaseRoot value) => OnGetFieldsContact(value.Authentication);
+        public bool ContactDelete(string email, Authentication value) => OnDeleteContact(email, value);
 
         public bool CompanyRegister(CompanyRoot value) => ExecuteCompany(value);
         public bool CompanyUpdate(CompanyRoot value) => ExecuteCompany(value);
-        public bool CompanyDelete(CompanyRoot value) => OnDeleteCompany(value.GetId(), value.Authentication);
         public bool CompanyGetFields(BaseRoot value) => OnGetFieldsCompany(value.Authentication);
+        public bool CompanyDelete(string id, Authentication value) => OnDeleteCompany(id, value);
 
         #endregion
 

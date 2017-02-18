@@ -354,8 +354,8 @@ namespace CrmHub.Application.Integration.Services
         private bool SendRequestDelete(Authentication value, string entityName, string id, MessageType.ENTITY entity)
         {
             string url = value.UrlService;
-            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={4}", url, entityName, "deleteRecords", value.Token, value.User, id);
-            return SendRequestDeleteAsync(urlFormat, entity).Result;
+            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={5}", url, entityName, "deleteRecords", value.Token, value.User, id);
+            return SendRequestPostAsync(urlFormat, string.Empty, entity).Result;
         }
 
         private void LoadResponse(EntityResponse value, MessageType message)
@@ -375,7 +375,7 @@ namespace CrmHub.Application.Integration.Services
         private ResponseEntity GetEntity(Section value)
         {
             ResponseEntity result = new ResponseEntity();
-            result.EntityName = value.name;
+            result.EntityName = value.name.Replace("Information", string.Empty).Trim();
             value.FL.ForEach(v => result.Fields.Add(ConvertFieldCrmToResponse(v)));
             return result;
         }
@@ -453,9 +453,8 @@ namespace CrmHub.Application.Integration.Services
 
         private static string RemoveDescription(string value)
         {
-            return value.Replace(
-                ",{\"dv\":\"Descrição Informações\",\"FL\":{\"dv\":\"Descrição\",\"customfield\":\"false\",\"maxlength\":\"32000\",\"isreadonly\":\"false\",\"label\":\"Description\",\"type\":\"TextArea\",\"req\":\"false\"},\"name\":\"Description Information\"}",
-                string.Empty);
+            Regex rgx = new Regex("(,{\"dv\":\")(Descrição | Description)(...*)(Information\"})");
+            return rgx.Replace(value, string.Empty);
         }
 
         #endregion

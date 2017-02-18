@@ -12,29 +12,33 @@ namespace CrmHub.Application.Models.Exact
 
         [Required]
         [Crm(eCrmName.ZOHOCRM, "Last Name")]
-        [Crm(eCrmName.ZOHOCRM, "Potential", true, "Potential Name", "Account Name")]
+        //[Crm(eCrmName.ZOHOCRM, "Account", "Account Name")]
+        [Crm(eCrmName.ZOHOCRM, "Potential", new string[] { "Potential Name", "Account Name" })]
         public string Nome { get; set; }
+
+        //[Crm(eCrmName.ZOHOCRM, "Account", "Website")]
+        public string Site { get; set; }
 
         [Crm(eCrmName.ZOHOCRM, "Lead Source")]
         public string Origem { get; set; }
+
+        [Required]
+       //[Crm(eCrmName.ZOHOCRM, "Account", new string[] { "Description" })]
+        [Crm(eCrmName.ZOHOCRM, "Potential", new string[] { "Description" })]
+        public string Diagnostico { get; set; }
+
+        [Required]
+        //[Crm(eCrmName.ZOHOCRM, "Account", "Phone")]
+        [Crm(eCrmName.ZOHOCRM, new string[] { "Phone", "Mobile", "Other Phone" })]
+        public List<string> Telefone { get; set; }
 
         public string Mercado { get; set; }
         public string Produto { get; set; }
         public string SubOrigem { get; set; }
         public string LinkExact { get; set; }
         public string Observacao { get; set; }
-
-        [Required]
-        [Crm(eCrmName.ZOHOCRM, "Potential", true, "Description")]
-        public string Diagnostico { get; set; }
-
         public string PreVendedor { get; set; }
         public string DataCadastro { get; set; }
-
-        [Required]
-        [Crm(eCrmName.ZOHOCRM, "Phone", "Mobile", "Other Phone")]
-        public List<string> Telefone { get; set; }
-
         public List<Filtro> Filtros { get; set; }
     }
 }
