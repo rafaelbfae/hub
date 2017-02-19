@@ -244,6 +244,7 @@
 -resource:"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\obj\Debug\netcoreapp1.0\CrmHub.Webdotnet-compile.deps.json",CrmHub.Web.deps.json
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\Program.cs"
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\Startup.cs"
+"C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\Areas\Api\CompanyController.cs"
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\Areas\Api\ContactController.cs"
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\Areas\Api\LeadController.cs"
 "C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Web\Areas\Api\ScheduleController.cs"

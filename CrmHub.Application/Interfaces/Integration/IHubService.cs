@@ -1,6 +1,5 @@
 ﻿using CrmHub.Application.Models.Exact;
 using CrmHub.Application.Models.Exact.Roots;
-using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Interfaces.Integration
 {
@@ -20,5 +19,10 @@ namespace CrmHub.Application.Interfaces.Integration
         bool ContactUpdate(ContatoExact value);
         bool ContactGetFields(Autenticacao value);
         bool ContactDelete(string email, Autenticacao value);
+
+        bool CompanyRegister(EmpresaExact value);
+        bool CompanyUpdate(EmpresaExact value);
+        bool CompanyGetFields(Autenticacao value);
+        bool CompanyDelete(string id, Autenticacao value);
     }
 }

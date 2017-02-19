@@ -215,8 +215,8 @@ namespace CrmHub.Application.Integration.Services
                         var response = JsonConvert.DeserializeObject(s, typeof(RootObject));
                         if (!((RootObject)response).response.result.Accounts.row.FL.content.Equals(string.Empty))
                         {
-                            value.Id = ((RootObject)response).response.result.Accounts.row.FL.content;
-                            setId(value.Id);
+                            value.Company.Id = ((RootObject)response).response.result.Accounts.row.FL.content;
+                            setId(value.GetId());
                             return true;
                         }
                     }
@@ -383,8 +383,8 @@ namespace CrmHub.Application.Integration.Services
         private bool SendRequestDelete(Authentication value, string entityName, string id, MessageType.ENTITY entity, Action<string> setId)
         {
             string url = value.UrlService;
-            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={4}", url, entityName, "deleteRecords", value.Token, value.User, id);
-            return SendRequestDeleteAsync(urlFormat, string.Empty, setId).Result;
+            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={5}", url, entityName, "deleteRecords", value.Token, value.User, id);
+            return SendRequestPostAsync(urlFormat, string.Empty, entity, setId).Result;
         }
 
         private void LoadResponse(EntityResponse value, MessageType message)

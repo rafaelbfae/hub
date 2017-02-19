@@ -39,6 +39,7 @@ namespace CrmHub.Application.Services.Integration
 
         #region Public Methods
 
+        #region Scheduler
         public bool ScheduleRegister(ReuniaoExact value)
         {
             var _value = Mapper.Map<ScheduleRoot>(value);
@@ -63,6 +64,9 @@ namespace CrmHub.Application.Services.Integration
             return ExecuteById(id, _value, (c, i, v) => c.LeadDelete(id, _value));
         }
 
+        #endregion
+
+        #region Lead
         public bool LeadRegister(LeadExact value)
         {
             var _value = Mapper.Map<LeadRoot>(value);
@@ -86,7 +90,9 @@ namespace CrmHub.Application.Services.Integration
             var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
             return Execute(_value, (c, v) => c.LeadGetFields(_value));
         }
+        #endregion
 
+        #region Contact
         public bool ContactRegister(ContatoExact value)
         {
             var _value = Mapper.Map<ContactRoot>(value);
@@ -110,6 +116,34 @@ namespace CrmHub.Application.Services.Integration
             var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
             return Execute(_value, (c, v) => c.CompanyGetFields(_value));
         }
+
+        #endregion
+
+        #region Company
+        public bool CompanyRegister(EmpresaExact value)
+        {
+            var _value = Mapper.Map<CompanyRoot>(value);
+            return Execute(_value, (c, v) => c.CompanyRegister(_value));
+        }
+
+        public bool CompanyUpdate(EmpresaExact value)
+        {
+            var _value = Mapper.Map<CompanyRoot>(value);
+            return Execute(_value, (c, v) => c.CompanyUpdate(_value));
+        }
+
+        public bool CompanyDelete(string id, Autenticacao value)
+        {
+            var _value = Mapper.Map<Authentication>(value);
+            return ExecuteById(id, _value, (c, i, v) => c.LeadDelete(id, _value));
+        }
+
+        public bool CompanyGetFields(Autenticacao value)
+        {
+            var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
+            return Execute(_value, (c, v) => c.LeadGetFields(_value));
+        }
+        #endregion
 
         public IMessageController MessageController()
         {
