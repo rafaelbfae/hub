@@ -91,10 +91,20 @@ namespace CrmHub.Application.Integration.Services
             var emailField = "Email";
             Predicate<MappingFields> filterEmail = m => m.Field.Equals(emailField) && m.Id == index;
 
+            Action<string> setParticipants = id =>
+            {
+                //var participants =
+                    //value.MappingFields.Where(w => w.Entity.Equals("Event") && w.Field.Equals("Participants")).First();
+                //if (participants.Value)
+            };
+
             Action<string> setId = id =>
             {
                 if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("CONTACTID")))
                     value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "CONTACTID", Value = id });
+                else if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("Participants")))
+                    value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "Participants", Value = "<CONTACTID>2355081000000157115</CONTACTID>" });
+                setParticipants(id);
             };
 
             if (list.ToList().Exists(e => filterEmail(e)))
@@ -134,7 +144,27 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnDeleteContact(string id, Authentication value)
         {
-            return SendRequestDelete(value, "Contacts", id, MessageType.ENTITY.CONTATO, s => { });
+            string contactId = string.Empty;
+
+            Predicate<String> loadId = s =>
+            {
+                try
+                {
+                    var response = JsonConvert.DeserializeObject(s, typeof(RootObject));
+                    if (!((RootObject)response).response.result.Contacts.row.FL.content.Equals(string.Empty))
+                    {
+                        contactId = ((RootObject)response).response.result.Contacts.row.FL.content;
+                        return true;
+                    }
+                }
+                catch
+                { }
+                return false;
+            };
+
+            if (SendRequestSearch(value, "Contacts", "CONTACTID", "email", id, loadId))
+                return SendRequestDelete(value, "Contacts", contactId, MessageType.ENTITY.CONTATO, s => { });
+            return false;
         }
 
         protected override bool OnGetFieldsContact(Authentication value)
@@ -384,7 +414,7 @@ namespace CrmHub.Application.Integration.Services
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={4}", url, entityName, "deleteRecords", value.Token, value.User, id);
-            return SendRequestDeleteAsync(urlFormat, string.Empty, setId).Result;
+            return SendRequestDeleteAsync(urlFormat, entity, setId).Result;
         }
 
         private void LoadResponse(EntityResponse value, MessageType message)
