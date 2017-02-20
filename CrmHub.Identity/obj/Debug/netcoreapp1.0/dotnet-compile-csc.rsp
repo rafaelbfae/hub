@@ -175,6 +175,8 @@
 "C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Identity\Migrations\20161230233155_CreateidentitySchema.Designer.cs"
 "C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Identity\Migrations\20170117121632_FixUsername.cs"
 "C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Identity\Migrations\20170117121632_FixUsername.Designer.cs"
+"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Identity\Migrations\20170219221635_Add Level.cs"
+"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Identity\Migrations\20170219221635_Add Level.Designer.cs"
 "C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Identity\Migrations\ApplicationDbContextModelSnapshot.cs"
 "C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Identity\Models\ApplicationUser.cs"
 "C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Identity\Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs"

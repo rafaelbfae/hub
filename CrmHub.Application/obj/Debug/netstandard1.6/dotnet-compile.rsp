@@ -145,11 +145,13 @@ C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Models\Exact
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Models\Exact\Pergunta.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Models\Exact\Reuniao.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Models\Exact\Roots\ContatoExact.cs
+C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Models\Exact\Roots\EmpresaExact.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Models\Exact\Roots\LeadExact.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Models\Exact\Roots\ReuniaoExact.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Models\Exact\Roots\Base\BaseExact.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Profiles\Exact\AddressProfile.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Profiles\Exact\AuthenticationProfile.cs
+C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Profiles\Exact\CompanyProfile.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Profiles\Exact\ContactProfile.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Profiles\Exact\CustomFieldsProfile.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Profiles\Exact\LeadProfile.cs
@@ -157,6 +159,7 @@ C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Profiles\Exa
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Profiles\Exact\ScheduleProfile.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Properties\AssemblyInfo.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Services\CrmService.cs
+C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Services\Integration\CompanyService.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Services\Integration\ContactService.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Services\Integration\HubService.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\Services\Integration\LeadService.cs

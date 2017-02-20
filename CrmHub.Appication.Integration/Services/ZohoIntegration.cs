@@ -93,17 +93,18 @@ namespace CrmHub.Application.Integration.Services
 
             Action<string> setParticipants = id =>
             {
-                //var participants =
-                    //value.MappingFields.Where(w => w.Entity.Equals("Event") && w.Field.Equals("Participants")).First();
-                //if (participants.Value)
+                if (value.MappingFields.Where(w => w.Entity.Equals("Event") && w.Field.Equals("Participants")).First().Value.IndexOf(id) <= 0)
+                    value.MappingFields.Where(w => w.Entity.Equals("Event") && w.Field.Equals("Participants")).First().Value =
+                        value.MappingFields.Where(w => w.Entity.Equals("Event") && w.Field.Equals("Participants")).First().Value.Replace("{0}", id + ",{0}");
             };
 
             Action<string> setId = id =>
             {
                 if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("CONTACTID")))
                     value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "CONTACTID", Value = id });
-                else if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("Participants")))
-                    value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "Participants", Value = "<CONTACTID>2355081000000157115</CONTACTID>" });
+
+                if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("Participants")))
+                    value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "Participants", Value = "<Participant><FL val=\"CONTACTID\">{0}</FL></Participant>" });
                 setParticipants(id);
             };
 
@@ -456,7 +457,7 @@ namespace CrmHub.Application.Integration.Services
             string result = string.Format("<{0}><row no=\"1\">", entityName);
 
             foreach (MappingFields mapping in list)
-                result += string.Format("<FL val=\"{0}\">{1}</FL>", mapping.Field, mapping.Value);
+                result += string.Format("<FL val=\"{0}\">{1}</FL>", mapping.Field, mapping.Value.Replace(",{0}", string.Empty));
 
             result += string.Format("</row></{0}>", entityName);
             return result;
