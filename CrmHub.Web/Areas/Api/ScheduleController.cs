@@ -3,12 +3,11 @@ using Microsoft.Extensions.Logging;
 using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Models.Exact;
-using System.Linq;
-using System;
 using CrmHub.Web.Areas.Api.Base;
 
 namespace CrmHub.Web.Areas.Api
 {
+    [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class ScheduleController : HubController<IScheduleService>
     {

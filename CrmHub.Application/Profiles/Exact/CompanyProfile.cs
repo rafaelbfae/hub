@@ -6,20 +6,21 @@ using CrmHub.Application.Models.Exact.Roots;
 
 namespace CrmHub.Application
 {
-    public class ContactProfile : Profile
+    public class CompanyProfile : Profile
     {
-        public ContactProfile()
+        public CompanyProfile()
         {
-            this.CreateMap<ContatoExact, ContactRoot>()
+            this.CreateMap<EmpresaExact, CompanyRoot>()
                 .BeforeMap((s, i) => s.EntidadeCampoValor.AddRange(s.GetFieldsByMapping()))
-                .BeforeMap((s, i) => s.EntidadeCampoValor.AddRange(s.Contato.GetFieldsByAttribute(0, s.Autenticacao.Crm())))
+                .BeforeMap((s, i) => s.EntidadeCampoValor.AddRange(s.Empresa.GetFieldsByAttribute(0, s.Autenticacao.Crm())))
                 .ForMember(s => s.MappingFields, i => i.MapFrom(o => o.EntidadeCampoValor))
                 .ForMember(s => s.Authentication, i => i.MapFrom(o => o.Autenticacao))
                 .ForMember(s => s.CustomFields, i => i.MapFrom(o => o.CamposPersonalizados))
-                .ForMember(s => s.EntityName, i => i.MapFrom(o => "Contact"))
+                .ForMember(s => s.EntityName, i => i.MapFrom(o => "Company"))
+                .ForMember(s => s.Id, i => i.MapFrom(o => o.Empresa.Id))
             ;
 
-            this.CreateMap<Contato, Contact>();
+            this.CreateMap<Empresa, Company>();
 
         }
     }

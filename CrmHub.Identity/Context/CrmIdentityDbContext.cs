@@ -1,8 +1,4 @@
 ﻿using CrmHub.Identity.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -13,6 +9,7 @@ namespace CrmHub.Identity.Context
         public CrmIdentityDbContext(DbContextOptions<CrmIdentityDbContext> options)
             : base(options)
         {
+            
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

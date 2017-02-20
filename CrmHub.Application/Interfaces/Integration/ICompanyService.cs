@@ -1,13 +1,13 @@
-﻿using CrmHub.Infra.Messages.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CrmHub.Application.Models.Exact;
+using CrmHub.Application.Models.Exact.Roots;
 
 namespace CrmHub.Application.Interfaces.Integration
 {
-    public interface ICompanyService
+    public interface ICompanyService : IMessageService
     {
-        IMessageController MessageController();
+        bool Register(EmpresaExact value);
+        bool Update(EmpresaExact value);
+        bool Fields(Autenticacao value);
+        bool Delete(string id, Autenticacao value);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CrmHub.Application.Integration.Models;
 using CrmHub.Application.Models.Exact;
-using System.Collections.Generic;
 
 namespace CrmHub.Application.Profiles.Exact
 {

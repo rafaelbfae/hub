@@ -28,7 +28,7 @@ namespace CrmHub.Infra.Dependences.Injection
             services.AddTransient<IScheduleService, ScheduleService>();
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<ILeadService, LeadService>();
-            //services.AddTransient<ICompanyService, CompanyService>();
+            services.AddTransient<ICompanyService, CompanyService>();
 
             services.AddTransient<ICrmRepository, CrmRepository>();
 
