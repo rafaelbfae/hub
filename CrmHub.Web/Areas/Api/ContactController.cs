@@ -7,6 +7,7 @@ using CrmHub.Web.Areas.Api.Base;
 
 namespace CrmHub.Web.Areas.Api
 {
+    [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class ContactController : HubController<IContactService>
     {
@@ -21,10 +22,11 @@ namespace CrmHub.Web.Areas.Api
             return Execute(value, (v, c) => v.Register(c));
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ContatoExact value)
+        [HttpPut("{email}")]
+        public IActionResult Put(string email, [FromBody] ContatoExact value)
         {
             _logger.LogDebug("Contact Update Call");
+            value.Contato.Id = email;
             return Execute(value, (v, c) => v.Update(c));
         }
 

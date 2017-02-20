@@ -215,7 +215,7 @@ namespace CrmHub.Application.Integration.Services
                         var response = JsonConvert.DeserializeObject(s, typeof(RootObject));
                         if (!((RootObject)response).response.result.Accounts.row.FL.content.Equals(string.Empty))
                         {
-                            value.Company.Id = ((RootObject)response).response.result.Accounts.row.FL.content;
+                            value.Id = ((RootObject)response).response.result.Accounts.row.FL.content;
                             setId(value.GetId());
                             return true;
                         }

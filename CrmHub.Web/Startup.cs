@@ -11,6 +11,8 @@ using CrmHub.Identity.Models;
 using CrmHub.Infra.Dependences.Injection;
 using AutoMapper;
 using CrmHub.Infra.Data.Context;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace CrmHub.Web
 {
@@ -40,8 +42,10 @@ namespace CrmHub.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<CrmIdentityDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            services.AddDbContext<CrmIdentityDbContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
+                options.UseOpenIddict();
+            });
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection")));
@@ -50,8 +54,18 @@ namespace CrmHub.Web
                 .AddEntityFrameworkStores<CrmIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddOpenIddict(options => {
+                options.AddEntityFrameworkCoreStores<CrmIdentityDbContext>();
+                options.AddMvcBinders();
+                options.EnableTokenEndpoint("/api/v1/connect/token");
+                options.AllowPasswordFlow();
+                // During development, you can disable the HTTPS requirement.
+                options.DisableHttpsRequirement();
+            });
+
             services.AddMvc();
             services.AddAutoMapper();
+           
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -80,8 +94,7 @@ namespace CrmHub.Web
 
             app.UseStaticFiles();
             app.UseIdentity();
-            app.UseApplicationInsightsExceptionTelemetry();
-
+            app.UseOpenIddict();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
@@ -94,5 +107,7 @@ namespace CrmHub.Web
 
             //DbInitializer.Initialize(context);
         }
+
+       
     }
 }

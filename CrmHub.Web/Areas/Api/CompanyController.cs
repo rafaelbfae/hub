@@ -7,6 +7,7 @@ using CrmHub.Web.Areas.Api.Base;
 
 namespace CrmHub.Web.Areas.Api
 {
+    [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class CompanyController : HubController<ICompanyService>
     {
@@ -22,9 +23,10 @@ namespace CrmHub.Web.Areas.Api
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] EmpresaExact value)
+        public IActionResult Put(string id, [FromBody] EmpresaExact value)
         {
             _logger.LogDebug("Company Update Call");
+            value.Empresa.Id = id;
             return Execute(value, (v, c) => v.Update(c));
         }
 

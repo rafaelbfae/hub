@@ -7,6 +7,7 @@ using CrmHub.Web.Areas.Api.Base;
 
 namespace CrmHub.Web.Areas.Api
 {
+    [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class LeadController : HubController<ILeadService>
     {
