@@ -135,7 +135,7 @@ namespace CrmHub.Application.Services.Integration
         public bool CompanyDelete(string id, Autenticacao value)
         {
             var _value = Mapper.Map<Authentication>(value);
-            return ExecuteById(id, _value, (c, i, v) => c.LeadDelete(id, _value));
+            return ExecuteById(id, _value, (c, i, v) => c.CompanyDelete(id, _value));
         }
 
         public bool CompanyGetFields(Autenticacao value)
