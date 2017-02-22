@@ -103,6 +103,12 @@ namespace CrmHub.Application.Integration.Services
                 if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("CONTACTID")))
                     value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "CONTACTID", Value = id });
 
+                if (!value.MappingFields.Exists(e => e.Entity.Equals("Account") && e.Field.Equals("CONTACTID")))
+                    value.MappingFields.Add(new MappingFields { Entity = "Account", Field = "CONTACTID", Value = id });
+
+                if (!value.MappingFields.Exists(e => e.Entity.Equals("Potential") && e.Field.Equals("CONTACTID")))
+                    value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "CONTACTID", Value = id });
+
                 if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("Participants")))
                     value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "Participants", Value = "<Participant><FL val=\"CONTACTID\">{0}</FL></Participant>" });
                 setParticipants(id);

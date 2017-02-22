@@ -31,15 +31,12 @@ namespace CrmHub.Application.Integration.Services.Base
 
         public bool ReSchedule(ScheduleRoot value)
         {
-            if (ExecuteLead(value))
-            {
-                int index = 0;
-                bool result = true;
-                value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
-                result &= ExecuteEvent(value);
-                return result;
-            }
-            return false;
+            int index = 0;
+            bool result = true;
+            value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
+            result &= ExecuteLead(value);
+            result &= ExecuteEvent(value);
+            return result;
         }
 
         public bool LeadRegister(LeadRoot value) => ExecuteLead(value);
