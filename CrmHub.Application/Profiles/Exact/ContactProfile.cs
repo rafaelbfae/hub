@@ -13,6 +13,7 @@ namespace CrmHub.Application
             this.CreateMap<ContatoExact, ContactRoot>()
                 .BeforeMap((s, i) => s.EntidadeCampoValor.AddRange(s.GetFieldsByMapping()))
                 .BeforeMap((s, i) => s.EntidadeCampoValor.AddRange(s.Contato.GetFieldsByAttribute(0, s.Autenticacao.Crm())))
+                .ForMember(s => s.Contact, i => i.MapFrom(o => o.Contato))
                 .ForMember(s => s.MappingFields, i => i.MapFrom(o => o.EntidadeCampoValor))
                 .ForMember(s => s.Authentication, i => i.MapFrom(o => o.Autenticacao))
                 .ForMember(s => s.CustomFields, i => i.MapFrom(o => o.CamposPersonalizados))

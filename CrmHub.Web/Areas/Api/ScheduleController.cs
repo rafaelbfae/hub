@@ -26,7 +26,6 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Put(string id, [FromBody] ReuniaoExact value)
         {
             _logger.LogDebug("Schedule Update Call");
-            value.Reuniao = new Reuniao();
             value.Reuniao.Id = id;
             return Execute(value, (v, c) => v.Update(c));
         }
