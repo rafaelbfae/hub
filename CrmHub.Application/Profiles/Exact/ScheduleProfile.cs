@@ -24,13 +24,13 @@ namespace CrmHub.Application
                 .BeforeMap((s, i) => s.EntidadeCampoValor.AddRange(s.Lead.GetFieldsByAttribute(0, s.Autenticacao.Crm())))
                 .BeforeMap((s, i) => loadContato(s, i))
                 .ForMember(s => s.EntityName, i => i.MapFrom(o => "Event"))
-                .ForMember(s => s.Lead, i => i.MapFrom(o => o.Lead))
-                .ForMember(s => s.Schedule, i => i.MapFrom(o => o.Reuniao))
                 .ForMember(s => s.CustomFields, i => i.MapFrom(o => o.CamposPersonalizados))
                 .ForMember(s => s.Authentication, i => i.MapFrom(o => o.Autenticacao))
                 .ForMember(s => s.MappingFields, i => i.MapFrom(o => o.EntidadeCampoValor))
                 .ForMember(s => s.Contacts, i => i.MapFrom(o => o.Contatos))
+                .ForMember(s => s.Schedule, i => i.MapFrom(o => o.Reuniao))
                 .ForMember(s => s.Company, i => i.MapFrom(o => o.Empresa))
+                .ForMember(s => s.Lead, i => i.MapFrom(o => o.Lead))
             ;
 
             this.CreateMap<Reuniao, Events>();

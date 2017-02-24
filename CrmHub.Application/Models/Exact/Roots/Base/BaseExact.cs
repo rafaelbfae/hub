@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
@@ -11,9 +12,10 @@ namespace CrmHub.Application.Models.Exact.Roots.Base
 
         protected BaseExact()
         {
-            EntidadeCampoValor = new List<Exact.MapeamentoCampos>();
+            EntidadeCampoValor = new List<MapeamentoCampos>();
         }
 
+        [Required]
         public Autenticacao Autenticacao { get; set; }
         public List<MapeamentoCampos> MapeamentoCampos { get; set; }
         public List<MapeamentoCampos> EntidadeCampoValor { get; set; }
@@ -22,6 +24,12 @@ namespace CrmHub.Application.Models.Exact.Roots.Base
         public List<MapeamentoCampos> GetFieldsByMapping()
         {
             var campos = new List<MapeamentoCampos>();
+
+            if (MapeamentoCampos == null)
+            {
+                return campos;
+            }
+
             PropertyInfo[] props = typeof(T).GetProperties();
             foreach (var mapeamento in MapeamentoCampos)
             {

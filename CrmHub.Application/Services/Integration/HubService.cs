@@ -118,7 +118,7 @@ namespace CrmHub.Application.Services.Integration
         public bool ContactGetFields(Autenticacao value)
         {
             var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
-            return Execute(_value, (c, v) => c.CompanyGetFields(_value));
+            return Execute(_value, (c, v) => c.ContactGetFields(_value));
         }
 
         #endregion

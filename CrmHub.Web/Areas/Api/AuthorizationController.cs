@@ -21,7 +21,6 @@ using CrmHub.Identity.Models;
 
 namespace CrmHub.Web.Areas.Api
 {
-    [Authorize]
     [Produces("application/json")]
     [Route("api/v1/connect")]
     public class AuthorizationController : Controller
@@ -30,14 +29,11 @@ namespace CrmHub.Web.Areas.Api
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger _logger;
 
-        public AuthorizationController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            ILoggerFactory loggerFactory)
+        public AuthorizationController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-             _logger = loggerFactory.CreateLogger<AuthorizationController>();
+            _logger = loggerFactory.CreateLogger<AuthorizationController>();
         }
 
         [AllowAnonymous]

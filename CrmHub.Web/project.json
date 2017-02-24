@@ -47,9 +47,9 @@
     "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.2.0",
     "BundlerMinifier.Core": "2.3.327",
     "Microsoft.DotNet.InternalAbstractions": "1.0.0",
-    "OpenIddict": "1.0.0-beta2-0557",
-    "OpenIddict.Mvc": "1.0.0-beta2-0557",
-    "OpenIddict.EntityFrameworkCore": "1.0.0-beta2-0557"
+    "OpenIddict": "1.0.0-*",
+    "OpenIddict.Mvc": "1.0.0-*",
+    "OpenIddict.EntityFrameworkCore": "1.0.0-*"
   },
 
   "tools": {
