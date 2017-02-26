@@ -62,7 +62,7 @@ namespace CrmHub.Application.Services.Integration
         public bool ScheduleDelete(string id, Autenticacao value)
         {
             var _value = Mapper.Map<Authentication>(value);
-            return ExecuteById(id, _value, (c, i, v) => c.EventDelete(id, _value));
+            return ExecuteById(id, _value, (c, i, v) => c.CancelSchedule(id, _value));
         }
 
         #endregion

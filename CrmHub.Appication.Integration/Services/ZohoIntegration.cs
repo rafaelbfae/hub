@@ -45,16 +45,56 @@ namespace CrmHub.Application.Integration.Services
             }
         }
 
-        protected override bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list)
+        protected override bool OnCancelSchedule(string id, Authentication value)
         {
-            CompanyRoot company = GetAccount(value);
-            if (OnExecuteCompany(company, company.MappingFields))
+            string accountId = string.Empty;
+            string potentialId = string.Empty;
+            Predicate<String> loadPotentialId = s =>
             {
-                company.MappingFields.Where(w => w.Entity.Equals("Event")).ToList().ForEach(f => { value.MappingFields.Add(f); });
-                return OnExecutePotential(value, value.MappingFields.Where(v => filterPotential(v.Entity)).ToList());
+                try
+                {
+                    var response = JsonConvert.DeserializeObject(s, typeof(Models.Zoho.GetRecord.RootObject));
+                    if (((Models.Zoho.GetRecord.RootObject)response).response.result.Events.row.FL.Exists(e => e.val.Equals("RELATEDTOID")))
+                    {
+                        potentialId = ((Models.Zoho.GetRecord.RootObject)response).response.result.Events.row.FL
+                            .Where(e => e.val.Equals("RELATEDTOID")).First().content;
+                        return true;
+                    }
+                }
+                catch
+                { }
+                return false;
+            };
+
+            Predicate<String> loadAccountId = s =>
+            {
+                try
+                {
+                    var response = JsonConvert.DeserializeObject(s, typeof(Models.Zoho.GetRecord.RootObject));
+                    if (((Models.Zoho.GetRecord.RootObject)response).response.result.Potentials.row.FL.Exists(e => e.val.Equals("ACCOUNTID")))
+                    {
+                        accountId = ((Models.Zoho.GetRecord.RootObject)response).response.result.Potentials.row.FL
+                            .Where(e => e.val.Equals("ACCOUNTID")).First().content;
+                        return true;
+                    }
+                }
+                catch
+                { }
+                return false;
+            };
+
+            if (SendRequestGetRecord(value, "Events", id, loadPotentialId))
+            {
+                if (SendRequestGetRecord(value, "Potentials", potentialId, loadAccountId))
+                    return OnDeleteCompany(accountId, value);
             }
                 
             return false;
+        }
+
+        protected override bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list)
+        {
+            return OnExecutePotential(value, value.MappingFields.Where(v => filterPotential(v.Entity)).ToList());
         }
 
         protected override bool OnExecuteLead(LeadRoot value, List<MappingFields> list)
@@ -90,6 +130,12 @@ namespace CrmHub.Application.Integration.Services
 
             var emailField = "Email";
             Predicate<MappingFields> filterEmail = m => m.Field.Equals(emailField) && m.Id == index;
+
+            if (value.MappingFields.Exists(e => filterPotential(e.Entity) && e.Field.Equals("ACCOUNTID")))
+            {
+                string accountId = value.MappingFields.Where(w => filterPotential(w.Entity) && w.Field.Equals("ACCOUNTID")).First().Value;
+                list.Add(new MappingFields { Entity = "Contact", Field = "ACCOUNTID", Id = index, Value = accountId });
+            }
 
             Action<string> setParticipants = id =>
             {
@@ -260,8 +306,36 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnExecuteCompany(ScheduleRoot value, List<MappingFields> list)
         {
-            string entityName = "Accounts";
-            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.EMPRESA, s => { });
+            CompanyRoot company = GetAccount(value);
+            if (!string.IsNullOrEmpty(value.Lead.Id))
+            {
+                Predicate<String> loadId = s =>
+                {
+                    try
+                    {
+                        var response = JsonConvert.DeserializeObject(s, typeof(Models.Zoho.GetRecord.RootObject));
+                        if (((Models.Zoho.GetRecord.RootObject)response).response.result.Potentials.row.FL.Exists(e => e.val.Equals("ACCOUNTID")))
+                        {
+                            company.Id = ((Models.Zoho.GetRecord.RootObject)response).response.result.Potentials.row.FL
+                                .Where(e => e.val.Equals("ACCOUNTID")).First().content;
+                            return true;
+                        }
+                    }
+                    catch
+                    { }
+                    return false;
+                };
+
+                SendRequestGetRecord(value.Authentication, "Potentials", value.Lead.Id, loadId);
+            }
+
+            if (OnExecuteCompany(company, company.MappingFields))
+            {
+                company.MappingFields.Where(w => w.Entity.Equals("Event")).ToList().ForEach(f => { value.MappingFields.Add(f); });
+                company.MappingFields.Where(w => w.Entity.Equals("Potential")).ToList().ForEach(f => { value.MappingFields.Add(f); });            
+                return true;
+            }
+            return false;
         }
 
         protected override bool OnExecuteCompany(CompanyRoot value, List<MappingFields> list)
@@ -273,7 +347,12 @@ namespace CrmHub.Application.Integration.Services
             {
                 if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("ACCOUNTID")))
                     value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "ACCOUNTID", Value = id });
+                if (!value.MappingFields.Exists(e => e.Entity.Equals("Potential") && e.Field.Equals("ACCOUNTID")))
+                    value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "ACCOUNTID", Value = id });
             };
+
+            if (!string.IsNullOrEmpty(value.Id))
+                return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.EMPRESA, setId);
 
             Predicate<MappingFields> filterAccount = m => m.Field.Equals(accountField);
             if (list.Exists(e => filterAccount(e)))
@@ -341,7 +420,7 @@ namespace CrmHub.Application.Integration.Services
 
             list.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = DateTime.Now.AddMonths(1).ToString("yyy-MM-dd hh:mm:ss") });
 
-            if (!value.Lead.Id.Equals(string.Empty))
+            if (!string.IsNullOrEmpty(value.Lead.Id))
             {
                 LeadRoot lead = new LeadRoot { Lead = value.Lead, Authentication = value.Authentication };
                 return OnSendRequestSave(lead, entityName, LoadXml(entityName, list), MessageType.ENTITY.LEAD, setId);
@@ -445,6 +524,14 @@ namespace CrmHub.Application.Integration.Services
             return SendRequestGetAsync(this, urlFormat, loadResponse).Result;
         }
 
+        private bool SendRequestGetRecord(Authentication value, string entityName, string id, Predicate<string> loadResponse)
+        {
+            string url = value.UrlService;
+            string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}&id={5}",
+                url, entityName, "getRecordById", value.Token, value.User, id);
+            return SendRequestGetAsync(this, urlFormat, loadResponse).Result;
+        }
+
         private bool SendRequestInsert(Authentication value, string entityName, string xml, MessageType.ENTITY entity, Action<string> setId)
         {
             string url = value.UrlService;
@@ -513,10 +600,12 @@ namespace CrmHub.Application.Integration.Services
 
         private CompanyRoot GetAccount(ScheduleRoot value)
         {
-            CompanyRoot company = new CompanyRoot { Authentication = value.Authentication };
-            string leadName = GetFieldValue(value, "Last Name", filterLead);
-            company.MappingFields = new List<MappingFields>();
-            company.MappingFields.Add(new MappingFields { Entity = "Account", Field = "Account Name", Value = leadName });
+            CompanyRoot company = new CompanyRoot { Authentication = value.Authentication, MappingFields = value.MappingFields.Where(w => filterAccount(w.Entity)).ToList() };
+            string accountSite = 
+                GetFieldValue(value, "City", filterLead) + " / " +
+                GetFieldValue(value, "State", filterLead) + " - " +
+                GetFieldValue(value, "Country", filterLead);
+            company.MappingFields.Add(new MappingFields { Entity = "Account", Field = "Account Site", Value = accountSite });
             return company;
         }
 

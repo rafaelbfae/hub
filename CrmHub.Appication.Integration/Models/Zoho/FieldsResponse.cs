@@ -33,6 +33,8 @@ namespace CrmHub.Application.Integration.Models.Zoho
 
         public class Accounts : EntityResponse { }
 
+        public class Potentials : EntityResponse { }
+
         public class EntityResponse
         {
             public List<Section> section { get; set; }
@@ -44,6 +46,7 @@ namespace CrmHub.Application.Integration.Models.Zoho
             public Events Events { get; set; }
             public Contacts Contacts { get; set; }
             public Accounts Accounts { get; set; }
+            public Potentials Potentials { get; set; }
         }
     }
 }

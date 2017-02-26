@@ -11,6 +11,7 @@ namespace CrmHub.Application.Integration.Interfaces.Base
 
         bool Schedule(ScheduleRoot value);
         bool ReSchedule(ScheduleRoot value);
+        bool CancelSchedule(string id, Authentication value);
         
         bool LeadUpdate(LeadRoot value);
         bool LeadRegister(LeadRoot value);

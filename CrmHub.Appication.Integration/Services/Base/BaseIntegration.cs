@@ -33,11 +33,14 @@ namespace CrmHub.Application.Integration.Services.Base
         {
             int index = 0;
             bool result = true;
+            result &= ExecuteCompany(value);
             value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
             result &= ExecuteLead(value);
             result &= ExecuteEvent(value);
             return result;
         }
+
+        public bool CancelSchedule(string id, Authentication value) => OnCancelSchedule(id, value);
 
         public bool LeadRegister(LeadRoot value) => ExecuteLead(value);
         public bool LeadUpdate(LeadRoot value) => ExecuteLead(value);
@@ -64,6 +67,7 @@ namespace CrmHub.Application.Integration.Services.Base
         #region Protected Methods
 
         protected abstract IMessageController MessageController { get; }
+        protected abstract bool OnCancelSchedule(string id, Authentication value);
         protected abstract bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list);
         protected abstract bool OnExecuteLead(LeadRoot value, List<MappingFields> list);
         protected abstract bool OnDeleteLead(string id, Authentication value);
