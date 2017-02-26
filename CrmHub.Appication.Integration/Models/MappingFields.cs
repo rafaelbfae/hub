@@ -2,9 +2,9 @@
 {
     public class MappingFields
     {
-        public string CrmField { get; set; }
-        public string CrmEntity { get; set; }
-        public string ClientField { get; set; }
-        public string ClientEntity { get; set; }
+        public int Id { get; set; }
+        public string Field { get; set; }
+        public string Value { get; set; }
+        public string Entity { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using CrmHub.Application.Integration.Models.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CrmHub.Application.Integration.Models.Zoho
 {
@@ -34,17 +33,20 @@ namespace CrmHub.Application.Integration.Models.Zoho
 
         public class Accounts : EntityResponse { }
 
+        public class Potentials : EntityResponse { }
+
         public class EntityResponse
         {
             public List<Section> section { get; set; }
         }
 
-        public class FieldsResponseCrm : ResponseCrm
+        public class FieldsResponseCrm : object
         {
             public Leads Leads { get; set; }
             public Events Events { get; set; }
             public Contacts Contacts { get; set; }
             public Accounts Accounts { get; set; }
+            public Potentials Potentials { get; set; }
         }
     }
 }

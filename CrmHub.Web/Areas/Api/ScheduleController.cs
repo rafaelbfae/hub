@@ -1,58 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using CrmHub.Application.Models.Exact;
-using CrmHub.Application.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Models.Exact.Roots;
+using CrmHub.Application.Models.Exact;
+using CrmHub.Web.Areas.Api.Base;
 
 namespace CrmHub.Web.Areas.Api
 {
-    [Route("api/[controller]")]
-    public class ScheduleController : Controller
+    [Produces("application/json")]
+    [Route("api/v1/[controller]")]
+    public class ScheduleController : HubController<IScheduleService>
     {
-        private readonly IScheduleService _service;
-        private readonly ILogger _logger;
-
-        public ScheduleController(IScheduleService service, ILogger<ScheduleController> logger)
+        public ScheduleController(IScheduleService service, ILogger<ScheduleController> logger) : base(service, logger)
         {
-            this._service = service;
-            this._logger = logger;
-        }
-
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(new string[] { "value1", "value2" });
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            return Ok(new { id = 12 });
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ReuniaoExact schedule)
+        public IActionResult Post([FromBody] ReuniaoExact value)
         {
-            _service.Schedule(schedule);
-            return Ok(new { id = 12 });
+            _logger.LogDebug("Schedule Register Call");
+            return Execute(value, (v, c) => v.Register(c));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ReuniaoExact schedule)
+        public IActionResult Put(string id, [FromBody] ReuniaoExact value)
         {
-            _service.ReSchedule(schedule);
-            return new NoContentResult();
+            _logger.LogDebug("Schedule Update Call");
+            value.Reuniao.Id = id;
+            return Execute(value, (v, c) => v.Update(c));
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id, [FromBody] Autenticacao value)
         {
-            return new NoContentResult();
+            if (ModelState.IsValid)
+            {
+                _logger.LogDebug("Schedule Delete Call");
+                _service.Delete(id, value);
+                return Ok(_service.MessageController().GetAllMessageToJson());
+            }
+
+            return ErrorValidation();
+        }
+
+        [HttpPost]
+        [Route("fields")]
+        public IActionResult Fields([FromBody] Autenticacao value)
+        {
+            if (ModelState.IsValid)
+            {
+                _logger.LogDebug("Schedule Fields Call");
+                _service.Fields(value);
+                return Ok(_service.MessageController().GetAllMessageToJson());
+            }
+
+            return ErrorValidation();
         }
     }
 }

@@ -4,14 +4,24 @@
 
   "dependencies": {
     "CrmHub.Application": "1.0.0-*",
-    "CrmHub.Appication.Integration": "1.0.0-*",
     "CrmHub.Infra.Mensagens": "1.0.0-*",
+    "CrmHub.Infra.Data": "1.0.0-*",
     "NETStandard.Library": "1.6.1"
   },
 
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.1.0"
+        }
+      },
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
     }
   }
+
 }

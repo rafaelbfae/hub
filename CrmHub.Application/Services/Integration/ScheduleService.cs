@@ -1,5 +1,7 @@
 ﻿using CrmHub.Application.Interfaces.Integration;
+using CrmHub.Application.Models.Exact;
 using CrmHub.Application.Models.Exact.Roots;
+using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Services.Integration
 {
@@ -12,14 +14,29 @@ namespace CrmHub.Application.Services.Integration
             this._service = service;
         }
 
-        public bool ReSchedule(ReuniaoExact value)
+        public IMessageController MessageController()
         {
-            return _service.ReSchedule(value);
+            return _service.MessageController();
         }
 
-        public bool Schedule(ReuniaoExact value)
+        public bool Update(ReuniaoExact value)
         {
-            return _service.Schedule(value);
+            return _service.ScheduleUpdate(value);
+        }
+
+        public bool Register(ReuniaoExact value)
+        {
+            return _service.ScheduleRegister(value);
+        }
+
+        public bool Fields(Autenticacao value)
+        {
+            return _service.ScheduleGetFields(value);
+        }
+
+        public bool Delete(string id, Autenticacao value)
+        {
+            return _service.ScheduleDelete(id, value);
         }
     }
 }

@@ -1,0 +1,93 @@
+﻿{
+  "Autenticacao": {
+    "TipoCRM": "ZOHOCRM",
+    "TokenCRM": "8fe3a3d6012e33b211045fa74a42c902",
+    "EmailVendedor": "vendedor@exactsales.com.br",
+    "UsuarioCRM": "crmapi",
+    "UsuarioToken": "11234556"
+  },
+  "Lead": {
+    "Nome": "Empresa Teste Ltda.",
+    "Origem": "Networking",
+    "SubOrigem": "E-mail Marketing",
+    "Mercado": "Serviços",
+    "Produto": "Consultoria",
+    "PreVendedor": "Ciclano de Tal",
+    "Site": "www.empresateste.com.br",
+    "LinkExact": "http://app.exactsales.com.br/lead/123456",
+    "Observacao": "Uma observação qualquer.",
+    "DataCadastro": "2016-01-20T14:00:00.000Z",
+    "Diagnostico": "<>diagnosticos</>",
+    "Telefone": [
+      "(48)3233-4563"
+    ],
+    "Filtros": [
+      {
+        "Nome": "Filtro1",
+        "Qualificacao": "Muito Quente",
+        "Dor": [
+          "Sem processos definidos"
+        ],
+        "Perguntas": [
+          {
+            "Pergunta": "Quantos Colaboradores?",
+            "Resposta": "Acima de 100"
+          }
+        ]
+      }
+    ]
+  },
+  "Endereco": {
+    "Pais": "Brasil",
+    "Estado": "Santa Catarina",
+    "Cidade": "Florianópolis",
+    "Rua": "Rua treze de Maio, 123",
+    "CEP": "15840-500",
+    "Complemento": "Fundos",
+    "Maps": "Rua treze de maio, 123, João Paulo, Florianopolis, Santa Catarina, 15840500"
+  },
+  "Contatos": [
+    {
+      "Nome": "Fulano de Tal",
+      "Email": "fulanodetal@exactsales.com.br",
+      "Cargo": "Gerente",
+      "TipoMensageiro": "Skype",
+      "IdMensageiro": "fulanodetal.exact",
+      "Telefone": [
+        "(48)3233-4563"
+      ]
+    },
+    {
+      "Nome": "Teste",
+      "Email": "fulanodetal@exactsales.com.br",
+      "Cargo": "Gerente",
+      "TipoMensageiro": "Skype",
+      "IdMensageiro": "fulanodetal.exact",
+      "Telefone": [
+        "(48)3233-4563"
+      ]
+    }
+  ],
+  "CamposPersonalizados": [
+    {
+      "id": "_Cnpj",
+      "value": "01223344000155"
+    }
+  ],
+  "Reuniao": {
+    "TipoReuniao": "Online",
+    "Referencia": "Descrição inserida no agendamento",
+    "TimeZone": "E. South America Standard Time",
+    "DataIni": "2017-02-20 13:00:00",
+    "DataFim": "2017-02-20 14:35:45",
+    "Endereco": "Rua treze de maio, 123, João Paulo, Florianopolis, SC"
+  },
+  "MapeamentoCampos": [
+    //{
+    //  "TipoEntidadeExact": "Lead",
+    //  "TipoEntidadeCRM": "Account",
+    //  "CampoExact": "Nome",
+    //  "CampoCRM": "Account Name"
+    //}
+  ]
+}

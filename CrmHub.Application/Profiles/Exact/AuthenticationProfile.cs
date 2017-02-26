@@ -3,7 +3,6 @@ using CrmHub.Application.Integration.Enuns;
 using CrmHub.Application.Integration.Models;
 using CrmHub.Application.Models.Exact;
 using System;
-using System.Collections.Generic;
 
 namespace CrmHub.Application.Profiles.Exact
 {

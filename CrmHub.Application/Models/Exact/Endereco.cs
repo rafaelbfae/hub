@@ -1,18 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CrmHub.Application.Custom;
+using CrmHub.Application.Integration.Enuns;
+using CrmHub.Application.Models.Exact;
+using System.ComponentModel.DataAnnotations;
 
 namespace CrmHub.Application.Models.Exact
 {
-    public class Endereco
+    [Crm(eCrmName.ZOHOCRM, "Address")]
+    public class Endereco : Base<Endereco>
     {
+        [Required]
+        [Crm(eCrmName.ZOHOCRM, "Street")]
         public string Rua { get; set; }
+
+        [Required]
+        [Crm(eCrmName.ZOHOCRM, "Zip Code")]
         public string CEP { get; set; }
+
+        [Required]
+        [Crm(eCrmName.ZOHOCRM, "Country")]
         public string Pais { get; set; }
-        public string Maps { get; set; }
+
+        [Required]
+        [Crm(eCrmName.ZOHOCRM, "State")]
         public string Estado { get; set; }
+
+        [Required]
+        [Crm(eCrmName.ZOHOCRM, "City")]
         public string Cidade { get; set; }
+
+        public string Maps { get; set; }
+
         public string Complemento { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace CrmHub.Application.Interfaces.Base
         void Add(T entity);
         void AddOrUpdate(T entity);
         T GetById(int id);
+        List<T> GetAll();
         void Update(T entity);
         void Remove(int id);
         void Remove(T entity);

@@ -1,46 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using CrmHub.Application.Interfaces.Integration;
+using CrmHub.Application.Models.Exact.Roots;
+using CrmHub.Application.Models.Exact;
+using CrmHub.Web.Areas.Api.Base;
 
 namespace CrmHub.Web.Areas.Api
 {
+    [Produces("application/json")]
     [Route("api/v1/[controller]")]
-    public class ContactController : Controller
+    public class ContactController : HubController<IContactService>
     {
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public ContactController(IContactService service, ILogger<ContactController> logger) : base(service, logger)
         {
-            return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody] ContatoExact value)
         {
+            _logger.LogDebug("Contact Register Call");
+            return Execute(value, (v, c) => v.Register(c));
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut("{email}")]
+        public IActionResult Put(string email, [FromBody] ContatoExact value)
         {
+            _logger.LogDebug("Contact Update Call");
+            value.Contato.Id = email;
+            return Execute(value, (v, c) => v.Update(c));
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{email}")]
+        public IActionResult Delete(string email, [FromBody] Autenticacao value)
         {
+            if (ModelState.IsValid)
+            {
+                _logger.LogDebug("Contact Delete Call");
+                _service.Delete(email, value);
+                return Ok(_service.MessageController().GetAllMessageToJson());
+            }
+
+            return ErrorValidation();
+        }
+
+        [HttpPost]
+        [Route("fields")]
+        public IActionResult Fields([FromBody] Autenticacao value)
+        {
+            if (ModelState.IsValid)
+            {
+                _logger.LogDebug("Contact Fields Call");
+                _service.Fields(value);
+                return Ok(_service.MessageController().GetAllMessageToJson());
+            }
+
+            return ErrorValidation();
         }
     }
 }

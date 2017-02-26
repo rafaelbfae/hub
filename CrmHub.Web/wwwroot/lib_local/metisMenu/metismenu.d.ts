@@ -3,8 +3,6 @@
 // Definitions by: onokums <https://github.com/onokumus/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
-/// <reference path="../jquery/jquery.d.ts"/>
-
 interface MetisMenuOptions {
     toggle?: boolean;
     doubleTapToGo?: boolean;

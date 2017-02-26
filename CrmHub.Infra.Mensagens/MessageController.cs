@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using CrmHub.Infra.Messages.Interfaces;
 using CrmHub.Infra.Messages.Models;
+using Newtonsoft.Json;
 
 namespace CrmHub.Infra.Messages
 {
@@ -61,6 +62,8 @@ namespace CrmHub.Infra.Messages
         public List<MessageType> GetMessageSuccess() => ListMessage.Where(w => w.Type.Equals(MessageType.TYPE.SUCCESS)).ToList();
 
         public List<MessageType> GetMessageWaring() => ListMessage.Where(w => w.Type.Equals(MessageType.TYPE.WARING)).ToList();
+
+        public string GetAllMessageToJson() => JsonConvert.SerializeObject(ListMessage);
 
         #endregion
     }

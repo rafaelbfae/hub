@@ -31,6 +31,8 @@ namespace CrmHub.Identity.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<int>("Level");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
