@@ -21,22 +21,22 @@ namespace CrmHub.Application.Services.Integration
 
         public bool Update(EmpresaExact value)
         {
-            return _service.CompanyUpdate(value);
+            return _service.AccountUpdate(value);
         }
 
         public bool Register(EmpresaExact value)
         {
-            return _service.CompanyRegister(value);
+            return _service.AccountRegister(value);
         }
 
         public bool Delete(string id, Autenticacao value)
         {
-            return _service.CompanyDelete(id, value);
+            return _service.AccountDelete(id, value);
         }
 
         public bool Fields(Autenticacao value)
         {
-            return _service.CompanyGetFields(value);
+            return _service.AccountGetFields(value);
         }
     }
 }

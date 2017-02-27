@@ -28,9 +28,9 @@ namespace CrmHub.Application.Integration.Interfaces.Base
         bool EventGetFields(BaseRoot value);
         bool EventDelete(string id, Authentication value);
 
-        bool CompanyUpdate(CompanyRoot value);
-        bool CompanyRegister(CompanyRoot value);
-        bool CompanyGetFields(BaseRoot value);
-        bool CompanyDelete(string id, Authentication value);
+        bool AccountUpdate(AccountRoot value);
+        bool AccountRegister(AccountRoot value);
+        bool AccountGetFields(BaseRoot value);
+        bool AccountDelete(string id, Authentication value);
     }
 }

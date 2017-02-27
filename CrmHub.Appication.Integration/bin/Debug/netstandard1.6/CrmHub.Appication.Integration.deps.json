@@ -13,7 +13,8 @@
           "System.Reflection.TypeExtensions": "4.3.0",
           "NETStandard.Library": "1.6.1",
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
-          "Microsoft.Extensions.Logging.Abstractions": "1.1.0"
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "CrmHub.Infra.Helpers": "1.0.0"
         },
         "runtime": {
           "CrmHub.Appication.Integration.dll": {}
@@ -1198,6 +1199,15 @@
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
       },
+      "CrmHub.Infra.Helpers/1.0.0": {
+        "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "CrmHub.Infra.Helpers.dll": {}
+        }
+      },
       "CrmHub.Infra.Mensagens/1.0.0": {
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
@@ -1729,6 +1739,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-2eZu6IP+etFVBBFUFzw2w6J21DqIN5eL9Y8r8JfJWUmV28Z5P0SNU01oCisVHQgHsDhHPnmq2s1hJrJCFZWloQ=="
+    },
+    "CrmHub.Infra.Helpers/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "CrmHub.Infra.Mensagens/1.0.0": {
       "type": "project",

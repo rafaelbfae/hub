@@ -3,6 +3,8 @@ using CrmHub.Application.Integration.Interfaces.Base;
 using CrmHub.Application.Integration.Models;
 using CrmHub.Application.Integration.Models.Roots;
 using CrmHub.Application.Integration.Models.Roots.Base;
+using CrmHub.Application.Integration.Services.Zoho;
+using CrmHub.Infra.Helpers.Interfaces;
 using CrmHub.Infra.Messages.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ namespace CrmHub.Application.Integration.Services.Base
     {
         #region Attributes
 
+        private IHttpMessageSender _httpMessageSender;
         private IMessageController _messageController;
         private Dictionary<eCrmName, Type> _crmHub = new Dictionary<eCrmName, Type>();
 
@@ -20,8 +23,9 @@ namespace CrmHub.Application.Integration.Services.Base
 
         #region Constructor
 
-        public HubIntegration(IMessageController messageController)
+        public HubIntegration(IHttpMessageSender httpMessageSender, IMessageController messageController)
         {
+            _httpMessageSender = httpMessageSender;
             _messageController = messageController;
             LoadCRM();
         }
@@ -29,6 +33,14 @@ namespace CrmHub.Application.Integration.Services.Base
         #endregion
 
         #region Public Methods
+
+        public IHttpMessageSender HttpMessageSender
+        {
+            get
+            {
+                return _httpMessageSender;
+            }
+        }
 
         public IMessageController MessageController
         {
@@ -57,38 +69,33 @@ namespace CrmHub.Application.Integration.Services.Base
         public bool EventGetFields(BaseRoot value) => Execute(value, (c, v) => c.EventGetFields(v));
         public bool EventDelete(string id, Authentication value) => ExecuteById(id, value, (c, i, v) => c.EventDelete(i, v));
 
-        public bool CompanyRegister(CompanyRoot value) => Execute(value, (c, v) => c.CompanyRegister((CompanyRoot)v));
-        public bool CompanyUpdate(CompanyRoot value) => Execute(value, (c, v) => c.CompanyUpdate((CompanyRoot)v));
-        public bool CompanyGetFields(BaseRoot value) => Execute(value, (c, v) => c.CompanyGetFields(v));
-        public bool CompanyDelete(string id, Authentication value) => ExecuteById(id, value, (c, i, v) => c.CompanyDelete(i, v));
+        public bool AccountRegister(AccountRoot value) => Execute(value, (c, v) => c.AccountRegister((AccountRoot)v));
+        public bool AccountUpdate(AccountRoot value) => Execute(value, (c, v) => c.AccountUpdate((AccountRoot)v));
+        public bool AccountGetFields(BaseRoot value) => Execute(value, (c, v) => c.AccountGetFields(v));
+        public bool AccountDelete(string id, Authentication value) => ExecuteById(id, value, (c, i, v) => c.AccountDelete(i, v));
 
         private void LoadCRM()
         {
             _crmHub.Add(ZohoIntegration.CRM_NAME, typeof(ZohoIntegration));
         }
 
-        private BaseIntegration CrmController(eCrmName value) => (BaseIntegration)Activator.CreateInstance(_crmHub[value], this._messageController);
+        private BaseIntegration CrmController(eCrmName value) => (BaseIntegration)Activator.CreateInstance(_crmHub[value], HttpMessageSender, MessageController);
 
         private bool Execute(BaseRoot value, Func<BaseIntegration, BaseRoot, bool> function)
         {
-            eCrmName crm = value.Authentication.Crm;
-            try
-            {
-                return function(CrmController(crm), value);
-            }
-            catch (KeyNotFoundException e)
-            {
-                _messageController.AddErrorMessage(e.Message);
-            }
-            return false;
+            return Exec(value.Authentication.Crm, (c) => function(c, value));
         }
 
         private bool ExecuteById(string id, Authentication value, Func<BaseIntegration, string, Authentication, bool> function)
         {
-            eCrmName crm = value.Crm;
+            return Exec(value.Crm, (c) => function(c, id, value));
+        }
+
+        private bool Exec(eCrmName crm, Func<BaseIntegration, bool> function)
+        {
             try
             {
-                return function(CrmController(crm), id, value);
+                return function(CrmController(crm));
             }
             catch (KeyNotFoundException e)
             {

@@ -6,6 +6,8 @@ using CrmHub.Application.Services;
 using CrmHub.Application.Services.Integration;
 using CrmHub.Domain.Interfaces.Repositories;
 using CrmHub.Infra.Data.Repositories;
+using CrmHub.Infra.Helpers;
+using CrmHub.Infra.Helpers.Interfaces;
 using CrmHub.Infra.Messages;
 using CrmHub.Infra.Messages.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +36,7 @@ namespace CrmHub.Infra.Dependences.Injection
 
             services.AddTransient<IMessageController, MessageController>();
 
-
+            services.AddTransient<IHttpMessageSender, HttpMessageSender>();
         }
     }
 }

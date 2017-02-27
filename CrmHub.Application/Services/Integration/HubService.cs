@@ -118,35 +118,35 @@ namespace CrmHub.Application.Services.Integration
         public bool ContactGetFields(Autenticacao value)
         {
             var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
-            return Execute(_value, (c, v) => c.CompanyGetFields(_value));
+            return Execute(_value, (c, v) => c.ContactGetFields(_value));
         }
 
         #endregion
 
         #region Company
 
-        public bool CompanyRegister(EmpresaExact value)
+        public bool AccountRegister(EmpresaExact value)
         {
-            var _value = Mapper.Map<CompanyRoot>(value);
-            return Execute(_value, (c, v) => c.CompanyRegister(_value));
+            var _value = Mapper.Map<AccountRoot>(value);
+            return Execute(_value, (c, v) => c.AccountRegister(_value));
         }
 
-        public bool CompanyUpdate(EmpresaExact value)
+        public bool AccountUpdate(EmpresaExact value)
         {
-            var _value = Mapper.Map<CompanyRoot>(value);
-            return Execute(_value, (c, v) => c.CompanyUpdate(_value));
+            var _value = Mapper.Map<AccountRoot>(value);
+            return Execute(_value, (c, v) => c.AccountUpdate(_value));
         }
 
-        public bool CompanyDelete(string id, Autenticacao value)
+        public bool AccountDelete(string id, Autenticacao value)
         {
             var _value = Mapper.Map<Authentication>(value);
-            return ExecuteById(id, _value, (c, i, v) => c.CompanyDelete(id, _value));
+            return ExecuteById(id, _value, (c, i, v) => c.AccountDelete(id, _value));
         }
 
-        public bool CompanyGetFields(Autenticacao value)
+        public bool AccountGetFields(Autenticacao value)
         {
             var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
-            return Execute(_value, (c, v) => c.CompanyGetFields(_value));
+            return Execute(_value, (c, v) => c.AccountGetFields(_value));
         }
 
         #endregion

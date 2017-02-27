@@ -2,7 +2,7 @@
 
 namespace CrmHub.Application.Integration.Models.Roots.Base
 {
-    public class BaseRoot
+    public class BaseRoot : object
     {
         public string EntityName { get; set; }
         public Authentication Authentication { get; set; }

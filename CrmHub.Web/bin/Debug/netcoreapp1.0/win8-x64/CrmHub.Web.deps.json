@@ -3673,7 +3673,8 @@
           "System.Reflection.TypeExtensions": "4.3.0",
           "NETStandard.Library": "1.6.1",
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
-          "Microsoft.Extensions.Logging.Abstractions": "1.1.0"
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "CrmHub.Infra.Helpers": "1.0.0"
         },
         "compile": {
           "CrmHub.Appication.Integration.dll": {}
@@ -3732,10 +3733,20 @@
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "CrmHub.Infra.Helpers": "1.0.0"
         },
         "compile": {
           "CrmHub.Infra.Dependences.Injection.dll": {}
+        }
+      },
+      "CrmHub.Infra.Helpers/1.0.0": {
+        "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "CrmHub.Infra.Helpers.dll": {}
         }
       },
       "CrmHub.Infra.Mensagens/1.0.0": {
@@ -7521,7 +7532,8 @@
           "System.Reflection.TypeExtensions": "4.3.0",
           "NETStandard.Library": "1.6.1",
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
-          "Microsoft.Extensions.Logging.Abstractions": "1.1.0"
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "CrmHub.Infra.Helpers": "1.0.0"
         },
         "runtime": {
           "CrmHub.Appication.Integration.dll": {}
@@ -7580,10 +7592,20 @@
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "CrmHub.Infra.Helpers": "1.0.0"
         },
         "runtime": {
           "CrmHub.Infra.Dependences.Injection.dll": {}
+        }
+      },
+      "CrmHub.Infra.Helpers/1.0.0": {
+        "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "CrmHub.Infra.Helpers.dll": {}
         }
       },
       "CrmHub.Infra.Mensagens/1.0.0": {
@@ -9189,6 +9211,11 @@
       "sha512": ""
     },
     "CrmHub.Infra.Dependences.Injection/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CrmHub.Infra.Helpers/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

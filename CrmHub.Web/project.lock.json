@@ -4857,6 +4857,7 @@
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "CrmHub.Infra.Helpers": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
           "NETStandard.Library": "1.6.1",
@@ -4936,6 +4937,7 @@
         "dependencies": {
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
+          "CrmHub.Infra.Helpers": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "NETStandard.Library": "1.6.1"
@@ -4945,6 +4947,20 @@
         },
         "runtime": {
           "netcoreapp1.0/CrmHub.Infra.Dependences.Injection.dll": {}
+        }
+      },
+      "CrmHub.Infra.Helpers/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Infra.Helpers.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Infra.Helpers.dll": {}
         }
       },
       "CrmHub.Infra.Mensagens/1.0.0": {
@@ -9950,6 +9966,7 @@
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "CrmHub.Infra.Helpers": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
           "NETStandard.Library": "1.6.1",
@@ -10029,6 +10046,7 @@
         "dependencies": {
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
+          "CrmHub.Infra.Helpers": "1.0.0",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "NETStandard.Library": "1.6.1"
@@ -10038,6 +10056,20 @@
         },
         "runtime": {
           "netcoreapp1.0/CrmHub.Infra.Dependences.Injection.dll": {}
+        }
+      },
+      "CrmHub.Infra.Helpers/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Infra.Helpers.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Infra.Helpers.dll": {}
         }
       },
       "CrmHub.Infra.Mensagens/1.0.0": {
@@ -17981,6 +18013,11 @@
       "type": "project",
       "path": "../CrmHub.Infra.Dependences.Injection/project.json",
       "msbuildProject": "../CrmHub.Infra.Dependences.Injection/CrmHub.Infra.Dependences.Injection.xproj"
+    },
+    "CrmHub.Infra.Helpers/1.0.0": {
+      "type": "project",
+      "path": "../CrmHub.Infra.Helpers/project.json",
+      "msbuildProject": "../CrmHub.Infra.Helpers/CrmHub.Infra.Helpers.xproj"
     },
     "CrmHub.Infra.Mensagens/1.0.0": {
       "type": "project",

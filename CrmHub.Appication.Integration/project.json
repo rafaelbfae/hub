@@ -7,7 +7,8 @@
     "System.Reflection.TypeExtensions": "4.3.0",
     "NETStandard.Library": "1.6.1",
     "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
-    "Microsoft.Extensions.Logging.Abstractions": "1.1.0"
+    "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+    "CrmHub.Infra.Helpers": "1.0.0-*"
   },
 
   "frameworks": {

@@ -20,9 +20,9 @@ namespace CrmHub.Application.Interfaces.Integration
         bool ContactGetFields(Autenticacao value);
         bool ContactDelete(string email, Autenticacao value);
 
-        bool CompanyRegister(EmpresaExact value);
-        bool CompanyUpdate(EmpresaExact value);
-        bool CompanyGetFields(Autenticacao value);
-        bool CompanyDelete(string id, Autenticacao value);
+        bool AccountRegister(EmpresaExact value);
+        bool AccountUpdate(EmpresaExact value);
+        bool AccountGetFields(Autenticacao value);
+        bool AccountDelete(string id, Autenticacao value);
     }
 }

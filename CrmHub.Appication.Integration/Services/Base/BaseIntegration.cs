@@ -1,15 +1,14 @@
 ﻿using CrmHub.Application.Integration.Models;
 using CrmHub.Application.Integration.Models.Roots;
 using CrmHub.Application.Integration.Models.Roots.Base;
+using CrmHub.Infra.Helpers.Interfaces;
 using CrmHub.Infra.Messages.Interfaces;
 using CrmHub.Infra.Messages.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using static CrmHub.Application.Integration.Models.Zoho.FieldsResponse;
 
 namespace CrmHub.Application.Integration.Services.Base
 {
@@ -33,7 +32,7 @@ namespace CrmHub.Application.Integration.Services.Base
         {
             int index = 0;
             bool result = true;
-            result &= ExecuteCompany(value);
+            result &= ExecuteAccount(value);
             value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
             result &= ExecuteLead(value);
             result &= ExecuteEvent(value);
@@ -57,16 +56,17 @@ namespace CrmHub.Application.Integration.Services.Base
         public bool ContactGetFields(BaseRoot value) => OnGetFieldsContact(value.Authentication);
         public bool ContactDelete(string email, Authentication value) => OnDeleteContact(email, value);
 
-        public bool CompanyRegister(CompanyRoot value) => ExecuteCompany(value);
-        public bool CompanyUpdate(CompanyRoot value) => ExecuteCompany(value);
-        public bool CompanyGetFields(BaseRoot value) => OnGetFieldsCompany(value.Authentication);
-        public bool CompanyDelete(string id, Authentication value) => OnDeleteCompany(id, value);
+        public bool AccountRegister(AccountRoot value) => ExecuteAccount(value);
+        public bool AccountUpdate(AccountRoot value) => ExecuteAccount(value);
+        public bool AccountGetFields(BaseRoot value) => OnGetFieldsCompany(value.Authentication);
+        public bool AccountDelete(string id, Authentication value) => OnDeleteCompany(id, value);
 
         #endregion
 
         #region Protected Methods
 
         protected abstract IMessageController MessageController { get; }
+        protected abstract IHttpMessageSender HttpMessageSender { get; }
         protected abstract bool OnCancelSchedule(string id, Authentication value);
         protected abstract bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list);
         protected abstract bool OnExecuteLead(LeadRoot value, List<MappingFields> list);
@@ -81,8 +81,8 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract bool OnDeleteContact(string id, Authentication value);
         protected abstract bool OnGetIdContact(ContactRoot value);
         protected abstract bool OnGetFieldsContact(Authentication value);
-        protected abstract bool OnExecuteCompany(ScheduleRoot value, List<MappingFields> list);
-        protected abstract bool OnExecuteCompany(CompanyRoot value, List<MappingFields> list);
+        protected abstract bool OnExecuteAccount(ScheduleRoot value, List<MappingFields> list);
+        protected abstract bool OnExecuteAccount(AccountRoot value, List<MappingFields> list);
         protected abstract bool OnDeleteCompany(string id, Authentication value);
         protected abstract bool OnGetFieldsCompany(Authentication value);
         protected abstract string GetSubjectEvent(ScheduleRoot value);
@@ -184,14 +184,14 @@ namespace CrmHub.Application.Integration.Services.Base
             return OnExecuteContact(value, value.MappingFields, s => { });
         }
 
-        private bool ExecuteCompany(ScheduleRoot value)
+        private bool ExecuteAccount(ScheduleRoot value)
         {
-            return OnExecuteCompany(value, value.MappingFields.Where(v => filterAccount(v.Entity)).ToList());
+            return OnExecuteAccount(value, value.MappingFields.Where(v => filterAccount(v.Entity)).ToList());
         }
 
-        private bool ExecuteCompany(CompanyRoot value)
+        private bool ExecuteAccount(AccountRoot value)
         {
-            return OnExecuteCompany(value, value.MappingFields);
+            return OnExecuteAccount(value, value.MappingFields);
         }
 
         #endregion
