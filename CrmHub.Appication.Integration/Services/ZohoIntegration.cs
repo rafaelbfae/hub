@@ -59,8 +59,8 @@ namespace CrmHub.Application.Integration.Services
 
         protected override bool OnExecuteLead(LeadRoot value, List<MappingFields> list)
         {
-            string entityName = "Leads";
-            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.LEAD, s => { });
+            string entityName = "Potentials";
+            return OnSendRequestSave(value, entityName, LoadXml(entityName, list.Where(w => filterPotential(w.Entity)).ToList()), MessageType.ENTITY.LEAD, s => { });
         }
 
         protected override bool OnDeleteLead(string id, Authentication value)
@@ -147,6 +147,41 @@ namespace CrmHub.Application.Integration.Services
             string entityName = "Contacts";
             var contacList = list.Where(x => x.Entity == "Contact" && x.Id == index).ToList();
             return OnSendRequestSave(value, entityName, LoadXml(entityName, contacList), MessageType.ENTITY.CONTATO, setId);
+        }
+
+        protected override bool OnGetIdContact(ContactRoot value)
+        {
+            var emailField = "Email";
+            Predicate<String> loadId = s =>
+            {
+                try
+                {
+                    var response = JsonConvert.DeserializeObject(s, typeof(RootObject));
+                    if (!((RootObject)response).response.result.Contacts.row.FL.content.Equals(string.Empty))
+                    {
+                        value.Contact.Id = ((RootObject)response).response.result.Contacts.row.FL.content;
+                        return true;
+                    }
+                }
+                catch 
+                {
+                    try
+                    {
+                        var response = JsonConvert.DeserializeObject(s, typeof(Models.Json.Test.RootObject));
+                        if (!((Models.Json.Test.RootObject)response).response.result.Contacts.row[0].FL.content.Equals(string.Empty))
+                        {
+                            value.Contact.Id = ((Models.Json.Test.RootObject)response).response.result.Contacts.row[0].FL.content;
+                            return true;
+                        }
+                    }
+                    catch { return false; }
+                }
+                return false;
+            };
+
+            if (SendRequestSearch(value.Authentication, "Contacts", "CONTACTID", emailField, value.Contact.Id, loadId))
+                return true;
+            return false;
         }
 
         protected override bool OnDeleteContact(string id, Authentication value)
@@ -304,8 +339,15 @@ namespace CrmHub.Application.Integration.Services
                 }
             };
 
-            list.Add(new MappingFields { Entity = "Potential", Field = "Stage", Value = "Qualificação" });
             list.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = DateTime.Now.AddMonths(1).ToString("yyy-MM-dd hh:mm:ss") });
+
+            if (!value.Lead.Id.Equals(string.Empty))
+            {
+                LeadRoot lead = new LeadRoot { Lead = value.Lead, Authentication = value.Authentication };
+                return OnSendRequestSave(lead, entityName, LoadXml(entityName, list), MessageType.ENTITY.LEAD, setId);
+            }
+            else
+                list.Add(new MappingFields { Entity = "Potential", Field = "Stage", Value = "Qualificação" });
 
             Predicate<MappingFields> filterPotential = m => m.Field.Equals(potentialField);
             if (list.Exists(e => filterPotential(e)))
