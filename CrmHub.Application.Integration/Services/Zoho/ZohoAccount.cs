@@ -9,6 +9,7 @@ using CrmHub.Infra.Messages.Models;
 using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;
 using Newtonsoft.Json;
+using CrmHub.Application.Integration.Models.Zoho;
 
 namespace CrmHub.Application.Integration.Services.Zoho
 {
@@ -17,9 +18,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
         #region Constantes
 
         private const string ENTITY = "Account";
-
         private const string ENTITY_NAME = "Accounts";
-
         private const MessageType.ENTITY ENTITY_TYPE = MessageType.ENTITY.EMPRESA;
 
         #endregion
@@ -59,6 +58,11 @@ namespace CrmHub.Application.Integration.Services.Zoho
         protected override string GetEntityName() => ENTITY_NAME;
         protected override MessageType.ENTITY GetEntityType() => ENTITY_TYPE;
         protected override bool FilterEntity(string entity) => entity.Equals(ENTITY);
+
+        protected override void OnLoadResponseGetFields(FieldsResponse.FieldsResponseCrm fieldResponse, MessageType message)
+        {
+            LoadResponse(fieldResponse.Accounts, message);
+        }
 
         protected override void SetId(string id, BaseRoot value)
         {

@@ -284,35 +284,22 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         protected override bool OnExecuteEvent(ScheduleRoot value, List<MappingFields> list)
         {
-            EventRoot reuniao = new EventRoot { Schedule = value.Schedule, Authentication = value.Authentication };
-            return OnExecuteEvent(reuniao, list);
+            return EventController.Execute(value, list);
         }
 
         protected override bool OnExecuteEvent(EventRoot value, List<MappingFields> list)
         {
-            string entityName = "Events";
-            return OnSendRequestSave(value, entityName, LoadXml(entityName, list), MessageType.ENTITY.REUNIAO, s => { });
+            return EventController.Execute(value, list);
         }
 
         protected override bool OnDeleteEvent(string id, Authentication value)
         {
-            return SendRequestDelete(value, "Events", id, MessageType.ENTITY.REUNIAO, s => { });
+            return EventController.Delete(id, value);
         }
 
         protected override bool OnGetFieldsEvent(Authentication value)
         {
-            if (SendRequestGet(value, "Events", LoadResponseFields))
-            {
-                MessageController.GetMessageSuccess().ForEach(e =>
-                {
-                    e.Entity = MessageType.ENTITY.REUNIAO;
-                    FieldsResponseCrm data = ((FieldsResponseCrm)(e.Data));
-                    if (data.Events != null)
-                        LoadResponse(data.Events, e);
-                });
-                return true;
-            }
-            return false;
+            return EventController.GetFields(value);
         }
 
         protected override bool OnExecuteAccount(ScheduleRoot value, List<MappingFields> list)
@@ -433,6 +420,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
         #region Private Methods
 
         private ZohoAccount AccountController => new ZohoAccount(HttpMessageSender, MessageController);
+        private ZohoEvent EventController => new ZohoEvent(HttpMessageSender, MessageController);
 
         private bool OnSendRequestSave(BaseRoot value, string entityName, string xml, MessageType.ENTITY entity, Action<string> setId)
         {

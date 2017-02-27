@@ -43,9 +43,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
                 MessageController.GetMessageSuccess().ForEach(e =>
                 {
                     e.Entity = MessageType.ENTITY.EMPRESA;
-                    FieldsResponseCrm data = ((FieldsResponseCrm)(e.Data));
-                    if (data.Accounts != null)
-                        LoadResponse(data.Accounts, e);
+                    OnLoadResponseGetFields(((FieldsResponseCrm)(e.Data)), e);
                 });
                 return true;
             }
@@ -63,6 +61,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
         protected abstract MessageType.ENTITY GetEntityType();
         protected abstract bool FilterEntity(string entity);
         protected abstract void SetId(string id, BaseRoot value);
+        protected abstract void OnLoadResponseGetFields(FieldsResponseCrm fieldResponse, MessageType message);
         
         protected bool SendRequestGetRecord(BaseRoot value, string id, Func<string, object, bool> loadResponse)
         {
@@ -123,6 +122,13 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             message.Message = msg;
             MessageController.AddMessage(message);
             return message.Type == MessageType.TYPE.SUCCESS;
+        }
+
+        protected void LoadResponse(EntityResponse value, MessageType message)
+        {
+            message.Type = MessageType.TYPE.SUCCESS;
+            message.Message = string.Empty;
+            message.Data = GetResponseFields(value);
         }
 
         protected string GetFieldValue(BaseRoot value, string field, Func<string, bool> filter)
@@ -195,13 +201,6 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
                 Console.WriteLine(e.Message);
             }
             return false;
-        }
-
-        private void LoadResponse(EntityResponse value, MessageType message)
-        {
-            message.Type = MessageType.TYPE.SUCCESS;
-            message.Message = string.Empty;
-            message.Data = GetResponseFields(value);
         }
 
         private ResponseFields GetResponseFields(EntityResponse value)
