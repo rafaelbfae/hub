@@ -97,7 +97,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
             if (SendRequestGetRecord(value, "Events", id, loadPotentialId))
             {
                 if (SendRequestGetRecord(value, "Potentials", potentialId, loadAccountId))
-                    return OnDeleteCompany(accountId, value);
+                    return OnDeleteAccount(accountId, value);
             }
                 
             return false;
@@ -327,12 +327,13 @@ namespace CrmHub.Application.Integration.Services.Zoho
             return controller.Execute(value, list);
         }
 
-        protected override bool OnDeleteCompany(string id, Authentication value)
+        protected override bool OnDeleteAccount(string id, Authentication value)
         {
-            return SendRequestDelete(value, "Accounts", id, MessageType.ENTITY.EMPRESA, s => { });
+            ZohoAccount controller = new ZohoAccount(HttpMessageSender, MessageController);
+            return controller.Delete(id, value);
         }
 
-        protected override bool OnGetFieldsCompany(Authentication value)
+        protected override bool OnGetFieldsAccount(Authentication value)
         {
             if (SendRequestGet(value, "Accounts", LoadResponseFields))
             {

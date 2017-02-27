@@ -58,8 +58,8 @@ namespace CrmHub.Application.Integration.Services.Base
 
         public bool AccountRegister(AccountRoot value) => ExecuteAccount(value);
         public bool AccountUpdate(AccountRoot value) => ExecuteAccount(value);
-        public bool AccountGetFields(BaseRoot value) => OnGetFieldsCompany(value.Authentication);
-        public bool AccountDelete(string id, Authentication value) => OnDeleteCompany(id, value);
+        public bool AccountGetFields(BaseRoot value) => OnGetFieldsAccount(value.Authentication);
+        public bool AccountDelete(string id, Authentication value) => OnDeleteAccount(id, value);
 
         #endregion
 
@@ -83,8 +83,8 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract bool OnGetFieldsContact(Authentication value);
         protected abstract bool OnExecuteAccount(ScheduleRoot value, List<MappingFields> list);
         protected abstract bool OnExecuteAccount(AccountRoot value, List<MappingFields> list);
-        protected abstract bool OnDeleteCompany(string id, Authentication value);
-        protected abstract bool OnGetFieldsCompany(Authentication value);
+        protected abstract bool OnDeleteAccount(string id, Authentication value);
+        protected abstract bool OnGetFieldsAccount(Authentication value);
         protected abstract string GetSubjectEvent(ScheduleRoot value);
         protected abstract bool GetResponse(string responseBody, MessageType.ENTITY entity, Action<string> setId);
 

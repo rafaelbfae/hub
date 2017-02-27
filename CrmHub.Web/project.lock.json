@@ -4852,24 +4852,12 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "CrmHub.Appication.Integration/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
-          "CrmHub.Infra.Helpers": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
-          "NETStandard.Library": "1.6.1",
-          "System.Reflection.TypeExtensions": "4.3.0"
-        }
-      },
       "CrmHub.Application/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "AutoMapper": "5.2.0",
-          "CrmHub.Appication.Integration": "1.0.0",
+          "CrmHub.Application.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
           "Microsoft.Extensions.Logging": "1.1.0",
           "NETStandard.Library": "1.6.1"
@@ -4879,6 +4867,24 @@
         },
         "runtime": {
           "netstandard1.6/CrmHub.Application.dll": {}
+        }
+      },
+      "CrmHub.Application.Integration/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "CrmHub.Infra.Helpers": "1.0.0",
+          "CrmHub.Infra.Messages": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Application.Integration.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Application.Integration.dll": {}
         }
       },
       "CrmHub.Domain/1.0.0": {
@@ -4938,7 +4944,7 @@
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
           "CrmHub.Infra.Helpers": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0",
+          "CrmHub.Infra.Messages": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "NETStandard.Library": "1.6.1"
         },
@@ -4963,12 +4969,18 @@
           "netstandard1.6/CrmHub.Infra.Helpers.dll": {}
         }
       },
-      "CrmHub.Infra.Mensagens/1.0.0": {
+      "CrmHub.Infra.Messages/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
         }
       }
     },
@@ -9961,24 +9973,12 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "CrmHub.Appication.Integration/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
-          "CrmHub.Infra.Helpers": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
-          "NETStandard.Library": "1.6.1",
-          "System.Reflection.TypeExtensions": "4.3.0"
-        }
-      },
       "CrmHub.Application/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "AutoMapper": "5.2.0",
-          "CrmHub.Appication.Integration": "1.0.0",
+          "CrmHub.Application.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
           "Microsoft.Extensions.Logging": "1.1.0",
           "NETStandard.Library": "1.6.1"
@@ -9988,6 +9988,24 @@
         },
         "runtime": {
           "netstandard1.6/CrmHub.Application.dll": {}
+        }
+      },
+      "CrmHub.Application.Integration/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
+          "CrmHub.Infra.Helpers": "1.0.0",
+          "CrmHub.Infra.Messages": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Application.Integration.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Application.Integration.dll": {}
         }
       },
       "CrmHub.Domain/1.0.0": {
@@ -10047,7 +10065,7 @@
           "CrmHub.Application": "1.0.0",
           "CrmHub.Infra.Data": "1.0.0",
           "CrmHub.Infra.Helpers": "1.0.0",
-          "CrmHub.Infra.Mensagens": "1.0.0",
+          "CrmHub.Infra.Messages": "1.0.0",
           "Microsoft.NETCore.App": "1.1.0",
           "NETStandard.Library": "1.6.1"
         },
@@ -10072,12 +10090,18 @@
           "netstandard1.6/CrmHub.Infra.Helpers.dll": {}
         }
       },
-      "CrmHub.Infra.Mensagens/1.0.0": {
+      "CrmHub.Infra.Messages/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
         }
       }
     }
@@ -17985,14 +18009,15 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "CrmHub.Appication.Integration/1.0.0": {
-      "type": "project",
-      "path": "../CrmHub.Appication.Integration/project.json"
-    },
     "CrmHub.Application/1.0.0": {
       "type": "project",
       "path": "../CrmHub.Application/project.json",
       "msbuildProject": "../CrmHub.Application/CrmHub.Application.xproj"
+    },
+    "CrmHub.Application.Integration/1.0.0": {
+      "type": "project",
+      "path": "../CrmHub.Application.Integration/project.json",
+      "msbuildProject": "../CrmHub.Application.Integration/CrmHub.Application.Integration.xproj"
     },
     "CrmHub.Domain/1.0.0": {
       "type": "project",
@@ -18019,9 +18044,10 @@
       "path": "../CrmHub.Infra.Helpers/project.json",
       "msbuildProject": "../CrmHub.Infra.Helpers/CrmHub.Infra.Helpers.xproj"
     },
-    "CrmHub.Infra.Mensagens/1.0.0": {
+    "CrmHub.Infra.Messages/1.0.0": {
       "type": "project",
-      "path": "../CrmHub.Infra.Mensagens/project.json"
+      "path": "../CrmHub.Infra.Messages/project.json",
+      "msbuildProject": "../CrmHub.Infra.Messages/CrmHub.Infra.Messages.xproj"
     }
   },
   "projectFileDependencyGroups": {

@@ -3,10 +3,10 @@
 
   "dependencies": {
     "CrmHub.Domain": "1.0.0-*",
-    "CrmHub.Appication.Integration": "1.0.0-*",
     "NETStandard.Library": "1.6.1",
     "AutoMapper": "5.2.0",
-    "Microsoft.Extensions.Logging": "1.1.0"
+    "Microsoft.Extensions.Logging": "1.1.0",
+    "CrmHub.Application.Integration": "1.0.0-*"
   },
 
   "frameworks": {

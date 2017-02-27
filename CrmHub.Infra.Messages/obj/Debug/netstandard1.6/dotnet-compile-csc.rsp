@@ -8,8 +8,8 @@
 -debug:full
 -nostdlib
 -nologo
-"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\obj\Debug\netstandard1.6\dotnet-compile.assemblyinfo.cs"
--out:"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\bin\Debug\netstandard1.6\CrmHub.Infra.Mensagens.dll"
+"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\obj\Debug\netstandard1.6\dotnet-compile.assemblyinfo.cs"
+-out:"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\bin\Debug\netstandard1.6\CrmHub.Infra.Messages.dll"
 -r:"C:\Users\Administrator\.nuget\packages\CoreCompat.Newtonsoft.Json\9.0.2-beta001\lib\netstandard1.5\CoreCompat.Newtonsoft.Json.dll"
 -r:"C:\Users\Administrator\.nuget\packages\Microsoft.CSharp\4.0.1\ref\netstandard1.0\Microsoft.CSharp.dll"
 -r:"C:\Users\Administrator\.nuget\packages\Microsoft.Win32.Primitives\4.3.0\ref\netstandard1.3\Microsoft.Win32.Primitives.dll"
@@ -69,7 +69,7 @@
 -r:"C:\Users\Administrator\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\Administrator\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll"
 -r:"C:\Users\Administrator\.nuget\packages\System.Xml.XmlDocument\4.0.1\ref\netstandard1.3\System.Xml.XmlDocument.dll"
-"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\MessageController.cs"
-"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\Interfaces\IMessageController.cs"
-"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\Models\MessageType.cs"
-"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\Properties\AssemblyInfo.cs"
+"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\MessageController.cs"
+"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\Interfaces\IMessageController.cs"
+"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\Models\MessageType.cs"
+"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\Properties\AssemblyInfo.cs"

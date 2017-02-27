@@ -255,14 +255,14 @@
 --reference:C:\Users\Administrator\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\Administrator\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
 --reference:C:\Users\Administrator\.nuget\packages\System.Xml.XmlDocument\4.0.1\ref\netstandard1.3\System.Xml.XmlDocument.dll
---reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Appication.Integration\bin\Debug\netstandard1.6\CrmHub.Appication.Integration.dll
 --reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application\bin\Debug\netstandard1.6\CrmHub.Application.dll
+--reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Application.Integration\bin\Debug\netstandard1.6\CrmHub.Application.Integration.dll
 --reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Domain\bin\Debug\netstandard1.6\CrmHub.Domain.dll
 --reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Identity\bin\Debug\netcoreapp1.0\CrmHub.Identity.dll
 --reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Data\bin\Debug\netcoreapp1.0\CrmHub.Infra.Data.dll
 --reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Dependences.Injection\bin\Debug\netcoreapp1.0\CrmHub.Infra.Dependences.Injection.dll
 --reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Helpers\bin\Debug\netstandard1.6\CrmHub.Infra.Helpers.dll
---reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\bin\Debug\netstandard1.6\CrmHub.Infra.Mensagens.dll
+--reference:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\bin\Debug\netstandard1.6\CrmHub.Infra.Messages.dll
 --resource:"C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Web\obj\Debug\netcoreapp1.0\CrmHub.Webdotnet-compile.deps.json",CrmHub.Web.deps.json
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Web\Program.cs
 C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Web\Startup.cs

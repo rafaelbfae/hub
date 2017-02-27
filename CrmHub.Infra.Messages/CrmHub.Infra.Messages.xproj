@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>8f2baa89-d8dd-4126-8ac7-d947815ba20c</ProjectGuid>
-    <RootNamespace>CrmHub.Application.Integration</RootNamespace>
+    <ProjectGuid>f8995fed-0484-4dc8-9457-3f1b880e8a48</ProjectGuid>
+    <RootNamespace>CrmHub.Infra.Messages</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>

@@ -32,6 +32,11 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
 
         #region Public Methods
 
+        public bool Delete(string id, Authentication value)
+        {
+            return SendRequestDelete(value, id, GetResponse);
+        }
+
         #endregion
 
         #region Protected Methods
@@ -63,6 +68,13 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             if (string.IsNullOrEmpty(value.GetId()))
                 return SendRequestInsert(value.Authentication, content, value, getReponse);
             return SendRequestUpdate(value.Authentication, content, value, getReponse);
+        }
+
+        protected bool SendRequestDelete(Authentication value, string id, Func<string, object, bool> getResponse)
+        {
+            string url = value.UrlService;
+            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={5}", url, GetEntityName(), "deleteRecords", value.Token, value.User, id);
+            return HttpMessageSender.SendRequestPost(urlFormat, string.Empty, null, getResponse);
         }
 
         protected virtual bool GetResponse(string response, object value)
