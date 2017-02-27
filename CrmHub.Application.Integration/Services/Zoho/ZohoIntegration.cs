@@ -317,36 +317,22 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         protected override bool OnExecuteAccount(ScheduleRoot value, List<MappingFields> list)
         {
-            ZohoAccount controller = new ZohoAccount(HttpMessageSender, MessageController);
-            return controller.Execute(value, list.Where(w => filterAccount(w.Entity)).ToList());
+            return AccountController.Execute(value, list.Where(w => filterAccount(w.Entity)).ToList());
         }
 
         protected override bool OnExecuteAccount(AccountRoot value, List<MappingFields> list)
         {
-            ZohoAccount controller = new ZohoAccount(HttpMessageSender, MessageController);
-            return controller.Execute(value, list);
+            return AccountController.Execute(value, list);
         }
 
         protected override bool OnDeleteAccount(string id, Authentication value)
         {
-            ZohoAccount controller = new ZohoAccount(HttpMessageSender, MessageController);
-            return controller.Delete(id, value);
+            return AccountController.Delete(id, value);
         }
 
         protected override bool OnGetFieldsAccount(Authentication value)
         {
-            if (SendRequestGet(value, "Accounts", LoadResponseFields))
-            {
-                MessageController.GetMessageSuccess().ForEach(e =>
-                {
-                    e.Entity = MessageType.ENTITY.EMPRESA;
-                    FieldsResponseCrm data = ((FieldsResponseCrm)(e.Data));
-                    if (data.Accounts != null)
-                        LoadResponse(data.Accounts, e);
-                });
-                return true;
-            }
-            return false;
+            return AccountController.GetFields(value);
         }
 
         protected bool OnExecutePotential(ScheduleRoot value, List<MappingFields> list)
@@ -445,6 +431,8 @@ namespace CrmHub.Application.Integration.Services.Zoho
         #endregion
 
         #region Private Methods
+
+        private ZohoAccount AccountController => new ZohoAccount(HttpMessageSender, MessageController);
 
         private bool OnSendRequestSave(BaseRoot value, string entityName, string xml, MessageType.ENTITY entity, Action<string> setId)
         {

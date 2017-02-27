@@ -5,7 +5,6 @@ using CrmHub.Infra.Helpers.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CrmHub.Infra.Messages.Models;
 using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;
@@ -23,9 +22,6 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         private const MessageType.ENTITY ENTITY_TYPE = MessageType.ENTITY.EMPRESA;
 
-        #endregion
-
-        #region Attributes
         #endregion
 
         #region Constructor
