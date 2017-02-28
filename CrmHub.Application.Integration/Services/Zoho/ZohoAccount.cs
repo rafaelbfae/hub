@@ -35,7 +35,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
         {
             AccountRoot account = GetAccount(schedule);
             if (!string.IsNullOrEmpty(schedule.Lead.Id))
-                SendRequestGetRecord(schedule, ZohoPotential.ENTITY_NAME, schedule.Lead.Id, GetIdByRecord);
+                SendRequestGetRecord(account, ZohoPotential.ENTITY_NAME, schedule.Lead.Id, GetIdByRecord);
 
             if (Execute(account, mapping.Where(w => FilterEntity(w.Entity)).ToList()))
             {
@@ -51,13 +51,15 @@ namespace CrmHub.Application.Integration.Services.Zoho
             return SendRequestSave(account, mapping.Where(w => FilterEntity(w.Entity)).ToList(), GetResponse);
         }
 
+        public static bool Filter(string entity) => entity.Equals(ENTITY);
+
         #endregion
 
         #region Protected Methods
 
         protected override string GetEntityName() => ENTITY_NAME;
         protected override MessageType.ENTITY GetEntityType() => ENTITY_TYPE;
-        protected override bool FilterEntity(string entity) => entity.Equals(ENTITY);
+        protected override bool FilterEntity(string entity) => Filter(entity);
 
         protected override void OnLoadResponseGetFields(FieldsResponse.FieldsResponseCrm fieldResponse, MessageType message)
         {

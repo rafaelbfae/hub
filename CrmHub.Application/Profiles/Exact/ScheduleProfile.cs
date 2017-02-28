@@ -30,7 +30,7 @@ namespace CrmHub.Application
                 .ForMember(s => s.Authentication, i => i.MapFrom(o => o.Autenticacao))
                 .ForMember(s => s.MappingFields, i => i.MapFrom(o => o.EntidadeCampoValor))
                 .ForMember(s => s.Contacts, i => i.MapFrom(o => o.Contatos))
-                .ForMember(s => s.Company, i => i.MapFrom(o => o.Empresa))
+                .ForMember(s => s.Account, i => i.MapFrom(o => o.Empresa))
             ;
 
             this.CreateMap<Reuniao, Events>();

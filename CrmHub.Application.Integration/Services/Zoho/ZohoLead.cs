@@ -1,10 +1,5 @@
-﻿using CrmHub.Application.Integration.Models;
-using CrmHub.Application.Integration.Models.Roots;
-using CrmHub.Application.Integration.Services.Zoho.Base;
+﻿using CrmHub.Application.Integration.Services.Zoho.Base;
 using CrmHub.Infra.Helpers.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using CrmHub.Infra.Messages.Models;
 using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;

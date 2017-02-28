@@ -7,7 +7,7 @@ namespace CrmHub.Application.Integration.Models.Roots
     {
         public Lead Lead { get; set; }
         public Address Address { get; set; }
-        public Company Company { get; set; }
+        public Account Account { get; set; }
         public Events Schedule { get; set; }
         public List<Contact> Contacts { get; set; }
 

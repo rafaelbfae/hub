@@ -55,7 +55,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         public string GetIdPotential(Authentication value, string id)
         {
-            LeadRoot lead = new LeadRoot { Authentication = value };
+            LeadRoot lead = new LeadRoot { Authentication = value, Lead = new Lead() };
             if (SendRequestGetRecord(lead, id, LoadResponsePotential))
                 return lead.GetId();
             return string.Empty;
@@ -67,7 +67,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         protected override string GetEntityName() => ENTITY_NAME;
         protected override MessageType.ENTITY GetEntityType() => ENTITY_TYPE;
-        protected override bool FilterEntity(string entity) => entity.Equals(ENTITY);
+        protected override bool FilterEntity(string entity) => Filter(entity);
         protected override void SetId(string id, BaseRoot value) { }
 
         protected override void OnLoadResponseGetFields(FieldsResponse.FieldsResponseCrm fieldResponse, MessageType message)

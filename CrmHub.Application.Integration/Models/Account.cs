@@ -2,7 +2,7 @@
 
 namespace CrmHub.Application.Integration.Models
 {
-    public class Company : BaseEntity
+    public class Account : BaseEntity
     {
        
     }

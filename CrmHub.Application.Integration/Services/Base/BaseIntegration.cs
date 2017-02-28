@@ -33,7 +33,7 @@ namespace CrmHub.Application.Integration.Services.Base
             int index = 0;
             bool result = true;
             result &= ExecuteAccount(value);
-            if (!result)
+            if (result)
             {
                 value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
                 result &= ExecuteLead(value);
@@ -104,10 +104,7 @@ namespace CrmHub.Application.Integration.Services.Base
             return OnExecuteLead(value, value.MappingFields.Where(v => filterLead(v.Entity)).ToList());
         }
 
-        private bool ExecuteLead(LeadRoot value)
-        {
-            return OnExecuteLead(value, value.MappingFields);
-        }
+        private bool ExecuteLead(LeadRoot value) => OnExecuteLead(value, value.MappingFields);
 
         private bool ExecuteEvent(ScheduleRoot value)
         {
@@ -130,10 +127,7 @@ namespace CrmHub.Application.Integration.Services.Base
             return OnExecuteEvent(value, mapping);
         }
 
-        private bool ExecuteEvent(EventRoot value)
-        {
-            return OnExecuteEvent(value, value.MappingFields);
-        }
+        private bool ExecuteEvent(EventRoot value) => OnExecuteEvent(value, value.MappingFields);
 
         private bool ExecuteContact(ScheduleRoot value, Contact contact, int index)
         {
@@ -152,10 +146,7 @@ namespace CrmHub.Application.Integration.Services.Base
             return OnExecuteAccount(value, value.MappingFields.Where(v => filterAccount(v.Entity)).ToList());
         }
 
-        private bool ExecuteAccount(AccountRoot value)
-        {
-            return OnExecuteAccount(value, value.MappingFields);
-        }
+        private bool ExecuteAccount(AccountRoot value) => OnExecuteAccount(value, value.MappingFields);
 
         #endregion
     }

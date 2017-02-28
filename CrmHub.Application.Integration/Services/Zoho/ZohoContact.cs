@@ -55,11 +55,20 @@ namespace CrmHub.Application.Integration.Services.Zoho
                 mapping.Add(new MappingFields { Entity = ENTITY, Field = ACCOUNT_ID, Id = index, Value = accountId });
             }
 
-            ContactRoot contactRoot = new ContactRoot { Authentication = schedule.Authentication, Contact = contact };
+            ContactRoot contactRoot = new ContactRoot { Authentication = schedule.Authentication, Contact = contact, MappingFields = schedule.MappingFields };
+            SendRequestSearch(contactRoot, GetEntityName(), FIELD_SELECT, FIELD_SEARCH, email, GetResponseSearch);
 
-            if (SendRequestSearch(contactRoot, GetEntityName(), FIELD_SELECT, FIELD_SEARCH, email, GetResponseSearch))
-                return Execute(contactRoot, mapping, index);
-            return Execute(contactRoot, mapping, index);
+            if (Execute(contactRoot, mapping, index))
+            {
+                Predicate<string> filter = s => ZohoEvent.Filter(s) || ZohoPotential.Filter(s) || ZohoAccount.Filter(s);
+
+                if (!schedule.MappingFields.Exists(e => filter(e.Entity) && e.Field.Equals("CONTACTID")))
+                    contactRoot.MappingFields.Where(e => filter(e.Entity) && e.Field.Equals("CONTACTID")).ToList().ForEach(f => schedule.MappingFields.Add(f));
+
+                if (!schedule.MappingFields.Exists(e => ZohoEvent.Filter(e.Entity) && e.Field.Equals("Participants")))
+                    contactRoot.MappingFields.Where(e => ZohoEvent.Filter(e.Entity) && e.Field.Equals("Participants")).ToList().ForEach(f => schedule.MappingFields.Add(f));
+            }
+            return false;
         }
 
         public bool Execute(ContactRoot value, List<MappingFields> mapping, int index = 0)
@@ -87,16 +96,16 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         protected override void SetId(string id, BaseRoot value)
         {
-            if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("CONTACTID")))
+            if (!value.MappingFields.Exists(e => ZohoEvent.Filter(e.Entity) && e.Field.Equals("CONTACTID")))
                 value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "CONTACTID", Value = id });
 
-            if (!value.MappingFields.Exists(e => e.Entity.Equals("Account") && e.Field.Equals("CONTACTID")))
+            if (!value.MappingFields.Exists(e => ZohoAccount.Filter(e.Entity) && e.Field.Equals("CONTACTID")))
                 value.MappingFields.Add(new MappingFields { Entity = "Account", Field = "CONTACTID", Value = id });
 
-            if (!value.MappingFields.Exists(e => e.Entity.Equals("Potential") && e.Field.Equals("CONTACTID")))
+            if (!value.MappingFields.Exists(e => ZohoPotential.Filter(e.Entity) && e.Field.Equals("CONTACTID")))
                 value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "CONTACTID", Value = id });
 
-            if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("Participants")))
+            if (!value.MappingFields.Exists(e => ZohoEvent.Filter(e.Entity) && e.Field.Equals("Participants")))
                 value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "Participants", Value = "<Participant><FL val=\"CONTACTID\">{0}</FL></Participant>" });
 
             SetParticipants(id, value);

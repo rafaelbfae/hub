@@ -76,20 +76,9 @@ namespace CrmHub.Application.Integration.Services.Zoho
             return OnExecutePotential(value, value.MappingFields.Where(v => filterPotential(v.Entity)).ToList());
         }
 
-        protected override bool OnExecuteLead(LeadRoot value, List<MappingFields> list)
-        {
-            return PotentialController.Execute(value, list);
-        }
-
-        protected override bool OnDeleteLead(string id, Authentication value)
-        {
-            return PotentialController.Delete(id, value);
-        }
-
-        protected override bool OnGetFieldsLead(Authentication value)
-        {
-            return PotentialController.GetFields(value);
-        }
+        protected override bool OnExecuteLead(LeadRoot value, List<MappingFields> list) => PotentialController.Execute(value, list);
+        protected override bool OnDeleteLead(string id, Authentication value) => PotentialController.Delete(id, value);
+        protected override bool OnGetFieldsLead(Authentication value) => PotentialController.GetFields(value);
 
         protected override bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list, int index = 0)
         {
@@ -101,60 +90,23 @@ namespace CrmHub.Application.Integration.Services.Zoho
             return ContactController.Execute(value, list, index);
         }
 
-        protected override bool OnGetIdContact(ContactRoot value)
-        {
-            return ContactController.GetId(value);
-        }
+        protected override bool OnGetIdContact(ContactRoot value) => ContactController.GetId(value);
+        protected override bool OnDeleteContact(string id, Authentication value) => ContactController.Delete(id, value);
+        protected override bool OnGetFieldsContact(Authentication value) => ContactController.GetFields(value);
 
-        protected override bool OnDeleteContact(string id, Authentication value)
-        {
-            return ContactController.Delete(id, value);
-        }
-
-        protected override bool OnGetFieldsContact(Authentication value)
-        {
-            return ContactController.GetFields(value);
-        }
-
-        protected override bool OnExecuteEvent(ScheduleRoot value, List<MappingFields> list)
-        {
-            return EventController.Execute(value, list);
-        }
-
-        protected override bool OnExecuteEvent(EventRoot value, List<MappingFields> list)
-        {
-            return EventController.Execute(value, list);
-        }
-
-        protected override bool OnDeleteEvent(string id, Authentication value)
-        {
-            return EventController.Delete(id, value);
-        }
-
-        protected override bool OnGetFieldsEvent(Authentication value)
-        {
-            return EventController.GetFields(value);
-        }
+        protected override bool OnExecuteEvent(ScheduleRoot value, List<MappingFields> list) => EventController.Execute(value, list);
+        protected override bool OnExecuteEvent(EventRoot value, List<MappingFields> list) => EventController.Execute(value, list);
+        protected override bool OnDeleteEvent(string id, Authentication value) => EventController.Delete(id, value);
+        protected override bool OnGetFieldsEvent(Authentication value) => EventController.GetFields(value);
 
         protected override bool OnExecuteAccount(ScheduleRoot value, List<MappingFields> list)
         {
             return AccountController.Execute(value, list.Where(w => filterAccount(w.Entity)).ToList());
         }
 
-        protected override bool OnExecuteAccount(AccountRoot value, List<MappingFields> list)
-        {
-            return AccountController.Execute(value, list);
-        }
-
-        protected override bool OnDeleteAccount(string id, Authentication value)
-        {
-            return AccountController.Delete(id, value);
-        }
-
-        protected override bool OnGetFieldsAccount(Authentication value)
-        {
-            return AccountController.GetFields(value);
-        }
+        protected override bool OnExecuteAccount(AccountRoot value, List<MappingFields> list) => AccountController.Execute(value, list);
+        protected override bool OnDeleteAccount(string id, Authentication value) => AccountController.Delete(id, value);
+        protected override bool OnGetFieldsAccount(Authentication value) => AccountController.GetFields(value);
 
         protected bool OnExecutePotential(ScheduleRoot value, List<MappingFields> list)
         {

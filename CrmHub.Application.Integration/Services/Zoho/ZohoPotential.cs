@@ -34,7 +34,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         public bool Execute(ScheduleRoot schedule, List<MappingFields> mapping)
         {
-            LeadRoot lead = new LeadRoot { Lead = schedule.Lead, Authentication = schedule.Authentication };
+            LeadRoot lead = new LeadRoot { Lead = schedule.Lead, Authentication = schedule.Authentication, MappingFields = mapping };
             mapping.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = DateTime.Now.AddMonths(1).ToString("yyy-MM-dd hh:mm:ss") });
 
             if (string.IsNullOrEmpty(schedule.Lead.Id))
@@ -42,8 +42,8 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
             if (Execute(lead, mapping.Where(w => FilterEntity(w.Entity)).ToList()))
             {
-                if (!schedule.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("SEMODULE")))
-                    lead.MappingFields.Where(w => w.Entity.Equals("Event")).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
+                if (!schedule.MappingFields.Exists(e => ZohoEvent.Filter(e.Entity) && e.Field.Equals("SEMODULE")))
+                    lead.MappingFields.Where(w => ZohoEvent.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
                 return true;
             }
             return false;
