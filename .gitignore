@@ -11,6 +11,14 @@ x64/*
 build/*
 [Bb]in/*
 [Oo]bj/*
+bin/*
+obj/*
+Debug/*
+Release/*
+**/bin/*
+**/obj/*
+**/Debug/*
+**/Release/*
 
 # NuGet Packages
 *.nupkg
@@ -21,3 +29,4 @@ build/*
 *.dll
 *.pdb
 *.exe
+*.rsp
