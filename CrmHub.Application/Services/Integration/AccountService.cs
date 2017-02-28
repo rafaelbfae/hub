@@ -5,11 +5,11 @@ using CrmHub.Infra.Messages.Interfaces;
 
 namespace CrmHub.Application.Services.Integration
 {
-    public class CompanyService : ICompanyService
+    public class AccountService : IAccountService
     {
         private readonly IHubService _service;
 
-        public CompanyService(IHubService service)
+        public AccountService(IHubService service)
         {
             this._service = service;
         }

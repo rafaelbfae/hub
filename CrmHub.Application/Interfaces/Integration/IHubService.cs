@@ -24,5 +24,10 @@ namespace CrmHub.Application.Interfaces.Integration
         bool AccountUpdate(EmpresaExact value);
         bool AccountGetFields(Autenticacao value);
         bool AccountDelete(string id, Autenticacao value);
+
+        bool EventRegister(ReuniaoExact value);
+        bool EventUpdate(ReuniaoExact value);
+        bool EventGetFields(Autenticacao value);
+        bool EventDelete(string id, Autenticacao value);
     }
 }

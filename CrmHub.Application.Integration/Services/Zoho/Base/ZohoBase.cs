@@ -42,7 +42,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             {
                 MessageController.GetMessageSuccess().ForEach(e =>
                 {
-                    e.Entity = MessageType.ENTITY.EMPRESA;
+                    e.Entity = GetEntityType();
                     OnLoadResponseGetFields(((FieldsResponseCrm)(e.Data)), e);
                 });
                 return true;

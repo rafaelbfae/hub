@@ -123,7 +123,7 @@ namespace CrmHub.Application.Services.Integration
 
         #endregion
 
-        #region Company
+        #region Account
 
         public bool AccountRegister(EmpresaExact value)
         {
@@ -147,6 +147,34 @@ namespace CrmHub.Application.Services.Integration
         {
             var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
             return Execute(_value, (c, v) => c.AccountGetFields(_value));
+        }
+
+        #endregion
+
+        #region Event
+
+        public bool EventRegister(ReuniaoExact value)
+        {
+            var _value = Mapper.Map<EventRoot>(value);
+            return Execute(_value, (c, v) => c.EventRegister(_value));
+        }
+
+        public bool EventUpdate(ReuniaoExact value)
+        {
+            var _value = Mapper.Map<EventRoot>(value);
+            return Execute(_value, (c, v) => c.EventUpdate(_value));
+        }
+
+        public bool EventDelete(string id, Autenticacao value)
+        {
+            var _value = Mapper.Map<Authentication>(value);
+            return ExecuteById(id, _value, (c, i, v) => c.EventDelete(id, _value));
+        }
+
+        public bool EventGetFields(Autenticacao value)
+        {
+            var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
+            return Execute(_value, (c, v) => c.EventGetFields(_value));
         }
 
         #endregion

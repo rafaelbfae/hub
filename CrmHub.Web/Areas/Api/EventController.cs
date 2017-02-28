@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Models.Exact.Roots;
+using CrmHub.Application.Interfaces.Integration;
+using Microsoft.Extensions.Logging;
 using CrmHub.Application.Models.Exact;
 using CrmHub.Web.Areas.Api.Base;
 
@@ -9,24 +9,24 @@ namespace CrmHub.Web.Areas.Api
 {
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
-    public class CompanyController : HubController<IAccountService>
+    public class EventController : HubController<IEventService>
     {
-        public CompanyController(IAccountService service, ILogger<CompanyController> logger) : base(service, logger)
+        public EventController(IEventService service, ILogger<EventController> logger) : base(service, logger)
         {
         }
-
+    
         [HttpPost]
-        public IActionResult Post([FromBody] EmpresaExact value)
+        public IActionResult Post([FromBody] ReuniaoExact value)
         {
-            _logger.LogDebug("Company Register Call");
+            _logger.LogDebug("Event Register Call");
             return Execute(value, (v, c) => v.Register(c));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] EmpresaExact value)
+        public IActionResult Put(string id, [FromBody] ReuniaoExact value)
         {
-            _logger.LogDebug("Company Update Call");
-            value.Empresa.Id = id;
+            _logger.LogDebug("Event Update Call");
+            value.Reuniao.Id = id;
             return Execute(value, (v, c) => v.Update(c));
         }
 
@@ -35,7 +35,7 @@ namespace CrmHub.Web.Areas.Api
         {
             if (ModelState.IsValid)
             {
-                _logger.LogDebug("Company Delete Call");
+                _logger.LogDebug("Event Delete Call");
                 _service.Delete(id, value);
                 return Ok(_service.MessageController().GetAllMessageToJson());
             }
@@ -49,7 +49,7 @@ namespace CrmHub.Web.Areas.Api
         {
             if (ModelState.IsValid)
             {
-                _logger.LogDebug("Company Fields Call");
+                _logger.LogDebug("Event Fields Call");
                 _service.Fields(value);
                 return Ok(_service.MessageController().GetAllMessageToJson());
             }
