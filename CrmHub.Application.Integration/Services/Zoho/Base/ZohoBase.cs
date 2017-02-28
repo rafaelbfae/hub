@@ -34,9 +34,9 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
 
         #region Public Methods
 
-        public bool Delete(string id, Authentication value) => SendRequestDelete(value, id, GetResponse);
+        public virtual bool Delete(string id, Authentication value) => SendRequestDelete(value, id, GetResponse);
 
-        public bool GetFields(Authentication value)
+        public virtual bool GetFields(Authentication value)
         {
             if (SendRequestGetFields(value, LoadResponseFields))
             {
@@ -62,7 +62,14 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
         protected abstract bool FilterEntity(string entity);
         protected abstract void SetId(string id, BaseRoot value);
         protected abstract void OnLoadResponseGetFields(FieldsResponseCrm fieldResponse, MessageType message);
-        
+
+        protected bool SendRequestDelete(Authentication value, string id, Func<string, object, bool> getResponse)
+        {
+            string url = value.UrlService;
+            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={5}", url, GetEntityName(), "deleteRecords", value.Token, value.User, id);
+            return HttpMessageSender.SendRequestPost(urlFormat, string.Empty, null, getResponse);
+        }
+
         protected bool SendRequestGetRecord(BaseRoot value, string id, Func<string, object, bool> loadResponse)
         {
             return SendRequestGetRecord(value, GetEntityName(), id, loadResponse);
@@ -91,11 +98,17 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             return SendRequestUpdate(value.Authentication, content, value, getReponse);
         }
 
-        protected bool SendRequestDelete(Authentication value, string id, Func<string, object, bool> getResponse)
+        protected bool SendRequestSearch(BaseRoot value, string selectColumn, string searchColumn, string searchValue, Func<string, object, bool> getResponse)
         {
-            string url = value.UrlService;
-            string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&id={5}", url, GetEntityName(), "deleteRecords", value.Token, value.User, id);
-            return HttpMessageSender.SendRequestPost(urlFormat, string.Empty, null, getResponse);
+            return SendRequestSearch(value, GetEntityName(), selectColumn, searchColumn, searchValue, getResponse);
+        }
+
+        protected bool SendRequestSearch(BaseRoot value, string entityName, string selectColumn, string searchColumn, string searchValue, Func<string, object, bool> getResponse)
+        {
+            string url = value.Authentication.UrlService;
+            string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}&selectColumns={5}({6})&searchColumn={7}&searchValue={8}",
+                url, entityName, "getSearchRecordsByPDC", value.Authentication.Token, value.Authentication.User, entityName, selectColumn, searchColumn.ToLower(), searchValue);
+            return HttpMessageSender.SendRequestGet(urlFormat, value, getResponse);
         }
 
         protected virtual bool GetResponse(string response, object value)

@@ -35,12 +35,12 @@ namespace CrmHub.Application.Integration.Services.Zoho
         {
             AccountRoot account = GetAccount(schedule);
             if (!string.IsNullOrEmpty(schedule.Lead.Id))
-                SendRequestGetRecord(schedule, "Potentials", schedule.Lead.Id, GetIdByRecord);
+                SendRequestGetRecord(schedule, ZohoPotential.ENTITY_NAME, schedule.Lead.Id, GetIdByRecord);
 
             if (Execute(account, mapping.Where(w => FilterEntity(w.Entity)).ToList()))
             {
-                account.MappingFields.Where(w => w.Entity.Equals("Event")).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
-                account.MappingFields.Where(w => w.Entity.Equals("Potential")).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
+                account.MappingFields.Where(w => ZohoEvent.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
+                account.MappingFields.Where(w => ZohoPotential.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
                 return true;
             }
             return true;
@@ -66,10 +66,10 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         protected override void SetId(string id, BaseRoot value)
         {
-            if (!value.MappingFields.Exists(e => e.Entity.Equals("Event") && e.Field.Equals("ACCOUNTID")))
-                value.MappingFields.Add(new MappingFields { Entity = "Event", Field = "ACCOUNTID", Value = id });
-            if (!value.MappingFields.Exists(e => e.Entity.Equals("Potential") && e.Field.Equals("ACCOUNTID")))
-                value.MappingFields.Add(new MappingFields { Entity = "Potential", Field = "ACCOUNTID", Value = id });
+            if (!value.MappingFields.Exists(e => ZohoEvent.Filter(e.Entity) && e.Field.Equals("ACCOUNTID")))
+                value.MappingFields.Add(new MappingFields { Entity = ZohoEvent.ENTITY, Field = "ACCOUNTID", Value = id });
+            if (!value.MappingFields.Exists(e => ZohoPotential.Filter(e.Entity) && e.Field.Equals("ACCOUNTID")))
+                value.MappingFields.Add(new MappingFields { Entity = ZohoPotential.ENTITY, Field = "ACCOUNTID", Value = id });
         }
 
         #endregion
@@ -79,12 +79,11 @@ namespace CrmHub.Application.Integration.Services.Zoho
         private AccountRoot GetAccount(ScheduleRoot value)
         {
             AccountRoot company = new AccountRoot { Authentication = value.Authentication, MappingFields = value.MappingFields.Where(w => FilterEntity(w.Entity)).ToList() };
-            Func<string, bool> filterLead = v => v.Equals("Lead") || v.Equals("Address");
             string accountSite =
-                GetFieldValue(value, "City", filterLead) + " / " +
-                GetFieldValue(value, "State", filterLead) + " - " +
-                GetFieldValue(value, "Country", filterLead);
-            company.MappingFields.Add(new MappingFields { Entity = "Account", Field = "Account Site", Value = accountSite });
+                GetFieldValue(value, "City", ZohoLead.Filter) + " / " +
+                GetFieldValue(value, "State", ZohoLead.Filter) + " - " +
+                GetFieldValue(value, "Country", ZohoLead.Filter);
+            company.MappingFields.Add(new MappingFields { Entity = ENTITY, Field = "Account Site", Value = accountSite });
             return company;
         }
 
