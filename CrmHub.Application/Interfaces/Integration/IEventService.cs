@@ -5,8 +5,8 @@ namespace CrmHub.Application.Interfaces.Integration
 {
     public interface IEventService : IMessageService
     {
-        bool Register(ReuniaoExact value);
-        bool Update(ReuniaoExact value);
+        bool Register(EventoExact value);
+        bool Update(EventoExact value);
         bool Fields(Autenticacao value);
         bool Delete(string id, Autenticacao value);
     }

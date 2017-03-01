@@ -35,10 +35,6 @@ namespace CrmHub.Application.Integration.Services.Zoho
         public bool Execute(ScheduleRoot schedule, List<MappingFields> mapping)
         {
             LeadRoot lead = new LeadRoot { Lead = schedule.Lead, Authentication = schedule.Authentication, MappingFields = mapping };
-            mapping.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = DateTime.Now.AddMonths(1).ToString("yyy-MM-dd hh:mm:ss") });
-
-            if (string.IsNullOrEmpty(schedule.Lead.Id))
-                mapping.Add(new MappingFields { Entity = "Potential", Field = "Stage", Value = "Qualificação" });
 
             if (Execute(lead, mapping.Where(w => FilterEntity(w.Entity)).ToList()))
             {
@@ -51,7 +47,12 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         public bool Execute(LeadRoot lead, List<MappingFields> mapping)
         {
-            return SendRequestSave(lead, mapping, GetResponse);
+            mapping.Add(new MappingFields { Entity = "Potential", Field = "Closing Date", Value = DateTime.Now.AddMonths(1).ToString("yyy-MM-dd hh:mm:ss") });
+
+            if (string.IsNullOrEmpty(lead.GetId()))
+                mapping.Add(new MappingFields { Entity = "Potential", Field = "Stage", Value = "Qualificação" });
+
+            return SendRequestSave(lead, mapping.Where(w => FilterEntity(w.Entity)).ToList(), GetResponse);
         }
 
         public static bool Filter(string entity) => entity.Equals(ENTITY);

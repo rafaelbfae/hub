@@ -16,14 +16,14 @@ namespace CrmHub.Web.Areas.Api
         }
     
         [HttpPost]
-        public IActionResult Post([FromBody] ReuniaoExact value)
+        public IActionResult Post([FromBody] EventoExact value)
         {
             _logger.LogDebug("Event Register Call");
             return Execute(value, (v, c) => v.Register(c));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] ReuniaoExact value)
+        public IActionResult Put(string id, [FromBody] EventoExact value)
         {
             _logger.LogDebug("Event Update Call");
             value.Reuniao.Id = id;

@@ -153,13 +153,13 @@ namespace CrmHub.Application.Services.Integration
 
         #region Event
 
-        public bool EventRegister(ReuniaoExact value)
+        public bool EventRegister(EventoExact value)
         {
             var _value = Mapper.Map<EventRoot>(value);
             return Execute(_value, (c, v) => c.EventRegister(_value));
         }
 
-        public bool EventUpdate(ReuniaoExact value)
+        public bool EventUpdate(EventoExact value)
         {
             var _value = Mapper.Map<EventRoot>(value);
             return Execute(_value, (c, v) => c.EventUpdate(_value));

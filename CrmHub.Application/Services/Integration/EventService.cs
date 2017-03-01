@@ -19,12 +19,12 @@ namespace CrmHub.Application.Services.Integration
             return _service.MessageController();
         }
 
-        public bool Update(ReuniaoExact value)
+        public bool Update(EventoExact value)
         {
             return _service.EventUpdate(value);
         }
 
-        public bool Register(ReuniaoExact value)
+        public bool Register(EventoExact value)
         {
             return _service.EventRegister(value);
         }

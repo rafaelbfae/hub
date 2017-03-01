@@ -159,14 +159,14 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&xmlData={5}", url, GetEntityName(), "insertRecords", value.Token, value.User, content);
-            return _httpMessageSender.SendRequestPost(urlFormat, content, baseRoot, getResponse);
+            return HttpMessageSender.SendRequestPost(urlFormat, content, baseRoot, getResponse);
         }
 
         private bool SendRequestUpdate(Authentication value, string content, BaseRoot baseRoot, Func<string, object, bool> getResponse)
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}xml/{1}/{2}?authtoken={3}&scope={4}&newFormat=1&id={5}&xmlData={6}", url, GetEntityName(), "updateRecords", value.Token, value.User, baseRoot.GetId(), content);
-            return _httpMessageSender.SendRequestPost(urlFormat, content, baseRoot, getResponse);
+            return HttpMessageSender.SendRequestPost(urlFormat, content, baseRoot, getResponse);
         }
 
         private string LoadXml(string entityName, List<MappingFields> list)

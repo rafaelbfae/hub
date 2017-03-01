@@ -28,7 +28,7 @@ namespace CrmHub.Application.Models.Exact
         public string Diagnostico { get; set; }
 
         [Required]
-        [Crm(eCrmName.ZOHOCRM, "Account", "Phone")]
+        [Crm(eCrmName.ZOHOCRM, "Account", new string[] { "Phone" })]
         [Crm(eCrmName.ZOHOCRM, new string[] { "Phone", "Mobile", "Other Phone" })]
         public List<string> Telefone { get; set; }
 

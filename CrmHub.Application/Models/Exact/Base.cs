@@ -60,7 +60,7 @@ namespace CrmHub.Application.Models.Exact
                             fields.Add(new MapeamentoCampos()
                             {
                                 Id = id,
-                                TipoEntidadeCRM = entityCrm,
+                                TipoEntidadeCRM = map.Entity,
                                 CampoCRM = map.Fields[index],
                                 Valor = ConvertToString(propertieValue[index], map.Format)
                             });

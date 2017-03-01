@@ -37,7 +37,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
             if (!string.IsNullOrEmpty(schedule.Lead.Id))
                 SendRequestGetRecord(account, ZohoPotential.ENTITY_NAME, schedule.Lead.Id, GetIdByRecord);
 
-            if (Execute(account, mapping.Where(w => FilterEntity(w.Entity)).ToList()))
+            if (Execute(account, account.MappingFields.Where(w => FilterEntity(w.Entity)).ToList()))
             {
                 account.MappingFields.Where(w => ZohoEvent.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
                 account.MappingFields.Where(w => ZohoPotential.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
