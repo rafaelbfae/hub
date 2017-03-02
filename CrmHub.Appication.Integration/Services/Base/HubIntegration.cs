@@ -40,6 +40,7 @@ namespace CrmHub.Application.Integration.Services.Base
 
         public bool Schedule(ScheduleRoot value) => Execute(value, (c, v) => c.Schedule((ScheduleRoot)v));
         public bool ReSchedule(ScheduleRoot value) => Execute(value, (c, v) => c.ReSchedule((ScheduleRoot)v));
+        public bool CancelSchedule(string id, Authentication value) => ExecuteById(id, value, (c, i, v) => c.CancelSchedule(i, v));
 
         public bool LeadRegister(LeadRoot value) => Execute(value, (c, v) => c.LeadRegister((LeadRoot)v));
         public bool LeadUpdate(LeadRoot value) => Execute(value, (c, v) => c.LeadUpdate((LeadRoot)v));
