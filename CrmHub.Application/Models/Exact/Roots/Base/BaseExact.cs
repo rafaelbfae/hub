@@ -10,6 +10,8 @@ namespace CrmHub.Application.Models.Exact.Roots.Base
     public abstract class BaseExact<T>
     {
 
+        public virtual string GetId() { return string.Empty; }
+
         protected BaseExact()
         {
             EntidadeCampoValor = new List<MapeamentoCampos>();

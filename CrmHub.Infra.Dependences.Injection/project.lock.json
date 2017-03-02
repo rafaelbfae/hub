@@ -20,51 +20,6 @@
           "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
-      "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.CSharp": "4.0.1",
-          "System.AppDomain": "2.0.10",
-          "System.Collections": "4.0.11",
-          "System.Collections.Concurrent": "4.0.12",
-          "System.ComponentModel.TypeConverter": "4.1.0",
-          "System.Data.Common": "4.1.0",
-          "System.Data.SqlClient": "4.1.0",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Diagnostics.TraceSource": "4.0.0",
-          "System.Dynamic.Runtime": "4.0.11",
-          "System.Globalization": "4.0.11",
-          "System.IO": "4.1.0",
-          "System.Linq": "4.1.0",
-          "System.Linq.Expressions": "4.1.0",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Emit.ILGeneration": "4.0.1",
-          "System.Reflection.Emit.Lightweight": "4.0.1",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Runtime.InteropServices": "4.1.0",
-          "System.Runtime.Numerics": "4.0.1",
-          "System.Runtime.Serialization.Primitives": "4.1.1",
-          "System.Text.Encoding": "4.0.11",
-          "System.Text.Encoding.Extensions": "4.0.11",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11",
-          "System.Xml.ReaderWriter": "4.0.11",
-          "System.Xml.XDocument": "4.0.11",
-          "System.Xml.XmlDocument": "4.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.5/CoreCompat.Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.5/CoreCompat.Newtonsoft.Json.dll": {}
-        }
-      },
       "Libuv/1.9.1": {
         "type": "package",
         "dependencies": {
@@ -1684,23 +1639,6 @@
           "lib/netstandard1.6/System.AppContext.dll": {}
         }
       },
-      "System.AppDomain/2.0.10": {
-        "type": "package",
-        "dependencies": {
-          "System.Linq": "4.1.0-rc2-24027",
-          "System.Linq.Expressions": "4.0.11-rc2-24027",
-          "System.Reflection": "4.1.0-rc2-24027",
-          "System.Reflection.TypeExtensions": "4.1.0-rc2-24027",
-          "System.Resources.ResourceManager": "4.0.1-rc2-24027",
-          "System.Runtime.InteropServices": "4.1.0-rc2-24027"
-        },
-        "compile": {
-          "lib/netstandard1.3/System.AppDomain.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/System.AppDomain.dll": {}
-        }
-      },
       "System.Buffers/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2100,33 +2038,6 @@
         },
         "runtime": {
           "lib/portable-net45+win8+wp8+wpa81/_._": {}
-        }
-      },
-      "System.Diagnostics.TraceSource/4.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Globalization": "4.0.11",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "runtime.native.System": "4.0.0"
-        },
-        "compile": {
-          "ref/netstandard1.3/System.Diagnostics.TraceSource.dll": {}
-        },
-        "runtimeTargets": {
-          "runtimes/unix/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {
-            "assetType": "runtime",
-            "rid": "unix"
-          },
-          "runtimes/win/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {
-            "assetType": "runtime",
-            "rid": "win"
-          }
         }
       },
       "System.Diagnostics.Tracing/4.3.0": {
@@ -2847,7 +2758,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
+          "ref/netstandard1.0/_._": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.ILGeneration.dll": {}
@@ -2862,7 +2773,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.Lightweight.dll": {}
+          "ref/netstandard1.0/_._": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.Lightweight.dll": {}
@@ -3682,7 +3593,7 @@
           "System.Xml.ReaderWriter": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.3/System.Xml.XmlDocument.dll": {}
+          "ref/netstandard1.3/_._": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
@@ -3732,7 +3643,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
           "CrmHub.Infra.Mensagens": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
           "NETStandard.Library": "1.6.1",
@@ -3793,8 +3703,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "CoreCompat.Newtonsoft.Json": "9.0.2-beta001",
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "Newtonsoft.Json": "9.0.1"
         }
       }
     }
@@ -3813,27 +3723,6 @@
         "lib/netstandard1.1/AutoMapper.xml",
         "lib/netstandard1.3/AutoMapper.dll",
         "lib/netstandard1.3/AutoMapper.xml"
-      ]
-    },
-    "CoreCompat.Newtonsoft.Json/9.0.2-beta001": {
-      "sha512": "KuaJL0Ni+hPcyE7j2KH1Pmy1g51J0bx6b3RlUXIaYfJrA9BoDIF8PcJ5OesHMa3+O2yxjD9BNEEB2Axr6meCHw==",
-      "type": "package",
-      "path": "CoreCompat.Newtonsoft.Json/9.0.2-beta001",
-      "files": [
-        "CoreCompat.Newtonsoft.Json.9.0.2-beta001.nupkg.sha512",
-        "CoreCompat.Newtonsoft.Json.nuspec",
-        "lib/net20/CoreCompat.Newtonsoft.Json.dll",
-        "lib/net35/CoreCompat.Newtonsoft.Json.dll",
-        "lib/net40/CoreCompat.Newtonsoft.Json.dll",
-        "lib/net45/CoreCompat.Newtonsoft.Json.dll",
-        "lib/netstandard1.0/CoreCompat.Newtonsoft.Json.dll",
-        "lib/netstandard1.1/CoreCompat.Newtonsoft.Json.dll",
-        "lib/netstandard1.2/CoreCompat.Newtonsoft.Json.dll",
-        "lib/netstandard1.3/CoreCompat.Newtonsoft.Json.dll",
-        "lib/netstandard1.4/CoreCompat.Newtonsoft.Json.dll",
-        "lib/netstandard1.5/CoreCompat.Newtonsoft.Json.dll",
-        "lib/portable40-net40+sl5+win8+wp8+wpa81/CoreCompat.Newtonsoft.Json.dll",
-        "lib/portable45-net45+win8+wp8+wpa81/CoreCompat.Newtonsoft.Json.dll"
       ]
     },
     "Libuv/1.9.1": {
@@ -5386,19 +5275,6 @@
         "runtimes/aot/lib/netcore50/System.AppContext.dll"
       ]
     },
-    "System.AppDomain/2.0.10": {
-      "sha512": "BpKqoIrEXtqoK0pZ7KOISMvR3qRKuJnxeLwPQoPhFN8MrroLcRe/V6GmERYpnP4iya7+ie8qwQOGoOR93FQ2Mw==",
-      "type": "package",
-      "path": "System.AppDomain/2.0.10",
-      "files": [
-        "System.AppDomain.2.0.10.nupkg.sha512",
-        "System.AppDomain.nuspec",
-        "lib/dnxcore50/System.AppDomain.dll",
-        "lib/dnxcore50/System.AppDomain.xml",
-        "lib/netstandard1.3/System.AppDomain.dll",
-        "lib/netstandard1.3/System.AppDomain.xml"
-      ]
-    },
     "System.Buffers/4.3.0": {
       "sha512": "ratu44uTIHgeBeI0dE8DWvmXVBSo4u7ozRZZHOMmK/JPpYyo0dAfgSiHlpiObMQ5lEtEyIXA40sKRYg5J6A8uQ==",
       "type": "package",
@@ -6322,45 +6198,6 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
-      ]
-    },
-    "System.Diagnostics.TraceSource/4.0.0": {
-      "sha512": "6WVCczFZKXwpWpzd/iJkYnsmWTSFFiU24Xx/YdHXBcu+nFI/ehTgeqdJQFbtRPzbrO3KtRNjvkhtj4t5/WwWsA==",
-      "type": "package",
-      "path": "System.Diagnostics.TraceSource/4.0.0",
-      "files": [
-        "System.Diagnostics.TraceSource.4.0.0.nupkg.sha512",
-        "System.Diagnostics.TraceSource.nuspec",
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net46/System.Diagnostics.TraceSource.dll",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net46/System.Diagnostics.TraceSource.dll",
-        "ref/netstandard1.3/System.Diagnostics.TraceSource.dll",
-        "ref/netstandard1.3/System.Diagnostics.TraceSource.xml",
-        "ref/netstandard1.3/de/System.Diagnostics.TraceSource.xml",
-        "ref/netstandard1.3/es/System.Diagnostics.TraceSource.xml",
-        "ref/netstandard1.3/fr/System.Diagnostics.TraceSource.xml",
-        "ref/netstandard1.3/it/System.Diagnostics.TraceSource.xml",
-        "ref/netstandard1.3/ja/System.Diagnostics.TraceSource.xml",
-        "ref/netstandard1.3/ko/System.Diagnostics.TraceSource.xml",
-        "ref/netstandard1.3/ru/System.Diagnostics.TraceSource.xml",
-        "ref/netstandard1.3/zh-hans/System.Diagnostics.TraceSource.xml",
-        "ref/netstandard1.3/zh-hant/System.Diagnostics.TraceSource.xml",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "runtimes/unix/lib/netstandard1.3/System.Diagnostics.TraceSource.dll",
-        "runtimes/win/lib/net46/System.Diagnostics.TraceSource.dll",
-        "runtimes/win/lib/netstandard1.3/System.Diagnostics.TraceSource.dll"
       ]
     },
     "System.Diagnostics.Tracing/4.3.0": {

@@ -180,6 +180,8 @@ C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Migrations
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Migrations\20170117121632_FixUsername.Designer.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Migrations\20170219221635_Add Level.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Migrations\20170219221635_Add Level.Designer.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Migrations\20170224232151_Alterado UserName no acesso remoto.cs
+C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Migrations\20170224232151_Alterado UserName no acesso remoto.Designer.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Models\ApplicationUser.cs
 C:\Users\fabio\Source\Repos\HubCrm\HubCrm.Application\CrmHub.Identity\Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs

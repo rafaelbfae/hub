@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CrmHub.Application.Models.Exact.Roots
 {
-    public class EmpresaExact : BaseExact<EmpresaExact>
+    public class EventExact : BaseExact<EventExact>
     {
         [Required]
-        public Empresa Empresa { get; set; }
+        public Reuniao Reuniao { get; set; }
 
-        public override string GetId() { return Empresa.Id; }
+        public override string GetId() { return Reuniao.Id; }
     }
 }

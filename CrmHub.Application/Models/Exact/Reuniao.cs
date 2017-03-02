@@ -40,9 +40,7 @@ namespace CrmHub.Application.Models.Exact
         [Required]
         [Crm(eCrmName.ZOHOCRM, "Description")]
         public string Referencia { get; set; }
-
-        public string TipoReuniao { get; set; }
-
+        
         [Required]
         public string TimeZone { get; set; }
 
@@ -50,5 +48,7 @@ namespace CrmHub.Application.Models.Exact
         {
             return TimeZoneInfo.ConvertTime(value, TimeZoneInfo.FindSystemTimeZoneById(TimeZone));
         }
+
+        public string TipoReuniao { get; set; }
     }
 }

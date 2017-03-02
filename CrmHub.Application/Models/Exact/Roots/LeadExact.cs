@@ -7,5 +7,7 @@ namespace CrmHub.Application.Models.Exact.Roots
     {
         [Required]
         public Lead Lead { get; set; }
+
+        public override string GetId() { return Lead.Id; }
     }
 }

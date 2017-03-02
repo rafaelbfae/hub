@@ -18,11 +18,8 @@ namespace CrmHub.Infra.Data.Context
         {
             base.OnModelCreating(modelBuilder);
             
-            //modelBuilder.Entity<Client>()
+            //modelBuilder.Entity<Company>()
             //.HasIndex(p => new { p.Company.Id, p.CNPJ });
-
-            //modelBuilder.Entity<FieldMappingValue>()
-            //.HasIndex(p => new { p.Client.Id, p.LabelHub, p.LabelCrm });
         }
 
         protected void UpdateDatesEntries()
@@ -49,11 +46,8 @@ namespace CrmHub.Infra.Data.Context
             return base.SaveChanges();
         }
 
+        public virtual DbSet<LogApi> LogApi { get; set; }
         public virtual DbSet<Crm> Crm { get; set; }
-        public virtual DbSet<Client> Client { get; set; }
-        public virtual DbSet<Vendor> Vendor { get; set; }
         public virtual DbSet<Company> Company { get; set; }
-        public virtual DbSet<AttributeEntity> AttributeEntity { get; set; }
-        public virtual DbSet<FieldMappingValue> FieldMappingValue { get; set; }
     }
 }

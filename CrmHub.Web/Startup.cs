@@ -94,6 +94,7 @@ namespace CrmHub.Web
 
             app.UseStaticFiles();
             app.UseIdentity();
+            app.UseOAuthValidation();
             app.UseOpenIddict();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715

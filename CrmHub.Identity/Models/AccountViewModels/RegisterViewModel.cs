@@ -9,7 +9,7 @@ namespace CrmHub.Identity.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Name")]
         public string UserName { get; set; }
 
         [Required]

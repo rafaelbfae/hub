@@ -5,9 +5,9 @@ using CrmHub.Infra.Data.Repositories.Base;
 
 namespace CrmHub.Infra.Data.Repositories
 {
-    public class ClientRepository : Repository<Client>, IClientRepository
+    public class LoggerApiRepository : Repository<LogApi>, ILogApiRepository
     {
-        public ClientRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public LoggerApiRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
     }

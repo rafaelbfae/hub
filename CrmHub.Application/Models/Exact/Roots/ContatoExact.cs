@@ -1,9 +1,5 @@
 ﻿using CrmHub.Application.Models.Exact.Roots.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CrmHub.Application.Models.Exact.Roots
 {
@@ -11,5 +7,7 @@ namespace CrmHub.Application.Models.Exact.Roots
     {
         [Required]
         public Contato Contato { get; set; }
+
+        public override string GetId() { return Contato.Id; }
     }
 }

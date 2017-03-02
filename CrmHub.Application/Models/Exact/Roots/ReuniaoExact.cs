@@ -19,5 +19,7 @@ namespace CrmHub.Application.Models.Exact.Roots
 
         [Required]
         public List<Contato> Contatos { get; set; }
+
+        public override string GetId() { return Reuniao.Id; }
     }
 }
