@@ -39,6 +39,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
             if (Execute(account, account.MappingFields.Where(w => FilterEntity(w.Entity)).ToList()))
             {
+                schedule.Account = new Account { Id = account.Id };
                 account.MappingFields.Where(w => ZohoEvent.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
                 account.MappingFields.Where(w => ZohoPotential.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
                 return true;

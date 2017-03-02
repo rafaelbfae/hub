@@ -25,16 +25,17 @@ namespace CrmHub.Application.Integration.Services.Base
         public bool Schedule(ScheduleRoot value)
         {
             value.Schedule.Id = string.Empty;
-            return ReSchedule(value);
+            if (!ReSchedule(value))
+                return AccountDelete(value.Account.Id, value.Authentication);
+            return false;
         }
 
         public bool ReSchedule(ScheduleRoot value)
         {
-            int index = 0;
-            bool result = true;
-            result &= ExecuteAccount(value);
+            bool result = ExecuteAccount(value);
             if (result)
             {
+                int index = 0;
                 value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
                 result &= ExecuteLead(value);
                 result &= ExecuteEvent(value);
@@ -136,7 +137,7 @@ namespace CrmHub.Application.Integration.Services.Base
 
         private bool ExecuteContact(ContactRoot value)
         {
-            if (!value.Contact.Id.Equals(string.Empty))
+            if (!string.IsNullOrEmpty(value.GetId()))
                 OnGetIdContact(value);
             return OnExecuteContact(value, value.MappingFields, s => { });
         }

@@ -67,6 +67,8 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
                 if (!schedule.MappingFields.Exists(e => ZohoEvent.Filter(e.Entity) && e.Field.Equals("Participants")))
                     contactRoot.MappingFields.Where(e => ZohoEvent.Filter(e.Entity) && e.Field.Equals("Participants")).ToList().ForEach(f => schedule.MappingFields.Add(f));
+
+                return true;
             }
             return false;
         }
