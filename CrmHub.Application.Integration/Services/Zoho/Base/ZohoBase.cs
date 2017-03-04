@@ -70,6 +70,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
         protected IHttpMessageSender HttpMessageSender => _httpMessageSender;
         protected IMessageController MessageController => _messageController;
 
+        protected abstract string GetEntity();
         protected abstract string GetEntityName();
         protected abstract MessageType.ENTITY GetEntityType();
         protected abstract bool FilterEntity(string entity);
@@ -81,7 +82,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             BaseRoot baseRoot = (BaseRoot)value;
             try
             {
-                Predicate<MappingFields> filter = v => v.Entity.Equals(GetEntityName()) && v.Field.Equals("SMOWNERID");
+                Predicate<MappingFields> filter = v => v.Entity.Equals(GetEntity()) && v.Field.Equals("SMOWNERID");
                 if (!baseRoot.MappingFields.Exists(e => filter(e)))
                     baseRoot.MappingFields.Add(new MappingFields { Entity = GetEntityName(), Field = "SMOWNERID", Value = user.id });
                 return true;

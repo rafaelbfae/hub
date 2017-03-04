@@ -1,5 +1,5 @@
---temp-output:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\obj\Release\netstandard1.6\
---out:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\bin\Release\netstandard1.6\CrmHub.Infra.Mensagens.dll
+--temp-output:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\obj\Release\netstandard1.6\
+--out:C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\bin\Release\netstandard1.6\CrmHub.Infra.Messages.dll
 --define:RELEASE
 --define:TRACE
 --define:NETSTANDARD1_6
@@ -7,7 +7,7 @@
 --suppress-warning:CS1702
 --suppress-warning:CS1705
 --optimize:True
---output-name:CrmHub.Infra.Mensagens
+--output-name:CrmHub.Infra.Messages
 --title:CrmHub.Infra.Message
 --file-version:1.0.0.0
 --version:1.0.0.0
@@ -72,7 +72,7 @@
 --reference:C:\Users\Administrator\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\Administrator\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
 --reference:C:\Users\Administrator\.nuget\packages\System.Xml.XmlDocument\4.0.1\ref\netstandard1.3\System.Xml.XmlDocument.dll
-C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\MessageController.cs
-C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\Interfaces\IMessageController.cs
-C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\Models\MessageType.cs
-C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Mensagens\Properties\AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\MessageController.cs
+C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\Interfaces\IMessageController.cs
+C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\Models\MessageType.cs
+C:\Users\Administrator\Source\Repos\Exact.CrmHub\CrmHub.Infra.Messages\Properties\AssemblyInfo.cs

@@ -88,6 +88,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         #region Protected Methods
 
+        protected override string GetEntity() => ENTITY;
         protected override string GetEntityName() => ENTITY_NAME;
         protected override MessageType.ENTITY GetEntityType() => ENTITY_TYPE;
         protected override bool FilterEntity(string entity) => entity.Equals(ENTITY);

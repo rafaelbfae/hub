@@ -66,7 +66,6 @@ namespace CrmHub.Application.Integration.Services.Zoho
                 string idAccount = PotentialController.GetIdAccount(value, idPotential);
                 if (!idAccount.Equals(string.Empty))
                     return AccountController.Delete(idAccount, value);
-                  
             }
             return false;
         }

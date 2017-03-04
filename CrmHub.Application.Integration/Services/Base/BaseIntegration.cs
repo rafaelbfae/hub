@@ -37,6 +37,8 @@ namespace CrmHub.Application.Integration.Services.Base
                 value.Contacts.ForEach(c => result &= ExecuteContact(value, c, index++));
                 result &= ExecuteLead(value);
                 result &= ExecuteEvent(value);
+                if (!result)
+                    AccountDelete(value.Account.Id, value.Authentication);
             }
             return result;
         }

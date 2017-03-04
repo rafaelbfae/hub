@@ -9,6 +9,7 @@ using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;
 using CrmHub.Application.Integration.Models.Zoho;
 using Newtonsoft.Json;
+using System;
 
 namespace CrmHub.Application.Integration.Services.Zoho
 {
@@ -65,6 +66,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         #region Protected Methods
 
+        protected override string GetEntity() => ENTITY;
         protected override string GetEntityName() => ENTITY_NAME;
         protected override MessageType.ENTITY GetEntityType() => ENTITY_TYPE;
         protected override bool FilterEntity(string entity) => Filter(entity);
