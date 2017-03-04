@@ -18,13 +18,14 @@ namespace CrmHub.Application.Integration.Services.Zoho
     {
         #region Constantes
 
-        private const string ENTITY = "Contact";
-        private const string ENTITY_NAME = "Contacts";
         private const MessageType.ENTITY ENTITY_TYPE = MessageType.ENTITY.CONTATO;
         private const string FIELD_SEARCH = "email";
         private const string FIELD_SELECT = "CONTACTID";
         private const string FIELD_EMAIL = "Email";
         private const string ACCOUNT_ID = "ACCOUNTID";
+
+        public const string ENTITY = "Contact";
+        public const string ENTITY_NAME = "Contacts";
 
         #endregion
 

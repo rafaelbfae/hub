@@ -54,18 +54,7 @@ namespace CrmHub.Infra.Helpers
 
         #endregion
 
-        #region Private Methods
-
-        private async Task<bool> SendRequestPostAsync(string url, string content, object value, Func<string, object, bool> getResponse)
-        {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                StringContent xmlQuery = new StringContent(content);
-                var response = await httpClient.PostAsync(new Uri(url), xmlQuery);
-                response.EnsureSuccessStatusCode();
-                return getResponse(await response.Content.ReadAsStringAsync(), value);
-            }
-        }
+        #region Protected Methods
 
         protected async Task<bool> SendRequestGetAsync(string url, object value, Func<string, object, bool> loadResponse)
         {
@@ -84,6 +73,21 @@ namespace CrmHub.Infra.Helpers
                 var response = await httpClient.DeleteAsync(new Uri(url));
                 response.EnsureSuccessStatusCode();
                 return loadResponse(await response.Content.ReadAsStringAsync(), value);
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private async Task<bool> SendRequestPostAsync(string url, string content, object value, Func<string, object, bool> getResponse)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                StringContent xmlQuery = new StringContent(content);
+                var response = await httpClient.PostAsync(new Uri(url), xmlQuery);
+                response.EnsureSuccessStatusCode();
+                return getResponse(await response.Content.ReadAsStringAsync(), value);
             }
         }
 

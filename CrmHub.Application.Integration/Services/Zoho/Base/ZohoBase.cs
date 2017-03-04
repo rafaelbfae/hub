@@ -1,6 +1,7 @@
 ﻿using CrmHub.Application.Integration.Models;
 using CrmHub.Application.Integration.Models.Response;
 using CrmHub.Application.Integration.Models.Roots.Base;
+using CrmHub.Application.Integration.Models.Zoho;
 using CrmHub.Infra.Helpers.Interfaces;
 using CrmHub.Infra.Messages.Interfaces;
 using CrmHub.Infra.Messages.Models;
@@ -34,6 +35,18 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
 
         #region Public Methods
 
+        public virtual bool Execute(BaseRoot value)
+        {
+            if (!value.MappingFields.Exists(e => e.Entity.Equals(GetEntityName()) && e.Field.Equals("SMOWNERID")))
+            {
+                if (SendRequestGetUser(value, LoadResponseUser))
+                    return true;
+            }
+            else
+                return true;
+            return false;
+        }
+
         public virtual bool Delete(string id, Authentication value) => SendRequestDelete(value, id, GetResponse);
 
         public virtual bool GetFields(Authentication value)
@@ -63,6 +76,19 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
         protected abstract void SetId(string id, BaseRoot value);
         protected abstract void OnLoadResponseGetFields(FieldsResponseCrm fieldResponse, MessageType message);
 
+        protected virtual bool OnLoadReponseUser(User user, object value)
+        {
+            BaseRoot baseRoot = (BaseRoot)value;
+            try
+            {
+                Predicate<MappingFields> filter = v => v.Entity.Equals(GetEntityName()) && v.Field.Equals("SMOWNERID");
+                if (!baseRoot.MappingFields.Exists(e => filter(e)))
+                    baseRoot.MappingFields.Add(new MappingFields { Entity = GetEntityName(), Field = "SMOWNERID", Value = user.id });
+                return true;
+            }
+            catch { return false; }
+        }
+
         protected bool SendRequestDelete(Authentication value, string id, Func<string, object, bool> getResponse)
         {
             string url = value.UrlService;
@@ -80,6 +106,14 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             string url = value.Authentication.UrlService;
             string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}&id={5}",
                 url, entityName, "getRecordById", value.Authentication.Token, value.Authentication.User, id);
+            return HttpMessageSender.SendRequestGet(urlFormat, value, loadResponse);
+        }
+
+        protected bool SendRequestGetUser(BaseRoot value, Func<string, object, bool> loadResponse)
+        {
+            string url = value.Authentication.UrlService;
+            string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}&type={5}",
+                url, "Users", "getUsers", value.Authentication.Token, value.Authentication.User, "ActiveUsers");
             return HttpMessageSender.SendRequestGet(urlFormat, value, loadResponse);
         }
 
@@ -210,6 +244,29 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
                 Console.WriteLine(e.Message);
             }
             catch (AggregateException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return false;
+        }
+
+        private bool LoadResponseUser(string response, object value)
+        {
+            BaseRoot valueRoot = (BaseRoot)value;
+            try
+            {
+                var objectReponse = JsonConvert.DeserializeObject(response, typeof(RootUser));
+                Predicate<User> filter = s => s.email.Equals(valueRoot.Authentication.Email);
+                if (((RootUser)objectReponse).users.user.Exists(e => filter(e)))
+                {
+                    User user = ((RootUser)objectReponse).users.user.Where(w => filter(w)).First();
+                    return OnLoadReponseUser(user, value);
+                }
+                else
+                    MessageController.AddErrorMessage("User not found.");
+
+            }
+            catch (JsonSerializationException e)
             {
                 Console.WriteLine(e.Message);
             }

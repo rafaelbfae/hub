@@ -33,23 +33,28 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         public bool Execute(ScheduleRoot schedule, List<MappingFields> mapping)
         {
-            AccountRoot account = GetAccount(schedule);
-            if (!string.IsNullOrEmpty(schedule.Lead.Id))
-                SendRequestGetRecord(account, ZohoPotential.ENTITY_NAME, schedule.Lead.Id, GetIdByRecord);
-
-            if (Execute(account, account.MappingFields.Where(w => FilterEntity(w.Entity)).ToList()))
+            if (base.Execute(schedule))
             {
-                schedule.Account = new Account { Id = account.Id };
-                account.MappingFields.Where(w => ZohoEvent.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
-                account.MappingFields.Where(w => ZohoPotential.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
-                return true;
+                AccountRoot account = GetAccount(schedule);
+                if (!string.IsNullOrEmpty(schedule.Lead.Id))
+                    SendRequestGetRecord(account, ZohoPotential.ENTITY_NAME, schedule.Lead.Id, GetIdByRecord);
+
+                if (Execute(account, account.MappingFields.Where(w => FilterEntity(w.Entity)).ToList()))
+                {
+                    schedule.Account = new Account { Id = account.Id };
+                    account.MappingFields.Where(w => ZohoEvent.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
+                    account.MappingFields.Where(w => ZohoPotential.Filter(w.Entity)).ToList().ForEach(f => { schedule.MappingFields.Add(f); });
+                    return true;
+                }
             }
-            return true;
+            return false;
         }
 
         public bool Execute(AccountRoot account, List<MappingFields> mapping)
         {
-            return SendRequestSave(account, mapping.Where(w => FilterEntity(w.Entity)).ToList(), GetResponse);
+            if (base.Execute(account))
+                return SendRequestSave(account, mapping.Where(w => FilterEntity(w.Entity)).ToList(), GetResponse);
+            return false;
         }
 
         public static bool Filter(string entity) => entity.Equals(ENTITY);
@@ -65,6 +70,22 @@ namespace CrmHub.Application.Integration.Services.Zoho
         protected override void OnLoadResponseGetFields(FieldsResponse.FieldsResponseCrm fieldResponse, MessageType message)
         {
             LoadResponse(fieldResponse.Accounts, message);
+        }
+
+        protected override bool OnLoadReponseUser(User user, object value)
+        {
+            BaseRoot baseRoot = (BaseRoot)value;
+            if (base.OnLoadReponseUser(user, value))
+            {
+                Func<string, int, MappingFields> mapping = (e, id) => new MappingFields { Entity = e, Field = "SMOWNERID", Value = user.id, Id = id };
+                baseRoot.MappingFields.Add(mapping(ZohoPotential.ENTITY, 0));
+                baseRoot.MappingFields.Add(mapping(ZohoEvent.ENTITY, 0));
+                int index = 0;
+                if (value.GetType() == typeof(ScheduleRoot))
+                    ((ScheduleRoot)baseRoot).Contacts.ForEach(f => { baseRoot.MappingFields.Add(mapping(ZohoContact.ENTITY, index++)); });
+                return true;
+            }
+            return false;
         }
 
         protected override void SetId(string id, BaseRoot value)

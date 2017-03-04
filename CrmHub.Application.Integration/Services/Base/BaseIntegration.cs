@@ -25,9 +25,7 @@ namespace CrmHub.Application.Integration.Services.Base
         public bool Schedule(ScheduleRoot value)
         {
             value.Schedule.Id = string.Empty;
-            if (!ReSchedule(value))
-                return AccountDelete(value.Account.Id, value.Authentication);
-            return false;
+            return ReSchedule(value);
         }
 
         public bool ReSchedule(ScheduleRoot value)
