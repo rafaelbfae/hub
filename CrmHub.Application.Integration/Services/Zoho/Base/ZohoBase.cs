@@ -84,7 +84,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             {
                 Predicate<MappingFields> filter = v => v.Entity.Equals(GetEntity()) && v.Field.Equals("SMOWNERID");
                 if (!baseRoot.MappingFields.Exists(e => filter(e)))
-                    baseRoot.MappingFields.Add(new MappingFields { Entity = GetEntityName(), Field = "SMOWNERID", Value = user.id });
+                    baseRoot.MappingFields.Add(new MappingFields { Entity = GetEntity(), Field = "SMOWNERID", Value = user.id });
                 return true;
             }
             catch { return false; }

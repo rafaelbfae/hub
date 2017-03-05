@@ -34,13 +34,15 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         public bool Execute(ScheduleRoot schedule, List<MappingFields> mapping)
         {
-            EventRoot eventRoot = new EventRoot { Schedule = schedule.Schedule, Authentication = schedule.Authentication };
+            EventRoot eventRoot = new EventRoot { Schedule = schedule.Schedule, Authentication = schedule.Authentication, MappingFields = mapping };
             return Execute(eventRoot, mapping.Where(w => FilterEntity(w.Entity)).ToList());
         }
 
         public bool Execute(EventRoot eventRoot, List<MappingFields> mapping)
         {
-            return SendRequestSave(eventRoot, mapping, GetResponse);
+            if (base.Execute(eventRoot))
+                return SendRequestSave(eventRoot, mapping, GetResponse);
+            return false;
         }
 
         public static bool Filter(string entity) => entity.Equals(ENTITY);
