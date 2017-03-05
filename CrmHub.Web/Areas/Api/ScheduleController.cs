@@ -22,6 +22,12 @@ namespace CrmHub.Web.Areas.Api
             return Execute(value, (v, c) => v.Register(c));
         }
 
+        [HttpPut]
+        public IActionResult Put([FromBody] ReuniaoExact value)
+        {
+            return Post(value);
+        }
+
         [HttpPut("{id}")]
         public IActionResult Put(string id, [FromBody] ReuniaoExact value)
         {
