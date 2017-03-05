@@ -209,10 +209,22 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             string result = string.Format("<{0}><row no=\"1\">", entityName);
 
             foreach (MappingFields mapping in list)
-                result += string.Format("<FL val=\"{0}\">{1}</FL>", mapping.Field, mapping.Value.Replace(",{0}", string.Empty));
+                result += string.Format("<FL val=\"{0}\">{1}</FL>", mapping.Field, GetPlainTextFromHtml(mapping.Value.Replace(",{0}", string.Empty)));
 
             result += string.Format("</row></{0}>", entityName);
             return result;
+        }
+
+        private string GetPlainTextFromHtml(string htmlString)
+        {
+            string htmlTagPattern = "<.*?>";
+            var regexCss = new Regex("(\\<script(.+?)\\</script\\>)|(\\<style(.+?)\\</style\\>)", RegexOptions.Singleline | RegexOptions.IgnoreCase);
+            htmlString = regexCss.Replace(htmlString.Replace("<br />", "\n"), string.Empty);
+            htmlString = Regex.Replace(htmlString, htmlTagPattern, string.Empty);
+            htmlString = Regex.Replace(htmlString, @"^\s+$[\r\n]*", "", RegexOptions.Multiline);
+            htmlString = htmlString.Replace("&nbsp;", string.Empty);
+
+            return htmlString;
         }
 
         private string LoadId(string value, BaseRoot baseRoot, Action<string, BaseRoot> setId)
