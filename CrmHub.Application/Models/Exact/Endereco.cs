@@ -1,6 +1,5 @@
 ﻿using CrmHub.Application.Custom;
 using CrmHub.Application.Integration.Enuns;
-using CrmHub.Application.Models.Exact;
 using System.ComponentModel.DataAnnotations;
 
 namespace CrmHub.Application.Models.Exact
@@ -12,7 +11,6 @@ namespace CrmHub.Application.Models.Exact
         [Crm(eCrmName.ZOHOCRM, "Street")]
         public string Rua { get; set; }
 
-        [Required]
         [Crm(eCrmName.ZOHOCRM, "Zip Code")]
         public string CEP { get; set; }
 
