@@ -281,7 +281,19 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             }
             catch (JsonSerializationException e)
             {
-                Console.WriteLine(e.Message);
+                try
+                {
+                    var objectReponse = JsonConvert.DeserializeObject(response, typeof(RootUserSimple));
+                    User user = ((RootUserSimple)objectReponse).users.user;
+                    if (user.email.Equals(valueRoot.Authentication.Email))
+                        return OnLoadReponseUser(((RootUserSimple)objectReponse).users.user, value);
+                    else
+                        MessageController.AddErrorMessage("User not found.");
+                }
+                catch (JsonSerializationException ex)
+                {
+                    MessageController.AddErrorMessage("User not found.");
+                }
             }
             return false;
         }

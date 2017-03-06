@@ -34,9 +34,18 @@ namespace CrmHub.Application.Integration.Models.Zoho
         public List<User> user { get; set; }
     }
 
+    public class UserSimple
+    {
+        public User user { get; set; }
+    }
+
     public class RootUser
     {
         public Users users { get; set; }
     }
 
+    public class RootUserSimple
+    {
+        public UserSimple users { get; set; }
+    }
 }
