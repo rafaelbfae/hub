@@ -14,7 +14,6 @@ namespace CrmHub.Application.Models.Exact.Roots
         [Required]
         public Reuniao Reuniao { get; set; }
 
-        [Required]
         public Endereco Endereco { get; set; }
 
         [Required]

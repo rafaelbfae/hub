@@ -37,7 +37,6 @@ namespace CrmHub.Application.Models.Exact
         [Crm(eCrmName.ZOHOCRM, "Venue")]
         public string Endereco { get; set; }
 
-        [Required]
         [Crm(eCrmName.ZOHOCRM, "Description")]
         public string Referencia { get; set; }
 

@@ -182,8 +182,12 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
         protected string GetFieldValue(BaseRoot value, string field, Func<string, bool> filter)
         {
             var mapping = value.MappingFields.Where(v => filter(v.Entity)).ToList();
-            var fieldValue = mapping.Where(x => x.Field == field).FirstOrDefault();
-            return fieldValue.Value;
+            if (mapping.Exists(x => x.Field == field))
+            {
+                var fieldValue = mapping.Where(x => x.Field == field).FirstOrDefault();
+                return fieldValue.Value;
+            }
+            return string.Empty;
         }
 
         #endregion
