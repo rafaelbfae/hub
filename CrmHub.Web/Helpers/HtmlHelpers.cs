@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace CrmHub.Web
 {
@@ -32,6 +29,11 @@ namespace CrmHub.Web
         {
             string currentAction = (string)htmlHelper.ViewContext.RouteData.Values["action"];
             return currentAction;
+        }
+
+        public static string ToJson<T>(this T @this)
+        {
+            return JsonConvert.SerializeObject(@this);
         }
 
     }

@@ -2,7 +2,7 @@
 
 namespace CrmHub.Domain.Interfaces.Repositories
 {
-    public interface ICrmRepository : IRepository<Crm>
+    public interface ILogApiRepository : IRepository<LogApi>
     {
     }
 }

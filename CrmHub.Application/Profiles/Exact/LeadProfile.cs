@@ -17,6 +17,7 @@ namespace CrmHub.Application
                 .ForMember(s => s.Authentication, i => i.MapFrom(o => o.Autenticacao))
                 .ForMember(s => s.CustomFields, i => i.MapFrom(o => o.CamposPersonalizados))
                 .ForMember(s => s.EntityName, i => i.MapFrom(o => "Lead"))
+                .ForMember(s => s.Lead, i => i.MapFrom(o => o.Lead))
                 ;
 
             this.CreateMap<Models.Exact.Lead, Lead>();

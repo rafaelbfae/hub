@@ -4,6 +4,7 @@ using CrmHub.Application.Interfaces.Integration;
 using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Models.Exact;
 using CrmHub.Web.Areas.Api.Base;
+using CrmHub.Application.Interfaces;
 
 namespace CrmHub.Web.Areas.Api
 {
@@ -11,7 +12,7 @@ namespace CrmHub.Web.Areas.Api
     [Route("api/v1/[controller]")]
     public class ContactController : HubController<IContactService>
     {
-        public ContactController(IContactService service, ILogger<ContactController> logger) : base(service, logger)
+        public ContactController(IContactService service, ILogger<ContactController> logger, ILoggerApiService loggerApi) : base(service, logger, loggerApi)
         {
         }
 
@@ -19,7 +20,7 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Post([FromBody] ContatoExact value)
         {
             _logger.LogDebug("Contact Register Call");
-            return Execute(value, (v, c) => v.Register(c));
+            return Execute(value, Method.Post, (s, v) => s.Register(v));
         }
 
         [HttpPut("{email}")]
@@ -27,34 +28,22 @@ namespace CrmHub.Web.Areas.Api
         {
             _logger.LogDebug("Contact Update Call");
             value.Contato.Id = email;
-            return Execute(value, (v, c) => v.Update(c));
+            return Execute(value, Method.Put, (s, v) => s.Update(v));
         }
 
         [HttpDelete("{email}")]
         public IActionResult Delete(string email, [FromBody] Autenticacao value)
         {
-            if (ModelState.IsValid)
-            {
-                _logger.LogDebug("Contact Delete Call");
-                _service.Delete(email, value);
-                return Ok(_service.MessageController().GetAllMessageToJson());
-            }
-
-            return ErrorValidation();
+            _logger.LogDebug("Contact Delete Call");
+            return Execute("Contact", email, Method.Delete, value, (s, v, a) => s.Delete(v, a));
         }
 
         [HttpPost]
         [Route("fields")]
         public IActionResult Fields([FromBody] Autenticacao value)
         {
-            if (ModelState.IsValid)
-            {
-                _logger.LogDebug("Contact Fields Call");
-                _service.Fields(value);
-                return Ok(_service.MessageController().GetAllMessageToJson());
-            }
-
-            return ErrorValidation();
+            _logger.LogDebug("Contact Fields Call");
+            return Execute("Contact", string.Empty, Method.Fields, value, (s, v, a) => s.Fields(a));
         }
     }
 }

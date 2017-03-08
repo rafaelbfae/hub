@@ -10,6 +10,7 @@ using CrmHub.Infra.Helpers;
 using CrmHub.Infra.Helpers.Interfaces;
 using CrmHub.Infra.Messages;
 using CrmHub.Infra.Messages.Interfaces;
+using LogApiHub.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CrmHub.Infra.Dependences.Injection
@@ -21,11 +22,11 @@ namespace CrmHub.Infra.Dependences.Injection
             this.CreateSimpleInject(services);
         }
 
-        public void CreateSimpleInject(IServiceCollection services)
+        private void CreateSimpleInject(IServiceCollection services)
         {
-            services.AddTransient<IHubIntegration, HubIntegration>();
-            services.AddTransient<ICrmService, CrmService>();
+            #region Integration
 
+            services.AddTransient<IHubIntegration, HubIntegration>();
             services.AddTransient<IHubService, HubService> ();
             services.AddTransient<IScheduleService, ScheduleService>();
             services.AddTransient<IContactService, ContactService>();
@@ -33,7 +34,12 @@ namespace CrmHub.Infra.Dependences.Injection
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IEventService, EventService>();
 
+            #endregion
+
             services.AddTransient<ICrmRepository, CrmRepository>();
+            services.AddTransient<ILogApiRepository, LoggerApiRepository>();
+            services.AddTransient<ICrmService, CrmService>();
+            services.AddTransient<ILoggerApiService, LoggerApiService>();
 
             services.AddTransient<IMessageController, MessageController>();
 

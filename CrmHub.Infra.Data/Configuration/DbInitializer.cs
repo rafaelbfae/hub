@@ -9,20 +9,10 @@ namespace CrmHub.Infra.Data.Configuration
         public static void Initialize(ApplicationDbContext context)
         {
 
-            if (context.Company.Any())
+            if (context.Crm.Any())
             {
                 return;
             }
-
-            var company = new Company
-            {
-                Name = "ExactSales",
-                Phone = "554830257750",
-                Email = "froman@exactsales.com.br",
-                Contact = "Felipe Roman"
-            };
-
-            context.SaveChanges();
 
             var crms = new Crm[]
             {

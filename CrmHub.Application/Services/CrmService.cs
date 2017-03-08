@@ -19,12 +19,12 @@ namespace CrmHub.Application.Services
 
         public void Add(Crm entity)
         {
-            throw new NotImplementedException();
+            _repository.Add(entity);
         }
 
         public void AddOrUpdate(Crm entity)
         {
-            throw new NotImplementedException();
+            _repository.AddOrUpdate(entity);
         }
 
         public void Dispose()
@@ -34,7 +34,7 @@ namespace CrmHub.Application.Services
 
         public Crm GetById(int id)
         {
-            throw new NotImplementedException();
+            return _repository.GetById(id);
         }
 
         public Crm GetByName(eCrmName name, string environment)
@@ -43,24 +43,24 @@ namespace CrmHub.Application.Services
             return crm;
         }
 
-        public List<Crm> GetAll()
+        public IEnumerable<Crm> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.List();
         }
 
         public void Remove(Crm entity)
         {
-            throw new NotImplementedException();
+            _repository.Delete(entity);
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(new Crm() { Id = id});
         }
 
         public void Update(Crm entity)
         {
-            throw new NotImplementedException();
+            _repository.Update(entity);
         }
     }
 }

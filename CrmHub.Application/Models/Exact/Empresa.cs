@@ -1,5 +1,6 @@
 ﻿using CrmHub.Application.Custom;
 using CrmHub.Application.Integration.Enuns;
+using System.ComponentModel.DataAnnotations;
 
 namespace CrmHub.Application.Models.Exact
 {
@@ -8,6 +9,7 @@ namespace CrmHub.Application.Models.Exact
     {
         public string Id { get; set; }
 
+        [Required]
         [Crm(eCrmName.ZOHOCRM, "Account Name")]
         public string Nome { get; set; }
         
