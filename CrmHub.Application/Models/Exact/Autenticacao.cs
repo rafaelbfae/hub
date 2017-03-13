@@ -9,12 +9,12 @@ namespace CrmHub.Application.Models.Exact
         [Required]
         public string TipoCRM { get; set; }
 
-        [Required]
         public string TokenCRM { get; set; }
 
         [Required]
         public string UsuarioCRM { get; set; }
 
+        [Required]
         public string UsuarioToken { get; set; }
 
         [EmailAddress]
