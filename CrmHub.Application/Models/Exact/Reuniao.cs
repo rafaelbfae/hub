@@ -33,7 +33,6 @@ namespace CrmHub.Application.Models.Exact
             set { dataFim = value; }
         }
 
-        [Required]
         [Crm(eCrmName.ZOHOCRM, "Venue")]
         public string Endereco { get; set; }
 

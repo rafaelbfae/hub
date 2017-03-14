@@ -101,6 +101,12 @@ namespace CrmHub.Application.Integration.Services.Zoho
             return false;
         }
 
+        private void LoadVenue(List<MappingFields> mapping)
+        {
+            const string VENUE = "Venue";
+            if (!mapping.Exists(e => Filter(e.Entity) && e.Field.Equals(VENUE)))
+                mapping.Add(new MappingFields { Entity = ENTITY, Field = VENUE, Value = "Endereço não informado" });
+        }
 
         #endregion
     }
