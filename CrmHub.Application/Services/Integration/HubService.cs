@@ -179,34 +179,6 @@ namespace CrmHub.Application.Services.Integration
 
         #endregion
 
-        #region Event
-
-        public bool EventRegister(EventExact value)
-        {
-            var _value = Mapper.Map<EventRoot>(value);
-            return Execute(_value, (c, v) => c.EventRegister(_value));
-        }
-
-        public bool EventUpdate(EventExact value)
-        {
-            var _value = Mapper.Map<EventRoot>(value);
-            return Execute(_value, (c, v) => c.EventUpdate(_value));
-        }
-
-        public bool EventDelete(string id, Autenticacao value)
-        {
-            var _value = Mapper.Map<Authentication>(value);
-            return ExecuteById(id, _value, (c, i, v) => c.EventDelete(id, _value));
-        }
-
-        public bool EventGetFields(Autenticacao value)
-        {
-            var _value = new BaseRoot() { Authentication = Mapper.Map<Authentication>(value) };
-            return Execute(_value, (c, v) => c.EventGetFields(_value));
-        }
-
-        #endregion
-
         public IMessageController MessageController()
         {
             return _crmIntegration.MessageController;

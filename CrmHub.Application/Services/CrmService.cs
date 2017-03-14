@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CrmHub.Application.Integration.Enuns;
 using CrmHub.Domain.Interfaces.Repositories;
+using CrmHub.Domain.Interfaces.Filters;
 
 namespace CrmHub.Application.Services
 {
@@ -61,6 +62,11 @@ namespace CrmHub.Application.Services
         public void Update(Crm entity)
         {
             _repository.Update(entity);
+        }
+
+        public IEnumerable<Crm> GetList(IDataTableFilter filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

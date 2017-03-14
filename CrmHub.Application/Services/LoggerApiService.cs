@@ -3,6 +3,7 @@ using CrmHub.Domain.Interfaces.Repositories;
 using CrmHub.Domain.Models;
 using System;
 using System.Collections.Generic;
+using CrmHub.Domain.Interfaces.Filters;
 
 namespace LogApiHub.Application.Services
 {
@@ -38,6 +39,11 @@ namespace LogApiHub.Application.Services
         public IEnumerable<LogApi> GetAll()
         {
             return _repository.List();
+        }
+
+        public IEnumerable<LogApi> GetList(IDataTableFilter filter)
+        {
+            return _repository.GetList(filter);
         }
 
         public void Remove(LogApi entity)

@@ -1307,12 +1307,32 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "CrmHub.Infra.Mensagens/1.0.0": {
+      "CrmHub.Infra.Helpers/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Infra.Helpers.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Infra.Helpers.dll": {}
+        }
+      },
+      "CrmHub.Infra.Messages/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CrmHub.Infra.Messages.dll": {}
         }
       }
     }
@@ -4673,16 +4693,24 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "CrmHub.Infra.Mensagens/1.0.0": {
+    "CrmHub.Infra.Helpers/1.0.0": {
       "type": "project",
-      "path": "../CrmHub.Infra.Mensagens/project.json"
+      "path": "../CrmHub.Infra.Helpers/project.json",
+      "msbuildProject": "../CrmHub.Infra.Helpers/CrmHub.Infra.Helpers.xproj"
+    },
+    "CrmHub.Infra.Messages/1.0.0": {
+      "type": "project",
+      "path": "../CrmHub.Infra.Messages/project.json",
+      "msbuildProject": "../CrmHub.Infra.Messages/CrmHub.Infra.Messages.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "CrmHub.Infra.Mensagens >= 1.0.0-*",
+      "CrmHub.Infra.Helpers >= 1.0.0-*",
+      "CrmHub.Infra.Messages >= 1.0.0-*",
       "Microsoft.Extensions.Logging.Abstractions >= 1.1.0",
       "NETStandard.Library >= 1.6.1",
+      "Newtonsoft.Json >= 9.0.1",
       "System.Reflection.TypeExtensions >= 4.3.0"
     ],
     ".NETStandard,Version=v1.6": []

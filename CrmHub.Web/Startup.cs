@@ -1,18 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using CrmHub.Identity.Context;
+using CrmHub.Identity.Models;
+using CrmHub.Infra.Data.Context;
+using CrmHub.Infra.Dependences.Injection;
+using CrmHub.Web.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CrmHub.Web.Services;
-using CrmHub.Identity.Context;
-using CrmHub.Identity.Models;
-using CrmHub.Infra.Dependences.Injection;
-using AutoMapper;
-using CrmHub.Infra.Data.Context;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 
 namespace CrmHub.Web
 {
@@ -42,7 +40,8 @@ namespace CrmHub.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<CrmIdentityDbContext>(options => {
+            services.AddDbContext<CrmIdentityDbContext>(options =>
+            {
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
                 options.UseOpenIddict();
             });
@@ -54,7 +53,8 @@ namespace CrmHub.Web
                 .AddEntityFrameworkStores<CrmIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddOpenIddict(options => {
+            services.AddOpenIddict(options =>
+            {
                 options.AddEntityFrameworkCoreStores<CrmIdentityDbContext>();
                 options.AddMvcBinders();
                 options.EnableTokenEndpoint("/api/v1/connect/token");
@@ -63,9 +63,13 @@ namespace CrmHub.Web
                 options.DisableHttpsRequirement();
             });
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.Culture = System.Globalization.CultureInfo.CurrentCulture;
+                    options.SerializerSettings.DateFormatString = "dd/MM/yyyy HH:mm:ss";
+                });
+
             services.AddAutoMapper();
-           
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -109,6 +113,6 @@ namespace CrmHub.Web
             //DbInitializer.Initialize(context);
         }
 
-       
+
     }
 }

@@ -11,7 +11,7 @@ namespace CrmHub.Infra.Data.Repositories.Base
 {
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
-        private readonly ApplicationDbContext _dbContext;
+        protected readonly ApplicationDbContext _dbContext;
 
         public Repository(ApplicationDbContext dbContext)
         {

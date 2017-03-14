@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using CrmHub.Web.Areas.Api.Base;
 using CrmHub.Application.Interfaces.Integration;
+using CrmHub.Application.Interfaces;
 using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Models.Exact;
-using CrmHub.Web.Areas.Api.Base;
-using CrmHub.Application.Interfaces;
 
 namespace CrmHub.Web.Areas.Api
 {
