@@ -19,6 +19,8 @@ namespace CrmHub.Application.Models.Exact
         [Crm(eCrmName.ZOHOCRM, "Account", new string[] { "Website" })]
         public string Site { get; set; }
 
+        public string Email { get; set; }
+
         [Crm(eCrmName.ZOHOCRM, "Lead Source")]
         public string Origem { get; set; }
 

@@ -4,6 +4,7 @@ using CrmHub.Application.Integration.Models.Roots;
 using CrmHub.Application.Models.Exact;
 using CrmHub.Application.Models.Exact.Roots;
 using System;
+using System.Linq;
 
 namespace CrmHub.Application
 {
@@ -14,7 +15,9 @@ namespace CrmHub.Application
             Action<ReuniaoExact, ScheduleRoot> loadContato = (s, i) =>
             {
                 int id = 0;
-                s.Contatos.ForEach(x => s.EntidadeCampoValor.AddRange(x.GetFieldsByAttribute(id++, s.Autenticacao.Crm())));
+                s.Contatos.ForEach(c => c.Ordem = c.Email.Equals(s.Lead.Email) ? 0 : 1);
+                s.Contatos.OrderBy(c => c.Ordem).ToList()
+                    .ForEach(x => s.EntidadeCampoValor.AddRange(x.GetFieldsByAttribute(id++, s.Autenticacao.Crm())));
             };
 
             this.CreateMap<ReuniaoExact, ScheduleRoot>()

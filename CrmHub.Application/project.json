@@ -6,7 +6,8 @@
     "NETStandard.Library": "1.6.1",
     "AutoMapper": "5.2.0",
     "Microsoft.Extensions.Logging": "1.1.0",
-    "CrmHub.Application.Integration": "1.0.0-*"
+    "CrmHub.Application.Integration": "1.0.0-*",
+    "System.Linq": "4.3.0"
   },
 
   "frameworks": {
