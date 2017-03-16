@@ -16,7 +16,6 @@ namespace CrmHub.Application.Models.Exact
         [Crm(eCrmName.ZOHOCRM, "Last Name")]
         public string Nome { get; set; }
 
-        [Required]
         [Crm(eCrmName.ZOHOCRM, "Title")]
         public string Cargo { get; set; }
 
