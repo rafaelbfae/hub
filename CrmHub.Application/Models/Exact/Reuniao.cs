@@ -46,7 +46,7 @@ namespace CrmHub.Application.Models.Exact
 
         private DateTime ConvertTimeZone(DateTime value)
         {
-            return TimeZoneInfo.ConvertTime(value, TimeZoneInfo.FindSystemTimeZoneById(TimeZone));
+            return TimeZoneInfo.ConvertTime(value.ToUniversalTime(), TimeZoneInfo.FindSystemTimeZoneById(TimeZone));
         }
     }
 }
