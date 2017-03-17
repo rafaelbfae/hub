@@ -36,5 +36,10 @@ namespace CrmHub.Web
             return JsonConvert.SerializeObject(@this);
         }
 
+        public static T ToObject<T>(this string @this)
+        {
+            return JsonConvert.DeserializeObject<T>(@this);
+        }
+
     }
 }

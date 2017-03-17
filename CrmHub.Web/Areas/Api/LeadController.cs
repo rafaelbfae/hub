@@ -12,7 +12,7 @@ namespace CrmHub.Web.Areas.Api
     [Route("api/v1/[controller]")]
     public class LeadController : HubController<ILeadService>
     {
-        public LeadController(ILeadService service, ILogger<LeadController> logger, ILoggerApiService loggerApi) : base(service, logger, loggerApi)
+        public LeadController(ILeadService service, ILogger<LeadController> logger, ILoggerService loggerApi) : base(service, logger, loggerApi)
         {
         }
 

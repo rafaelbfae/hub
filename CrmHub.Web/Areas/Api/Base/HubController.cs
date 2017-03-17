@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using CrmHub.Application.Interfaces;
 using CrmHub.Domain.Models;
 using CrmHub.Application.Models.Exact.Roots.Base;
-using System.Reflection;
 using CrmHub.Application.Models.Exact;
 
 namespace CrmHub.Web.Areas.Api.Base
@@ -15,52 +14,50 @@ namespace CrmHub.Web.Areas.Api.Base
     {
         protected readonly T _service;
         protected readonly ILogger _logger;
-        protected readonly ILoggerApiService _loggerApiService;
+        protected readonly ILoggerService _loggerApiService;
         protected enum Method { Post, Put, Delete, Get, Fields }
 
-        protected HubController(T service, ILogger<HubController<T>> logger, ILoggerApiService loggerApiService)
+        protected HubController(T service, ILogger<HubController<T>> logger, ILoggerService loggerApiService)
         {
             this._service = service;
             this._logger = logger;
             this._loggerApiService = loggerApiService;
         }
 
-        protected IActionResult Execute<E>(E value, Method method, Func<T, E, bool> function) where E : BaseExact<E>
+        protected IActionResult Execute<E>(E value, Method method, Func<T, E, bool> function, bool addLog = true) where E : BaseExact<E>
         {
             if (ModelState.IsValid)
             {
-                var log = AddLoggerApi(value, method, value.Autenticacao, value.GetId());
-                function(_service, value);
-                log.Response = _service.MessageController().GetAllMessage().ToJson();
-                log.Type = "Ready";
-                _loggerApiService.Update(log);
+                var log = AddLoggerApi(value, method, value.Autenticacao, value.GetId(), addLog);
+                bool success = function(_service, value);
+                UpdateLoggerApi(log, addLog, success);
                 return Ok(_service.MessageController().GetAllMessage());
             }
 
             return ErrorValidation();
         }
 
-        protected IActionResult Execute(string entityName, string parameter, Method method, Autenticacao autenticacao, Func<T, string, Autenticacao, bool> function)
+        protected IActionResult Execute(string entityName, string parameter, Method method, Autenticacao autenticacao, Func<T, string, Autenticacao, bool> function, bool addLog = true)
         {
             if (ModelState.IsValid)
             {
-                var log = AddLoggerApi(parameter, method, autenticacao, parameter, entityName);
-                function(_service, parameter, autenticacao);
-                log.Response = _service.MessageController().GetAllMessage().ToJson();
-                log.Type = "Ready";
-                _loggerApiService.Update(log);
+                var log = AddLoggerApi(parameter, method, autenticacao, parameter, addLog, entityName);
+                bool success = function(_service, parameter, autenticacao);
+                UpdateLoggerApi(log, addLog, success);
                 return Ok(_service.MessageController().GetAllMessage());
             }
 
             return ErrorValidation();
         }
 
-        protected LogApi AddLoggerApi<E>(E value, Method method, Autenticacao autenticacao, string parameter, string entityName = null)
+        private LogApi AddLoggerApi<E>(E value, Method method, Autenticacao autenticacao, string parameter, bool addLog, string entityName = null)
         {
+            if (!addLog) return null;
+
             _logger.LogDebug("Add Log");
             var log = new LogApi()
             {
-                Type = "Sending...",
+                Type = "Sending",
                 Parameters = parameter,
                 Method = method.ToString(),
                 Crm = autenticacao.TipoCRM,
@@ -71,6 +68,15 @@ namespace CrmHub.Web.Areas.Api.Base
 
             _loggerApiService.Add(log);
             return log;
+        }
+
+        private void UpdateLoggerApi(LogApi log, bool addLog, bool success)
+        {
+            if (!addLog) return;
+
+            log.Response = _service.MessageController().GetAllMessage().ToJson();
+            log.Type = success ? "Success": "Error";
+            _loggerApiService.Update(log);
         }
 
         protected IActionResult ErrorValidation()

@@ -12,7 +12,7 @@ namespace CrmHub.Web.Areas.Api
     [Route("api/v1/[controller]")]
     public class ContactController : HubController<IContactService>
     {
-        public ContactController(IContactService service, ILogger<ContactController> logger, ILoggerApiService loggerApi) : base(service, logger, loggerApi)
+        public ContactController(IContactService service, ILogger<ContactController> logger, ILoggerService loggerApi) : base(service, logger, loggerApi)
         {
         }
 

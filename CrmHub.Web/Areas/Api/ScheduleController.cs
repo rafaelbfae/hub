@@ -12,7 +12,7 @@ namespace CrmHub.Web.Areas.Api
     [Route("api/v1/[controller]")]
     public class ScheduleController : HubController<IScheduleService>
     {
-        public ScheduleController(IScheduleService service, ILogger<ScheduleController> logger, ILoggerApiService loggerApi) : base(service, logger, loggerApi)
+        public ScheduleController(IScheduleService service, ILogger<ScheduleController> logger, ILoggerService loggerApi) : base(service, logger, loggerApi)
         {
         }
 

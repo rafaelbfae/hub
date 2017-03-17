@@ -3,7 +3,8 @@ using CrmHub.Domain.Models;
 
 namespace CrmHub.Application.Interfaces
 {
-    public interface ILoggerApiService : IServiceBase<LogApi>
+    public interface ILoggerService : IServiceBase<LogApi>
     {
+        bool Resent(int id, LogApi entity);
     }
 }

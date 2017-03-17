@@ -12,7 +12,7 @@ namespace CrmHub.Web.Areas.Api
     [Route("api/v1/[controller]")]
     public class CompanyController : HubController<IAccountService>
     {
-        public CompanyController(IAccountService service, ILogger<CompanyController> logger, ILoggerApiService loggerApi) : base(service, logger, loggerApi)
+        public CompanyController(IAccountService service, ILogger<CompanyController> logger, ILoggerService loggerApi) : base(service, logger, loggerApi)
         {
         }
 

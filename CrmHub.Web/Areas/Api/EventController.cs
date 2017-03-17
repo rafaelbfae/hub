@@ -12,7 +12,7 @@ namespace CrmHub.Web.Areas.Api
     [Route("api/v1/[controller]")]
     public class EventController : HubController<IEventService>
     {
-        public EventController(IEventService service, ILogger<EventController> logger, ILoggerApiService loggerApi) : base(service, logger, loggerApi)
+        public EventController(IEventService service, ILogger<EventController> logger, ILoggerService loggerApi) : base(service, logger, loggerApi)
         {
         }
 

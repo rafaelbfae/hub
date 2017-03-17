@@ -10,7 +10,7 @@ using CrmHub.Infra.Helpers;
 using CrmHub.Infra.Helpers.Interfaces;
 using CrmHub.Infra.Messages;
 using CrmHub.Infra.Messages.Interfaces;
-using LogApiHub.Application.Services;
+using CrmHub.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CrmHub.Infra.Dependences.Injection
@@ -39,7 +39,7 @@ namespace CrmHub.Infra.Dependences.Injection
             services.AddTransient<ICrmRepository, CrmRepository>();
             services.AddTransient<ILogApiRepository, LoggerApiRepository>();
             services.AddTransient<ICrmService, CrmService>();
-            services.AddTransient<ILoggerApiService, LoggerApiService>();
+            services.AddTransient<ILoggerService, LoggerService>();
 
             services.AddTransient<IMessageController, MessageController>();
 

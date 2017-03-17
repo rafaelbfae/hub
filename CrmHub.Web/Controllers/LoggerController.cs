@@ -4,6 +4,8 @@ using CrmHub.Application.Interfaces;
 using System.Linq;
 using CrmHub.Domain.Filters.Base;
 using CrmHub.Domain.Interfaces.Filters;
+using CrmHub.Domain.Models;
+using CrmHub.Application.Models.Exact.Roots;
 
 namespace CrmHub.Web.Controllers
 {
@@ -11,12 +13,12 @@ namespace CrmHub.Web.Controllers
     public class LoggerController : Controller
     {
         protected readonly ILogger _logger;
-        protected readonly ILoggerApiService _loggerApiService;
+        protected readonly ILoggerService _loggerService;
 
-        public LoggerController(ILogger<LoggerController> logger, ILoggerApiService loggerApiService)
+        public LoggerController(ILogger<LoggerController> logger, ILoggerService loggerService)
         {
             this._logger = logger;
-            this._loggerApiService = loggerApiService;
+            this._loggerService = loggerService;
         }
 
         public IActionResult Index()
@@ -32,7 +34,7 @@ namespace CrmHub.Web.Controllers
         [HttpGet]
         public IActionResult SendResponse(int id)
         {
-            var result = _loggerApiService.GetById(id);
+            var result = _loggerService.GetById(id);
             return base.Json(new
             {
                 send = result.Send,
@@ -40,11 +42,24 @@ namespace CrmHub.Web.Controllers
             });
         }
 
+        [HttpPut]
+        public IActionResult Resend(int id, [FromBody] LogApi value)
+        {
+            if (value.Type.Equals("Ready")) return Ok(value);
+
+            _logger.LogDebug("Resend");
+            var success = _loggerService.Resent(id, value);
+            return base.Json(new
+            {
+                data = value
+            });
+
+        }
 
         [HttpGet]
         public IActionResult All(int pDraw, int pLength, int pStart, int pOrder, string pDir, string pSearch)
         {
-            var result = _loggerApiService.GetList(new DataTableFilter()
+            var result = _loggerService.GetList(new DataTableFilter()
             {
                 Length = pLength,
                 Start = pStart,

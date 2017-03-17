@@ -13,10 +13,10 @@
         self.Type = ko.observable().extend({ required: true });
         self.Entity = ko.observable().extend({ required: true });
         self.Method = ko.observable().extend({ required: true });
-        self.Response = ko.observable().extend({ required: true });
+        self.Response = ko.observable();
         self.CreatedAt = ko.observable().extend({ required: true });
         self.UpdatedAt = ko.observable().extend({ required: true });
-        self.Parameters = ko.observable().extend({ required: true });
+        self.Parameters = ko.observable();
 
         self.Errors = ko.validation.group(self);
         self.isDisabled = ko.observable(false);
@@ -25,6 +25,8 @@
             var reg = Object.assign({}, this);
             delete reg.isDisabled;
             delete reg.Errors;
+            delete reg.Response;
+            reg.Send = $.trim(reg.Send().replace(/([\t\n])+/g, '').replace(/(["][" "]+|[" "]+["])+/g, '"'));
             return ko.toJSON(reg);
         }
 
@@ -34,15 +36,11 @@
                 return;
             }
 
-            $.crmhub.core.ajax("PUT", `Logger?id=${self.Id()}`, self.clearModel(),
-                function (response) {
-                    if (method === "POST") {
-                        //self.Companies.push(response);
-                        //$.crmhub.core.updateDataTableRow($.oTable);
-                    }
-
-                    $("#viewLogger").modal("hide");
-                    self.reset();
+            $.crmhub.core.ajax("PUT", `Logger/Resend?id=${self.Id()}`, self.clearModel(),
+                function (data) {
+                    console.log(data.response);
+                    //$("#viewLogger").modal("hide");
+                    //self.reset();
                 },
                 function (xhr) {
                     alert(xhr.status + ': ' + xhr.statusText);
@@ -115,7 +113,7 @@
             self.UpdatedAt(selected.updatedAt);
             self.Parameters(selected.parameters);
 
-            self.isDisabled(disabled);
+            self.isDisabled(disabled || selected.Type === "Success");
             self.Errors.showAllMessages(false);
         }
 
