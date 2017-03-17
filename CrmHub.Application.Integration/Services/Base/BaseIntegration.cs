@@ -75,6 +75,7 @@ namespace CrmHub.Application.Integration.Services.Base
         protected abstract bool OnExecuteLead(ScheduleRoot value, List<MappingFields> list);
         protected abstract bool OnExecuteLead(LeadRoot value, List<MappingFields> list);
         protected abstract bool OnDeleteLead(string id, Authentication value);
+        protected abstract bool OnGetIdLead(LeadRoot value);
         protected abstract bool OnGetFieldsLead(Authentication value);
         protected abstract bool OnExecuteEvent(ScheduleRoot value, List<MappingFields> list);
         protected abstract bool OnExecuteEvent(EventRoot value, List<MappingFields> list);
@@ -105,7 +106,12 @@ namespace CrmHub.Application.Integration.Services.Base
             return OnExecuteLead(value, value.MappingFields.Where(v => filterLead(v.Entity)).ToList());
         }
 
-        private bool ExecuteLead(LeadRoot value) => OnExecuteLead(value, value.MappingFields);
+        private bool ExecuteLead(LeadRoot value)
+        {
+            if (!string.IsNullOrEmpty(value.GetId()))
+                OnGetIdLead(value);
+            return OnExecuteLead(value, value.MappingFields);
+        }
 
         private bool ExecuteEvent(ScheduleRoot value)
         {

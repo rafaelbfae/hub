@@ -77,6 +77,7 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         protected override bool OnExecuteLead(LeadRoot value, List<MappingFields> list) => PotentialController.Execute(value, list);
         protected override bool OnDeleteLead(string id, Authentication value) => PotentialController.Delete(id, value);
+        protected override bool OnGetIdLead(LeadRoot value) => PotentialController.GetId(value);
         protected override bool OnGetFieldsLead(Authentication value) => PotentialController.GetFields(value);
 
         protected override bool OnExecuteContact(ScheduleRoot value, Contact contact, List<MappingFields> list, int index = 0)

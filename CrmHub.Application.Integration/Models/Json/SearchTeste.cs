@@ -25,12 +25,12 @@ namespace CrmHub.Application.Integration.Models.Json.Test
 
     public class Accounts
     {
-        public Row row { get; set; }
+        public IList<Row> row { get; set; }
     }
 
     public class Potentials
     {
-        public Row row { get; set; }
+        public IList<Row> row { get; set; }
     }
 
     public class Result
