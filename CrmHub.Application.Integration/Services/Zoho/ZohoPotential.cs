@@ -10,13 +10,17 @@ using CrmHub.Application.Integration.Models.Roots.Base;
 using CrmHub.Infra.Messages.Interfaces;
 using CrmHub.Application.Integration.Models.Zoho;
 using Newtonsoft.Json;
+using CrmHub.Application.Integration.Models.Json;
 
 namespace CrmHub.Application.Integration.Services.Zoho
 {
     public class ZohoPotential : ZohoBase
     {
         #region Constantes
-        
+
+        private const string FIELD_SEARCH = "potentialname";
+        private const string FIELD_SELECT = "POTENTIALID";
+        private const string FIELD_NAME = "Potential Name";
         private const MessageType.ENTITY ENTITY_TYPE = MessageType.ENTITY.LEAD;
 
         public const string ENTITY_NAME = "Potentials";
@@ -34,7 +38,12 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         public bool Execute(ScheduleRoot schedule, List<MappingFields> mapping)
         {
+            Predicate<MappingFields> filterName = m => m.Field.Equals(FIELD_NAME);
+            var potentialName = mapping.Where(w => filterName(w)).First().Value;
+
             LeadRoot lead = new LeadRoot { Lead = schedule.Lead, Authentication = schedule.Authentication, MappingFields = mapping };
+
+            SendRequestSearch(lead, GetEntityName(), FIELD_SELECT, FIELD_SEARCH, potentialName, GetResponseSearch);
 
             if (Execute(lead, mapping.Where(w => FilterEntity(w.Entity)).ToList()))
             {
@@ -65,6 +74,11 @@ namespace CrmHub.Application.Integration.Services.Zoho
             return string.Empty;
         }
 
+        public bool GetId(LeadRoot value)
+        {
+            return SendRequestSearch(value, GetEntityName(), FIELD_SELECT, FIELD_SEARCH, value.GetId(), GetResponseSearch);
+        }
+
         #endregion
 
         #region Protected Methods
@@ -91,6 +105,34 @@ namespace CrmHub.Application.Integration.Services.Zoho
         #endregion
 
         #region Private Methods
+
+        private bool GetResponseSearch(string response, object value)
+        {
+            LeadRoot lead = (LeadRoot)value;
+            try
+            {
+                var responseObject = JsonConvert.DeserializeObject(response, typeof(RootObject));
+                if (!((RootObject)responseObject).response.result.Potentials.row.FL.content.Equals(string.Empty))
+                {
+                    lead.Lead.Id = ((RootObject)responseObject).response.result.Potentials.row.FL.content;
+                    return true;
+                }
+            }
+            catch
+            {
+                try
+                {
+                    var responseObject = JsonConvert.DeserializeObject(response, typeof(Models.Json.Test.RootObject));
+                    if (!((Models.Json.Test.RootObject)responseObject).response.result.Potentials.row[0].FL.content.Equals(string.Empty))
+                    {
+                        lead.Lead.Id = ((Models.Json.Test.RootObject)responseObject).response.result.Potentials.row[0].FL.content;
+                        return true;
+                    }
+                }
+                catch { return false; }
+            }
+            return false;
+        }
 
         private bool LoadResponseAccount(string response, object value)
         {

@@ -76,6 +76,13 @@ namespace CrmHub.Application.Integration.Services.Zoho
 
         public bool Execute(ContactRoot value, List<MappingFields> mapping, int index = 0)
         {
+            Func<MappingFields, string, bool> filter = (e, f) => FilterEntity(e.Entity) && e.Id == index && e.Field.Equals(f);
+            if (!mapping.Exists(e => filter(e, "First Name")))
+            {
+                MappingFields field = mapping.Where(w => filter(w, "Last Name")).First();
+                mapping.Add(new MappingFields { Entity = ENTITY, Field = "First Name", Id = index, Value = field.Value.Split(' ').First() });
+                mapping.Where(w => filter(w, "Last Name")).First().Value = field.Value.Split(' ').Last();
+            }
             return SendRequestSave(value, mapping.Where(w => FilterEntity(w.Entity) && w.Id == index).ToList(), GetResponse);
         }
 

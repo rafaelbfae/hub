@@ -5,5 +5,6 @@ namespace CrmHub.Application.Integration.Models
 {
     public class Contact : BaseEntity
     {
+
     }
 }
