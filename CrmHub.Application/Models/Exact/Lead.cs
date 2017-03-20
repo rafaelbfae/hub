@@ -24,12 +24,10 @@ namespace CrmHub.Application.Models.Exact
         [Crm(eCrmName.ZOHOCRM, "Lead Source")]
         public string Origem { get; set; }
 
-        [Required]
         [Crm(eCrmName.ZOHOCRM, "Account", new string[] { "Description" })]
         [Crm(eCrmName.ZOHOCRM, "Potential", new string[] { "Description" })]
         public string Diagnostico { get; set; }
 
-        [Required]
         [Crm(eCrmName.ZOHOCRM, "Account", new string[] { "Phone" })]
         [Crm(eCrmName.ZOHOCRM, new string[] { "Phone", "Mobile", "Other Phone" })]
         public List<string> Telefone { get; set; }

@@ -16,7 +16,7 @@ namespace CrmHub.Application.Models.Exact
         private DateTime dataIni; 
 
         [Required]
-        [Crm(eCrmName.ZOHOCRM, "Start DateTime", "yyy-MM-dd hh:mm:ss")]
+        [Crm(eCrmName.ZOHOCRM, "Start DateTime", "yyy-MM-dd HH:mm:ss")]
         public DateTime DataIni
         {
             get { return ConvertTimeZone(dataIni); }
@@ -26,7 +26,7 @@ namespace CrmHub.Application.Models.Exact
         private DateTime dataFim;
 
         [Required]
-        [Crm(eCrmName.ZOHOCRM, "End DateTime", "yyy-MM-dd hh:mm:ss")]
+        [Crm(eCrmName.ZOHOCRM, "End DateTime", "yyy-MM-dd HH:mm:ss")]
         public DateTime DataFim
         {
             get { return ConvertTimeZone(dataFim); }

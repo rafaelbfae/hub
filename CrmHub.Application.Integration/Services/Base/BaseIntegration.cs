@@ -108,7 +108,7 @@ namespace CrmHub.Application.Integration.Services.Base
 
         private bool ExecuteLead(LeadRoot value)
         {
-            if (!string.IsNullOrEmpty(value.GetId()))
+            if (string.IsNullOrEmpty(value.GetId()))
                 OnGetIdLead(value);
             return OnExecuteLead(value, value.MappingFields);
         }
