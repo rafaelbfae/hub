@@ -27,7 +27,6 @@ namespace CrmHub.Web
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();
-                builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
             builder.AddEnvironmentVariables();
@@ -74,7 +73,6 @@ namespace CrmHub.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddApplicationInsightsTelemetry(Configuration);
             new InjectionContainer(services);
         }
 
@@ -83,7 +81,6 @@ namespace CrmHub.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            app.UseApplicationInsightsRequestTelemetry();
 
             if (env.IsDevelopment())
             {
