@@ -3647,7 +3647,8 @@
           "CrmHub.Application.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
           "Microsoft.Extensions.Logging": "1.1.0",
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Linq": "4.3.0"
         },
         "compile": {
           "netstandard1.6/CrmHub.Application.dll": {}

@@ -2445,13 +2445,13 @@
           "lib/netstandard1.3/NUglify.dll": {}
         }
       },
-      "OpenIddict/1.0.0-beta2-0580": {
+      "OpenIddict/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "AspNet.Security.OpenIdConnect.Server": "1.0.0-rc1-final",
           "Microsoft.AspNetCore.Diagnostics.Abstractions": "1.0.0",
           "Microsoft.Extensions.Caching.Abstractions": "1.0.0",
-          "OpenIddict.Core": "1.0.0-beta2-0580"
+          "OpenIddict.Core": "1.0.0-beta2-0584"
         },
         "compile": {
           "lib/netstandard1.4/OpenIddict.dll": {}
@@ -2460,7 +2460,7 @@
           "lib/netstandard1.4/OpenIddict.dll": {}
         }
       },
-      "OpenIddict.Core/1.0.0-beta2-0580": {
+      "OpenIddict.Core/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "AspNet.Security.OpenIdConnect.Primitives": "1.0.0-rc1-final",
@@ -2468,7 +2468,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
           "Microsoft.Extensions.Options": "1.0.0",
-          "OpenIddict.Models": "1.0.0-beta2-0580",
+          "OpenIddict.Models": "1.0.0-beta2-0584",
           "System.Reflection.TypeExtensions": "4.1.0",
           "System.Security.Claims": "4.0.1"
         },
@@ -2479,11 +2479,11 @@
           "lib/netstandard1.3/OpenIddict.Core.dll": {}
         }
       },
-      "OpenIddict.EntityFrameworkCore/1.0.0-beta2-0580": {
+      "OpenIddict.EntityFrameworkCore/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "1.0.0",
-          "OpenIddict.Core": "1.0.0-beta2-0580",
+          "OpenIddict.Core": "1.0.0-beta2-0584",
           "System.ComponentModel.TypeConverter": "4.1.0"
         },
         "compile": {
@@ -2493,7 +2493,7 @@
           "lib/netstandard1.3/OpenIddict.EntityFrameworkCore.dll": {}
         }
       },
-      "OpenIddict.Models/1.0.0-beta2-0580": {
+      "OpenIddict.Models/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -2506,12 +2506,12 @@
           "lib/netstandard1.0/OpenIddict.Models.dll": {}
         }
       },
-      "OpenIddict.Mvc/1.0.0-beta2-0580": {
+      "OpenIddict.Mvc/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "AspNet.Security.OpenIdConnect.Server": "1.0.0-rc1-final",
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
-          "OpenIddict.Core": "1.0.0-beta2-0580"
+          "OpenIddict.Core": "1.0.0-beta2-0584"
         },
         "compile": {
           "lib/netstandard1.6/OpenIddict.Mvc.dll": {}
@@ -4798,7 +4798,8 @@
           "CrmHub.Application.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
           "Microsoft.Extensions.Logging": "1.1.0",
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Linq": "4.3.0"
         },
         "compile": {
           "netstandard1.6/CrmHub.Application.dll": {}
@@ -7340,13 +7341,13 @@
           "lib/netstandard1.3/NUglify.dll": {}
         }
       },
-      "OpenIddict/1.0.0-beta2-0580": {
+      "OpenIddict/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "AspNet.Security.OpenIdConnect.Server": "1.0.0-rc1-final",
           "Microsoft.AspNetCore.Diagnostics.Abstractions": "1.0.0",
           "Microsoft.Extensions.Caching.Abstractions": "1.0.0",
-          "OpenIddict.Core": "1.0.0-beta2-0580"
+          "OpenIddict.Core": "1.0.0-beta2-0584"
         },
         "compile": {
           "lib/netstandard1.4/OpenIddict.dll": {}
@@ -7355,7 +7356,7 @@
           "lib/netstandard1.4/OpenIddict.dll": {}
         }
       },
-      "OpenIddict.Core/1.0.0-beta2-0580": {
+      "OpenIddict.Core/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "AspNet.Security.OpenIdConnect.Primitives": "1.0.0-rc1-final",
@@ -7363,7 +7364,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
           "Microsoft.Extensions.Options": "1.0.0",
-          "OpenIddict.Models": "1.0.0-beta2-0580",
+          "OpenIddict.Models": "1.0.0-beta2-0584",
           "System.Reflection.TypeExtensions": "4.1.0",
           "System.Security.Claims": "4.0.1"
         },
@@ -7374,11 +7375,11 @@
           "lib/netstandard1.3/OpenIddict.Core.dll": {}
         }
       },
-      "OpenIddict.EntityFrameworkCore/1.0.0-beta2-0580": {
+      "OpenIddict.EntityFrameworkCore/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "1.0.0",
-          "OpenIddict.Core": "1.0.0-beta2-0580",
+          "OpenIddict.Core": "1.0.0-beta2-0584",
           "System.ComponentModel.TypeConverter": "4.1.0"
         },
         "compile": {
@@ -7388,7 +7389,7 @@
           "lib/netstandard1.3/OpenIddict.EntityFrameworkCore.dll": {}
         }
       },
-      "OpenIddict.Models/1.0.0-beta2-0580": {
+      "OpenIddict.Models/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -7401,12 +7402,12 @@
           "lib/netstandard1.0/OpenIddict.Models.dll": {}
         }
       },
-      "OpenIddict.Mvc/1.0.0-beta2-0580": {
+      "OpenIddict.Mvc/1.0.0-beta2-0584": {
         "type": "package",
         "dependencies": {
           "AspNet.Security.OpenIdConnect.Server": "1.0.0-rc1-final",
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
-          "OpenIddict.Core": "1.0.0-beta2-0580"
+          "OpenIddict.Core": "1.0.0-beta2-0584"
         },
         "compile": {
           "lib/netstandard1.6/OpenIddict.Mvc.dll": {}
@@ -9864,7 +9865,8 @@
           "CrmHub.Application.Integration": "1.0.0",
           "CrmHub.Domain": "1.0.0",
           "Microsoft.Extensions.Logging": "1.1.0",
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Linq": "4.3.0"
         },
         "compile": {
           "netstandard1.6/CrmHub.Application.dll": {}
@@ -13582,12 +13584,12 @@
         "lib/netstandard1.3/NUglify.xml"
       ]
     },
-    "OpenIddict/1.0.0-beta2-0580": {
-      "sha512": "387brEUAbMNrwCb2IDpfcHxf98dP5hNX9bWcR92WRToIWsW/cxWZp79HVUSDDgf6DZp9fJd+v+BirWbdJX3+Qg==",
+    "OpenIddict/1.0.0-beta2-0584": {
+      "sha512": "e7QcQjJHee3FNmFjfjS6sxxA2/vgSCLeqN9qdHSJDOZOYPrMw7ntBlukXg7CHBDx0dgTPa1WXvH82PZL0RleEg==",
       "type": "package",
-      "path": "OpenIddict/1.0.0-beta2-0580",
+      "path": "OpenIddict/1.0.0-beta2-0584",
       "files": [
-        "OpenIddict.1.0.0-beta2-0580.nupkg.sha512",
+        "OpenIddict.1.0.0-beta2-0584.nupkg.sha512",
         "OpenIddict.nuspec",
         "lib/net451/OpenIddict.dll",
         "lib/net451/OpenIddict.xml",
@@ -13595,12 +13597,12 @@
         "lib/netstandard1.4/OpenIddict.xml"
       ]
     },
-    "OpenIddict.Core/1.0.0-beta2-0580": {
-      "sha512": "Q2Zplj7n0ytUJFvXuYX4J5wH9HWx37iGYSmupc0OCXZZ4TZAhQsRh8172LKkGf9o9BX3Se9UF5yyNY9Xdy8B+w==",
+    "OpenIddict.Core/1.0.0-beta2-0584": {
+      "sha512": "DG8a9lC3KzdoDJULfJBwnhSl9nEjkmoL46NrSms8CNXQx8gOs9MtnpqJczotuwtmq4R53UpxXyicc3uwBpe2vw==",
       "type": "package",
-      "path": "OpenIddict.Core/1.0.0-beta2-0580",
+      "path": "OpenIddict.Core/1.0.0-beta2-0584",
       "files": [
-        "OpenIddict.Core.1.0.0-beta2-0580.nupkg.sha512",
+        "OpenIddict.Core.1.0.0-beta2-0584.nupkg.sha512",
         "OpenIddict.Core.nuspec",
         "lib/net451/OpenIddict.Core.dll",
         "lib/net451/OpenIddict.Core.xml",
@@ -13608,12 +13610,12 @@
         "lib/netstandard1.3/OpenIddict.Core.xml"
       ]
     },
-    "OpenIddict.EntityFrameworkCore/1.0.0-beta2-0580": {
-      "sha512": "glbsBSc/h/4bZpcpxrbApfdexy8tHQyjndDMEyobQfaim35uJ62SN52HyO2vimHSXbe5whvzRl9H416uFmJTxw==",
+    "OpenIddict.EntityFrameworkCore/1.0.0-beta2-0584": {
+      "sha512": "aVQ4+76n7YAik51KlTJE4yWwNdJjNBy4XPaH4I+4AJR8IBeK/YA4nT5JZ9GftapFpHZwnArftgUu6jqzmpUhuA==",
       "type": "package",
-      "path": "OpenIddict.EntityFrameworkCore/1.0.0-beta2-0580",
+      "path": "OpenIddict.EntityFrameworkCore/1.0.0-beta2-0584",
       "files": [
-        "OpenIddict.EntityFrameworkCore.1.0.0-beta2-0580.nupkg.sha512",
+        "OpenIddict.EntityFrameworkCore.1.0.0-beta2-0584.nupkg.sha512",
         "OpenIddict.EntityFrameworkCore.nuspec",
         "lib/net451/OpenIddict.EntityFrameworkCore.dll",
         "lib/net451/OpenIddict.EntityFrameworkCore.xml",
@@ -13621,23 +13623,23 @@
         "lib/netstandard1.3/OpenIddict.EntityFrameworkCore.xml"
       ]
     },
-    "OpenIddict.Models/1.0.0-beta2-0580": {
-      "sha512": "mQQxMWuMeSSrdEX1MnAISsRSJvf5HSh4aIrQs+hrgc0c3iaor1XcjSjWZlSiYWmDaCkOW+XnKRCdz4doY2pj+A==",
+    "OpenIddict.Models/1.0.0-beta2-0584": {
+      "sha512": "hmyukpDvGIdZGadK5AZEt07otR0tOBWAem626Vqgs8KAGlPxWqfGU4xmLbYAIMk9IfrBC7TwIOvpMRpgaS311w==",
       "type": "package",
-      "path": "OpenIddict.Models/1.0.0-beta2-0580",
+      "path": "OpenIddict.Models/1.0.0-beta2-0584",
       "files": [
-        "OpenIddict.Models.1.0.0-beta2-0580.nupkg.sha512",
+        "OpenIddict.Models.1.0.0-beta2-0584.nupkg.sha512",
         "OpenIddict.Models.nuspec",
         "lib/netstandard1.0/OpenIddict.Models.dll",
         "lib/netstandard1.0/OpenIddict.Models.xml"
       ]
     },
-    "OpenIddict.Mvc/1.0.0-beta2-0580": {
-      "sha512": "WD2WdzVSNlQyaBtBZGjTR3pf19SPSuzhuOSLmDd/w4Dkkss6BkLjmkhl394DN3udhJpFUNQfnQnMzRF7xN4lxA==",
+    "OpenIddict.Mvc/1.0.0-beta2-0584": {
+      "sha512": "VmPzUMWCoPvYqFDLZTCOZszg4PItWsqXVkgRWo6kSti6SCZ31FOMH5z53w93Y+IUnx73BQsAYiL92K6uRncquA==",
       "type": "package",
-      "path": "OpenIddict.Mvc/1.0.0-beta2-0580",
+      "path": "OpenIddict.Mvc/1.0.0-beta2-0584",
       "files": [
-        "OpenIddict.Mvc.1.0.0-beta2-0580.nupkg.sha512",
+        "OpenIddict.Mvc.1.0.0-beta2-0584.nupkg.sha512",
         "OpenIddict.Mvc.nuspec",
         "lib/net451/OpenIddict.Mvc.dll",
         "lib/net451/OpenIddict.Mvc.xml",

@@ -7,6 +7,7 @@
 
     var ViewModel = function () {
         var self = this;
+        self.index = -1;
         self.Id = ko.observable();
         self.Crm = ko.observable().extend({ required: true });
         self.Send = ko.observable().extend({ required: true });
@@ -38,9 +39,8 @@
 
             $.crmhub.core.ajax("PUT", `Logger/Resend?id=${self.Id()}`, self.clearModel(),
                 function (data) {
-                    console.log(data.response);
-                    //$("#viewLogger").modal("hide");
-                    //self.reset();
+                    self.setValues(data.data, data.success)
+                    $.oTable.row(self.index).data(data.data);
                 },
                 function (xhr) {
                     alert(xhr.status + ': ' + xhr.statusText);
@@ -92,11 +92,13 @@
 
             $.oTable.on('click', 'a > i.fa-eye', function () {
                 var data = $.oTable.row($(this).parents('tr')).data();
+                self.index = $.oTable.row($(this).parents('tr')).index();
                 self.view(data);
             });
 
             $.oTable.on('click', 'a > i.fa-pencil', function () {
                 var data = $.oTable.row($(this).parents('tr')).data();
+                self.index = $.oTable.row($(this).parents('tr')).index();
                 self.edit(data);
             });
         }
@@ -104,16 +106,16 @@
         self.setValues = function (selected, disabled) {
             self.Id(selected.id);
             self.Crm(selected.crm);
-            self.Send(selected.send);
+            self.Send(self.ident(selected.send));
             self.Type(selected.type);
             self.Entity(selected.entity);
             self.Method(selected.method);
-            self.Response(selected.response);
+            self.Response(self.ident(selected.response));
             self.CreatedAt(selected.createdAt);
             self.UpdatedAt(selected.updatedAt);
             self.Parameters(selected.parameters);
 
-            self.isDisabled(disabled || selected.Type === "Success");
+            self.isDisabled(disabled || selected.type == "Success");
             self.Errors.showAllMessages(false);
         }
 

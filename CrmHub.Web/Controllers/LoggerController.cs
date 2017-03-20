@@ -1,14 +1,14 @@
+using CrmHub.Application.Interfaces;
+using CrmHub.Domain.Filters.Base;
+using CrmHub.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using CrmHub.Application.Interfaces;
 using System.Linq;
-using CrmHub.Domain.Filters.Base;
-using CrmHub.Domain.Interfaces.Filters;
-using CrmHub.Domain.Models;
-using CrmHub.Application.Models.Exact.Roots;
 
 namespace CrmHub.Web.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     public class LoggerController : Controller
     {
@@ -43,14 +43,16 @@ namespace CrmHub.Web.Controllers
         }
 
         [HttpPut]
-        public IActionResult Resend(int id, [FromBody] LogApi value)
+        public IActionResult Resend(string id, [FromBody] LogApi value)
         {
-            if (value.Type.Equals("Ready")) return Ok(value);
+            if (value.Type.Equals("Success")) return Ok(value);
 
             _logger.LogDebug("Resend");
             var success = _loggerService.Resent(id, value);
+            
             return base.Json(new
             {
+                success = success,
                 data = value
             });
 

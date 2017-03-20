@@ -1,10 +1,30 @@
 ﻿@{
+    Layout = "~/Views/Shared/_Layout_Blank.cshtml";
     ViewData["Title"] = "Confirm Email";
 }
 
-<h2>@ViewData["Title"].</h2>
-<div>
-    <p>
-        Thank you for confirming your email. Please <a asp-controller="Account" asp-action="Login">Click here to Log in</a>.
-    </p>
+<div class="register-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center m-b-md">
+                <h2>@ViewData["Title"].</h2>
+                <small></small>
+            </div>
+            <div class="hpanel">
+                <div class="panel-body">
+                    <p class="text-center">
+                        Thank you for confirming your email. Please <a asp-controller="Account" asp-action="Login">Click here to Log in</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <strong>CrmHub</strong> - Integrador de CRM's <br /> 2016 Copyright Floripa Software
+            </div>
+        </div>
+    </div>
 </div>
+
+
+

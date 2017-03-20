@@ -49,9 +49,12 @@ namespace CrmHub.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<CrmIdentityDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = false;
+            })
+            .AddEntityFrameworkStores<CrmIdentityDbContext>()
+            .AddDefaultTokenProviders();
 
             services.AddOpenIddict(options =>
             {
@@ -107,7 +110,7 @@ namespace CrmHub.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Logger}/{action=Index}/{id?}");
             });
 
             //DbInitializer.Initialize(context);

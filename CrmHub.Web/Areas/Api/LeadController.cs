@@ -35,7 +35,7 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Delete(string id, [FromBody] Autenticacao value)
         {
             _logger.LogDebug("Lead Delete Call");
-            return Execute("Lead", id, Method.Delete, value, (s, v, a) => s.Delete(v, a));
+            return Execute("LeadExact", id, Method.Delete, value, (s, v, a) => s.Delete(v, a));
         }
 
         [HttpPost]
@@ -43,7 +43,7 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Fields([FromBody] Autenticacao value)
         {
             _logger.LogDebug("Lead Fields Call");
-            return Execute("Lead", string.Empty, Method.Fields, value, (s, v, a) => s.Fields(a));
+            return Execute("LeadExact", string.Empty, Method.Fields, value, (s, v, a) => s.Fields(a));
         }
     }
 }

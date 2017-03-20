@@ -5,6 +5,6 @@ namespace CrmHub.Application.Interfaces
 {
     public interface ILoggerService : IServiceBase<LogApi>
     {
-        bool Resent(int id, LogApi entity);
+        bool Resent(string id, LogApi entity);
     }
 }

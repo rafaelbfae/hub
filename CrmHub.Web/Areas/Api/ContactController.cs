@@ -35,7 +35,7 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Delete(string email, [FromBody] Autenticacao value)
         {
             _logger.LogDebug("Contact Delete Call");
-            return Execute("Contact", email, Method.Delete, value, (s, v, a) => s.Delete(v, a));
+            return Execute("ContatoExact", email, Method.Delete, value, (s, v, a) => s.Delete(v, a));
         }
 
         [HttpPost]
@@ -43,7 +43,7 @@ namespace CrmHub.Web.Areas.Api
         public IActionResult Fields([FromBody] Autenticacao value)
         {
             _logger.LogDebug("Contact Fields Call");
-            return Execute("Contact", string.Empty, Method.Fields, value, (s, v, a) => s.Fields(a));
+            return Execute("ContatoExact", string.Empty, Method.Fields, value, (s, v, a) => s.Fields(a));
         }
     }
 }
