@@ -1,7 +1,7 @@
 ﻿{
   "Autenticacao": {
     "TipoCRM": "ZOHOCRM",
-    "TokenCRM": "8fe3a3d6012e33b211045fa74a42c902",
+    "TokenCRM": "19151a51da78ae6fdd185d2217b4c982",
     "EmailVendedor": "vendedor@exactsales.com.br",
     "UsuarioCRM": "crmapi",
     "UsuarioToken": "11234556"
@@ -17,7 +17,7 @@
     "LinkExact": "http://app.exactsales.com.br/lead/123456",
     "Observacao": "Uma observação qualquer.",
     "DataCadastro": "2016-01-20T14:00:00.000Z",
-    "Diagnostico": "<>diagnosticos</>",
+    "Diagnostico": "diagnosticos",
     "Telefone": [
       "(48)3233-4563"
     ],

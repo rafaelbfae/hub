@@ -221,13 +221,17 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
 
         private string GetPlainTextFromHtml(string htmlString)
         {
-            string htmlTagPattern = "<.*?>";
-            var regexCss = new Regex("(\\<script(.+?)\\</script\\>)|(\\<style(.+?)\\</style\\>)", RegexOptions.Singleline | RegexOptions.IgnoreCase);
-            htmlString = regexCss.Replace(htmlString.Replace("<br />", "\n"), string.Empty);
-            htmlString = Regex.Replace(htmlString, htmlTagPattern, string.Empty);
-            htmlString = Regex.Replace(htmlString, @"^\s+$[\r\n]*", "", RegexOptions.Multiline);
-            htmlString = htmlString.Replace("&nbsp;", string.Empty);
+            
+            if (!htmlString.Contains("<b>")) return htmlString;
 
+            string htmlTagPattern = "<.*?>";
+            htmlString = Regex.Replace(htmlString, "(>)(\\s)*", ">");
+            htmlString = Regex.Replace(htmlString, "(\\s)*(<)", "  <");
+            htmlString = htmlString.Replace("</p>", "\n\n");
+            htmlString = Regex.Replace(htmlString, "(<)(/h4|tr|/strong|br /)(>)", "\n");
+            htmlString = htmlString.Replace("Site:", " \nSite:");
+            htmlString = Regex.Replace(htmlString, "(style='display:block)(\\w|:|;|-|\\s|\'|=)*(>)", ">\n");
+            htmlString = Regex.Replace(htmlString, htmlTagPattern, string.Empty);
             return htmlString;
         }
 

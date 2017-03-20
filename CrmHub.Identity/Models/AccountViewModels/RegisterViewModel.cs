@@ -8,8 +8,14 @@ namespace CrmHub.Identity.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
+        public RegisterViewModel()
+        {
+            Level = 0;
+            IsUser = true;
+        }
+
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Name")]
         public string UserName { get; set; }
 
         [Required]

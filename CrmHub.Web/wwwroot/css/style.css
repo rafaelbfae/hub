@@ -339,7 +339,7 @@ body.modal-open {
   font-weight: 300;
 }
 .modal-header {
-  padding: 40px 30px;
+  padding: 10px 20px;
   background: #f7f9fa;
 }
 .modal-body {
@@ -2920,6 +2920,24 @@ h6 {
 .table > thead > tr > th {
   border-bottom: none;
 }
+.table td.actions {
+    width: 90px;
+    padding-right: 0;
+}
+
+    .table td.actions .action-buttons {
+        width: 80px;
+        margin: 0;
+    }
+
+        .table td.actions .action-buttons a:last-child {
+            margin-right: 0;
+        }
+
+.table-actions {
+    margin: 0 6px 0 6px;
+}
+
 .no-padding table {
   margin-bottom: 0;
 }

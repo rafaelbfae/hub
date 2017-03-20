@@ -1,7 +1,5 @@
-﻿using System;
+﻿using CrmHub.Domain.Interfaces.Filters;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CrmHub.Application.Interfaces.Base
 {
@@ -10,7 +8,8 @@ namespace CrmHub.Application.Interfaces.Base
         void Add(T entity);
         void AddOrUpdate(T entity);
         T GetById(int id);
-        List<T> GetAll();
+        IEnumerable<T> GetAll();
+        IEnumerable<T> GetList(IDataTableFilter filter);
         void Update(T entity);
         void Remove(int id);
         void Remove(T entity);

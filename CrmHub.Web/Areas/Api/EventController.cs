@@ -4,6 +4,7 @@ using CrmHub.Application.Interfaces.Integration;
 using Microsoft.Extensions.Logging;
 using CrmHub.Application.Models.Exact;
 using CrmHub.Web.Areas.Api.Base;
+using CrmHub.Application.Interfaces;
 
 namespace CrmHub.Web.Areas.Api
 {
@@ -11,15 +12,15 @@ namespace CrmHub.Web.Areas.Api
     [Route("api/v1/[controller]")]
     public class EventController : HubController<IEventService>
     {
-        public EventController(IEventService service, ILogger<EventController> logger) : base(service, logger)
+        public EventController(IEventService service, ILogger<EventController> logger, ILoggerService loggerApi) : base(service, logger, loggerApi)
         {
         }
-    
+
         [HttpPost]
         public IActionResult Post([FromBody] EventoExact value)
         {
             _logger.LogDebug("Event Register Call");
-            return Execute(value, (v, c) => v.Register(c));
+            return Execute(value, Method.Post, (s, v) => s.Register(v));
         }
 
         [HttpPut("{id}")]
@@ -27,34 +28,22 @@ namespace CrmHub.Web.Areas.Api
         {
             _logger.LogDebug("Event Update Call");
             value.Reuniao.Id = id;
-            return Execute(value, (v, c) => v.Update(c));
+            return Execute(value, Method.Put, (s, v) => s.Update(v));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(string id, [FromBody] Autenticacao value)
         {
-            if (ModelState.IsValid)
-            {
-                _logger.LogDebug("Event Delete Call");
-                _service.Delete(id, value);
-                return Ok(_service.MessageController().GetAllMessageToJson());
-            }
-
-            return ErrorValidation();
+            _logger.LogDebug("Event Delete Call");
+            return Execute("EventoExact", id, Method.Delete, value, (s, v, a) => s.Delete(v, a));
         }
 
         [HttpPost]
         [Route("fields")]
         public IActionResult Fields([FromBody] Autenticacao value)
         {
-            if (ModelState.IsValid)
-            {
-                _logger.LogDebug("Event Fields Call");
-                _service.Fields(value);
-                return Ok(_service.MessageController().GetAllMessageToJson());
-            }
-
-            return ErrorValidation();
+            _logger.LogDebug("Event Fields Call");
+            return Execute("EventoExact", string.Empty, Method.Fields, value, (s, v, a) => s.Fields(a));
         }
     }
 }

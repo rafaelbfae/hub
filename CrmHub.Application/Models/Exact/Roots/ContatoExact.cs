@@ -1,13 +1,13 @@
 ﻿using CrmHub.Application.Models.Exact.Roots.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace CrmHub.Application.Models.Exact.Roots
 {
     public class ContatoExact : BaseExact<ContatoExact>
     {
+        [Required]
         public Contato Contato { get; set; }
+
+        public override string GetId() { return Contato.Id; }
     }
 }
