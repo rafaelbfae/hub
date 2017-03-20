@@ -49,10 +49,7 @@ namespace CrmHub.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
-            {
-                config.SignIn.RequireConfirmedEmail = false;
-            })
+            services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<CrmIdentityDbContext>()
             .AddDefaultTokenProviders();
 
