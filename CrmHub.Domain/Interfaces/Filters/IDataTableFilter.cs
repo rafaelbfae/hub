@@ -13,6 +13,8 @@ namespace CrmHub.Domain.Interfaces.Filters
 
         int Order { get; set; }
 
+        int Total { get; set; }
+
         string Dir { get; set; }
 
         string Search { get; set; }

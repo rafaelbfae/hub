@@ -4,7 +4,9 @@ using CrmHub.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
+using System.Net;
 
 namespace CrmHub.Web.Controllers
 {
@@ -45,35 +47,43 @@ namespace CrmHub.Web.Controllers
         [HttpPut]
         public IActionResult Resend(string id, [FromBody] LogApi value)
         {
-            if (value.Type.Equals("Success")) return Ok(value);
-
-            _logger.LogDebug("Resend");
-            var success = _loggerService.Resent(id, value);
-            
-            return base.Json(new
+            try
             {
-                success = success,
-                data = value
-            });
+                if (value.Type.Equals("Success")) return Ok(value);
 
+                _logger.LogDebug("Resend");
+                value.User = HttpContext.User.Identity.Name;
+                var success = _loggerService.Resent(id, value);
+
+                return base.Json(new
+                {
+                    success = success,
+                    data = value
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, base.Json( new { success = false, data = ex.Message}));
+            }
         }
 
         [HttpGet]
         public IActionResult All(int pDraw, int pLength, int pStart, int pOrder, string pDir, string pSearch)
         {
-            var result = _loggerService.GetList(new DataTableFilter()
+            var tableFilter = new DataTableFilter()
             {
                 Length = pLength,
                 Start = pStart,
                 Order = pOrder,
                 Dir = pDir,
                 Search = pSearch
-            });
+            };
+            var result = _loggerService.GetList(tableFilter);
             return base.Json(new
             {
                 draw = pDraw,
-                recordsTotal = result.Count(),
-                recordsFiltered = result.Count(),
+                recordsTotal = tableFilter.Total,
+                recordsFiltered = tableFilter.Total,
                 data = result
             });
         }

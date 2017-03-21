@@ -27,7 +27,7 @@
             delete reg.isDisabled;
             delete reg.Errors;
             delete reg.Response;
-            reg.Send = $.trim(reg.Send().replace(/([\t\n])+/g, '').replace(/(["][" "]+|[" "]+["])+/g, '"'));
+            reg.Send = $.trim(reg.Send().replace(/([\t\n])+/g, ''));
             return ko.toJSON(reg);
         }
 
@@ -44,6 +44,7 @@
                 },
                 function (xhr) {
                     alert(xhr.status + ': ' + xhr.statusText);
+                    self.Response(self.ident(xhr.responseText));
                 },
                 function () {
                     self.Errors.showAllMessages(false);

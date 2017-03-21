@@ -11,6 +11,8 @@ namespace CrmHub.Domain.Filters.Base
 
         public int Order { get; set; }
 
+        public int Total { get; set; }
+
         public string Dir { get; set; }
 
         public string Search { get; set; }

@@ -122,7 +122,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
         {
             string url = value.UrlService;
             string urlFormat = string.Format("{0}json/{1}/{2}?authtoken={3}&scope={4}", url, GetEntityName(), "getFields", value.Token, value.User);
-            return HttpMessageSender.SendRequestGet(urlFormat, null,  getResponse);
+            return HttpMessageSender.SendRequestGet(urlFormat, null, getResponse);
         }
 
         protected bool SendRequestSave(BaseRoot value, List<MappingFields> mapping, Func<string, object, bool> getReponse)
@@ -221,7 +221,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
 
         private string GetPlainTextFromHtml(string htmlString)
         {
-            
+
             if (!htmlString.Contains("<b>")) return htmlString;
 
             string htmlTagPattern = "<.*?>";
@@ -229,7 +229,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             htmlString = Regex.Replace(htmlString, "(\\s)*(<)", "  <");
             htmlString = htmlString.Replace("</p>", "\n\n");
             htmlString = Regex.Replace(htmlString, "(<)(/h4|tr|/strong|br /)(>)", "\n");
-            htmlString = htmlString.Replace("Site:", " \nSite:");
+            htmlString = htmlString.Replace("Site:", " \n\nSite:");
             htmlString = Regex.Replace(htmlString, "(style='display:block)(\\w|:|;|-|\\s|\'|=)*(>)", ">\n");
             htmlString = Regex.Replace(htmlString, htmlTagPattern, string.Empty);
             return htmlString;
@@ -276,33 +276,44 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             BaseRoot valueRoot = (BaseRoot)value;
             try
             {
-                var objectReponse = JsonConvert.DeserializeObject(response, typeof(RootUser));
-                Predicate<User> filter = s => s.email.Equals(valueRoot.Authentication.Email);
-                if (((RootUser)objectReponse).users.user.Exists(e => filter(e)))
+                RootUser rootUser = JsonConvert.DeserializeObject<RootUser>(response);
+                if (rootUser.users != null)
                 {
-                    User user = ((RootUser)objectReponse).users.user.Where(w => filter(w)).First();
-                    return OnLoadReponseUser(user, value);
-                }
-                else
-                    MessageController.AddErrorMessage("User not found.");
 
+                    Predicate<User> filter = s => s.email.Equals(valueRoot.Authentication.Email);
+                    if (rootUser.users.user.Exists(e => filter(e)))
+                    {
+                        User user = rootUser.users.user.Where(w => filter(w)).First();
+                        return OnLoadReponseUser(user, value);
+                    }
+                }
             }
-            catch (JsonSerializationException e)
+            catch (JsonSerializationException) { }
+
+            try
             {
-                try
+                RootUserSimple userSimple = JsonConvert.DeserializeObject<RootUserSimple>(response);
+                if (userSimple.users != null)
                 {
-                    var objectReponse = JsonConvert.DeserializeObject(response, typeof(RootUserSimple));
-                    User user = ((RootUserSimple)objectReponse).users.user;
+                    User user = userSimple.users.user;
                     if (user.email.Equals(valueRoot.Authentication.Email))
-                        return OnLoadReponseUser(((RootUserSimple)objectReponse).users.user, value);
-                    else
-                        MessageController.AddErrorMessage("User not found.");
-                }
-                catch (JsonSerializationException ex)
-                {
-                    MessageController.AddErrorMessage("User not found.");
+                        return OnLoadReponseUser(userSimple.users.user, value);
                 }
             }
+            catch (JsonSerializationException) { }
+
+            try
+            {
+                ErrorResponse errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(response);
+                if (errorResponse.response != null)
+                {
+                    MessageController.AddErrorMessage(errorResponse.response.error.message);
+                    return false;
+                }
+            }
+            catch (JsonSerializationException) { }
+
+            MessageController.AddErrorMessage("User not found.");
             return false;
         }
 
@@ -333,7 +344,7 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             };
         }
 
-        private bool IsSuccess(string responseBody, string id) =>  (responseBody.IndexOf("<code>5000</code>") > 0) || !id.Equals(string.Empty);
+        private bool IsSuccess(string responseBody, string id) => (responseBody.IndexOf("<code>5000</code>") > 0) || !id.Equals(string.Empty);
 
         private static string RemoveDescription(string value)
         {

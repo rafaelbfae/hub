@@ -30,6 +30,8 @@ namespace CrmHub.Infra.Data.Repositories
                     || x.Crm.Contains(filter.Search));
             }
 
+            filter.Total = _dbContext.LogApi.Where(predicate).Count();
+
             var orderBy = (Orders)filter.Order;
             return (_dbContext.LogApi.Where(predicate)
                     .OrderBy(orderBy.ToString(), filter.Dir.Equals("asc"))
