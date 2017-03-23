@@ -31,7 +31,7 @@ namespace CrmHub.Web.Areas.Api.Base
                 var log = AddLoggerApi(value, method, value.Autenticacao, value.GetId(), addLog);
                 bool success = function(_service, value);
                 UpdateLoggerApi(log, addLog, success);
-                return Ok(_service.MessageController().GetAllMessage());
+                return success ? Ok(_service.MessageController().GetAllMessage()) : StatusCode(400, _service.MessageController().GetAllMessage());
             }
 
             return ErrorValidation();
@@ -44,7 +44,7 @@ namespace CrmHub.Web.Areas.Api.Base
                 var log = AddLoggerApi(parameter, method, autenticacao, parameter, addLog, entityName);
                 bool success = function(_service, parameter, autenticacao);
                 UpdateLoggerApi(log, addLog, success);
-                return Ok(_service.MessageController().GetAllMessage());
+                return success ? Ok(_service.MessageController().GetAllMessage()) : StatusCode(400, _service.MessageController().GetAllMessage());
             }
 
             return ErrorValidation();
@@ -75,7 +75,7 @@ namespace CrmHub.Web.Areas.Api.Base
             if (!addLog) return;
 
             log.Response = _service.MessageController().GetAllMessage().ToJson();
-            log.Type = success ? "Success": "Error";
+            log.Type = success ? "Success" : "Error";
             _loggerApiService.Update(log);
         }
 

@@ -18,6 +18,7 @@ using OpenIddict.Core;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using CrmHub.Identity.Models;
+using System.Security.Claims;
 
 namespace CrmHub.Web.Areas.Api
 {
@@ -106,7 +107,7 @@ namespace CrmHub.Web.Areas.Api
                 {
                     await _userManager.ResetAccessFailedCountAsync(user);
                 }
-
+                
                 // Create a new authentication ticket.
                 var ticket = await CreateTicketAsync(request, user);
 

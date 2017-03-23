@@ -3,7 +3,9 @@
 
     $.crmhub = $.crmhub || {};
     $.crmhub.logger = {};
-    $.oTable = {};
+
+    var oTable = {};
+    var btResend = $('#btnResend').ladda();
 
     var ViewModel = function () {
         var self = this;
@@ -37,10 +39,20 @@
                 return;
             }
 
+            btResend.ladda('start');
+            $("#logger\\.Type").removeClass("error");
+            $("#logger\\.Type").removeClass("success");
+
             $.crmhub.core.ajax("PUT", `Logger/Resend?id=${self.Id()}`, self.clearModel(),
                 function (data) {
                     self.setValues(data.data, data.success)
                     $.oTable.row(self.index).data(data.data);
+                    if (data.success) {
+                        $("#logger\\.Type").removeClass("error");
+                        $("#logger\\.Type").addClass("success");
+                    } else {
+                        $("#logger\\.Type").addClass("error");
+                    }
                 },
                 function (xhr) {
                     alert(xhr.status + ': ' + xhr.statusText);
@@ -48,6 +60,7 @@
                 },
                 function () {
                     self.Errors.showAllMessages(false);
+                    btResend.ladda('stop');
                 });
         }
 
@@ -70,7 +83,7 @@
         self.view = function (selected) {
             self.setValues(selected, true);
             self.jsons(self.Id())
-            
+
         }
 
         self.edit = function (selected) {
@@ -84,11 +97,13 @@
 
         self.load = function () {
             var columns = [{ "data": "id" }, { "data": "crm" }, { "data": "entity" }, { "data": "method" },
-                            { "data": "type" }, { "data": "createdAt" }, { "data": "updatedAt" }, { "defaultContent": 
-                            '<div class="action-buttons">' +
-                                '<a class="table-actions" href="#"><i class="fa fa-eye"></i></a>' +
-                                '<a class="table-actions" href="#"><i class="fa fa-pencil"></i></a>' +
-                            '</div>'}]
+                            { "data": "type" }, { "data": "createdAt" }, { "data": "updatedAt" }, {
+                                "defaultContent":
+                                '<div class="action-buttons">' +
+                                    '<a class="table-actions" href="#"><i class="fa fa-eye"></i></a>' +
+                                    '<a class="table-actions" href="#"><i class="fa fa-pencil"></i></a>' +
+                                '</div>'
+                            }]
             $.oTable = $.crmhub.core.initDataTableServeSide("Logger", -1, "Logger/All", columns, [[6, "desc"]]);
 
             $.oTable.on('click', 'a > i.fa-eye', function () {
@@ -116,7 +131,7 @@
             self.UpdatedAt(selected.updatedAt);
             self.Parameters(selected.parameters);
 
-            self.isDisabled(disabled || selected.type == "Success");
+            self.isDisabled(disabled || selected.type == "Success" || selected.method == "Fields");
             self.Errors.showAllMessages(false);
         }
 

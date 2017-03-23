@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using AspNet.Security.OpenIdConnect.Primitives;
+using AutoMapper;
 using CrmHub.Identity.Context;
 using CrmHub.Identity.Models;
+using CrmHub.Infra.Data.Configuration;
 using CrmHub.Infra.Data.Context;
 using CrmHub.Infra.Dependences.Injection;
 using CrmHub.Web.Services;
@@ -11,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace CrmHub.Web
 {
@@ -64,9 +67,16 @@ namespace CrmHub.Web
 
             services.AddMvc().AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.Culture = System.Globalization.CultureInfo.CurrentCulture;
+                    options.SerializerSettings.Culture = new CultureInfo("pt-BR");
                     options.SerializerSettings.DateFormatString = "dd/MM/yyyy HH:mm:ss";
                 });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.ClaimsIdentity.UserNameClaimType = OpenIdConnectConstants.Claims.Name;
+                options.ClaimsIdentity.UserIdClaimType = OpenIdConnectConstants.Claims.Subject;
+                options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
+            });
 
             services.AddAutoMapper();
 
@@ -107,7 +117,10 @@ namespace CrmHub.Web
                     template: "{controller=Logger}/{action=Index}/{id?}");
             });
 
-            //DbInitializer.Initialize(context);
+            if (env.IsProduction())
+            {
+                DbInitializer.Initialize(context);
+            }
         }
 
 

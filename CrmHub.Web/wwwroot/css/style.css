@@ -2959,6 +2959,9 @@ label.error:before {
   font-family: 'FontAwesome';
   margin: 0 4px;
 }
+.form-control.success {
+  border-color: #62cb31 !important;
+}
 /* File manager */
 .hpanel .panel-body.file-body {
   padding: 30px 0;

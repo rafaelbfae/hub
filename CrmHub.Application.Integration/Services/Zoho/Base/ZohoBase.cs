@@ -248,31 +248,36 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
 
         private bool LoadResponseFields(string response, object value)
         {
+            if (response.Contains("{\"error\""))
+            {
+                return ErrorResponse(response, "Error Load Response Fields");
+            }
+
             response = RemoveDescription(response);
             try
             {
-                var objectResponse = JsonConvert.DeserializeObject(response, typeof(FieldsResponseCrm));
+                FieldsResponseCrm fieldsResponse = JsonConvert.DeserializeObject<FieldsResponseCrm>(response);
                 MessageController.Clear();
                 MessageController.AddMessage(
                     new MessageType(MessageType.TYPE.SUCCESS)
                     {
-                        Data = (FieldsResponseCrm)objectResponse
+                        Data = fieldsResponse
                     });
                 return true;
             }
-            catch (JsonSerializationException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            catch (AggregateException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            catch (JsonSerializationException) { }
+            catch (AggregateException) {}
+
             return false;
         }
 
         private bool LoadResponseUser(string response, object value)
         {
+            if (response.Contains("{\"error\""))
+            {
+                return ErrorResponse(response, "Error Load Response Fields");
+            }
+
             BaseRoot valueRoot = (BaseRoot)value;
             try
             {
@@ -302,18 +307,6 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
             }
             catch (JsonSerializationException) { }
 
-            try
-            {
-                ErrorResponse errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(response);
-                if (errorResponse.response != null)
-                {
-                    MessageController.AddErrorMessage(errorResponse.response.error.message);
-                    return false;
-                }
-            }
-            catch (JsonSerializationException) { }
-
-            MessageController.AddErrorMessage("User not found.");
             return false;
         }
 
@@ -350,6 +343,23 @@ namespace CrmHub.Application.Integration.Services.Zoho.Base
         {
             Regex rgx = new Regex("(,{\"dv\":\")(Descrição | Description)(...*)(Information\"})");
             return rgx.Replace(value, string.Empty);
+        }
+
+        private bool ErrorResponse(string response, string generalMessage)
+        {
+            try
+            {
+                ErrorResponse errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(response);
+                if (errorResponse.response != null)
+                {
+                    MessageController.AddErrorMessage(errorResponse.response.error.message);
+                    return false;
+                }
+            }
+            catch (JsonSerializationException) { }
+
+            MessageController.AddErrorMessage(generalMessage);
+            return false;
         }
 
         #endregion

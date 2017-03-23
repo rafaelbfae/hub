@@ -13,6 +13,7 @@
     "font-awesome": "4.4.0",
     "iCheck": "~1.0.2",
     "knockout": "3.4.0",
-    "knockout-validation": "2.0.3"
+    "knockout-validation": "2.0.3",
+    "ladda": "1.0.0"
   }
 }
