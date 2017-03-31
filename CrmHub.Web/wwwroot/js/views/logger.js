@@ -16,6 +16,7 @@
         self.Type = ko.observable().extend({ required: true });
         self.Entity = ko.observable().extend({ required: true });
         self.Method = ko.observable().extend({ required: true });
+        self.Empresa = ko.observable().extend({ required: true });
         self.Response = ko.observable();
         self.CreatedAt = ko.observable().extend({ required: true });
         self.UpdatedAt = ko.observable().extend({ required: true });
@@ -96,7 +97,7 @@
         }
 
         self.load = function () {
-            var columns = [{ "data": "id" }, { "data": "crm" }, { "data": "entity" }, { "data": "method" },
+            var columns = [{ "data": "id" }, { "data": "empresa" }, { "data": "crm" }, { "data": "entity" }, { "data": "method" },
                             { "data": "type" }, { "data": "createdAt" }, { "data": "updatedAt" }, {
                                 "defaultContent":
                                 '<div class="action-buttons">' +
@@ -130,6 +131,7 @@
             self.CreatedAt(selected.createdAt);
             self.UpdatedAt(selected.updatedAt);
             self.Parameters(selected.parameters);
+            self.Empresa(selected.empresa);
 
             self.isDisabled(disabled || selected.type == "Success" || selected.method == "Fields");
             self.Errors.showAllMessages(false);

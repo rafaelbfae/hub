@@ -8,9 +8,10 @@ using CrmHub.Infra.Data.Context;
 namespace CrmHub.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170331003549_Empresa_ApiLog")]
+    partial class Empresa_ApiLog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -90,22 +91,17 @@ namespace CrmHub.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Crm")
-                        .IsRequired()
-                        .HasColumnType("varchar(150)");
+                        .IsRequired();
 
-                    b.Property<string>("Empresa")
-                        .HasColumnType("varchar(150)");
+                    b.Property<string>("Empresa");
 
                     b.Property<string>("Entity")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .IsRequired();
 
                     b.Property<string>("Method")
-                        .IsRequired()
-                        .HasColumnType("varchar(30)");
+                        .IsRequired();
 
-                    b.Property<string>("Parameters")
-                        .HasColumnType("varchar(150)");
+                    b.Property<string>("Parameters");
 
                     b.Property<string>("Response");
 
@@ -113,15 +109,13 @@ namespace CrmHub.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .IsRequired();
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("User")
-                        .IsRequired()
-                        .HasColumnType("varchar(150)");
+                        .IsRequired();
 
                     b.HasKey("Id");
 

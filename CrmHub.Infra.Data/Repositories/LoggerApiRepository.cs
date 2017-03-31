@@ -41,9 +41,10 @@ namespace CrmHub.Infra.Data.Repositories
                     {
                         Id = x.Id,
                         Crm = x.Crm,
+                        Type = x.Type,
                         Entity = x.Entity,
                         Method = x.Method,
-                        Type = x.Type,
+                        Empresa = x.Empresa,
                         CreatedAt = x.CreatedAt,
                         UpdatedAt = x.UpdatedAt
                     })
