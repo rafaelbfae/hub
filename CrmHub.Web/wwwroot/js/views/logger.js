@@ -47,7 +47,7 @@
             $.crmhub.core.ajax("PUT", `Logger/Resend?id=${self.Id()}`, self.clearModel(),
                 function (data) {
                     self.setValues(data.data, data.success)
-                    $.oTable.row(self.index).data(data.data);
+                    oTable.row(self.index).data(data.data);
                     if (data.success) {
                         $("#logger\\.Type").removeClass("error");
                         $("#logger\\.Type").addClass("success");
@@ -105,17 +105,17 @@
                                     '<a class="table-actions" href="#"><i class="fa fa-pencil"></i></a>' +
                                 '</div>'
                             }]
-            $.oTable = $.crmhub.core.initDataTableServeSide("Logger", -1, "Logger/All", columns, [[6, "desc"]]);
+            oTable = $.crmhub.core.initDataTableServeSide("Logger", -1, "Logger/All", columns, [[6, "desc"]]);
 
-            $.oTable.on('click', 'a > i.fa-eye', function () {
-                var data = $.oTable.row($(this).parents('tr')).data();
-                self.index = $.oTable.row($(this).parents('tr')).index();
+            oTable.on('click', 'a > i.fa-eye', function () {
+                var data = oTable.row($(this).parents('tr')).data();
+                self.index = oTable.row($(this).parents('tr')).index();
                 self.view(data);
             });
 
-            $.oTable.on('click', 'a > i.fa-pencil', function () {
-                var data = $.oTable.row($(this).parents('tr')).data();
-                self.index = $.oTable.row($(this).parents('tr')).index();
+            oTable.on('click', 'a > i.fa-pencil', function () {
+                var data = oTable.row($(this).parents('tr')).data();
+                self.index = oTable.row($(this).parents('tr')).index();
                 self.edit(data);
             });
         }
