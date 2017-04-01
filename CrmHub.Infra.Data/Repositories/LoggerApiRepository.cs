@@ -27,7 +27,8 @@ namespace CrmHub.Infra.Data.Repositories
                     .And(x => x.Entity.Contains(filter.Search) 
                     || x.Type.Contains(filter.Search)
                     || x.Method.Contains(filter.Search)
-                    || x.Crm.Contains(filter.Search));
+                    || x.Crm.Contains(filter.Search)
+                    || x.Empresa.Contains(filter.Search));
             }
 
             filter.Total = _dbContext.LogApi.Where(predicate).Count();
