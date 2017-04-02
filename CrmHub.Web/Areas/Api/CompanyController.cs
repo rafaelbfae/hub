@@ -5,6 +5,7 @@ using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Models.Exact;
 using CrmHub.Web.Areas.Api.Base;
 using CrmHub.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CrmHub.Web.Areas.Api
 {
@@ -39,6 +40,7 @@ namespace CrmHub.Web.Areas.Api
         }
 
         [HttpPost]
+        //[Authorize]
         [Route("fields")]
         public IActionResult Fields([FromBody] Autenticacao value)
         {

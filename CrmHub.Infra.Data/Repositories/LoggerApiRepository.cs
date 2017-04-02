@@ -27,8 +27,11 @@ namespace CrmHub.Infra.Data.Repositories
                     .And(x => x.Entity.Contains(filter.Search) 
                     || x.Type.Contains(filter.Search)
                     || x.Method.Contains(filter.Search)
-                    || x.Crm.Contains(filter.Search));
+                    || x.Crm.Contains(filter.Search)
+                    || x.Empresa.Contains(filter.Search));
             }
+
+            filter.Total = _dbContext.LogApi.Where(predicate).Count();
 
             var orderBy = (Orders)filter.Order;
             return (_dbContext.LogApi.Where(predicate)
@@ -39,9 +42,10 @@ namespace CrmHub.Infra.Data.Repositories
                     {
                         Id = x.Id,
                         Crm = x.Crm,
+                        Type = x.Type,
                         Entity = x.Entity,
                         Method = x.Method,
-                        Type = x.Type,
+                        Empresa = x.Empresa,
                         CreatedAt = x.CreatedAt,
                         UpdatedAt = x.UpdatedAt
                     })

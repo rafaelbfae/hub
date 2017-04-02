@@ -8,6 +8,7 @@ using CrmHub.Application.Interfaces.Integration;
 using Newtonsoft.Json;
 using CrmHub.Application.Models.Exact.Roots;
 using CrmHub.Application.Models.Exact;
+using Microsoft.AspNetCore.Http;
 
 namespace CrmHub.Application.Services
 {

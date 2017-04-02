@@ -90,15 +90,22 @@ namespace CrmHub.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Crm")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("Empresa")
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Entity")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Method")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("varchar(30)");
 
-                    b.Property<string>("Parameters");
+                    b.Property<string>("Parameters")
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Response");
 
@@ -106,13 +113,15 @@ namespace CrmHub.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Property<string>("Type")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("User")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
 
                     b.HasKey("Id");
 

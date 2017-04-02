@@ -27,8 +27,8 @@ namespace CrmHub.Infra.Data.Context
             foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreatedAt") != null))
             {
                 if (entry.State == EntityState.Added)
-                    entry.Property("CreatedAt").CurrentValue = DateTime.Now;
-
+                    entry.Property("CreatedAt").CurrentValue = TimeZoneInfo.ConvertTime(DateTime.Now.ToUniversalTime(), TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time")); ;
+                
                 if (entry.State == EntityState.Modified)
                     entry.Property("CreatedAt").IsModified = false;
             }
@@ -36,7 +36,7 @@ namespace CrmHub.Infra.Data.Context
             foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("UpdatedAt") != null))
             {
                 if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
-                    entry.Property("UpdatedAt").CurrentValue = DateTime.Now;
+                    entry.Property("UpdatedAt").CurrentValue = TimeZoneInfo.ConvertTime(DateTime.Now.ToUniversalTime(), TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time"));
             }
         }
 

@@ -20,6 +20,8 @@ namespace CrmHub.Application.Models.Exact
         [EmailAddress]
         public string EmailVendedor { get; set; }
 
+        public string EmpresaCliente { get; set; }
+
         public eCrmName Crm() { return (eCrmName)Enum.Parse(typeof(eCrmName), TipoCRM); }
     }
 }

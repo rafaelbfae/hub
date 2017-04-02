@@ -59,7 +59,7 @@ ko.validation.init({
             success: function (response) {
                 return onSuccess(response);
             },
-            error: onError || function (xhr) {alert(xhr.status + ': ' + xhr.statusText); }
+            error: onError || function (xhr) { alert(xhr.status + ': ' + xhr.statusText); }
         });
     }
 
@@ -107,23 +107,33 @@ ko.validation.init({
             "ajax": {
                 "url": $.crmhub.url + url,
                 "data": function (d) {
-                    d.pDraw = d.draw;
-                    d.pLength = d.length;
-                    d.pStart = d.start;
-                    d.pOrder = d.order[0].column;
-                    d.pDir = d.order[0].dir;
-                    d.pSearch = d.search.value;
+                    var q =
+                    {
+                        pDraw: d.draw,
+                        pLength: d.length,
+                        pStart: d.start,
+                        pOrder: d.order[0].column,
+                        pDir: d.order[0].dir,
+                        pSearch: d.search.value
+                    }
+                    return q;
                 }
+            },
+            "initComplete": function () {
+                var input = $('.dataTables_filter input').unbind(),
+                    self = this.api(),
+                    $searchButton = $('<button class="btn btn-default btn-circle">')
+                               .click(function () {
+                                   self.search(input.val()).draw();
+                               }).append('<i class="fa fa-search">'),
+                    $clearButton = $('<button class="btn btn-default btn-circle">')
+                               .click(function () {
+                                   input.val('');
+                                   $searchButton.click();
+                               }).append('<i class="fa fa-close">')
+                $('.dataTables_filter').append($searchButton, $clearButton);
             }
         });
-
-        $('.dataTables_filter input')
-            .unbind('keypress keyup keydown')
-            .bind('keypress keyup keydown', function (e) {
-                if ($(this).val().length < 3) return;
-                oTable.fnFilter($(this).val());
-            });
-
 
         return oTable;
     }

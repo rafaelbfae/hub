@@ -26,28 +26,43 @@ namespace CrmHub.Web.Areas.Api.Base
 
         protected IActionResult Execute<E>(E value, Method method, Func<T, E, bool> function, bool addLog = true) where E : BaseExact<E>
         {
-            if (ModelState.IsValid)
+            try
             {
-                var log = AddLoggerApi(value, method, value.Autenticacao, value.GetId(), addLog);
-                bool success = function(_service, value);
-                UpdateLoggerApi(log, addLog, success);
-                return Ok(_service.MessageController().GetAllMessage());
-            }
+                if (ModelState.IsValid)
+                {
+                    var log = AddLoggerApi(value, method, value.Autenticacao, value.GetId(), addLog);
+                    bool success = function(_service, value);
+                    UpdateLoggerApi(log, addLog, success);
+                    return success ? Ok(_service.MessageController().GetAllMessage()) : StatusCode(400, _service.MessageController().GetAllMessage());
+                }
 
-            return ErrorValidation();
+                return ErrorValidation();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, new { type = "ERROR", Message = ex.Message });
+            }
         }
 
         protected IActionResult Execute(string entityName, string parameter, Method method, Autenticacao autenticacao, Func<T, string, Autenticacao, bool> function, bool addLog = true)
         {
-            if (ModelState.IsValid)
-            {
-                var log = AddLoggerApi(parameter, method, autenticacao, parameter, addLog, entityName);
-                bool success = function(_service, parameter, autenticacao);
-                UpdateLoggerApi(log, addLog, success);
-                return Ok(_service.MessageController().GetAllMessage());
-            }
 
-            return ErrorValidation();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var log = AddLoggerApi(parameter, method, autenticacao, parameter, addLog, entityName);
+                    bool success = function(_service, parameter, autenticacao);
+                    UpdateLoggerApi(log, addLog, success);
+                    return success ? Ok(_service.MessageController().GetAllMessage()) : StatusCode(400, _service.MessageController().GetAllMessage());
+                }
+
+                return ErrorValidation();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, new { type = "ERROR", message = ex.Message });
+            }
         }
 
         private LogApi AddLoggerApi<E>(E value, Method method, Autenticacao autenticacao, string parameter, bool addLog, string entityName = null)
@@ -63,7 +78,8 @@ namespace CrmHub.Web.Areas.Api.Base
                 Crm = autenticacao.TipoCRM,
                 Send = value.Equals(parameter) ? autenticacao.ToJson() : value.ToJson(),
                 Entity = string.IsNullOrEmpty(entityName) ? value.GetType().Name : entityName,
-                User = string.IsNullOrEmpty(HttpContext.User.Identity.Name) ? "Anonymous" : HttpContext.User.Identity.Name
+                User = string.IsNullOrEmpty(HttpContext.User.Identity.Name) ? "Anonymous" : HttpContext.User.Identity.Name,
+                Empresa = string.IsNullOrEmpty(autenticacao.EmpresaCliente) ? "" : autenticacao.EmpresaCliente
             };
 
             _loggerApiService.Add(log);
@@ -75,7 +91,7 @@ namespace CrmHub.Web.Areas.Api.Base
             if (!addLog) return;
 
             log.Response = _service.MessageController().GetAllMessage().ToJson();
-            log.Type = success ? "Success": "Error";
+            log.Type = success ? "Success" : "Error";
             _loggerApiService.Update(log);
         }
 

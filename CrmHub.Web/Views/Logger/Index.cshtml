@@ -12,10 +12,11 @@
                     Logger
                 </div>
                 <div class="panel-body">
-                    <table id="loggerTable" class="table table-striped table-bordered table-hover">
+                    <table id="loggerTable" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                             <tr>
                                 <th width="20px">Id</th>
+                                <th>Empresa</th>
                                 <th>Crm</th>
                                 <th>Entity</th>
                                 <th width="60px">Method</th>
@@ -36,21 +37,29 @@
 
 @section Styles {
     <environment names="Development,Production">
-        <link rel="stylesheet" href="~/lib_local/datatables.net-bs/css/dataTables.bootstrap.min.css" />
+        <link href="~/lib_local/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+        <link href="~/lib/ladda/dist/ladda.min.css" rel="stylesheet" />
     </environment>
 }
 
 @section Scripts {
-    <environment names="Development,Production">
-        <script src="~/lib_local/DataTables/media/js/jquery.dataTables.min.js"></script>
-        <script src="~/lib_local/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-        <script src="~/lib/pdfmake/build/pdfmake.min.js"></script>
-        <script src="~/lib/pdfmake/build/vfs_fonts.js"></script>
-        <script src="~/lib_local/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="~/lib_local/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="~/lib_local/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="~/lib_local/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+
+    <script src="~/lib_local/DataTables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib_local/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/lib/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/lib/pdfmake/build/vfs_fonts.js"></script>
+    <script src="~/lib_local/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/lib_local/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/lib_local/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/lib_local/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="~/lib/ladda/dist/spin.min.js"></script>
+    <script src="~/lib/ladda/dist/ladda.min.js"></script>
+    <script src="~/lib/ladda/dist/ladda.jquery.min.js"></script>
+    <environment names="Development">
         <script src="~/js/views/logger.js"></script>
+    </environment>
+    <environment names="Production">
+        <script src="~/js/views/logger.min.js" asp-append-version="true"></script>
     </environment>
 }
 

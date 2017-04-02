@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using AspNet.Security.OpenIdConnect.Primitives;
+using AutoMapper;
 using CrmHub.Identity.Context;
 using CrmHub.Identity.Models;
+using CrmHub.Infra.Data.Configuration;
 using CrmHub.Infra.Data.Context;
 using CrmHub.Infra.Dependences.Injection;
 using CrmHub.Web.Services;
@@ -11,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace CrmHub.Web
 {
@@ -27,7 +30,6 @@ namespace CrmHub.Web
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();
-                builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
             builder.AddEnvironmentVariables();
@@ -65,16 +67,22 @@ namespace CrmHub.Web
 
             services.AddMvc().AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.Culture = System.Globalization.CultureInfo.CurrentCulture;
+                    options.SerializerSettings.Culture = new CultureInfo("pt-BR");
                     options.SerializerSettings.DateFormatString = "dd/MM/yyyy HH:mm:ss";
                 });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.ClaimsIdentity.UserNameClaimType = OpenIdConnectConstants.Claims.Name;
+                options.ClaimsIdentity.UserIdClaimType = OpenIdConnectConstants.Claims.Subject;
+                options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
+            });
 
             services.AddAutoMapper();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddApplicationInsightsTelemetry(Configuration);
             new InjectionContainer(services);
         }
 
@@ -83,7 +91,6 @@ namespace CrmHub.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            app.UseApplicationInsightsRequestTelemetry();
 
             if (env.IsDevelopment())
             {
@@ -110,7 +117,10 @@ namespace CrmHub.Web
                     template: "{controller=Logger}/{action=Index}/{id?}");
             });
 
-            //DbInitializer.Initialize(context);
+            if (env.IsProduction())
+            {
+                DbInitializer.Initialize(context);
+            }
         }
 
 
